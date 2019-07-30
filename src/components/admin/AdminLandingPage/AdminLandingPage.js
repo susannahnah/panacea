@@ -60,6 +60,7 @@ class AdminLandingPage extends Component {
 
             <span className="search-button">
               <Button
+                fullWidth={true}
                 style={{ boxShadow: 'none' }}
                 variant="contained"
                 onClick={this.handleSearchCity}

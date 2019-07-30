@@ -9,7 +9,7 @@
 
 .admin-search-field {
     width: 1000px;
-    height: 100px;
+    height: auto;
 }
 
 .search-input {
