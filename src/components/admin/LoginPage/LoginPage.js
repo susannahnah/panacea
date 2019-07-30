@@ -72,8 +72,6 @@ class LoginPage extends Component {
 
                 <OutlinedInput
                   labelWidth={75}
-                  name="username"
-                  type="text"
                   value={this.state.username}
                   onChange={this.handleInputChangeFor('username')}
                 />
