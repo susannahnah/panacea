@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import './LoginPage.css';
 
 // material ui
-import { Button, FormControl, InputLabel, OutlinedInput } from '@material-ui/core/';
+import { Button, FormControl, InputLabel, OutlinedInput, Typography } from '@material-ui/core/';
 
 class LoginPage extends Component {
   state = {
@@ -46,46 +46,76 @@ class LoginPage extends Component {
           </h2>
         )}
 
-        <form 
-        className="login-page"
-        onSubmit={this.login}
-        >
+        <div
+          className="login-page">
 
-          <FormControl
-            margin='dense'
-            variant="outlined">
+          <form
+            onSubmit={this.login}>
 
-            <InputLabel>Username</InputLabel>
-            <OutlinedInput
-              type="text"
-              name="username"
-              value={this.state.username}
-              onChange={this.handleInputChangeFor('username')}
-            />
+            <div
+              className="login-welcome">
 
-          </FormControl>
+              <Typography>
+                Welcome
+            </Typography>
 
-          <FormControl
-            margin='dense'
-            variant="outlined">
+            </div>
 
-            <InputLabel>Password</InputLabel>
-            <OutlinedInput
-              type="password"
-              name="password"
-              value={this.state.password}
-              onChange={this.handleInputChangeFor('password')}
-            />
+            <div
+              className="login-username">
 
-          </FormControl>
+              <FormControl
+                margin="dense"
+                variant="outlined">
 
-          <Button
-            type="submit"
-            variant="contained"
-          >Log In
+                <InputLabel>Username</InputLabel>
+
+                <OutlinedInput
+                  labelWidth={75}
+                  name="username"
+                  type="text"
+                  value={this.state.username}
+                  onChange={this.handleInputChangeFor('username')}
+                />
+
+              </FormControl>
+
+            </div>
+
+            <div
+              className="login-password">
+
+              <FormControl
+                margin="dense"
+                variant="outlined">
+
+                <InputLabel>Password</InputLabel>
+
+                <OutlinedInput
+                  labelWidth={70}
+                  name="password"
+                  type="password"
+                  value={this.state.password}
+                  onChange={this.handleInputChangeFor('password')}
+                />
+
+              </FormControl>
+            </div>
+
+            <div
+              className="login-button">
+
+              <Button
+                type="submit"
+                variant="contained"
+              >Log In
             </Button>
 
-        </form>
+            </div>
+
+          </form>
+
+        </div>
 
       </>
     );
@@ -94,7 +124,7 @@ class LoginPage extends Component {
 
 // Instead of taking everything from state, we just want the error messages.
 // if you wanted you could write this code like this:
-// const mapStateToProps = ({errors}) => ({ errors });
+// const mapStateToProps = ({errors}) => ({errors});
 const mapStateToProps = state => ({
   errors: state.errors,
 });
