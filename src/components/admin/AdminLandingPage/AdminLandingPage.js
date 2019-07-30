@@ -33,21 +33,31 @@ class AdminLandingPage extends Component {
 
           <div className="admin-new-buttons">
 
-            <Button
-              variant="outlined"
-              onClick={this.handleClickAddCity}
-            >Add New City</Button>
+            <div className="new-city-button">
 
-            <Button
-              variant="outlined"
-              onClick={this.handleClickAddOrganization}
-            >Add New Organization</Button>
+              <Button
+                size='large'
+                style={{ width: '250px' }}
+                variant="outlined"
+                onClick={this.handleClickAddCity}
+              >Add New City</Button>
+
+            </div>
+
+            <div className="new-org-button">
+
+              <Button
+                size='large'
+                style={{ width: '250px' }}
+                variant="outlined"
+                onClick={this.handleClickAddOrganization}
+              >Add New Organization</Button>
+
+            </div>
 
           </div>
 
-          <br />
-
-          <div className="admin-search-field">
+          <div className="admin-search-city">
 
             <div className="search-input">
               <TextField
@@ -58,14 +68,18 @@ class AdminLandingPage extends Component {
               />
             </div>
 
-            <span className="search-button">
+            <div className="search-button">
               <Button
-                fullWidth={true}
-                style={{ boxShadow: 'none' }}
+                size='large'
+                style={{ boxShadow: 'none', width: '175px' }}
                 variant="contained"
                 onClick={this.handleSearchCity}
               >Search</Button>
-            </span>
+            </div>
+
+          </div>
+
+          <div className="admin-search-org">
 
             <div className="search-input">
               <TextField
@@ -78,7 +92,8 @@ class AdminLandingPage extends Component {
 
             <span className="search-button">
               <Button
-                style={{ boxShadow: 'none' }}
+                size='large'
+                style={{ boxShadow: 'none', width: '175px' }}
                 variant="contained"
                 onClick={this.handleSearchOrganization}
               >Search</Button>
@@ -88,7 +103,8 @@ class AdminLandingPage extends Component {
 
         </div>
 
-        <LogOutButton />
+        {/* Temporary logout button */}
+        {/* <LogOutButton /> */}
       </>
     )
   }
