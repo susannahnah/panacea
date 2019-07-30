@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
+import './AdminLandingPage.css';
 
 // material-ui
 import { Button, TextField } from '@material-ui/core';
@@ -26,51 +27,63 @@ class AdminLandingPage extends Component {
   render() {
     return (
       <>
-        <pre>{JSON.stringify(this.props, null, 2)}</pre>
+        {/* <pre>{JSON.stringify(this.props, null, 2)}</pre> */}
 
-        <div className="admin-new-buttons">
+        <div className="admin-home-container">
 
-          <Button
-            variant="contained"
-            onClick={this.handleClickAddCity}
-          >Add New City</Button>
+          <div className="admin-new-buttons">
 
-          <Button
-            variant="contained"
-            onClick={this.handleClickAddOrganization}
-          >Add New Organization</Button>
+            <Button
+              variant="outlined"
+              onClick={this.handleClickAddCity}
+            >Add New City</Button>
 
-        </div>
+            <Button
+              variant="outlined"
+              onClick={this.handleClickAddOrganization}
+            >Add New Organization</Button>
 
-        <br />
+          </div>
 
-        <div className="search-city-field">
+          <br />
 
-          <TextField
-            label="City"
-            margin="dense"
-            variant="outlined"
-          />
+          <div className="admin-search-field">
 
-          <Button
-            variant="contained"
-            onClick={this.handleSearchCity}
-          >Search</Button>
+            <div className="search-input">
+              <TextField
+                fullWidth={true}
+                label="City"
+                margin="dense"
+                variant="outlined"
+              />
+            </div>
 
-        </div>
+            <span className="search-button">
+              <Button
+                style={{ boxShadow: 'none' }}
+                variant="contained"
+                onClick={this.handleSearchCity}
+              >Search</Button>
+            </span>
 
-        <div className="search-org-field">
+            <div className="search-input">
+              <TextField
+                fullWidth={true}
+                label="Organization"
+                margin="dense"
+                variant="outlined"
+              />
+            </div>
 
-          <TextField
-            label="Organization"
-            margin="dense"
-            variant="outlined"
-          />
+            <span className="search-button">
+              <Button
+                style={{ boxShadow: 'none' }}
+                variant="contained"
+                onClick={this.handleSearchOrganization}
+              >Search</Button>
+            </span>
 
-          <Button
-            variant="contained"
-            onClick={this.handleSearchOrganization}
-          >Search</Button>
+          </div>
 
         </div>
 

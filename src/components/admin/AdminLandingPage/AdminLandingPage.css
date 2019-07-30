@@ -1,0 +1,21 @@
+.admin-home-container {
+    margin-left: 10%;
+    margin-top: 10%;
+}
+
+.admin-new-buttons {
+    
+}
+
+.admin-search-field {
+    width: 1000px;
+    height: 100px;
+}
+
+.search-input {
+    width: 60%;
+}
+
+.search-button {
+    width: 20%;
+}
