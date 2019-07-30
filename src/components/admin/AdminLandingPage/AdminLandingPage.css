@@ -2,8 +2,6 @@
     margin-left: 10%;
     margin-top: 10%;
     margin-right: 20%;
-    display: flex;
-    flex-wrap: wrap;
 }
 
 .admin-new-buttons {
@@ -12,25 +10,18 @@
 }
 
 .new-city-button {
-    flex: 1 1 auto;
     margin-right: 59%;
-}
-
-.new-city-org {
-    flex: 1 1 auto;
 }
 
 .admin-search-city {
     display: flex;
     width: 1000px;
-    height: auto;
     margin-bottom: 20px;
 }
 
 .admin-search-org {
     display: flex;
     width: 1000px;
-    height: auto;
 }
 
 .search-input {

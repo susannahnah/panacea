@@ -4,7 +4,7 @@ import LogOutButton from '../LogOutButton/LogOutButton';
 import './AdminLandingPage.css';
 
 // material-ui
-import { Button, TextField } from '@material-ui/core';
+import { Button, Grid, TextField } from '@material-ui/core';
 
 class AdminLandingPage extends Component {
 
@@ -29,7 +29,9 @@ class AdminLandingPage extends Component {
       <>
         {/* <pre>{JSON.stringify(this.props, null, 2)}</pre> */}
 
-        <div className="admin-home-container">
+        <Grid 
+        className="admin-home-container"
+        container={true}>
 
           <div className="admin-new-buttons">
 
@@ -101,7 +103,7 @@ class AdminLandingPage extends Component {
 
           </div>
 
-        </div>
+        </Grid>
 
         {/* Temporary logout button */}
         {/* <LogOutButton /> */}
