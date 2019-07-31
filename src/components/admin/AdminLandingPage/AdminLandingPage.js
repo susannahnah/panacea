@@ -14,19 +14,21 @@ class AdminLandingPage extends Component {
   }
 
   clickAddCity = (e) => {
-    console.log('add city');
+    this.props.history.push('/cities/new');
   }
 
   clickAddOrganization = (e) => {
-    console.log('add org');
+    this.props.history.push('/organizations/new');
   }
 
   clickSearchCity = (e) => {
     this.props.dispatch({ type: 'SEARCH_CITY', payload: this.state.city });
+    this.props.history.push('/cities');
   }
 
   clickSearchOrganization = () => {
     this.props.dispatch({ type: 'SEARCH_ORGANIZATION', payload: this.state.organization });
+    this.props.history.push('/organizations');
   }
 
   inputSearchCity = (e) => {

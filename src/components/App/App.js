@@ -34,17 +34,17 @@ class App extends Component {
           <Switch>
             {/* User Pages */}
             <Route exact path="/" component={UserLandingPage}/>
-            <Route exact path="/:city-name" component={CityPage}/>
-            <Route exact path="/:city-name/medications" component={MedicationsPage}/>
-            <Route exact path="/:city-name/map" component={MapPage}/>
-            <Route exact path="/:city-name/:org-name" component={OrganizationPage}/>
+            <Route path="/:city-name" component={CityPage}/>
+            <Route path="/:city-name/medications" component={MedicationsPage}/>
+            <Route path="/:city-name/map" component={MapPage}/>
+            <Route path="/:city-name/:orgName" component={OrganizationPage}/>
             {/* "Not Found" Page if user attempts to search for a city not in the database */}
             {/* Admin Pages */}
             <ProtectedRoute exact path="/admin" component={AdminLandingPage}/>
             <ProtectedRoute exact path="/cities" component={CitiesPage}/>
-            <ProtectedRoute exact path="/cities/:city-name" component={CityFormPage}/>
+            <ProtectedRoute path="/cities/:cityName" component={CityFormPage}/>
             <ProtectedRoute exact path="/organizations" component={OrganizationsPage}/>
-            <ProtectedRoute exact path="/organizations/:org-name" component={OrganizationFormPage}/>
+            <ProtectedRoute path="/organizations/:orgName" component={OrganizationFormPage}/>
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
           </Switch>
