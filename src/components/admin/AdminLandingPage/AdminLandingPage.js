@@ -8,30 +8,46 @@ import { Button, Grid, TextField } from '@material-ui/core';
 
 class AdminLandingPage extends Component {
 
-  handleClickAddCity = (e) => {
+  state = {
+    city: '',
+    organization: '',
+  }
+
+  clickAddCity = (e) => {
     console.log('add city');
   }
 
-  handleClickAddOrganization = (e) => {
+  clickAddOrganization = (e) => {
     console.log('add org');
   }
 
-  handleSearchCity = (e) => {
-    console.log('search city');
+  clickSearchCity = (e) => {
+    this.props.dispatch({ type: 'SEARCH_CITY', payload: this.state.city });
   }
 
-  handleSearchOrganization = (e) => {
-    console.log('search org');
+  clickSearchOrganization = () => {
+    this.props.dispatch({ type: 'SEARCH_ORGANIZATION', payload: this.state.organization });
+  }
+
+  inputSearchCity = (e) => {
+    this.setState({
+      city: e.target.value,
+    });
+  }
+
+  inputSearchOrganization = (e) => {
+    this.setState({
+      organization: e.target.value,
+    });
   }
 
   render() {
     return (
       <>
-        {/* <pre>{JSON.stringify(this.props, null, 2)}</pre> */}
 
-        <Grid 
-        className="admin-home-container"
-        container={true}>
+        <Grid
+          className="admin-home-container"
+          container={true}>
 
           <div className="admin-new-buttons">
 
@@ -41,7 +57,7 @@ class AdminLandingPage extends Component {
                 size='large'
                 style={{ width: '250px' }}
                 variant="outlined"
-                onClick={this.handleClickAddCity}
+                onClick={this.clickAddCity}
               >Add New City</Button>
 
             </div>
@@ -52,7 +68,7 @@ class AdminLandingPage extends Component {
                 size='large'
                 style={{ width: '250px' }}
                 variant="outlined"
-                onClick={this.handleClickAddOrganization}
+                onClick={this.clickAddOrganization}
               >Add New Organization</Button>
 
             </div>
@@ -66,7 +82,9 @@ class AdminLandingPage extends Component {
                 fullWidth={true}
                 label="City"
                 margin="dense"
+                value={this.state.city}
                 variant="outlined"
+                onChange={this.inputSearchCity}
               />
             </div>
 
@@ -75,7 +93,7 @@ class AdminLandingPage extends Component {
                 size='large'
                 style={{ boxShadow: 'none', width: '175px' }}
                 variant="contained"
-                onClick={this.handleSearchCity}
+                onClick={this.clickSearchCity}
               >Search</Button>
             </div>
 
@@ -88,7 +106,9 @@ class AdminLandingPage extends Component {
                 fullWidth={true}
                 label="Organization"
                 margin="dense"
+                value={this.state.organization}
                 variant="outlined"
+                onChange={this.inputSearchOrganization}
               />
             </div>
 
@@ -97,7 +117,7 @@ class AdminLandingPage extends Component {
                 size='large'
                 style={{ boxShadow: 'none', width: '175px' }}
                 variant="contained"
-                onClick={this.handleSearchOrganization}
+                onClick={this.clickSearchOrganization}
               >Search</Button>
             </span>
 
@@ -105,11 +125,17 @@ class AdminLandingPage extends Component {
 
         </Grid>
 
+        <pre>{JSON.stringify(this.props, null, 2)}</pre>
+
         {/* Temporary logout button */}
-        {/* <LogOutButton /> */}
+        <LogOutButton />
       </>
     )
   }
 }
 
-export default connect()(AdminLandingPage);
+const mapStateToRedux = (reduxStore) => ({
+  reduxStore
+});
+
+export default connect(mapStateToRedux)(AdminLandingPage);
