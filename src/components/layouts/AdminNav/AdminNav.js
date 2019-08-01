@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -18,6 +19,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import SvgIcon from '@material-ui/core/SvgIcon';
 
 import './AdminNav.css'
+import LogOutButton from '../../admin/LogOutButton/LogOutButton';
 
 const drawerWidth = 240;
 
@@ -106,7 +108,7 @@ const AdminNav = (props) =>  {
           [classes.appBarShift]: open,
         })}
       >
-        <Toolbar>
+        <Toolbar className="navbar">
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -118,9 +120,15 @@ const AdminNav = (props) =>  {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap>
-            Panacea
-          </Typography>
+          <Link to="/admin">
+            <Typography variant="h6" noWrap>
+                Panacea
+            </Typography>
+          </Link>
+          <div>
+              <h6>Sommer Collins</h6>
+              <LogOutButton/>
+          </div>
         </Toolbar>
       </AppBar>
       <Drawer

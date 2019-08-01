@@ -3,3 +3,7 @@
     color: #616161;
     text-decoration: none;
 }
+
+.navbar > :any-link {
+    color: white;
+}

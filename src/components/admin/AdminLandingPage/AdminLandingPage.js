@@ -7,10 +7,10 @@ class AdminLandingPage extends Component {
 
   render() {
     return (
-        <>
+        <AdminLayout>
         <pre>{JSON.stringify(this.props, null, 2)}</pre>
         <LogOutButton />
-        </>
+        </AdminLayout>
   )}
 }
 
