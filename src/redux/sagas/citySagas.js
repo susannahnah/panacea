@@ -22,3 +22,5 @@ function* postCitySaga(action) {
 function* citySagas() {
     yield takeEvery('POST_CITY', postCitySaga)
 }
+
+export default citySagas;
