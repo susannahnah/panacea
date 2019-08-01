@@ -1,5 +1,7 @@
 import React from "react";
 
+import AdminLayout from '../../layouts/AdminLayout/AdminLayout';
+
 // Material-UI
 import Button from "@material-ui/core/Button";
 import { TextField } from "@material-ui/core";
@@ -35,7 +37,7 @@ function CitiesPage() {
   };
 
   return (
-    <>
+    <AdminLayout>
       <Grid
         container
         spacing={3}
@@ -111,7 +113,7 @@ function CitiesPage() {
         </Grid>
       </Grid>
       <pre>{JSON.stringify(searchValues, null, 2)}</pre>
-    </>
+      </AdminLayout>
   );
 }
 

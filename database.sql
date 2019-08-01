@@ -24,7 +24,9 @@ CREATE TABLE "cities" (
 	"local_health_remedies" VARCHAR,
 	"healthcare_tourism" VARCHAR,
 	"WHO_link" VARCHAR,
-	"CDC_link" VARCHAR
+	"CDC_link" VARCHAR,
+	"google_translate_link" VARCHAR,
+	"local_resources" VARCHAR,
 );
 
 CREATE TABLE "organizations" (
