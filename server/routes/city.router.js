@@ -19,8 +19,10 @@ router.post('/', rejectUnauthenticated, (req, res) => {
         "local_health_remedies", 
         "healthcare_tourism",
         "WHO_link",
-        "CDC_link"
-    ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) 
+        "CDC_link",
+        "google_translate_link",
+        "local_resources"
+    ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) 
     RETURNING "id"`;
     const queryValues = [
         newCity.name,
@@ -34,7 +36,9 @@ router.post('/', rejectUnauthenticated, (req, res) => {
         newCity.local_health_remedies,
         newCity.healthcare_tourism,
         newCity.WHO_link,
-        newCity.CDC_link
+        newCity.CDC_link,
+        newCity.google_translate_link,
+        newCity.local_resources
     ];
     pool.query(queryText, queryValues)
         .then((result) => {
