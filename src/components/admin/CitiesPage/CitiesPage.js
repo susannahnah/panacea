@@ -52,10 +52,11 @@ class CitiesPage extends Component {
                 onChange={this.handleChange("city")}
                 margin="normal"
                 variant="outlined"
+                fullWidth
               />
             </Grid>
-            <Grid item sm={1}>
-              <Button variant="contained">Search</Button>
+            <Grid item sm={2}>
+              <Button variant="contained" fullWidth>Search</Button>
             </Grid>
           </Grid>
 
@@ -67,7 +68,7 @@ class CitiesPage extends Component {
             justify="center"
             alignItems="center"
           >
-            <Grid item sm={3}>
+            <Grid item sm={6}>
               <TextField
                 id="country-search-input"
                 label="Country"
@@ -75,11 +76,11 @@ class CitiesPage extends Component {
                 onChange={this.handleChange("country")}
                 margin="normal"
                 variant="outlined"
-
+                fullWidth
               />
             </Grid>
-            <Grid item sm={3}>
-              <Button variant="contained">Search</Button>
+            <Grid item sm={2}>
+              <Button variant="contained" fullWidth>Search</Button>
             </Grid>
           </Grid>
         </Grid>
