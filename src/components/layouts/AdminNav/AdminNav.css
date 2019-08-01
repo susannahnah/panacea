@@ -7,3 +7,7 @@
 .navbar > :any-link {
     color: white;
 }
+
+.logout {
+    background-color: bisque;
+}

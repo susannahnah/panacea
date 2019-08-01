@@ -127,7 +127,6 @@ const AdminNav = (props) =>  {
           </Link>
           <div>
               <h6>Sommer Collins</h6>
-              <LogOutButton/>
           </div>
         </Toolbar>
       </AppBar>
