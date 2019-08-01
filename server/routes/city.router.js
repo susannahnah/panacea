@@ -27,14 +27,25 @@ router.post('/', rejectUnauthenticated, (req, res) => {
         newCity.overview,
         newCity.health_risks,
         newCity.ambulance,
-        newCity.fire, 
+        newCity.fire,
         newCity.police,
         newCity.roadside_assistance,
-        
-    ]
-
-})
-
+        newCity.wellness_resources,
+        newCity.local_health_remedies,
+        newCity.healthcare_tourism,
+        newCity.WHO_link,
+        newCity.CDC_link
+    ];
+    pool.query(queryText, queryValues)
+        .then((result) => {
+            res.sendStatus(201);
+            console.log(result);
+        })
+        .catch((error) => {
+            console.log('Error completing POST city query', error);
+            res.sendStatus(500);
+        });
+});
 
 
 
