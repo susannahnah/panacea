@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
+import AdminLayout from '../../layouts/AdminLayout/AdminLayout';
 
 class AdminLandingPage extends Component {
 

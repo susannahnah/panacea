@@ -21,6 +21,7 @@ import CitiesPage from '../admin/CitiesPage/CitiesPage';
 import CityFormPage from '../admin/CityFormPage/CityFormPage';
 import OrganizationsPage from '../admin/OrganizationsPage/OrganizationsPage';
 import OrganizationFormPage from '../admin/OrganizationFormPage/OrganizationFormPage';
+import AdminLayout from '../layouts/AdminLayout/AdminLayout';
 
 class App extends Component {
   componentDidMount () {
@@ -40,11 +41,13 @@ class App extends Component {
             <Route exact path="/:city-name/:org-name" component={OrganizationPage}/>
             {/* "Not Found" Page if user attempts to search for a city not in the database */}
             {/* Admin Pages */}
-            <ProtectedRoute exact path="/admin" component={AdminLandingPage}/>
-            <ProtectedRoute exact path="/cities" component={CitiesPage}/>
-            <ProtectedRoute exact path="/cities/:city-name" component={CityFormPage}/>
-            <ProtectedRoute exact path="/organizations" component={OrganizationsPage}/>
-            <ProtectedRoute exact path="/organizations/:org-name" component={OrganizationFormPage}/>
+            <AdminLayout>
+              <ProtectedRoute exact path="/admin" component={AdminLandingPage}/>
+              <ProtectedRoute exact path="/cities" component={CitiesPage}/>
+              <ProtectedRoute exact path="/cities/:city-name" component={CityFormPage}/>
+              <ProtectedRoute exact path="/organizations" component={OrganizationsPage}/>
+              <ProtectedRoute exact path="/organizations/:org-name" component={OrganizationFormPage}/>
+            </AdminLayout>
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
           </Switch>
