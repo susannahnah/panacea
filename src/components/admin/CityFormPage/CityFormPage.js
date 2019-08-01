@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import './CityFormPage.css';
+import { Button } from '@material-ui/core';
 
 class CityFormPage extends Component {
   state = {
@@ -73,7 +74,12 @@ class CityFormPage extends Component {
             <TextField id="google_translate_link" label="Google Translate Link" margin="dense" variant="outlined" value={this.state.newCity.google_translate_link} onChange={this.handleNewChange('google_translate_link')} />
             <TextField rows="3" label="Local Online Resources" multiline id="local_resources" margin="dense" variant="outlined" type='type' value={this.state.newCity.local_resources} onChange={this.handleNewChange('local_resources')} />
           </Grid>
+          <br />
+          <Grid item xs={12} className="GridItTextCenter">
+                            <Button type='submit' value='Add New City' style={{ width: "24vw" }} variant="contained" color="inherent">Submit New City</Button>
+                        </Grid>
           </Paper>
+
         </Grid>
         </form>
       </div>
