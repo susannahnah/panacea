@@ -29,7 +29,12 @@ class CityFormPage extends Component {
     })
   }
 
-  
+  addNewCity = event => {
+    event.preventDefault();
+    this.props.dispatch({ type: 'POST_CITY', payload: this.state.newCity })
+    this.props.history.push('/cities')
+  }
+
 
   componentDidMount() {
     const { match: { params: { cityName } } } = this.props; // this is the same way as writing const params = this.props.match.params.cityName;
