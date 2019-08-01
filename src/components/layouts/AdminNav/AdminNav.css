@@ -8,6 +8,11 @@
     color: white;
 }
 
+.nav-right {
+    display: flex;
+    float: right;
+}
+
 .logout {
     background-color: bisque;
 }

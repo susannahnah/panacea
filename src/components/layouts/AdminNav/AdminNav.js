@@ -125,9 +125,9 @@ const AdminNav = (props) =>  {
                 Panacea
             </Typography>
           </Link>
-          <div>
+          {/* <div className="nav-right">
               <h6>Sommer Collins</h6>
-          </div>
+          </div> */}
         </Toolbar>
       </AppBar>
       <Drawer
