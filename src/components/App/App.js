@@ -21,6 +21,7 @@ import CitiesPage from '../admin/CitiesPage/CitiesPage';
 import CityFormPage from '../admin/CityFormPage/CityFormPage';
 import OrganizationsPage from '../admin/OrganizationsPage/OrganizationsPage';
 import OrganizationFormPage from '../admin/OrganizationFormPage/OrganizationFormPage';
+import AdminLayout from '../layouts/AdminLayout/AdminLayout';
 
 class App extends Component {
   componentDidMount () {
