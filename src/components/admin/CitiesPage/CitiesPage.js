@@ -63,7 +63,7 @@ function CitiesPage() {
         {/* Input field to search city */}
         <Grid
           container
-          spacing={3}
+          spacing={6}
           direction="row"
           justify="center"
           alignItems="center"
