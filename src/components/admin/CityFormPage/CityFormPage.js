@@ -19,6 +19,18 @@ class CityFormPage extends Component {
     }
   }
 
+  handleNewChange = (propertyName) => (event) => {
+    console.log('somethings happening!');
+    this.setState({
+      newCity: {
+        ...this.state.newCity,
+        [propertyName]: event.target.value,
+      }
+    })
+  }
+
+  
+
   componentDidMount() {
     const { match: { params: { cityName } } } = this.props; // this is the same way as writing const params = this.props.match.params.cityName;
     if (cityName === 'new') {
