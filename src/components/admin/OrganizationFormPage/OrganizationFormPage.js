@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import AdminLayout from '../../layouts/AdminLayout/AdminLayout';
 
 class OrganizationFormPage extends Component {
 
@@ -14,11 +15,11 @@ class OrganizationFormPage extends Component {
 
   render() {
     return (
-      <>
+      <AdminLayout>
         <pre>
           {JSON.stringify(this.props, null, 2)}
         </pre>
-      </>
+      </AdminLayout>
     )
   }
 }

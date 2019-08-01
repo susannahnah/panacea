@@ -5,6 +5,7 @@ import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import './CityFormPage.css';
 import { Button } from '@material-ui/core';
+import AdminLayout from '../../layouts/AdminLayout/AdminLayout';
 
 class CityFormPage extends Component {
   state = {
@@ -53,7 +54,7 @@ class CityFormPage extends Component {
 
   render() {
     return (
-      <div>
+      <AdminLayout>
         <h2>Add New City</h2>
         <form onSubmit={this.addNewCity}>
         <Grid container xs={12} className='newCity'>
@@ -79,15 +80,9 @@ class CityFormPage extends Component {
                             <Button type='submit' value='Add New City' style={{ width: "24vw" }} variant="contained" color="inherent">Submit New City</Button>
                         </Grid>
           </Paper>
-
         </Grid>
         </form>
-      </div>
-      // <>
-      //   <pre>
-      //     {JSON.stringify(this.props, null, 2)}
-      //   </pre>
-      // </>
+      </AdminLayout>
     )
   }
 }
