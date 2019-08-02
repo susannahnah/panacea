@@ -46,9 +46,10 @@ const useStyles = makeStyles({
 });
 
 function CitiesPage(props) {
-  // Local state to store inputs for city and country to search.
+  // use classes names for styling
   const classes = useStyles();
 
+  // Local state to store inputs for city and country to search.
   const [searchValues, setSearchValues] = React.useState({
     city: "",
     country: ""
