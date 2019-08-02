@@ -11,9 +11,9 @@ export default ({children}) => {
     return (
         <div className="App">
             <UserNav/>
-            <Grid container spacing={5}
+            <Grid container
                 item xs={12}
-                style={{margin: `0`}}
+                style={{width: `100vw`}}
             >
                {children} 
             </Grid>
