@@ -2,17 +2,19 @@ import React, {Component} from 'react';
 import UserLayout from '../../layouts/UserLayout/UserLayout';
 import { Paper, InputBase, Typography, IconButton, Grid, Card, CardMedia } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
+import image from './panaceaFamilyImage.jpg';
 
 class UserLandingPage extends Component {
 
   state = {
-    citySearch: '',
+    topCitySearch: '',
+    bottomCitySearch: '',
   }  
 
-  handleChange = (e) => {
+  handleChangeFor = (prop) => (e) => {
     this.setState({
       ...this.state,
-      citySearch: e.target.value,
+      [prop]: e.target.value,
     });
   }
 
@@ -26,10 +28,10 @@ class UserLandingPage extends Component {
               <SearchIcon/>
             </IconButton>
             <InputBase
-              style={{width: `80%`}}
+              style={{width: `85%`}}
               value={this.state.citySearch}
               placeholder="Where are you traveling?"
-              onChange={this.handleChange}/>
+              onChange={this.handleChangeFor('topCitySearch')}/>
             </Paper>
           </Grid>
           <Grid item xs={12}>
@@ -49,8 +51,8 @@ class UserLandingPage extends Component {
               <CardMedia
                 component="img"
                 alt="Panacea Family Image"
-                height={140}
-                image="panacea-family-image.jpg"
+                height={270}
+                image={image}
                 title="Panacea Family Image"
               />
             </Card>
@@ -68,7 +70,7 @@ class UserLandingPage extends Component {
               style={{width: `80%`}}
               value={this.state.citySearch}
               placeholder="Where are you traveling?"
-              onChange={this.handleChange}/>
+              onChange={this.handleChangeFor('bottomCitySearch')}/>
             </Paper>
           </Grid>
         </UserLayout>
