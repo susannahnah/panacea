@@ -182,7 +182,7 @@ function CitiesPage(props) {
     </AdminLayout>
   );
 }
-
+//
 const mapReduxStateToProps = reduxState => ({
   // searchCityReducer: reduxState.searchCityReducer
   searchCityReducer: ['1', '2', '3']
