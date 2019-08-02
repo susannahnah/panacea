@@ -9,7 +9,7 @@ import Grid from '@material-ui/core/Grid'
 export default ({children}) => {
 
     return (
-        <div className="App">
+        <div>
             <UserNav/>
             <Grid container
                 item xs={12}
