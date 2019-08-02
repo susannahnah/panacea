@@ -57,7 +57,6 @@ function CitiesPage() {
     setSearchValues({ ...searchValues, [property]: event.target.value });
   };
 
-  const handleChangeDetails = () => {};
 
   return (
     <AdminLayout>
