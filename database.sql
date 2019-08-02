@@ -34,6 +34,7 @@ CREATE TABLE "organizations" (
   "type" VARCHAR NOT NULL,
   "recommended" BOOLEAN DEFAULT FALSE,
   "24_hour" BOOLEAN DEFAULT FALSE,
+  "hours" VARCHAR,
   "homeopathic_remedies" VARCHAR,
   "labor_delivery" BOOLEAN,
   "childrens" BOOLEAN,
@@ -41,9 +42,11 @@ CREATE TABLE "organizations" (
   "adult" BOOLEAN,
   "adult_surgical" BOOLEAN,
   "medical_translators" BOOLEAN,
-  "pros" VARCHAR,
-  "cons" VARCHAR,
-  "coordinates" VARCHAR,
+  "comments" VARCHAR,
+  "phone_number" INT,
+  "website_url" VARCHAR, 
+  "lat" INT,
+  "long" INT,
   "google_maps_link" VARCHAR
 );
 
