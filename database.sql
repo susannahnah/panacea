@@ -4,6 +4,11 @@ CREATE TABLE "user" (
     "password" VARCHAR (1000) NOT NULL
 );
 
+DROP TABLE “countries”;
+DROP TABLE “cities”;
+DROP TABLE “organizations”;
+DROP TABLE “medications”;
+
 CREATE TABLE countries (id VARCHAR(64) NOT NULL, value VARCHAR(64) NOT NULL, PRIMARY KEY(id));
 
 CREATE TABLE "cities" (
@@ -23,7 +28,9 @@ CREATE TABLE "cities" (
 	"WHO_link" VARCHAR,
 	"CDC_link" VARCHAR,
 	"google_translate_link" VARCHAR,
-	"local_resources" VARCHAR
+	"local_resources" VARCHAR,
+	"lat" INT,
+	"long" INT
 );
 
 CREATE TABLE "organizations" (
@@ -34,6 +41,7 @@ CREATE TABLE "organizations" (
   "type" VARCHAR NOT NULL,
   "recommended" BOOLEAN DEFAULT FALSE,
   "24_hour" BOOLEAN DEFAULT FALSE,
+  "hours" VARCHAR,
   "homeopathic_remedies" VARCHAR,
   "labor_delivery" BOOLEAN,
   "childrens" BOOLEAN,
@@ -41,9 +49,11 @@ CREATE TABLE "organizations" (
   "adult" BOOLEAN,
   "adult_surgical" BOOLEAN,
   "medical_translators" BOOLEAN,
-  "pros" VARCHAR,
-  "cons" VARCHAR,
-  "coordinates" VARCHAR,
+  "comments" VARCHAR,
+  "phone_number" INT,
+  "website_url" VARCHAR, 
+  "lat" INT,
+  "long" INT,
   "google_maps_link" VARCHAR
 );
 

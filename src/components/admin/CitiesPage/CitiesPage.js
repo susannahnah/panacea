@@ -60,19 +60,22 @@ function CitiesPage(props) {
     setSearchValues({ ...searchValues, [property]: event.target.value });
   };
 
-  // Fetch the cities associated to the search 
-  const handleClickSearch = (searchBy) => {
+  // Fetch the cities associated to the search
+  const handleClickSearch = searchBy => {
     switch (searchBy) {
       case "city":
-        props.dispatch({type: "FETCH_CITIES_BY_CITY_NAME", payload: searchValues.city});
+        props.dispatch({ type: "SEARCH_CITY", payload: searchValues.city });
         break;
       case "country":
-        props.dispatch({type: "FETCH_CITIES_BY_COUNTRY_NAME", payload: searchValues.city});
+        props.dispatch({
+          type: "FETCH_CITIES_BY_COUNTRY_NAME",
+          payload: searchValues.city
+        });
         break;
       default:
-        return
+        return;
     }
-  }
+  };
 
   return (
     <AdminLayout>
@@ -139,7 +142,7 @@ function CitiesPage(props) {
         </Grid>
       </Grid>
       <Grid container item spacing={1} direction="row" alignItems="center">
-      <Grid container item>
+        <Grid container item>
           <Paper className={classes.paper}>
             <Table className={classes.table}>
               <TableHead>
@@ -150,45 +153,39 @@ function CitiesPage(props) {
                 </TableRow>
               </TableHead>
               <TableBody>
-                <TableRow>
-                  <TableCell>Krakow</TableCell>
-                  <TableCell align="right">Poland</TableCell>
-                  <TableCell>
-                    <Link to="/cities/new">
-                      <Button
-                        variant="contained"
-                        fullWidth
-                        className={classes.detailsButton}
-                      >
-                        Details
-                      </Button>
-                    </Link>
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Warsaw</TableCell>
-                  <TableCell align="right">Poland</TableCell>
-                  <TableCell>
-                    <Link to="/cities/new">
-                      <Button
-                        variant="contained"
-                        fullWidth
-                        className={classes.detailsButton}
-                      >
-                        Details
-                      </Button>
-                    </Link>
-                  </TableCell>
-                </TableRow>
+                {props.searchCityReducer.map(city => {
+                  return (
+                    <TableRow>
+                      <TableCell>Krakow</TableCell>
+                      <TableCell align="right">Poland</TableCell>
+                      <TableCell>
+                        <Link to="/cities/new">
+                          <Button
+                            variant="contained"
+                            fullWidth
+                            className={classes.detailsButton}
+                          >
+                            Details
+                          </Button>
+                        </Link>
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
               </TableBody>
             </Table>
           </Paper>
         </Grid>
       </Grid>
-      <pre>Local State{JSON.stringify(searchValues, null, 2)}</pre>
-      <pre>Props{JSON.stringify(props, null, 2)}</pre>
+      <pre>Local State {JSON.stringify(searchValues, null, 2)}</pre>
+      <pre>Props + Redux State {JSON.stringify(props, null, 2)}</pre>
     </AdminLayout>
   );
 }
+//
+const mapReduxStateToProps = reduxState => ({
+  // searchCityReducer: reduxState.searchCityReducer
+  searchCityReducer: ['1', '2', '3']
+});
 
-export default connect()(CitiesPage);
+export default connect(mapReduxStateToProps)(CitiesPage);
