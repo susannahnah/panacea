@@ -5,10 +5,6 @@ const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
 class MapPage extends Component {
 
-  constructor(props){
-    this.props = props
-  }
-
   static defaultProps = {
     center: {
       lat: 50.0647,

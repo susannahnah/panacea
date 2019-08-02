@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
 import AdminLayout from "../../layouts/AdminLayout/AdminLayout";
 
@@ -13,6 +14,7 @@ import {
   TableRow,
   TableCell
 } from "@material-ui/core";
+import { getThemeProps } from "@material-ui/styles";
 
 const useStyles = makeStyles({
   root: {
@@ -43,10 +45,11 @@ const useStyles = makeStyles({
   }
 });
 
-function CitiesPage() {
-  // Local state to store inputs for city and country to search.
+function CitiesPage(props) {
+  // use classes names for styling
   const classes = useStyles();
 
+  // Local state to store inputs for city and country to search.
   const [searchValues, setSearchValues] = React.useState({
     city: "",
     country: ""
@@ -57,6 +60,19 @@ function CitiesPage() {
     setSearchValues({ ...searchValues, [property]: event.target.value });
   };
 
+  // Fetch the cities associated to the search 
+  const handleClickSearch = (searchBy) => {
+    switch (searchBy) {
+      case "city":
+        props.dispatch({type: "FETCH_CITIES_BY_CITY_NAME", payload: searchValues.city});
+        break;
+      case "country":
+        props.dispatch({type: "FETCH_CITIES_BY_COUNTRY_NAME", payload: searchValues.city});
+        break;
+      default:
+        return
+    }
+  }
 
   return (
     <AdminLayout>
@@ -80,7 +96,7 @@ function CitiesPage() {
             <TextField
               id="city-search-input"
               label="City"
-              value={searchValues.country}
+              value={searchValues.city}
               onChange={handleChange("city")}
               margin="normal"
               variant="outlined"
@@ -92,6 +108,7 @@ function CitiesPage() {
               variant="contained"
               fullWidth
               className={classes.searchButton}
+              onClick={() => handleClickSearch("city")}
             >
               Search
             </Button>
@@ -115,6 +132,7 @@ function CitiesPage() {
             variant="contained"
             fullWidth
             className={classes.searchButton}
+            onClick={() => handleClickSearch("country")}
           >
             Search
           </Button>
@@ -167,9 +185,10 @@ function CitiesPage() {
           </Paper>
         </Grid>
       </Grid>
-      <pre>{JSON.stringify(searchValues, null, 2)}</pre>
+      <pre>Local State{JSON.stringify(searchValues, null, 2)}</pre>
+      <pre>Props{JSON.stringify(props, null, 2)}</pre>
     </AdminLayout>
   );
 }
 
-export default CitiesPage;
+export default connect()(CitiesPage);
