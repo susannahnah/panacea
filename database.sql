@@ -23,7 +23,7 @@ CREATE TABLE "cities" (
 	"WHO_link" VARCHAR,
 	"CDC_link" VARCHAR,
 	"google_translate_link" VARCHAR,
-	"local_resources" VARCHAR,
+	"local_resources" VARCHAR
 );
 
 CREATE TABLE "organizations" (
