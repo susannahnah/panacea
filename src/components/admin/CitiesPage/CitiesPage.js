@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
 import AdminLayout from "../../layouts/AdminLayout/AdminLayout";
 
@@ -13,6 +14,7 @@ import {
   TableRow,
   TableCell
 } from "@material-ui/core";
+import { getThemeProps } from "@material-ui/styles";
 
 const useStyles = makeStyles({
   root: {
@@ -43,10 +45,11 @@ const useStyles = makeStyles({
   }
 });
 
-function CitiesPage() {
-  // Local state to store inputs for city and country to search.
+function CitiesPage(props) {
+  // use classes names for styling
   const classes = useStyles();
 
+  // Local state to store inputs for city and country to search.
   const [searchValues, setSearchValues] = React.useState({
     city: "",
     country: ""
@@ -57,6 +60,22 @@ function CitiesPage() {
     setSearchValues({ ...searchValues, [property]: event.target.value });
   };
 
+  // Fetch the cities associated to the search
+  const handleClickSearch = searchBy => {
+    switch (searchBy) {
+      case "city":
+        props.dispatch({ type: "SEARCH_CITY", payload: searchValues.city });
+        break;
+      case "country":
+        props.dispatch({
+          type: "FETCH_CITIES_BY_COUNTRY_NAME",
+          payload: searchValues.city
+        });
+        break;
+      default:
+        return;
+    }
+  };
 
   return (
     <AdminLayout>
@@ -80,7 +99,7 @@ function CitiesPage() {
             <TextField
               id="city-search-input"
               label="City"
-              value={searchValues.country}
+              value={searchValues.city}
               onChange={handleChange("city")}
               margin="normal"
               variant="outlined"
@@ -92,6 +111,7 @@ function CitiesPage() {
               variant="contained"
               fullWidth
               className={classes.searchButton}
+              onClick={() => handleClickSearch("city")}
             >
               Search
             </Button>
@@ -115,13 +135,14 @@ function CitiesPage() {
             variant="contained"
             fullWidth
             className={classes.searchButton}
+            onClick={() => handleClickSearch("country")}
           >
             Search
           </Button>
         </Grid>
       </Grid>
       <Grid container item spacing={1} direction="row" alignItems="center">
-      <Grid container item>
+        <Grid container item>
           <Paper className={classes.paper}>
             <Table className={classes.table}>
               <TableHead>
@@ -132,44 +153,39 @@ function CitiesPage() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                <TableRow>
-                  <TableCell>Krakow</TableCell>
-                  <TableCell align="right">Poland</TableCell>
-                  <TableCell>
-                    <Link to="/cities/new">
-                      <Button
-                        variant="contained"
-                        fullWidth
-                        className={classes.detailsButton}
-                      >
-                        Details
-                      </Button>
-                    </Link>
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Warsaw</TableCell>
-                  <TableCell align="right">Poland</TableCell>
-                  <TableCell>
-                    <Link to="/cities/new">
-                      <Button
-                        variant="contained"
-                        fullWidth
-                        className={classes.detailsButton}
-                      >
-                        Details
-                      </Button>
-                    </Link>
-                  </TableCell>
-                </TableRow>
+                {props.searchCityReducer.map(city => {
+                  return (
+                    <TableRow>
+                      <TableCell>Krakow</TableCell>
+                      <TableCell align="right">Poland</TableCell>
+                      <TableCell>
+                        <Link to="/cities/new">
+                          <Button
+                            variant="contained"
+                            fullWidth
+                            className={classes.detailsButton}
+                          >
+                            Details
+                          </Button>
+                        </Link>
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
               </TableBody>
             </Table>
           </Paper>
         </Grid>
       </Grid>
-      <pre>{JSON.stringify(searchValues, null, 2)}</pre>
+      <pre>Local State {JSON.stringify(searchValues, null, 2)}</pre>
+      <pre>Props + Redux State {JSON.stringify(props, null, 2)}</pre>
     </AdminLayout>
   );
 }
+//
+const mapReduxStateToProps = reduxState => ({
+  // searchCityReducer: reduxState.searchCityReducer
+  searchCityReducer: ['1', '2', '3']
+});
 
-export default CitiesPage;
+export default connect(mapReduxStateToProps)(CitiesPage);
