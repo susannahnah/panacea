@@ -1,6 +1,6 @@
 const orgDetails = {
     "id": 0,
-    "name":'',
+    "name": '',
     "type": '',
     "recommended": '',
     "twentyfour": '',
@@ -19,5 +19,15 @@ const orgDetails = {
     "long": '',
     "google_maps_link": '',
 
-
 }
+
+const individualOrgReducer = (state = orgDetails, action) => {
+    switch (action.type) {
+        case 'SET_INDIVIDUAL_ORG':
+            return action.payload;
+        default:
+            return state;
+    }
+}
+
+export default individualOrgReducer;
