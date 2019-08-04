@@ -11,8 +11,8 @@ import AdminLayout from '../../layouts/AdminLayout/AdminLayout';
 class CityFormPage extends Component {
   state = {
     newCity: {
-      name: '',
       country_id: 'Select A Country',
+      name: '',
       overview: '',
       health_risks: '',
       ambulance: '',
@@ -31,10 +31,10 @@ class CityFormPage extends Component {
 
   handleNewChange = (propertyName) => (event) => {
     console.log('somethings happening!');
-    this.setState({
+    this.setState({      
       newCity: {
         ...this.state.newCity,
-        [propertyName]: event.target.value,
+      [propertyName]: event.target.value,
       }
     })
   }
@@ -80,7 +80,6 @@ class CityFormPage extends Component {
                 onChange={this.handleNewChange('name')} />
             </Grid>
             <Grid className="inputFields" item xs={12}>
-              <InputLabel style={{marginBottom: `1%`}}>Country</InputLabel>
               <Select
                 style={{minWidth: 120}}
                 value={this.state.newCity.country_id}

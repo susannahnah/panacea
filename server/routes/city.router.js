@@ -37,7 +37,8 @@ router.get('/:id', (req, res) => {
 router.post('/', rejectUnauthenticated, (req, res) => {
     const newCity = req.body;
     const queryText = `INSERT INTO "cities"(
-        "name", 
+        "country_id",
+        "name",
         "overview", 
         "health_risks",
         "ambulance",
@@ -51,9 +52,10 @@ router.post('/', rejectUnauthenticated, (req, res) => {
         "CDC_link",
         "google_translate_link",
         "local_resources"
-    ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) 
+    ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) 
     RETURNING "id"`;
     const queryValues = [
+        newCity.country_id,
         newCity.name,
         newCity.overview,
         newCity.health_risks,
