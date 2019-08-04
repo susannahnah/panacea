@@ -1,19 +1,6 @@
 import axios from 'axios';
 import { put, takeEvery } from 'redux-saga/effects';
 
-// ////////////////////////// might not need this code
-// GET cities function:
-// action.payload is the city name searched by admin in cities page
-function* fetchCitiesSaga(action) {
-    try {
-        const cityResponse = yield axios.get(`/api/cities/`)
-        console.log('cool cities brah', cityResponse);
-        yield put({ type: 'SET_CITIES', payload: cityResponse.data });
-        console.log('end of fetchCitiesSaga');
-    } catch (error) {
-        console.log("Error with fetching cities:", error);
-    }
-};
 
 //GET specific city
 function* selectCitySaga(action) {
@@ -56,7 +43,6 @@ function* deleteCitySaga(action) {
 
 //ALL cities Sagas
 function* citySagas() {
-    yield takeEvery('FETCH_CITIES', fetchCitiesSaga)
     yield takeEvery('SELECT_CITY', selectCitySaga)
     yield takeEvery('POST_CITY', postCitySaga)
     yield takeEvery('EDIT_CITY', editCitySaga)
