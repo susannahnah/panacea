@@ -1,11 +1,10 @@
+// src/components/admin/CityFormPage/CityFormPage.js
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-//styling imports
-import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
+// Material-UI components
+import { Grid, TextField, Button, Select, MenuItem, OutlinedInput, InputLabel, FormControl } from '@material-ui/core';
 import './CityFormPage.css';
-import { Button } from '@material-ui/core';
 import AdminLayout from '../../layouts/AdminLayout/AdminLayout';
 
 
@@ -13,7 +12,7 @@ class CityFormPage extends Component {
   state = {
     newCity: {
       name: '',
-      country_id: '',
+      country_id: 'Select A Country',
       overview: '',
       health_risks: '',
       ambulance: '',
@@ -59,12 +58,14 @@ class CityFormPage extends Component {
 
   render() {
 
+    const countries = this.props.reduxState.countriesReducer;
+
     return (
       <AdminLayout>
         <div style={{height: `50px`, bottom: 0}}>
           { this.state.newCity.name ? 
           <h1>{this.state.newCity.name}</h1> :
-          <h1></h1> }
+          <h1> </h1> }
         </div>
         <form style={{width: `100%`}} onSubmit={this.addNewCity}>
           <h2>City Summary</h2>
@@ -77,6 +78,26 @@ class CityFormPage extends Component {
                 fullWidth margin="normal"
                 value={this.state.newCity.name} 
                 onChange={this.handleNewChange('name')} />
+            </Grid>
+            <Grid className="inputFields" item xs={12}>
+              <InputLabel style={{marginBottom: `1%`}}>Country</InputLabel>
+              <Select
+                style={{minWidth: 120}}
+                value={this.state.newCity.country_id}
+                onChange={this.handleNewChange('country_id')}
+                input={<OutlinedInput name="Country" id="outlined-country" />}
+              >
+                <MenuItem value="">
+                  <em>Select A Country</em>
+                </MenuItem>
+                { countries.map( country => {
+                  return (
+                    <MenuItem key={country.id} value={country.id}>
+                      {country.value} ({country.id})
+                    </MenuItem>
+                  )
+                })}
+              </Select>
             </Grid>
             <Grid className="inputFields"  item xs={12}>
               <TextField 
@@ -241,4 +262,6 @@ class CityFormPage extends Component {
   }
 }
 
-export default connect()(CityFormPage);
+const mapReduxStateToProps = (reduxState) => ({reduxState});
+
+export default connect(mapReduxStateToProps)(CityFormPage);
