@@ -13,6 +13,7 @@ class CityFormPage extends Component {
   state = {
     newCity: {
       name: '',
+      country_id: '',
       overview: '',
       health_risks: '',
       ambulance: '',
