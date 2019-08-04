@@ -5,18 +5,22 @@ const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
 class MapPage extends Component {
 
-  static defaultProps = {
-    center: {
-      lat: 50.0647,
-      lng: 19.9450
-    },
-    zoom: 13
-  };
+  // static defaultProps = {
+  //   center: {
+  //     lat: 50.0647,
+  //     lng: 19.9450
+  //   },
+  //   zoom: 13
+  // };
 
   render() {
     return (
       <>
-        <div style={{ height: '100vh', width: '100%' }}>
+        <pre>
+          {JSON.stringify(this.props, null, 2)}
+        </pre>
+
+        {/* <div style={{ height: '100vh', width: '100%' }}>
           <GoogleMapReact
             bootstrapURLKeys={{
               key: '',
@@ -33,7 +37,7 @@ class MapPage extends Component {
             />
 
           </GoogleMapReact>
-        </div>
+        </div> */}
       </>
     )
   }
