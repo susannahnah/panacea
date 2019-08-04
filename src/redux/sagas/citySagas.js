@@ -41,6 +41,7 @@ function* editCitySaga(action) {
     yield put({ type: 'FETCH_CITIES'})
 }
 
+//DELTE specific city
 function* deleteCitySaga(action) {
     console.log('deleteCitySaga hit')
     try {
