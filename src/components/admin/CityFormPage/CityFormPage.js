@@ -3,7 +3,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 // Material-UI components
-import { Grid, TextField, Button, Select, MenuItem, OutlinedInput, InputLabel, FormControl } from '@material-ui/core';
+import { Grid, TextField, Button, 
+  Select, MenuItem, OutlinedInput, 
+  InputLabel, Table, TableHead, TableBody, 
+  TableCell, TableRow, IconButton, SvgIcon } from '@material-ui/core';
 import './CityFormPage.css';
 import AdminLayout from '../../layouts/AdminLayout/AdminLayout';
 
@@ -26,15 +29,29 @@ class CityFormPage extends Component {
       CDC_link: '',
       google_translate_link: '',
       local_resources: '',
-    }
+    },
+    newMedication: {
+      generic_name_us: '',
+      brand_name_us: '',
+      brand_name_translated: '',
+    },
+    medications: [],
   }
 
-  handleNewChange = (propertyName) => (event) => {
-    console.log('somethings happening!');
+  handleCityChange = (propertyName) => (event) => {
     this.setState({      
       newCity: {
         ...this.state.newCity,
       [propertyName]: event.target.value,
+      }
+    })
+  }
+
+  handleMedicationChange = (prop) => (event) => {
+    this.setState({
+      newMedication: {
+        ...this.state.newMedication,
+        [prop]: event.target.value,
       }
     })
   }
@@ -59,6 +76,7 @@ class CityFormPage extends Component {
   render() {
 
     const countries = this.props.reduxState.countriesReducer;
+    const medications = this.state.medications;
 
     return (
       <AdminLayout>
@@ -77,7 +95,7 @@ class CityFormPage extends Component {
                 variant="outlined" 
                 fullWidth margin="normal"
                 value={this.state.newCity.name} 
-                onChange={this.handleNewChange('name')} />
+                onChange={this.handleCityChange('name')} />
             </Grid>
             <Grid className="inputFields" item xs={12}>
               <InputLabel htmlFor="countrySelect">Country</InputLabel>
@@ -89,7 +107,7 @@ class CityFormPage extends Component {
                 }}
                 style={{minWidth: 120}}
                 value={this.state.newCity.country_id}
-                onChange={this.handleNewChange('country_id')}
+                onChange={this.handleCityChange('country_id')}
                 input={<OutlinedInput name="Country" id="outlined-country" />}
               >
                 <MenuItem value="">
@@ -113,7 +131,7 @@ class CityFormPage extends Component {
                 variant="outlined" 
                 type='type' 
                 value={this.state.newCity.overview} 
-                onChange={this.handleNewChange('overview')} />
+                onChange={this.handleCityChange('overview')} />
             </Grid> 
             <Grid className="inputFields"  item xs={12}>
               <TextField 
@@ -124,7 +142,7 @@ class CityFormPage extends Component {
                 variant="outlined" 
                 type='type' 
                 value={this.state.newCity.health_risks} 
-                onChange={this.handleNewChange('health_risks')} />
+                onChange={this.handleCityChange('health_risks')} />
             </Grid>
             <Grid className="inputFields" container spacing={3}
               item xs={12}>
@@ -141,7 +159,7 @@ class CityFormPage extends Component {
                   fullWidth margin="normal"
                   variant="outlined" 
                   value={this.state.newCity.ambulance} 
-                  onChange={this.handleNewChange('ambulance')} />
+                  onChange={this.handleCityChange('ambulance')} />
               </Grid>
               <Grid item xs={6}>
                 <TextField 
@@ -150,7 +168,7 @@ class CityFormPage extends Component {
                   fullWidth margin="normal" 
                   variant="outlined" 
                   value={this.state.newCity.fire} 
-                  onChange={this.handleNewChange('fire')} />
+                  onChange={this.handleCityChange('fire')} />
               </Grid>
               <Grid item xs={6}>
                 <TextField 
@@ -159,7 +177,7 @@ class CityFormPage extends Component {
                   fullWidth margin="normal" 
                   variant="outlined" 
                   value={this.state.newCity.police} 
-                  onChange={this.handleNewChange('police')} />
+                  onChange={this.handleCityChange('police')} />
               </Grid>
               <Grid item xs={6}>
                 <TextField 
@@ -168,7 +186,66 @@ class CityFormPage extends Component {
                   fullWidth margin="normal" 
                   variant="outlined" 
                   value={this.state.newCity.roadside_assistance} 
-                  onChange={this.handleNewChange('roadside_assistance')} />
+                  onChange={this.handleCityChange('roadside_assistance')} />
+              </Grid>
+            </Grid>
+            <Grid className="inputFields" container spacing={3}
+              item xs={12}>
+              <h2 style={{
+                marginBottom: 0,
+                marginTop: `5vw`
+              }}>
+                Medicine Translations
+              </h2>
+              <Grid container item xs={12}>
+                <Table>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>US Generic Name</TableCell>
+                      <TableCell>US Brand Name</TableCell>
+                      <TableCell>Translated Brand Name</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {medications.map( med => {
+                      return (
+                        <TableRow key={med.generic_name_us}>
+                          <TableCell>{med.generic_name_us}</TableCell>
+                          <TableCell>{med.brand_name_us}</TableCell>
+                          <TableCell>{med.brand_name_translated}</TableCell>
+                        </TableRow>
+                      );
+                    })}
+                  </TableBody>
+                </Table>
+                <Grid item xs={4}>
+                  <TextField label="US Generic Name"
+                    margin="normal"
+                    variant="outlined"
+                    value={this.state.newMedication.generic_name_us}
+                    onChange={this.handleMedicationChange('generic_name_us')}/>
+                </Grid>
+                <Grid item xs={4}>
+                  <TextField label="US Brand Name"
+                    margin="normal"
+                    variant="outlined"
+                    value={this.state.newMedication.brand_name_us}
+                    onChange={this.handleMedicationChange('brand_name_us')}/>
+                </Grid>
+                <Grid item xs={4}>
+                  <TextField label="Translated Brand Name"
+                    margin="normal"
+                    variant="outlined"
+                    value={this.state.newMedication.brand_name_translated}
+                    onChange={this.handleMedicationChange('brand_name_translated')}/>
+                </Grid>
+                <Grid item xs={12} style={{textAlign: `center`}}>
+                  <IconButton onClick={() => console.log('new med')}>
+                    <SvgIcon>
+                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"></path>
+                    </SvgIcon>
+                  </IconButton>
+                </Grid>
               </Grid>
             </Grid> 
             <Grid className="inputFields"  item xs={12}>
@@ -186,7 +263,7 @@ class CityFormPage extends Component {
                 variant="outlined" 
                 type='type' 
                 value={this.state.newCity.wellness_resources} 
-                onChange={this.handleNewChange('wellness_resources')} />
+                onChange={this.handleCityChange('wellness_resources')} />
             </Grid>  
             <Grid className="inputFields"  item xs={12}>  
               <TextField 
@@ -197,7 +274,7 @@ class CityFormPage extends Component {
                 variant="outlined" 
                 type='type' 
                 value={this.state.newCity.local_health_remedies} 
-                onChange={this.handleNewChange('local_health_remedies')} />
+                onChange={this.handleCityChange('local_health_remedies')} />
             </Grid>  
             <Grid className="inputFields"  item xs={12}>  
               <TextField 
@@ -208,7 +285,7 @@ class CityFormPage extends Component {
                 variant="outlined" 
                 type='type' 
                 value={this.state.newCity.healthcare_tourism}
-                onChange={this.handleNewChange('healthcare_tourism')} />
+                onChange={this.handleCityChange('healthcare_tourism')} />
             </Grid>  
             <Grid className="inputFields"  item xs={12}>
               <h2 style={{
@@ -223,7 +300,7 @@ class CityFormPage extends Component {
                 fullWidth margin="normal" 
                 variant="outlined" 
                 value={this.state.newCity.WHO_link} 
-                onChange={this.handleNewChange('WHO_link')} />
+                onChange={this.handleCityChange('WHO_link')} />
             </Grid>  
             <Grid className="inputFields"  item xs={12}>  
               <TextField 
@@ -232,7 +309,7 @@ class CityFormPage extends Component {
                 fullWidth margin="normal" 
                 variant="outlined" 
                 value={this.state.newCity.CDC_link} 
-                onChange={this.handleNewChange('CDC_link')} />
+                onChange={this.handleCityChange('CDC_link')} />
             </Grid>  
             <Grid className="inputFields"  item xs={12}>  
               <TextField 
@@ -241,7 +318,7 @@ class CityFormPage extends Component {
                 fullWidth margin="normal" 
                 variant="outlined" 
                 value={this.state.newCity.google_translate_link} 
-                onChange={this.handleNewChange('google_translate_link')} />
+                onChange={this.handleCityChange('google_translate_link')} />
             </Grid>
             <Grid className="inputFields"  item xs={12}>  
               <TextField 
@@ -252,7 +329,7 @@ class CityFormPage extends Component {
                 variant="outlined" 
                 type='type' 
                 value={this.state.newCity.local_resources} 
-                onChange={this.handleNewChange('local_resources')} />
+                onChange={this.handleCityChange('local_resources')} />
             </Grid>
             <Grid container item xs={12} 
               style={{margin: `5%`, marginBottom: `20vh`}}>
