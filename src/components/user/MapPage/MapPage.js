@@ -4,7 +4,7 @@ import Marker from './Marker';
 
 function MapPage(props) {
 
-  const [coordinates, setCoordinates] = useState()
+  const [coordinates, setCoordinates] = useState();
   const org = [{ lat: 50, lng: 19.9 }, { lat: 50, lng: 20 }];
 
   return (
@@ -26,14 +26,10 @@ function MapPage(props) {
               defaultZoom={11}
             >
 
-              {/* <Marker
-                lat={props.location.coordinates.lat}
-                lng={props.location.coordinates.lng}
-              /> */}
-
-              {org.map((object) => {
+              {org.map((object, i) => {
                 return (
                   <Marker
+                    key={i}
                     {...object}
                   />
                 )

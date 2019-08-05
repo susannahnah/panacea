@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-
-// testing map
 import axios from 'axios';
-import MapPage from '../MapPage/MapPage';
 
 class CityPage extends Component {
 
@@ -15,7 +12,7 @@ class CityPage extends Component {
     return (
       <>
         <Link to={{
-          pathname: '/map',
+          pathname: `/map/${this.props.match.params.cityName}`,
           coordinates: {
             lat: Number(this.state.city.lat),
             lng: Number(this.state.city.long)
@@ -36,15 +33,15 @@ class CityPage extends Component {
   }
 
   componentDidMount() {
-    axios.get('/api/cities')
+    axios.get(`/api/search/city?city_name=%${this.props.match.params.cityName}%`)
       .then(({ data }) => {
         this.setState({
-          city: { ...data[0] }
+          city: {...data[0]},
         })
       })
       .catch((error) => {
-        console.log('Error with cities call: ', error);
-      });
+        console.log('Error with search city:', error);
+      })
   }
 
 }
