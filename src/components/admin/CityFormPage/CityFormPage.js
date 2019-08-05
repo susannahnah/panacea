@@ -34,10 +34,10 @@ class CityFormPage extends Component {
       generic_name_us: '',
       brand_name_us: '',
       brand_name_translated: '',
-    },
-    medications: [],
+    }
   }
 
+  // handles input changes for city information
   handleCityChange = (propertyName) => (event) => {
     this.setState({      
       newCity: {
@@ -47,6 +47,7 @@ class CityFormPage extends Component {
     })
   }
 
+  // handles input changes for new medications
   handleMedicationChange = (prop) => (event) => {
     this.setState({
       newMedication: {
@@ -54,6 +55,10 @@ class CityFormPage extends Component {
         [prop]: event.target.value,
       }
     })
+  }
+
+  addNewMedication = () => {
+    this.props.dispatch({ type: 'ADD_NEW_MEDICATION', payload: this.state.newMedication });
   }
 
   addNewCity = event => {
@@ -76,7 +81,8 @@ class CityFormPage extends Component {
   render() {
 
     const countries = this.props.reduxState.countriesReducer;
-    const medications = this.state.medications;
+    const cityMedications = this.props.reduxState.cityMedicationsReducer;
+    const newMedications = this.props.reduxState.newMedicationsReducer;
 
     return (
       <AdminLayout>
@@ -207,15 +213,26 @@ class CityFormPage extends Component {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {medications.map( med => {
-                      return (
-                        <TableRow key={med.generic_name_us}>
-                          <TableCell>{med.generic_name_us}</TableCell>
-                          <TableCell>{med.brand_name_us}</TableCell>
-                          <TableCell>{med.brand_name_translated}</TableCell>
-                        </TableRow>
-                      );
-                    })}
+                    { cityMedications.map( med => {
+                        return (
+                          <TableRow key={med.generic_name_us}>
+                            <TableCell>{med.generic_name_us}</TableCell>
+                            <TableCell>{med.brand_name_us}</TableCell>
+                            <TableCell>{med.brand_name_translated}</TableCell>
+                          </TableRow>
+                        );
+                      })
+                    }
+                    { newMedications.map( med => {
+                        return (
+                          <TableRow key={med.generic_name_us}>
+                            <TableCell>{med.generic_name_us}</TableCell>
+                            <TableCell>{med.brand_name_us}</TableCell>
+                            <TableCell>{med.brand_name_translated}</TableCell>
+                          </TableRow>
+                        );
+                      })
+                    }
                   </TableBody>
                 </Table>
                 <Grid item xs={4}>
@@ -240,7 +257,7 @@ class CityFormPage extends Component {
                     onChange={this.handleMedicationChange('brand_name_translated')}/>
                 </Grid>
                 <Grid item xs={12} style={{textAlign: `center`}}>
-                  <IconButton onClick={() => console.log('new med')}>
+                  <IconButton onClick={this.addNewMedication}>
                     <SvgIcon>
                       <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"></path>
                     </SvgIcon>

@@ -28,7 +28,7 @@ function* editCitySaga(action) {
     yield put({ type: 'SEARCH_CITY'})
 }
 
-//DELTE specific city
+//DELETE specific city
 function* deleteCitySaga(action) {
     console.log('deleteCitySaga hit')
     try {
