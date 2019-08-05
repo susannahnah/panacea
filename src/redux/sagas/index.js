@@ -3,6 +3,7 @@ import loginSaga from './loginSaga';
 import userSaga from './userSaga';
 import searchSaga from './searchSaga'
 import citySagas from './citySagas.js';
+import countrySaga from './countrySaga';
 import orgSagas from './orgSagas.js';
 
 // rootSaga is the primary saga.
@@ -18,6 +19,7 @@ export default function* rootSaga() {
     userSaga(),
     searchSaga(),
     citySagas(),
+    countrySaga(),
     orgSagas(),
   ]);
 }
