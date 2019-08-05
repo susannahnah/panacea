@@ -58,7 +58,23 @@ class CityFormPage extends Component {
   }
 
   addNewMedication = () => {
-    this.props.dispatch({ type: 'ADD_NEW_MEDICATION', payload: this.state.newMedication });
+
+    const generic = this.state.newMedication.generic_name_us;
+    const brand_us = this.state.newMedication.brand_name_us;
+    const brand_translated = this.state.newMedication.brand_name_translated;
+
+    if( generic && brand_us && brand_translated ){
+      this.props.dispatch({ type: 'ADD_NEW_MEDICATION', payload: this.state.newMedication });
+      this.setState({
+        newMedication: {
+          generic_name_us: '',
+          brand_name_us: '',
+          brand_name_translated: '',
+        }
+      }); 
+    } else {
+      alert('please fill inputs!');
+    }
   }
 
   addNewCity = event => {
