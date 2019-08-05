@@ -13,6 +13,7 @@ const userRouter = require('./routes/user.router');
 const searchRouter = require('./routes/search.router');
 const cityRouter = require('./routes/city.router');
 const countryRouter = require('./routes/country.router');
+const orgRouter = require('./routes/org.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -30,6 +31,7 @@ app.use('/api/user', userRouter);
 app.use('/api/search', searchRouter);
 app.use('/api/cities', cityRouter);
 app.use('/api/countries', countryRouter);
+app.use('/api/organizations', orgRouter)
 
 // Serve static files
 app.use(express.static('build'));
