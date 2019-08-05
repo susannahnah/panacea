@@ -80,7 +80,13 @@ class CityFormPage extends Component {
                 onChange={this.handleNewChange('name')} />
             </Grid>
             <Grid className="inputFields" item xs={12}>
+              <InputLabel htmlFor="countrySelect">Country</InputLabel>
               <Select
+                displayEmpty
+                inputProps={{
+                  name: 'country',
+                  id: 'countrySelect',
+                }}
                 style={{minWidth: 120}}
                 value={this.state.newCity.country_id}
                 onChange={this.handleNewChange('country_id')}
