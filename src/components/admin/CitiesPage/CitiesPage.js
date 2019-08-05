@@ -60,6 +60,7 @@ function CitiesPage(props) {
     setSearchValues({ ...searchValues, [property]: event.target.value });
   };
 
+ 
   // Fetch the cities associated to the search
   const handleClickSearch = searchBy => {
     switch (searchBy) {
@@ -82,9 +83,11 @@ function CitiesPage(props) {
       <Grid container>
         <Grid container item spacing={1} direction="row" alignItems="center">
           <Grid item>
+          <Link to="/cities/new">
             <Button fullWidth className={classes.addButton} variant="contained">
               Add New City
             </Button>
+          </Link>
           </Grid>
         </Grid>
         <Grid
