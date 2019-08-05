@@ -14,7 +14,7 @@ function* postOrgSaga(action) {
     try {
         console.log(action.payload);
         yield axios.post('/api/organizations', action.payload);
-        yield put({ type: 'FETCH_ORGS' })
+        yield put({ type: 'SET_ORGANIZATION_SEARCH_RESULT' })
     }
     catch (error) {
         console.log('Error with POST', error);
@@ -24,7 +24,7 @@ function* postOrgSaga(action) {
 //UPDATE specific org
 function* editOrgSaga(action) {
     yield axios.put(`/api/organizations`, action.payload)
-    yield put({ type: 'FETCH_ORGS'})
+    yield put({ type: 'SET_ORGANIZATION_SEARCH_RESULT'})
     console.log('org updated')
 }
 
@@ -33,7 +33,7 @@ function* deleteOrgSaga(action) {
     console.log('deleteOrgSaga hit')
     try {
       yield axios.delete(`/api/organizations/${action.payload}`)
-      yield put({type: 'FETCH_ORGS'})
+      yield put({type: 'SET_ORGANIZATION_SEARCH_RESULT'})
     } catch (error) {
       console.log(error);
       alert('Unable to delete item');
