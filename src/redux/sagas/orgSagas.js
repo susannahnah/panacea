@@ -42,7 +42,7 @@ function* deleteOrgSaga(action) {
 
 
 //ALL org Sagas
-function* citySagas() {
+function* orgSagas() {
     yield takeEvery('SELECT_ORG', selectOrgSaga)
     yield takeEvery('POST_ORG', postOrgSaga)
     yield takeEvery('EDIT_ORG', editOrgSaga)
