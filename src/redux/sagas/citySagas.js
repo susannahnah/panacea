@@ -25,7 +25,8 @@ function* postCitySaga(action) {
                 })
             ); // end axios post for one medication
         })); // end yield all
-        yield put({ type: 'SEARCH_CITY' })
+        yield put({ type: 'CLEAR_MEDICATIONS' });
+        yield put({ type: 'SEARCH_CITY', payload: "" });
     } catch (error) {
         console.log('Error with postCitySaga:', error);
     }
