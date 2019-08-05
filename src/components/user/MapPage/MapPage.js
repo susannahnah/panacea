@@ -1,42 +1,60 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import GoogleMapReact from 'google-map-react';
+import Marker from './Marker';
 
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
+function MapPage(props) {
 
-class MapPage extends Component {
+  const [coordinates, setCoordinates] = useState()
+  const org = [{ lat: 50, lng: 19.9 }, { lat: 50, lng: 20 }];
 
-  static defaultProps = {
-    center: {
-      lat: 50.0647,
-      lng: 19.9450
-    },
-    zoom: 13
-  };
+  return (
+    <>
 
-  render() {
-    return (
-      <>
-        <div style={{ height: '100vh', width: '100%' }}>
-          <GoogleMapReact
-            bootstrapURLKeys={{
-              key: '',
-              language: 'en'
-            }}
-            defaultCenter={this.props.center}
-            defaultZoom={this.props.zoom}
-          >
+      {
+        props.location.coordinates
 
-            <AnyReactComponent
-              lat={50.049683}
-              lng={19.944544}
-              text="My Marker"
-            />
+          ?
 
-          </GoogleMapReact>
-        </div>
-      </>
-    )
-  }
+          <div style={{ height: '100vh', width: '100%' }}>
+
+            <GoogleMapReact
+              bootstrapURLKeys={{
+                key: '',
+                language: 'en'
+              }}
+              center={props.location.coordinates}
+              defaultZoom={11}
+            >
+
+              {/* <Marker
+                lat={props.location.coordinates.lat}
+                lng={props.location.coordinates.lng}
+              /> */}
+
+              {org.map((object) => {
+                return (
+                  <Marker
+                    {...object}
+                  />
+                )
+              })}
+
+            </GoogleMapReact>
+
+            <pre>
+              {JSON.stringify(props, null, 2)}
+            </pre>
+
+          </div>
+
+          :
+
+          <></>
+
+      }
+
+    </>
+  )
 }
 
 export default (MapPage);
