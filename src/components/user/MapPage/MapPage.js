@@ -1,18 +1,13 @@
 import React, { Component, useState } from 'react';
 import GoogleMapReact from 'google-map-react';
-
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
+import Marker from './Marker';
 
 function MapPage(props) {
 
-  console.log(props);
   const [coordinates, setCoordinates] = useState()
 
   return (
     <>
-      <pre>
-        {JSON.stringify(props, null, 2)}
-      </pre>
 
       {
         props.location.coordinates
@@ -30,13 +25,16 @@ function MapPage(props) {
               defaultZoom={11}
             >
 
-              <AnyReactComponent
+              <Marker
                 lat={props.location.coordinates.lat}
                 lng={props.location.coordinates.lng}
-                text="My Marker"
               />
 
             </GoogleMapReact>
+
+            <pre>
+              {JSON.stringify(props, null, 2)}
+            </pre>
 
           </div>
 

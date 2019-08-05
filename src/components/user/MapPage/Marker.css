@@ -1,0 +1,47 @@
+.pin {
+    width: 40px;
+    height: 40px;
+    border-radius: 50% 50% 50% 0;
+    background: #0080e9;
+    position: absolute;
+    transform: rotate(-45deg);
+    left: 50%;
+    top: 50%;
+    margin: -20px 0 0 -20px;
+}
+
+.pin:after {
+    content: "H";
+    font-size: 15pt;
+    width: 24px;
+    height: 24px;
+    margin: 8px 0 0 8px;
+    background: #ffffff;
+    position: absolute;
+    border-radius: 50%;
+    text-align: center;
+    transform: rotate(45deg);
+}
+
+.bounce {
+    animation-name: bounce;
+    animation-fill-mode: both;
+    animation-duration: 1s;
+}
+
+@keyframes bounce {
+    0% {
+        opacity: 0;
+        transform: translateY(-2000px) rotate(-45deg);
+    }
+    60% {
+        opacity: 1;
+        transform: translateY(30px) rotate(-45deg);
+    }
+    80% {
+        transform: translateY(-10px) rotate(-45deg);
+    }
+    100% {
+        transform: translateY(0) rotate(-45deg);
+    }
+}
