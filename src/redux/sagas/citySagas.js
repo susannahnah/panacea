@@ -15,7 +15,7 @@ function* postCitySaga(action) {
     try {
         console.log(action.payload);
         yield axios.post('/api/cities', action.payload);
-        yield put({ type: 'SET_CITY_SEARCH_RESULT' })
+        yield put({ type: 'SEARCH_CITY' })
     }
     catch (error) {
         console.log('Error with POST', error);
@@ -25,7 +25,7 @@ function* postCitySaga(action) {
 //UPDATE specific city
 function* editCitySaga(action) {
     yield axios.put(`/api/cities`, action.payload)
-    yield put({ type: 'SET_CITY_SEARCH_RESULT'})
+    yield put({ type: 'SEARCH_CITY'})
 }
 
 //DELTE specific city
@@ -33,7 +33,7 @@ function* deleteCitySaga(action) {
     console.log('deleteCitySaga hit')
     try {
       yield axios.delete(`/api/cities/${action.payload}`)
-      yield put({type: 'SET_CITY_SEARCH_RESULT'})
+      yield put({type: 'SEARCH_CITY'})
     } catch (error) {
       console.log(error);
       alert('Unable to delete item');
