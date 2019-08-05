@@ -63,7 +63,13 @@ class CityFormPage extends Component {
 
   addNewCity = event => {
     event.preventDefault();
-    this.props.dispatch({ type: 'POST_CITY', payload: this.state.newCity })
+    this.props.dispatch({ 
+      type: 'POST_CITY', 
+      payload: {
+        city: this.state.newCity,
+        medications: this.props.reduxState.newMedicationsReducer
+      }
+    })
     this.props.history.push('/cities')
   }
 

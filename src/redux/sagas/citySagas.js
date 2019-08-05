@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { put, takeEvery } from 'redux-saga/effects';
+import { put, takeEvery, all } from 'redux-saga/effects';
 
 
 //GET specific city
@@ -9,16 +9,25 @@ function* selectCitySaga(action) {
     console.log('end of selectCitySaga');
   }
 
-//POST new city function:
+// POST new city function
+// will post a new city object to the database 
+// then will post each medication to the database with the newCityId
 function* postCitySaga(action) {
-    console.log('hit!');
     try {
-        console.log(action.payload);
-        yield axios.post('/api/cities', action.payload);
+        const cityResponse = yield axios.post('/api/cities', action.payload.city);
+        yield all( action.payload.medications.map( med => {
+            return (
+                axios.post('/api/medications', {
+                    city_id: cityResponse.data.id,
+                    generic_name_us: med.generic_name_us,
+                    brand_name_us: med.brand_name_us,
+                    brand_name_translated: med.brand_name_translated,
+                })
+            ); // end axios post for one medication
+        })); // end yield all
         yield put({ type: 'SEARCH_CITY' })
-    }
-    catch (error) {
-        console.log('Error with POST', error);
+    } catch (error) {
+        console.log('Error with postCitySaga:', error);
     }
 }
 

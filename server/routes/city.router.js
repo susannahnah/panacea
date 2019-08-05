@@ -73,8 +73,8 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     ];
     pool.query(queryText, queryValues)
         .then((result) => {
-            res.sendStatus(201);
-            console.log(result);
+            res.send(result.rows[0]);
+            console.log('this is result.rows from city.router:', result.rows);
         })
         .catch((error) => {
             console.log('Error completing POST city query', error);
