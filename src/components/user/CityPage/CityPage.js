@@ -11,6 +11,30 @@ class CityPage extends Component {
     city: {}
   }
 
+  render() {
+    return (
+      <>
+        <Link to={{
+          pathname: '/map',
+          coordinates: {
+            lat: Number(this.state.city.lat),
+            lng: Number(this.state.city.long)
+          },
+        }}>
+          Sending props to Map Page
+        </Link>
+
+        <pre>
+          {JSON.stringify(this.state, null, 2)}
+        </pre>
+
+        <pre>
+          {JSON.stringify(this.props, null, 2)}
+        </pre>
+      </>
+    )
+  }
+
   componentDidMount() {
     axios.get('/api/cities')
       .then(({ data }) => {
@@ -23,19 +47,6 @@ class CityPage extends Component {
       });
   }
 
-  render() {
-    return (
-      <>
-        <Link to="/map" render={(props) => <MapPage {...props} />}>
-          Sending props over to map page
-        </Link>
-
-        <pre>
-          {JSON.stringify(this.state, null, 2)}
-        </pre>
-      </>
-    )
-  }
 }
 
 export default (CityPage);

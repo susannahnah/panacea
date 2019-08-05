@@ -1,46 +1,53 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import GoogleMapReact from 'google-map-react';
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
-class MapPage extends Component {
+function MapPage(props) {
 
-  // static defaultProps = {
-  //   center: {
-  //     lat: 50.0647,
-  //     lng: 19.9450
-  //   },
-  //   zoom: 13
-  // };
+  console.log(props);
+  const [coordinates, setCoordinates] = useState()
 
-  render() {
-    return (
-      <>
-        <pre>
-          {JSON.stringify(this.props, null, 2)}
-        </pre>
+  return (
+    <>
+      <pre>
+        {JSON.stringify(props, null, 2)}
+      </pre>
 
-        {/* <div style={{ height: '100vh', width: '100%' }}>
-          <GoogleMapReact
-            bootstrapURLKeys={{
-              key: '',
-              language: 'en'
-            }}
-            defaultCenter={this.props.center}
-            defaultZoom={this.props.zoom}
-          >
+      {
+        props.location.coordinates
 
-            <AnyReactComponent
-              lat={50.049683}
-              lng={19.944544}
-              text="My Marker"
-            />
+          ?
 
-          </GoogleMapReact>
-        </div> */}
-      </>
-    )
-  }
+          <div style={{ height: '100vh', width: '100%' }}>
+
+            <GoogleMapReact
+              bootstrapURLKeys={{
+                key: '',
+                language: 'en'
+              }}
+              center={props.location.coordinates}
+              defaultZoom={11}
+            >
+
+              <AnyReactComponent
+                lat={props.location.coordinates.lat}
+                lng={props.location.coordinates.lng}
+                text="My Marker"
+              />
+
+            </GoogleMapReact>
+
+          </div>
+
+          :
+
+          <></>
+
+      }
+
+    </>
+  )
 }
 
 export default (MapPage);
