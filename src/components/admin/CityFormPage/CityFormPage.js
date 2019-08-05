@@ -1,17 +1,17 @@
+// src/components/admin/CityFormPage/CityFormPage.js
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-//styling imports
-import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
+// Material-UI components
+import { Grid, TextField, Button, Select, MenuItem, OutlinedInput, InputLabel, FormControl } from '@material-ui/core';
 import './CityFormPage.css';
-import { Button } from '@material-ui/core';
 import AdminLayout from '../../layouts/AdminLayout/AdminLayout';
 
 
 class CityFormPage extends Component {
   state = {
     newCity: {
+      country_id: 'Select A Country',
       name: '',
       overview: '',
       health_risks: '',
@@ -31,10 +31,10 @@ class CityFormPage extends Component {
 
   handleNewChange = (propertyName) => (event) => {
     console.log('somethings happening!');
-    this.setState({
+    this.setState({      
       newCity: {
         ...this.state.newCity,
-        [propertyName]: event.target.value,
+      [propertyName]: event.target.value,
       }
     })
   }
@@ -46,9 +46,11 @@ class CityFormPage extends Component {
   }
 
   componentDidMount() {
+    // check url param "cityName"
     const { match: { params: { cityName } } } = this.props; // this is the same way as writing const params = this.props.match.params.cityName;
     if (cityName === 'new') {
       console.log('new form');
+      this.props.dispatch({ type: 'FETCH_COUNTRIES' });
     } else {
       console.log('filled form');
     }
@@ -56,12 +58,14 @@ class CityFormPage extends Component {
 
   render() {
 
+    const countries = this.props.reduxState.countriesReducer;
+
     return (
       <AdminLayout>
         <div style={{height: `50px`, bottom: 0}}>
           { this.state.newCity.name ? 
           <h1>{this.state.newCity.name}</h1> :
-          <h1></h1> }
+          <h1> </h1> }
         </div>
         <form style={{width: `100%`}} onSubmit={this.addNewCity}>
           <h2>City Summary</h2>
@@ -74,6 +78,31 @@ class CityFormPage extends Component {
                 fullWidth margin="normal"
                 value={this.state.newCity.name} 
                 onChange={this.handleNewChange('name')} />
+            </Grid>
+            <Grid className="inputFields" item xs={12}>
+              <InputLabel htmlFor="countrySelect">Country</InputLabel>
+              <Select
+                displayEmpty
+                inputProps={{
+                  name: 'country',
+                  id: 'countrySelect',
+                }}
+                style={{minWidth: 120}}
+                value={this.state.newCity.country_id}
+                onChange={this.handleNewChange('country_id')}
+                input={<OutlinedInput name="Country" id="outlined-country" />}
+              >
+                <MenuItem value="">
+                  <em>Select A Country</em>
+                </MenuItem>
+                { countries.map( country => {
+                  return (
+                    <MenuItem key={country.id} value={country.id}>
+                      {country.value} ({country.id})
+                    </MenuItem>
+                  )
+                })}
+              </Select>
             </Grid>
             <Grid className="inputFields"  item xs={12}>
               <TextField 
@@ -238,4 +267,6 @@ class CityFormPage extends Component {
   }
 }
 
-export default connect()(CityFormPage);
+const mapReduxStateToProps = (reduxState) => ({reduxState});
+
+export default connect(mapReduxStateToProps)(CityFormPage);

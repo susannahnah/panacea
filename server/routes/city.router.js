@@ -4,17 +4,17 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 const router = express.Router();
 
 //GET all cities
-router.get('/', (req, res) => {
-    const queryText = 'SELECT * FROM "cities" ORDER BY "id"';
-    pool.query(queryText)
-        .then((result) => {
-            res.send(result.rows);
-        })
-        .catch((error) => {
-            console.log('Error completely SELECT city query', error)
-            res.sendStatus(500)
-        })
-})
+// router.get('/', (req, res) => {
+//     const queryText = 'SELECT * FROM "cities" ORDER BY "id"';
+//     pool.query(queryText)
+//         .then((result) => {
+//             res.send(result.rows);
+//         })
+//         .catch((error) => {
+//             console.log('Error completely SELECT city query', error)
+//             res.sendStatus(500)
+//         })
+// })
 
 
 //GET selected cities
@@ -37,7 +37,8 @@ router.get('/:id', (req, res) => {
 router.post('/', rejectUnauthenticated, (req, res) => {
     const newCity = req.body;
     const queryText = `INSERT INTO "cities"(
-        "name", 
+        "country_id",
+        "name",
         "overview", 
         "health_risks",
         "ambulance",
@@ -51,9 +52,10 @@ router.post('/', rejectUnauthenticated, (req, res) => {
         "CDC_link",
         "google_translate_link",
         "local_resources"
-    ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) 
+    ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) 
     RETURNING "id"`;
     const queryValues = [
+        newCity.country_id,
         newCity.name,
         newCity.overview,
         newCity.health_risks,

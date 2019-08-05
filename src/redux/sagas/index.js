@@ -3,6 +3,8 @@ import loginSaga from './loginSaga';
 import userSaga from './userSaga';
 import searchSaga from './searchSaga'
 import citySagas from './citySagas.js';
+import countrySaga from './countrySaga';
+import orgSagas from './orgSagas.js';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -17,5 +19,7 @@ export default function* rootSaga() {
     userSaga(),
     searchSaga(),
     citySagas(),
+    countrySaga(),
+    orgSagas(),
   ]);
 }
