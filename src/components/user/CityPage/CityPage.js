@@ -13,6 +13,7 @@ class CityPage extends Component {
       <>
         <Link to={{
           pathname: `/map/${this.props.match.params.cityName}`,
+          city_id: this.state.city.id,
           coordinates: {
             lat: Number(this.state.city.lat),
             lng: Number(this.state.city.long)
