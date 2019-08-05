@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
@@ -46,11 +46,14 @@ const useStyles = makeStyles({
 });
 
 function CitiesPage(props) {
+
+  useEffect(() => {props.dispatch({type: "SEARCH_CITY", payload: ""})}, []);
+
   // use classes names for styling
   const classes = useStyles();
 
   // Local state to store inputs for city and country to search.
-  const [searchValues, setSearchValues] = React.useState({
+  const [searchValues, setSearchValues] = useState({
     city: "",
     country: ""
   });
@@ -58,18 +61,15 @@ function CitiesPage(props) {
   // Takes in a property name and the event to update local state.
   const handleChange = property => event => {
     setSearchValues({ ...searchValues, [property]: event.target.value });
-  };
-
-  // Fetch the cities associated to the search
-  const handleClickSearch = searchBy => {
-    switch (searchBy) {
+    switch (property) {
       case "city":
-        props.dispatch({ type: "SEARCH_CITY", payload: searchValues.city });
+        props.dispatch({ type: "SEARCH_CITY", payload: event.target.value });
         break;
       case "country":
+        console.log(searchValues);
         props.dispatch({
-          type: "FETCH_CITIES_BY_COUNTRY_NAME",
-          payload: searchValues.city
+          type: "SEARCH_CITY_BY_COUNTRY",
+          payload: event.target.value,
         });
         break;
       default:
@@ -77,12 +77,36 @@ function CitiesPage(props) {
     }
   };
 
+  // Fetch the cities associated to the search
+  // const handleClickSearch = (searchBy) => {
+  //   switch (searchBy) {
+  //     case "city":
+  //       props.dispatch({ type: "SEARCH_CITY", payload: searchValues.city });
+  //       break;
+  //     case "country":
+  //       console.log(searchValues);
+  //       props.dispatch({type: "SEARCH_CITY_BY_COUNTRY", payload: searchValues.country });
+  //       break;
+  //     default:
+  //       return;
+  //   }
+  // };
+
+  const handleClickAddNewCity = () => {
+    props.history.push("/cities/new");
+  };
+
   return (
     <AdminLayout>
       <Grid container>
         <Grid container item spacing={1} direction="row" alignItems="center">
           <Grid item>
-            <Button fullWidth className={classes.addButton} variant="contained">
+            <Button
+              fullWidth
+              className={classes.addButton}
+              variant="contained"
+              onClick={handleClickAddNewCity}
+            >
               Add New City
             </Button>
           </Grid>
@@ -98,7 +122,7 @@ function CitiesPage(props) {
           <Grid item>
             <TextField
               id="city-search-input"
-              label="City"
+              label="Search City"
               value={searchValues.city}
               onChange={handleChange("city")}
               margin="normal"
@@ -106,7 +130,7 @@ function CitiesPage(props) {
               fullWidth
             />
           </Grid>
-          <Grid item>
+          {/* <Grid item>
             <Button
               variant="contained"
               fullWidth
@@ -115,14 +139,14 @@ function CitiesPage(props) {
             >
               Search
             </Button>
-          </Grid>
+          </Grid> */}
         </Grid>
       </Grid>
       <Grid container item spacing={1} direction="row" alignItems="center">
         <Grid item>
           <TextField
             id="country-search-input"
-            label="Country"
+            label="Search Country"
             value={searchValues.country}
             onChange={handleChange("country")}
             margin="normal"
@@ -130,7 +154,7 @@ function CitiesPage(props) {
             fullWidth
           />
         </Grid>
-        <Grid item>
+        {/* <Grid item>
           <Button
             variant="contained"
             fullWidth
@@ -139,7 +163,7 @@ function CitiesPage(props) {
           >
             Search
           </Button>
-        </Grid>
+        </Grid> */}
       </Grid>
       <Grid container item spacing={1} direction="row" alignItems="center">
         <Grid container item>
@@ -153,25 +177,27 @@ function CitiesPage(props) {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {props.searchCityReducer.map(city => {
-                  return (
-                    <TableRow>
-                      <TableCell>Krakow</TableCell>
-                      <TableCell align="right">Poland</TableCell>
-                      <TableCell>
-                        <Link to="/cities/new">
-                          <Button
-                            variant="contained"
-                            fullWidth
-                            className={classes.detailsButton}
-                          >
-                            Details
-                          </Button>
-                        </Link>
-                      </TableCell>
-                    </TableRow>
-                  );
-                })}
+                {props.searchCityReducer &&
+                  props.searchCityReducer.map(city => {
+                    return (
+                      <TableRow key={city.city_id}>
+                        <TableCell>{city.city_name}</TableCell>
+                        <TableCell align="right">{city.country_name}</TableCell>
+                        <TableCell>
+                          <Link to={`/cities/${city.city_name}`}>
+                            <Button
+                              variant="contained"
+                              fullWidth
+                              className={classes.detailsButton}
+                              value={city.city_id}
+                            >
+                              Details
+                            </Button>
+                          </Link>
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
               </TableBody>
             </Table>
           </Paper>
@@ -184,8 +210,7 @@ function CitiesPage(props) {
 }
 //
 const mapReduxStateToProps = reduxState => ({
-  // searchCityReducer: reduxState.searchCityReducer
-  searchCityReducer: ['1', '2', '3']
+  searchCityReducer: reduxState.searchReducer.searchCityReducer
 });
 
 export default connect(mapReduxStateToProps)(CitiesPage);
