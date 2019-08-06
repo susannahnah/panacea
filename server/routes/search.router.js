@@ -11,6 +11,7 @@ router.get("/city", async (req, res, next) => {
       "cities"."created_at" AS "city_created_at",
       "cities"."country_id" AS "city_country_id",
       "cities"."name" AS "city_name",
+      "cities"."lat", "cities"."long",
       "countries"."value" AS "country_name"
       FROM "cities" 
       JOIN "countries" ON "cities"."country_id"="countries"."id"
