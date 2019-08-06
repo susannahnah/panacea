@@ -6,11 +6,19 @@ import './MapPage.css';
 
 function MapPage(props) {
 
-  const [loadingStatus, setLoadingStatus] = useState(false);
+  const [loadingStatus, setLoadingStatus] = useState(true);
   const [coordinates, setCoordinates] = useState();
   const org = [{ lat: 50, lng: 19.9 }, { lat: 50, lng: 20 }];
 
-  axios.get(`/api/`)
+  if (props.location.city_id) {
+    axios.get(`/api/public/map?city_id=${props.location.city_id}&orgType=${props.location.orgType}`)
+      .then(({data})=>{
+        console.log('get data: ', data);
+      })
+      .catch((error)=>{
+        console.log('Error with get route: ', error);
+      })
+  }
 
   if (loadingStatus) {
     return (

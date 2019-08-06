@@ -5,22 +5,33 @@ import axios from 'axios';
 class CityPage extends Component {
 
   state = {
-    city: {}
+    city: {},
+    orgTypes: ['Hospital', 'Clinic', 'Urgent Care', 'Laboratory', 'Home Visits', 'Pharmacy'],
   }
 
   render() {
     return (
       <>
-        <Link to={{
-          pathname: `/map/${this.props.match.params.cityName}`,
-          city_id: this.state.city.id,
-          coordinates: {
-            lat: Number(this.state.city.lat),
-            lng: Number(this.state.city.long)
-          },
-        }}>
-          Sending props to Map Page
-        </Link>
+        {this.state.orgTypes.map(
+          (type, i) => (
+            <button
+              key={i}
+            >
+
+              <Link to={{
+                pathname: `/map/${this.props.match.params.cityName}`,
+                city_id: this.state.city.id,
+                orgType: type,
+                coordinates: {
+                  lat: Number(this.state.city.lat),
+                  lng: Number(this.state.city.long)
+                },
+              }}>
+                {type}
+              </Link>
+
+            </button>
+          ))}
 
         <pre>
           {JSON.stringify(this.state, null, 2)}
@@ -37,7 +48,7 @@ class CityPage extends Component {
     axios.get(`/api/search/city?city_name=%${this.props.match.params.cityName}%`)
       .then(({ data }) => {
         this.setState({
-          city: {...data[0]},
+          city: { ...data[0] },
         })
       })
       .catch((error) => {
