@@ -26,6 +26,7 @@ class CityPage extends Component {
               (type, i) => (
 
                 <Grid 
+                key={i}
                 item xs={6}
                 style={{textAlign:`center`, marginTop: `2vh`}}
                 >

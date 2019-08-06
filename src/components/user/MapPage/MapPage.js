@@ -9,6 +9,7 @@ function MapPage(props) {
 
   const [loadingStatus, setLoadingStatus] = useState(true);
   const [organizations, setOrganizations] = useState([]);
+  
 
   useEffect(() => {
 
@@ -30,6 +31,11 @@ function MapPage(props) {
     setLoadingStatus(true);
   }, []);
 
+  const markerClicked = (key, org) => {
+    console.log('this is the org',org);
+
+  }
+
   if (!loadingStatus) {
     return (
       <>
@@ -43,6 +49,7 @@ function MapPage(props) {
             }}
             center={props.location.coordinates}
             defaultZoom={11}
+            onChildClick={markerClicked}
           >
 
             {/* TODO: add functioning back button
