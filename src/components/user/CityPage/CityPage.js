@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './CityPage.css';
 import { Button, Grid } from '@material-ui/core/';
+import UserLayout from '../../layouts/UserLayout/UserLayout';
 
 class CityPage extends Component {
 
@@ -13,7 +14,7 @@ class CityPage extends Component {
 
   render() {
     return (
-      <>
+      <UserLayout>
 
         <div className="stock-map">
           <Grid 
@@ -63,7 +64,7 @@ class CityPage extends Component {
         <pre>
           {JSON.stringify(this.props, null, 2)}
         </pre>
-      </>
+      </UserLayout>
     )
   }
 
