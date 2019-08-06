@@ -1,42 +1,77 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import GoogleMapReact from 'google-map-react';
+import Marker from './Marker';
+import axios from 'axios';
+import './MapPage.css';
+import BackButton from '@material-ui/icons/ChevronLeftRounded';
 
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
+function MapPage(props) {
 
-class MapPage extends Component {
+  const [loadingStatus, setLoadingStatus] = useState(true);
+  const [organizations, setOrganizations] = useState([]);
 
-  static defaultProps = {
-    center: {
-      lat: 50.0647,
-      lng: 19.9450
-    },
-    zoom: 13
-  };
+  useEffect(() => {
 
-  render() {
+    async function fetchOrganizations() {
+      try {
+        const { data } = await axios.get(`/api/public/map?city_id=${props.location.city_id}&orgType=${props.location.orgType}`);
+        setOrganizations(data);
+      } catch (error) {
+        console.log('Error with request: ', error);
+      }
+
+      setLoadingStatus(false);
+    }
+
+    if (props.location.city_id) {
+      fetchOrganizations();
+    }
+
+  }, []);
+
+  if (!loadingStatus) {
     return (
       <>
-        <div style={{ height: '100vh', width: '100%' }}>
+
+        <div className="container">
+
           <GoogleMapReact
             bootstrapURLKeys={{
               key: '',
               language: 'en'
             }}
-            defaultCenter={this.props.center}
-            defaultZoom={this.props.zoom}
+            center={props.location.coordinates}
+            defaultZoom={11}
           >
 
-            <AnyReactComponent
-              lat={50.049683}
-              lng={19.944544}
-              text="My Marker"
-            />
+            <div className="back-button">
+              <BackButton></BackButton>
+            </div>
+
+            {organizations.map((org, i) => {
+              return (
+                <Marker
+                  key={i}
+                  {...org}
+                />
+              )
+            })}
 
           </GoogleMapReact>
+
         </div>
+
       </>
     )
+  } else {
+    return (
+      <div className="container">
+        <div className="loading"></div>
+      </div>
+    )
   }
+
+
 }
 
 export default (MapPage);

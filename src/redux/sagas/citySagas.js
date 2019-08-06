@@ -1,6 +1,18 @@
 import axios from 'axios';
 import { put, takeEvery, all } from 'redux-saga/effects';
 
+ // // Get all cities:
+ function* fetchCitiesSaga(action) {
+    try {
+      const cityResponse = yield axios.get('/api/cities')
+      console.log('hey cities!', cityResponse);
+      
+      yield put({ type: 'SET_CITIES', payload: cityResponse.data });
+      console.log('end of fetchCitiesSaga')
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
 //GET specific city
 function* selectCityByIdSaga(action) {
@@ -85,6 +97,7 @@ function* deleteCitySaga(action) {
 function* citySagas() {
     yield takeEvery('SELECT_CITY', selectCityByIdSaga)
     yield takeEvery('SELECT_CITY_BY_NAME', selectCityByNameSaga)
+    yield takeEvery('FETCH_CITIES', fetchCitiesSaga)
     yield takeEvery('POST_CITY', postCitySaga)
     yield takeEvery('EDIT_CITY', editCitySaga)
     yield takeEvery('DELETE_CITY', deleteCitySaga)

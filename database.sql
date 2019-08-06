@@ -29,8 +29,8 @@ CREATE TABLE "cities" (
 	"CDC_link" VARCHAR,
 	"google_translate_link" VARCHAR,
 	"local_resources" VARCHAR,
-	"lat" INT,
-	"long" INT
+	"lat" NUMERIC,
+	"long" NUMERIC
 );
 
 CREATE TABLE "organizations" (
@@ -52,8 +52,8 @@ CREATE TABLE "organizations" (
   "comments" VARCHAR,
   "phone_number" INT,
   "website_url" VARCHAR, 
-  "lat" INT,
-  "long" INT,
+  "lat" NUMERIC,
+  "long" NUMERIC,
   "google_maps_link" VARCHAR
 );
 

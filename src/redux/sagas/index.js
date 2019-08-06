@@ -2,9 +2,9 @@ import { all } from 'redux-saga/effects';
 import loginSaga from './loginSaga';
 import userSaga from './userSaga';
 import searchSaga from './searchSaga'
-import citySagas from './citySagas.js';
+import citySagas from './citySagas';
 import countrySaga from './countrySaga';
-import orgSagas from './orgSagas.js';
+import orgSagas from './orgSagas';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
