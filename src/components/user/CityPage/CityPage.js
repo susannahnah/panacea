@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import './CityPage.css';
+import { Button, Grid } from '@material-ui/core/';
 
 class CityPage extends Component {
 
@@ -12,26 +14,47 @@ class CityPage extends Component {
   render() {
     return (
       <>
-        {this.state.orgTypes.map(
-          (type, i) => (
-            <button
-              key={i}
-            >
 
-              <Link to={{
-                pathname: `/map/${this.props.match.params.cityName}`,
-                city_id: this.state.city.id,
-                orgType: type,
-                coordinates: {
-                  lat: Number(this.state.city.lat),
-                  lng: Number(this.state.city.long)
-                },
-              }}>
-                {type}
-              </Link>
+        <div className="stock-map">
+          <Grid 
+          container
+          spacing={1}
+          >
 
-            </button>
-          ))}
+            {this.state.orgTypes.map(
+              (type, i) => (
+
+                <Grid 
+                item xs={6}
+                style={{textAlign:`center`, marginTop: `2vh`}}
+                >
+
+                  <Button
+                    className="organization-button"
+                    key={i}
+                    variant="outlined"
+                  >
+
+                    <Link to={{
+                      pathname: `/map/${this.props.match.params.cityName}`,
+                      city_id: this.state.city.city_id,
+                      orgType: type,
+                      coordinates: {
+                        lat: Number(this.state.city.lat),
+                        lng: Number(this.state.city.long)
+                      },
+                    }}>
+                      {type}
+                    </Link>
+
+                  </Button>
+
+                </Grid>
+
+              ))}
+
+          </Grid>
+        </div>
 
         <pre>
           {JSON.stringify(this.state, null, 2)}

@@ -44,9 +44,10 @@ function MapPage(props) {
             defaultZoom={11}
           >
 
+            {/* TODO: add functioning back button
             <div className="back-button">
               <BackButton></BackButton>
-            </div>
+            </div> */}
 
             {organizations.map((org, i) => {
               return (
