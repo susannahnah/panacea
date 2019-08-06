@@ -10,9 +10,8 @@
     margin: -20px 0 0 -20px;
 }
 
-.pin:after {
-    content: "H";
-    font-size: 15pt;
+.type {
+    font-size: 12pt;
     width: 24px;
     height: 24px;
     margin: 8px 0 0 8px;

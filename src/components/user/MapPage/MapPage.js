@@ -54,10 +54,6 @@ function MapPage(props) {
 
           </GoogleMapReact>
 
-          <pre>
-            {JSON.stringify(props, null, 2)}
-          </pre>
-
         </div>
 
       </>
