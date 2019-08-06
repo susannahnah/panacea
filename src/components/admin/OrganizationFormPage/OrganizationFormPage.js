@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { TextField, Grid } from '@material-ui/core';
+
+//Material-UI components
+import { TextField, Grid, Button, Select, MenuItem, OutlinedInput, InputLabel } from '@material-ui/core';
 import AdminLayout from '../../layouts/AdminLayout/AdminLayout';
 import Checkbox from '@material-ui/core/Checkbox';
-import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
 
 
 class OrganizationFormPage extends Component {
@@ -61,9 +60,10 @@ class OrganizationFormPage extends Component {
   };
 
   componentDidMount() {
-    const orgName = this.props.match.params.orgName;
+    const { match: { params: { orgName } } } = this.props;
     if (orgName === 'new') {
       console.log('new form');
+      this.props.dispatch({ type: 'FETCH_CITIES'})
     } else {
       console.log('filled form');
     }
