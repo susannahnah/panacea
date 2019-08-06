@@ -27,6 +27,7 @@ function MapPage(props) {
       fetchOrganizations();
     }
 
+    setLoadingStatus(true);
   }, []);
 
   if (!loadingStatus) {
