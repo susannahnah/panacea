@@ -16,7 +16,18 @@ router.get('/', (req, res) => {
         })
 })
 
-router.get('/city/:cityName', )
+router.get('/city/:cityName', (req, res) => {
+    const queryText = 'SELECT * FROM "cities" WHERE "name"=$1';
+    console.log('here is your city', req.params.cityName);
+    pool.query(queryText, [req.params.cityName])
+        .then((result) => {
+            res.send(result.rows[0]);
+        })
+        .catch((error) => {
+            console.log('Error completely SELECT city query', error)
+            res.sendStatus(500)
+        })
+})
 
 //GET selected cities
 router.get('/:id', (req, res) => {
