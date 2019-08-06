@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
@@ -47,7 +47,7 @@ const useStyles = makeStyles({
 
 function CitiesPage(props) {
 
-  useEffect(() => {props.dispatch({type: "SEARCH_CITY", payload: ""})}, []);
+  useEffect(() => { props.dispatch({ type: "SEARCH_CITY", payload: "" }) }, []);
 
   // use classes names for styling
   const classes = useStyles();
@@ -63,7 +63,7 @@ function CitiesPage(props) {
     setSearchValues({ ...searchValues, [property]: event.target.value });
   };
 
- 
+
   // Fetch the cities associated to the search
   const handleClickSearch = searchBy => event => {
     switch (searchBy) {
@@ -82,35 +82,16 @@ function CitiesPage(props) {
     }
   };
 
-  // Fetch the cities associated to the search
-  // const handleClickSearch = (searchBy) => {
-  //   switch (searchBy) {
-  //     case "city":
-  //       props.dispatch({ type: "SEARCH_CITY", payload: searchValues.city });
-  //       break;
-  //     case "country":
-  //       console.log(searchValues);
-  //       props.dispatch({type: "SEARCH_CITY_BY_COUNTRY", payload: searchValues.country });
-  //       break;
-  //     default:
-  //       return;
-  //   }
-  // };
-
-  const handleClickAddNewCity = () => {
-    props.history.push("/cities/new");
-  };
-
   return (
     <AdminLayout>
       <Grid container>
         <Grid container item spacing={1} direction="row" alignItems="center">
           <Grid item>
-          <Link to="/cities/new">
-            <Button fullWidth className={classes.addButton} variant="contained">
-              Add New City
+            <Link to="/cities/new">
+              <Button fullWidth className={classes.addButton} variant="contained">
+                Add New City
             </Button>
-          </Link>
+            </Link>
           </Grid>
         </Grid>
         <Grid
@@ -132,16 +113,6 @@ function CitiesPage(props) {
               fullWidth
             />
           </Grid>
-          {/* <Grid item>
-            <Button
-              variant="contained"
-              fullWidth
-              className={classes.searchButton}
-              onClick={() => handleClickSearch("city")}
-            >
-              Search
-            </Button>
-          </Grid> */}
         </Grid>
       </Grid>
       <Grid container item spacing={1} direction="row" alignItems="center">
