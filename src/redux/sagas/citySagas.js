@@ -46,10 +46,14 @@ function* postNewCitySaga(action) {
     }
 }
 
-//UPDATE specific city
+// UPDATE specific city
+// refresh individual city
 function* editCitySaga(action) {
-    yield axios.put(`/api/cities`, action.payload)
-    yield put({ type: 'SEARCH_CITY'})
+    console.log(action.payload)
+    yield axios.put(`/api/cities`, action.payload);
+    const updatedCityResponse = yield axios.get(`/api/cities/${action.payload.id}`);
+    yield put({ type: 'SET_INDIVIDUAL_CITY', payload: updatedCityResponse.data });
+    // yield put({ type: 'SEARCH_CITY'})
 }
 
 //DELETE specific city

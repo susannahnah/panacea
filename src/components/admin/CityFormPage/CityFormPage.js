@@ -24,23 +24,26 @@ import AdminLayout from '../../layouts/AdminLayout/AdminLayout';
 
 
 class CityFormPage extends Component {
+
+  individualCity = this.props.reduxState.individualCityReducer;
+
   state = {
     newCity: {
-      country_id: null,
-      name: null,
-      overview: null,
-      health_risks: null,
-      ambulance: null,
-      fire: null,
-      police: null,
-      roadside_assistance: null,
-      wellness_resources: null,
-      local_health_remedies: null,
-      healthcare_tourism: null,
-      WHO_link: null,
-      CDC_link: null,
-      google_translate_link: null,
-      local_resources: null,
+      country_id: this.individualCity.country_id || '',
+      name: this.individualCity.name || '',
+      overview: this.individualCity.overview || '',
+      health_risks: this.individualCity.health_risks || '',
+      ambulance: this.individualCity.ambulance || '',
+      fire: this.individualCity.fire || '',
+      police: this.individualCity.police || '',
+      roadside_assistance: this.individualCity.roadside_assistance || '',
+      wellness_resources: this.individualCity.wellness_resources || '',
+      local_health_remedies: this.individualCity.local_health_remedies || '',
+      healthcare_tourism: this.individualCity.healthcare_tourism || '',
+      WHO_link: this.individualCity.WHO_link || '',
+      CDC_link: this.individualCity.CDC_link || '',
+      google_translate_link: this.individualCity.google_translate_link || '',
+      local_resources: this.individualCity.local_resources || '',
     },
     newMedication: {
       generic_name_us: '',
@@ -102,16 +105,18 @@ class CityFormPage extends Component {
     });
   }
 
-  addNewCity = event => {
+  // saves updates to the database
+  // alert (will be sweetalert) user that changes have been saved
+  saveCity = event => {
     event.preventDefault();
     this.props.dispatch({ 
-      type: 'POST_CITY', 
+      type: 'EDIT_CITY', 
       payload: {
-        city: this.state.newCity,
-        medications: this.props.reduxState.newMedicationsReducer
+        ...this.state.newCity,
+        id: this.props.reduxState.individualCityReducer.id,
       }
     })
-    this.props.history.push('/cities')
+    alert('your changes have been saved!');
   }
 
   componentDidMount() {
@@ -122,10 +127,10 @@ class CityFormPage extends Component {
         type: 'NEW_CITY',
         payload: {
           city: this.state.newCity,
-          medications: this.props.reduxState.newMedicationsReducer
         }
       });
       this.props.dispatch({ type: 'FETCH_COUNTRIES' });
+      console.log(this.state)
     } else {
       console.log('filled form');
     }
@@ -142,7 +147,7 @@ class CityFormPage extends Component {
           <h1>{this.state.newCity.name}</h1> :
           <h1> </h1> }
         </div>
-        <form style={{width: `100%`}} onSubmit={this.addNewCity}>
+        <form style={{width: `100%`}} onSubmit={this.saveCity}>
           <h2>City Summary</h2>
           <Grid id="newCityGrid" container>
             <Grid className="inputFields" item xs={12}>
@@ -406,7 +411,7 @@ class CityFormPage extends Component {
             <Grid container item xs={12} 
               style={{margin: `5%`, marginBottom: `20vh`}}>
               <Grid item xs={4}>
-                <Button type='submit' value='Add New City' style={{ width: "24vw" }} variant="contained" color="inherent">Submit New City</Button>
+                <Button type='submit' value='Save' style={{ width: "24vw" }} variant="contained" color="inherent">Save</Button>
               </Grid>
             </Grid>
           </Grid>
