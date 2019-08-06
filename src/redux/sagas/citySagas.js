@@ -26,8 +26,10 @@ function* selectCityByIdSaga(action) {
 
 function* selectCityByNameSaga(action) {
     try {
-        const getCity = yield axios.get(`/api/cities/city/${action.payload}`)
-        yield put({ type: 'SET_INDIVIDUAL_CITY', payload: getCity.data })
+        const getCity = yield axios.get(`/api/cities/city/${action.payload}`);
+        const getMedications = yield axios.get(`/api/medications/${getCity.data.id}`);
+        yield put({ type: 'SET_CITY_MEDICATIONS', payload: getMedications.data });
+        yield put({ type: 'SET_INDIVIDUAL_CITY', payload: getCity.data });
     } catch (error) {
         console.log(`Error with selectCityByNameSaga:`, error);
     }
