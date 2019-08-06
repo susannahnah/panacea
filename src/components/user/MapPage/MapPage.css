@@ -5,6 +5,12 @@
     display: flex;
 }
 
+.back-button{
+  height:100vh;
+  width:100%;
+  position: absolute!important;
+}
+
 .loading {
     margin: auto;
     border: 20px solid #f3f3f3;

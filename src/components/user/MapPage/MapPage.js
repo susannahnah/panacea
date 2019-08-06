@@ -3,6 +3,7 @@ import GoogleMapReact from 'google-map-react';
 import Marker from './Marker';
 import axios from 'axios';
 import './MapPage.css';
+import BackButton from '@material-ui/icons/ChevronLeftRounded';
 
 function MapPage(props) {
 
@@ -18,7 +19,7 @@ function MapPage(props) {
       } catch (error) {
         console.log('Error with request: ', error);
       }
-      
+
       setLoadingStatus(false);
     }
 
@@ -32,7 +33,7 @@ function MapPage(props) {
     return (
       <>
 
-        <div style={{ height: '100vh', width: '100%' }}>
+        <div className="container">
 
           <GoogleMapReact
             bootstrapURLKeys={{
@@ -42,6 +43,10 @@ function MapPage(props) {
             center={props.location.coordinates}
             defaultZoom={11}
           >
+
+            <div className="back-button">
+              <BackButton></BackButton>
+            </div>
 
             {organizations.map((org, i) => {
               return (

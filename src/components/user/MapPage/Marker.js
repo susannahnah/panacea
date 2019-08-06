@@ -30,7 +30,7 @@ const Marker = (props) => {
         case 'Home Visits':
             return (
                 <div className="pin bounce">
-                    <span className="type" style={{fontSize: '10pt'}}>HV</span>
+                    <span className="type">Hv</span>
                 </div>
             )
         case 'Pharmacy':
