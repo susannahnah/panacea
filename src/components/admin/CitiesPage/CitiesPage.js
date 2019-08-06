@@ -65,7 +65,7 @@ function CitiesPage(props) {
 
  
   // Fetch the cities associated to the search
-  const handleClickSearch = searchBy => {
+  const handleClickSearch = searchBy => event => {
     switch (searchBy) {
       case "city":
         props.dispatch({ type: "SEARCH_CITY", payload: event.target.value });
