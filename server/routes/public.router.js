@@ -10,7 +10,7 @@ router.get('/map', async (req, res, next) => {
         "lat", "long" as "lng", "google_maps_link" 
         FROM "public"."organizations"
         WHERE "city_id"=$1 AND "type"=$2`;
-        const { city_id, orgTyp } = req.query;
+        const { city_id, orgType } = req.query;
         const { rows } = await pool.query(selectQuery, [city_id, orgType]);
         res.send(rows);
     } catch (error) {
