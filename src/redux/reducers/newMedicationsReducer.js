@@ -3,6 +3,8 @@ const newMedicationsReducer = (state = [], action) => {
     switch (action.type) {
         case 'ADD_NEW_MEDICATION':
             return [...state, action.payload];
+        case 'DELETE_NEW_MEDICATION':
+            return action.payload;
         case 'CLEAR_MEDICATIONS':
             return [];
         default:

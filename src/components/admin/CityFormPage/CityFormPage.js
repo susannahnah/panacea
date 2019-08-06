@@ -3,10 +3,22 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 // Material-UI components
-import { Grid, TextField, Button, 
-  Select, MenuItem, OutlinedInput, 
-  InputLabel, Table, TableHead, TableBody, 
-  TableCell, TableRow, IconButton, SvgIcon } from '@material-ui/core';
+import { 
+  Grid,
+  TextField, 
+  Button, 
+  Select, 
+  MenuItem,
+  OutlinedInput, 
+  InputLabel, 
+  Table, 
+  TableHead, 
+  TableBody, 
+  TableCell,
+  TableRow, 
+  IconButton, 
+  SvgIcon 
+} from '@material-ui/core';
 import './CityFormPage.css';
 import AdminLayout from '../../layouts/AdminLayout/AdminLayout';
 
@@ -14,21 +26,21 @@ import AdminLayout from '../../layouts/AdminLayout/AdminLayout';
 class CityFormPage extends Component {
   state = {
     newCity: {
-      country_id: 'Select A Country',
-      name: '',
-      overview: '',
-      health_risks: '',
-      ambulance: '',
-      fire: '',
-      police: '',
-      roadside_assistance: '',
-      wellness_resources: '',
-      local_health_remedies: '',
-      healthcare_tourism: '',
-      WHO_link: '',
-      CDC_link: '',
-      google_translate_link: '',
-      local_resources: '',
+      country_id: null,
+      name: null,
+      overview: null,
+      health_risks: null,
+      ambulance: null,
+      fire: null,
+      police: null,
+      roadside_assistance: null,
+      wellness_resources: null,
+      local_health_remedies: null,
+      healthcare_tourism: null,
+      WHO_link: null,
+      CDC_link: null,
+      google_translate_link: null,
+      local_resources: null,
     },
     newMedication: {
       generic_name_us: '',
@@ -57,6 +69,8 @@ class CityFormPage extends Component {
     })
   }
 
+  // if all medication inputs are fill out, 
+  // will add a new medication to redux state until ready to post to database
   addNewMedication = () => {
 
     const generic = this.state.newMedication.generic_name_us;
@@ -75,6 +89,17 @@ class CityFormPage extends Component {
     } else {
       alert('please fill inputs!');
     }
+  }
+
+  // will grab array of medication from redux state, alter, then push new array to redux state
+  deleteNewMedication = (i) => (event) => {
+
+    const medications = this.props.reduxState.newMedicationsReducer;
+
+    this.props.dispatch({
+      type: 'DELETE_NEW_MEDICATION',
+      payload: medications.slice(i, 1)
+    });
   }
 
   addNewCity = event => {
@@ -103,8 +128,6 @@ class CityFormPage extends Component {
   render() {
 
     const countries = this.props.reduxState.countriesReducer;
-    const cityMedications = this.props.reduxState.cityMedicationsReducer;
-    const newMedications = this.props.reduxState.newMedicationsReducer;
 
     return (
       <AdminLayout>
@@ -129,10 +152,6 @@ class CityFormPage extends Component {
               <InputLabel htmlFor="countrySelect">Country</InputLabel>
               <Select
                 displayEmpty
-                inputProps={{
-                  name: 'country',
-                  id: 'countrySelect',
-                }}
                 style={{minWidth: 120}}
                 value={this.state.newCity.country_id}
                 onChange={this.handleCityChange('country_id')}
@@ -232,10 +251,11 @@ class CityFormPage extends Component {
                       <TableCell>US Generic Name</TableCell>
                       <TableCell>US Brand Name</TableCell>
                       <TableCell>Translated Brand Name</TableCell>
+                      <TableCell></TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    { cityMedications.map( med => {
+                    { this.props.reduxState.cityMedicationsReducer.map( med => {
                         return (
                           <TableRow key={med.generic_name_us}>
                             <TableCell>{med.generic_name_us}</TableCell>
@@ -245,12 +265,19 @@ class CityFormPage extends Component {
                         );
                       })
                     }
-                    { newMedications.map( med => {
+                    { this.props.reduxState.newMedicationsReducer.map((med, i) => {
                         return (
-                          <TableRow key={med.generic_name_us}>
+                          <TableRow key={i}>
                             <TableCell>{med.generic_name_us}</TableCell>
                             <TableCell>{med.brand_name_us}</TableCell>
                             <TableCell>{med.brand_name_translated}</TableCell>
+                            <TableCell>
+                              <IconButton onClick={this.deleteNewMedication(i)}>
+                                <SvgIcon>
+                                  <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"></path>
+                                </SvgIcon>
+                              </IconButton>
+                            </TableCell>
                           </TableRow>
                         );
                       })
