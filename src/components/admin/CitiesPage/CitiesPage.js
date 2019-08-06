@@ -61,7 +61,12 @@ function CitiesPage(props) {
   // Takes in a property name and the event to update local state.
   const handleChange = property => event => {
     setSearchValues({ ...searchValues, [property]: event.target.value });
-    switch (property) {
+  };
+
+ 
+  // Fetch the cities associated to the search
+  const handleClickSearch = searchBy => {
+    switch (searchBy) {
       case "city":
         props.dispatch({ type: "SEARCH_CITY", payload: event.target.value });
         break;
@@ -101,14 +106,11 @@ function CitiesPage(props) {
       <Grid container>
         <Grid container item spacing={1} direction="row" alignItems="center">
           <Grid item>
-            <Button
-              fullWidth
-              className={classes.addButton}
-              variant="contained"
-              onClick={handleClickAddNewCity}
-            >
+          <Link to="/cities/new">
+            <Button fullWidth className={classes.addButton} variant="contained">
               Add New City
             </Button>
+          </Link>
           </Grid>
         </Grid>
         <Grid
