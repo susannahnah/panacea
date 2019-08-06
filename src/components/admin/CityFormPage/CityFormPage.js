@@ -118,7 +118,13 @@ class CityFormPage extends Component {
     // check url param "cityName"
     const { match: { params: { cityName } } } = this.props; // this is the same way as writing const params = this.props.match.params.cityName;
     if (cityName === 'new') {
-      console.log('new form');
+      this.props.dispatch({
+        type: 'NEW_CITY',
+        payload: {
+          city: this.state.newCity,
+          medications: this.props.reduxState.newMedicationsReducer
+        }
+      });
       this.props.dispatch({ type: 'FETCH_COUNTRIES' });
     } else {
       console.log('filled form');
