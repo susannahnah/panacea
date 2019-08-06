@@ -45,7 +45,7 @@ class App extends Component {
             <ProtectedRoute exact path="/cities" component={CitiesPage}/>
             <ProtectedRoute path="/cities/:cityName" component={CityFormPage}/>
             <ProtectedRoute exact path="/organizations" component={OrganizationsPage}/>
-            <ProtectedRoute path="/organizations/:orgName" component={OrganizationFormPage}/>
+            <ProtectedRoute path="/organizations/:orgName/:id" component={OrganizationFormPage}/>
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
           </Switch>
