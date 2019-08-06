@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const pool = require('../modules/pool');
 
-router.get('/city', async(req, res)=>{ // async is just another way of writing promises like .then
+router.get('/city', async (req, res, next) => { // async is just another way of writing promises like .then
     try {
         const { city_name } = req.query; // destructuring the query object only looking for the city name
         const searchQuery = `
@@ -17,18 +17,18 @@ router.get('/city', async(req, res)=>{ // async is just another way of writing p
         const { rows } = await pool.query(searchQuery, [city_name]); // destructuring the result only looking for the rows
         res.send(rows);
     } catch (error) {
-        throw error;
+        next(error);
     }
 });
 
-router.get('/organization', async(req, res) => {
+router.get('/organization', async (req, res, next) => {
     try {
-        const { organization_name } = req.query; 
+        const { organization_name } = req.query;
         const searchQuery = 'SELECT * FROM "organizations" WHERE "name" ILIKE $1';
-        const { rows } = await pool.query(searchQuery, [organization_name]); 
+        const { rows } = await pool.query(searchQuery, [organization_name]);
         res.send(rows);
     } catch (error) {
-        throw error;
+        next(error);
     }
 });
 

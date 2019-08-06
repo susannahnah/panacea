@@ -12,10 +12,10 @@ function MapPage(props) {
 
   if (props.location.city_id) {
     axios.get(`/api/public/map?city_id=${props.location.city_id}&orgType=${props.location.orgType}`)
-      .then(({data})=>{
+      .then(({ data }) => {
         console.log('get data: ', data);
       })
-      .catch((error)=>{
+      .catch((error) => {
         console.log('Error with get route: ', error);
       })
   }
