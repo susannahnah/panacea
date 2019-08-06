@@ -82,7 +82,13 @@ class CityFormPage extends Component {
     const brand_translated = this.state.newMedication.brand_name_translated;
 
     if( generic && brand_us && brand_translated ){
-      this.props.dispatch({ type: 'ADD_NEW_MEDICATION', payload: this.state.newMedication });
+      this.props.dispatch({ 
+        type: 'ADD_NEW_MEDICATION', 
+        payload: {
+          ...this.state.newMedication,
+          city_id: this.props.reduxState.individualCityReducer.id,
+        } 
+      });
       this.setState({
         newMedication: {
           generic_name_us: '',
@@ -142,6 +148,7 @@ class CityFormPage extends Component {
         type: 'SELECT_CITY_BY_NAME', 
         payload: cityName 
       });
+      // directly set state
       axios.get(`/api/cities/city/${cityName}`)
       .then( ({ data }) => {
         console.log(data);
@@ -289,19 +296,9 @@ class CityFormPage extends Component {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    { this.props.reduxState.cityMedicationsReducer.map( med => {
+                    { this.props.reduxState.cityMedicationsReducer.map( (med, i) => {
                         return (
                           <TableRow key={med.generic_name_us}>
-                            <TableCell>{med.generic_name_us}</TableCell>
-                            <TableCell>{med.brand_name_us}</TableCell>
-                            <TableCell>{med.brand_name_translated}</TableCell>
-                          </TableRow>
-                        );
-                      })
-                    }
-                    { this.props.reduxState.newMedicationsReducer.map((med, i) => {
-                        return (
-                          <TableRow key={i}>
                             <TableCell>{med.generic_name_us}</TableCell>
                             <TableCell>{med.brand_name_us}</TableCell>
                             <TableCell>{med.brand_name_translated}</TableCell>
@@ -316,6 +313,17 @@ class CityFormPage extends Component {
                         );
                       })
                     }
+                    {/* { this.props.reduxState.newMedicationsReducer.map((med, i) => {
+                        return (
+                          <TableRow key={i}>
+                            <TableCell>{med.generic_name_us}</TableCell>
+                            <TableCell>{med.brand_name_us}</TableCell>
+                            <TableCell>{med.brand_name_translated}</TableCell>
+                            
+                          </TableRow>
+                        );
+                      })
+                    } */}
                   </TableBody>
                 </Table>
                 <Grid item xs={4}>
