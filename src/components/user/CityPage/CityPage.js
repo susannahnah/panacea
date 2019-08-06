@@ -1,28 +1,37 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-
-// testing map
 import axios from 'axios';
-import MapPage from '../MapPage/MapPage';
 
 class CityPage extends Component {
 
   state = {
-    city: {}
+    city: {},
+    orgTypes: ['Hospital', 'Clinic', 'Urgent Care', 'Laboratory', 'Home Visits', 'Pharmacy'],
   }
 
   render() {
     return (
       <>
-        <Link to={{
-          pathname: '/map',
-          coordinates: {
-            lat: Number(this.state.city.lat),
-            lng: Number(this.state.city.long)
-          },
-        }}>
-          Sending props to Map Page
-        </Link>
+        {this.state.orgTypes.map(
+          (type, i) => (
+            <button
+              key={i}
+            >
+
+              <Link to={{
+                pathname: `/map/${this.props.match.params.cityName}`,
+                city_id: this.state.city.id,
+                orgType: type,
+                coordinates: {
+                  lat: Number(this.state.city.lat),
+                  lng: Number(this.state.city.long)
+                },
+              }}>
+                {type}
+              </Link>
+
+            </button>
+          ))}
 
         <pre>
           {JSON.stringify(this.state, null, 2)}
@@ -36,15 +45,15 @@ class CityPage extends Component {
   }
 
   componentDidMount() {
-    axios.get('/api/cities')
+    axios.get(`/api/search/city?city_name=%${this.props.match.params.cityName}%`)
       .then(({ data }) => {
         this.setState({
-          city: { ...data[0] }
+          city: { ...data[0] },
         })
       })
       .catch((error) => {
-        console.log('Error with cities call: ', error);
-      });
+        console.log('Error with search city:', error);
+      })
   }
 
 }

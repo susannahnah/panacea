@@ -1,28 +1,28 @@
 const router = require("express").Router();
 const pool = require("../modules/pool");
 
-router.get("/city", async (req, res) => {
+router.get("/city", async (req, res, next) => {
   // async is just another way of writing promises like .then
   try {
     const { city_name } = req.query; // destructuring the query object only looking for the city name
     const searchQuery =
-    `SELECT 
-    "cities"."id" AS "city_id",
-    "cities"."created_at" AS "city_created_at",
-    "cities"."country_id" AS "city_country_id",
-    "cities"."name" AS "city_name",
-    "countries"."value" AS "country_name"
-    FROM "cities" 
-    JOIN "countries" ON "cities"."country_id"="countries"."id"
-    WHERE "cities"."name" ILIKE $1;`;
+      `SELECT 
+      "cities"."id" AS "city_id",
+      "cities"."created_at" AS "city_created_at",
+      "cities"."country_id" AS "city_country_id",
+      "cities"."name" AS "city_name",
+      "countries"."value" AS "country_name"
+      FROM "cities" 
+      JOIN "countries" ON "cities"."country_id"="countries"."id"
+      WHERE "cities"."name" ILIKE $1;`;
     const { rows } = await pool.query(searchQuery, [city_name]); // destructuring the result only looking for the rows
-    await res.send(rows);
+    res.send(rows);
   } catch (error) {
-    throw error;
+    next(error);
   }
 });
 
-router.get("/country", async (req, res) => {
+router.get("/country", async (req, res, next) => {
   // async is just another way of writing promises like .then
   try {
     const { country_name } = req.query; // destructuring the query object only looking for the city name
@@ -52,17 +52,17 @@ router.get("/country", async (req, res) => {
         JOIN "countries" ON "cities"."country_id"="countries"."id"
         WHERE "countries"."value" ILIKE $1`;
     const { rows } = await pool.query(searchQuery, [country_name]); // destructuring the result.rows only looking for the rows
-    await res.send(rows);
+    res.send(rows);
   } catch (error) {
-    throw error;
+    next(error);
   }
 });
 
-router.get("/organization", async (req, res) => {
+router.get("/organization", async (req, res, next) => {
   try {
     const { organization_name } = req.query;
     const searchQuery =
-       `SELECT
+      `SELECT
        "organizations"."id" AS "organization_id",
        "organizations"."created_at" AS "organization_create_at",
        "organizations"."city_id" AS "organization_city_id",
@@ -110,9 +110,9 @@ router.get("/organization", async (req, res) => {
        WHERE "organizations"."name" ILIKE $1;`;
 
     const { rows } = await pool.query(searchQuery, [organization_name]);
-    await res.send(rows);
+    res.send(rows);
   } catch (error) {
-    throw error;
+    next(error);
   }
 });
 
