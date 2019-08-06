@@ -70,10 +70,18 @@ class OrganizationFormPage extends Component {
   }
 
   render() {
+
+    const cities = this.props.reduxState.allCitiesReducer;
+
     return (
       <AdminLayout>
-        <h2>Add New Organization</h2>
-        <form className="newOrgForm" onSubmit={this.addNewOrg}>
+        <div style={{height: `50px`, bottom: 0}}>
+          { this.state.newOrg.name ? 
+          <h1>{this.state.newOrg.name}</h1> :
+          <h1> </h1> }
+        </div>
+        <form style={{width: `100%`}} onSubmit={this.addNewOrg}>
+        <h2>Organization Summary</h2>
           <Grid id="newOrgGrid" container>
             <Grid className="inputFields" item xs={12}>
               <TextField
@@ -81,8 +89,35 @@ class OrganizationFormPage extends Component {
                 label="Organization Name"
                 margin="normal"
                 variant="outlined"
+                fullWidth margin="normal"
                 value={this.state.newOrg.name}
                 onChange={this.handleNewChange('name')} />
+            </Grid>
+            <Grid className="inputFields" item xs={12}>
+            <Select
+                displayEmpty
+                inputProps={{
+                  name: 'city',
+                  id: 'citySelect',
+                }}
+                style={{minWidth: 120}}
+                value={this.state.newOrg.city_id}
+                onChange={this.handleNewChange('city_id')}
+                input={<OutlinedInput name="City" id="outlined-city" />}
+              >
+                <MenuItem value="">
+                  <em>Select A City</em>
+                </MenuItem>
+                { cities.map( city => {
+                  return (
+                    <MenuItem key={city.id} value={city.id}>
+                      {city.value} ({city.id})
+                    </MenuItem>
+                  )
+                })}
+              </Select>
+            </Grid>
+            <InputLabel htmlFor="citySelect">City</InputLabel>
               <TextField
                 id="type"
                 label="Organization Type"
