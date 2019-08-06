@@ -109,14 +109,19 @@ class CityFormPage extends Component {
   // alert (will be sweetalert) user that changes have been saved
   saveCity = event => {
     event.preventDefault();
-    this.props.dispatch({ 
-      type: 'EDIT_CITY', 
-      payload: {
-        ...this.state.newCity,
-        id: this.props.reduxState.individualCityReducer.id,
-      }
-    })
-    alert('your changes have been saved!');
+    if( this.state.newCity.name !== '' ){
+      this.props.dispatch({ 
+        type: 'EDIT_CITY', 
+        payload: {
+          ...this.state.newCity,
+          id: this.props.reduxState.individualCityReducer.id,
+        }
+      });
+      this.props.history.push('/cities/' + this.state.newCity.name)
+      alert('your changes have been saved!');
+    } else {
+      alert('please leave a city name')
+    }
   }
 
   componentDidMount() {
@@ -132,6 +137,7 @@ class CityFormPage extends Component {
       this.props.dispatch({ type: 'FETCH_COUNTRIES' });
       console.log(this.state)
     } else {
+      this.props.dispatch({ type: 'SELECT_CITY_BY_NAME', payload: cityName });
       console.log('filled form');
     }
   }

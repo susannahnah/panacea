@@ -3,11 +3,23 @@ import { put, takeEvery, all } from 'redux-saga/effects';
 
 
 //GET specific city
-function* selectCitySaga(action) {
-    const getCity = yield axios.get(`/api/cities/${action.payload}`)
-    yield put({ type: 'SET_INDIVIDUAL_CITY', payload: getCity.data })
-    console.log('end of selectCitySaga');
-  }
+function* selectCityByIdSaga(action) {
+    try {
+        const getCity = yield axios.get(`/api/cities/${action.payload}`)
+        yield put({ type: 'SET_INDIVIDUAL_CITY', payload: getCity.data })
+    } catch (error) {
+        console.log(`Error with selectCityByIdSaga:`, error);
+    }
+}
+
+function* selectCityByNameSaga(action) {
+    try {
+        const getCity = yield axios.get(`/api/cities/city/${action.payload}`)
+        yield put({ type: 'SET_INDIVIDUAL_CITY', payload: getCity.data })
+    } catch (error) {
+        console.log(`Error with selectCityByNameSaga:`, error);
+    }
+}
 
 // POST new city function
 // will post a new city object to the database 
@@ -71,7 +83,8 @@ function* deleteCitySaga(action) {
 
 //ALL cities Sagas
 function* citySagas() {
-    yield takeEvery('SELECT_CITY', selectCitySaga)
+    yield takeEvery('SELECT_CITY', selectCityByIdSaga)
+    yield takeEvery('SELECT_CITY_BY_NAME', selectCityByNameSaga)
     yield takeEvery('POST_CITY', postCitySaga)
     yield takeEvery('EDIT_CITY', editCitySaga)
     yield takeEvery('DELETE_CITY', deleteCitySaga)

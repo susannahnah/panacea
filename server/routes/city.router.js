@@ -16,6 +16,7 @@ const router = express.Router();
 //         })
 // })
 
+router.get('/city/:cityName', )
 
 //GET selected cities
 router.get('/:id', (req, res) => {
