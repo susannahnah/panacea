@@ -117,7 +117,7 @@ function AdminLandingPage(props) {
       </div>
       <Grid container>
         <Grid container item spacing={1} direction="row" alignItems="center">
-          <Grid item xs={6}>
+          <Grid item xs={5}>
             <Link to="/cities/new">
               <Button 
               fullWidth 
@@ -127,7 +127,7 @@ function AdminLandingPage(props) {
             </Button>
             </Link>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={5}>
           <Link to="/organizations/new">
             <Button 
             fullWidth 
