@@ -48,6 +48,7 @@ const useStyles = makeStyles({
 function CitiesPage(props) {
 
   useEffect(() => {props.dispatch({type: "SEARCH_CITY", payload: ""})}, []);
+  useEffect(() => {props.dispatch({type: "CLEAR_INDIVIDUAL_CITY"})})
 
   // use classes names for styling
   const classes = useStyles();
@@ -205,14 +206,19 @@ function CitiesPage(props) {
           </Paper>
         </Grid>
       </Grid>
-      <pre>Local State {JSON.stringify(searchValues, null, 2)}</pre>
-      <pre>Props + Redux State {JSON.stringify(props, null, 2)}</pre>
+      <pre>
+        Local State {JSON.stringify(searchValues, null, 2)}
+      </pre>
+      <pre>
+        Props + Redux State {JSON.stringify(props, null, 2)}
+      </pre>
     </AdminLayout>
   );
 }
 //
 const mapReduxStateToProps = reduxState => ({
-  searchCityReducer: reduxState.searchReducer.searchCityReducer
+  searchCityReducer: reduxState.searchReducer.searchCityReducer,
+  reduxState: reduxState
 });
 
 export default connect(mapReduxStateToProps)(CitiesPage);

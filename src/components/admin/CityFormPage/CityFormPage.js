@@ -1,6 +1,7 @@
 // src/components/admin/CityFormPage/CityFormPage.js
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import axios from 'axios';
 
 // Material-UI components
 import { 
@@ -128,18 +129,31 @@ class CityFormPage extends Component {
     // check url param "cityName"
     const { match: { params: { cityName } } } = this.props; // this is the same way as writing const params = this.props.match.params.cityName;
     if (cityName === 'new') {
+      // create a new city
       this.props.dispatch({
         type: 'NEW_CITY',
         payload: {
           city: this.state.newCity,
         }
       });
-      this.props.dispatch({ type: 'FETCH_COUNTRIES' });
-      console.log(this.state)
     } else {
-      this.props.dispatch({ type: 'SELECT_CITY_BY_NAME', payload: cityName });
-      console.log('filled form');
+      // select city by names
+      this.props.dispatch({ 
+        type: 'SELECT_CITY_BY_NAME', 
+        payload: cityName 
+      });
+      axios.get(`/api/cities/city/${cityName}`)
+      .then( ({ data }) => {
+        console.log(data);
+        this.setState({
+          newCity: {
+            ...data,
+          }
+        })
+      })
     }
+    // fetch countries in both circumstances
+    this.props.dispatch({ type: 'FETCH_COUNTRIES' });
   }
 
   render() {
@@ -148,6 +162,9 @@ class CityFormPage extends Component {
 
     return (
       <AdminLayout>
+        <pre>
+          {JSON.stringify(this.state, null, 2)}
+        </pre>
         <div style={{height: `50px`, bottom: 0}}>
           { this.state.newCity.name ? 
           <h1>{this.state.newCity.name}</h1> :

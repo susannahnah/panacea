@@ -44,6 +44,10 @@ class AdminLandingPage extends Component {
     });
   }
 
+  componentDidMount() {
+    this.props.dispatch({type: "CLEAR_INDIVIDUAL_CITY"})
+  }
+
   render() {
     return (
       <AdminLayout>
