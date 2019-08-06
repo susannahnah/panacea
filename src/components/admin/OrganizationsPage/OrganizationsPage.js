@@ -65,8 +65,8 @@ function OrganizationsPage(props) {
 
 
   // Fetch the organizations associated to the search
-  const handleClickSearch = searchBy => {
-    switch (property) {
+  const handleClickSearch = searchBy => event => {
+    switch (searchBy) {
       case "organization":
         props.dispatch({
           type: "SEARCH_ORGANIZATION",
@@ -160,7 +160,6 @@ function OrganizationsPage(props) {
               </TableBody>
             </Table>
           </Paper>
-          </Grid>
         </Grid>
       </Grid>
       <pre>Local State {JSON.stringify(searchValues, null, 2)}</pre>
