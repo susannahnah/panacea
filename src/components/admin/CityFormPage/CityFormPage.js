@@ -102,13 +102,10 @@ class CityFormPage extends Component {
   }
 
   // will grab array of medication from redux state, alter, then push new array to redux state
-  deleteNewMedication = (i) => (event) => {
-
-    const medications = this.props.reduxState.newMedicationsReducer;
-
+  deleteMedication = (id) => (event) => {
     this.props.dispatch({
-      type: 'DELETE_NEW_MEDICATION',
-      payload: medications.slice(i, 1)
+      type: 'DELETE_MEDICATION',
+      payload: id
     });
   }
 
@@ -296,14 +293,14 @@ class CityFormPage extends Component {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    { this.props.reduxState.cityMedicationsReducer.map( (med, i) => {
+                    { this.props.reduxState.cityMedicationsReducer.map( med => {
                         return (
                           <TableRow key={med.generic_name_us}>
                             <TableCell>{med.generic_name_us}</TableCell>
                             <TableCell>{med.brand_name_us}</TableCell>
                             <TableCell>{med.brand_name_translated}</TableCell>
                             <TableCell>
-                              <IconButton onClick={this.deleteNewMedication(i)}>
+                              <IconButton onClick={this.deleteMedication(med.id)}>
                                 <SvgIcon>
                                   <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"></path>
                                 </SvgIcon>

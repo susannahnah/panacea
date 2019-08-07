@@ -4,6 +4,7 @@ const pool = require('../modules/pool');
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 const router = express.Router();
 
+// GET route to retrieve medications for one city by id
 router.get('/:id', (req, res) => {
     const queryText = `SELECT * FROM "medications" WHERE "city_id"=$1`;
     pool.query(queryText, [req.params.id])
@@ -40,5 +41,18 @@ router.post('/', rejectUnauthenticated, (req, res) => {
             res.sendStatus(500);
         });
 })
+
+// DELETE route to delete a medication from the database
+router.delete('/:id', (req, res) => {
+    const queryText = 'DELETE FROM "medications" WHERE id=$1 RETURNING "city_id"';
+    pool.query(queryText, [req.params.id])
+        .then((result) => {
+            res.send(result.rows[0])
+        })
+        .catch((err) => {
+            console.log('Error completing DELETE city query', err);
+            res.sendStatus(500);
+        });
+});
 
 module.exports = router;

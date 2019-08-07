@@ -12,8 +12,21 @@ function* newMedicationSaga(action) {
     }
 }
 
+function* deleteMedicationSaga(action) {
+    try {
+        console.log(action.payload)
+        const deleteResponse = yield axios.delete(`/api/medications/${action.payload}`);
+        console.log(deleteResponse.data)
+        const getMedications = yield axios.get(`/api/medications/${deleteResponse.data.city_id}`);
+        yield put({ type: 'SET_CITY_MEDICATIONS', payload: getMedications.data });
+    } catch (error) {
+        console.log(`Error with deleteMedicationSaga:`, error);
+    }
+}
+
 function* medicationSagas() {
     yield takeEvery('ADD_NEW_MEDICATION', newMedicationSaga);
+    yield takeEvery('DELETE_MEDICATION', deleteMedicationSaga);
 }
 
 export default medicationSagas;
