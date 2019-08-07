@@ -62,7 +62,7 @@ router.get("/organization", async (req, res, next) => {
        "organizations"."name" AS "organization_name",
        "type",
        "recommended",
-       "24_hour",
+       "twentyfour",
        "hours",
        "homeopathic_remedies",
        "labor_delivery",
