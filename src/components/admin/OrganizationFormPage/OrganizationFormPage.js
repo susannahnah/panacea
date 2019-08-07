@@ -12,6 +12,7 @@ class OrganizationFormPage extends Component {
   state = {
     newOrg: {
       name: '',
+      city_id: '',
       type: '',
       recommended: false,
       twentyfour: false,
@@ -53,21 +54,71 @@ class OrganizationFormPage extends Component {
     })
 
   }
-
-  addNewOrg = event => {
+  
+  // NEEDS EDIT SAGA AND FIX PUT ROUTE
+  saveOrg = event => {
     event.preventDefault();
-    this.props.dispatch({ type: 'POST_ORG', payload: this.state.newOrg });
-    this.props.history.push('/organizations')
+    if( this.state.newOrg.name !== '' && this.state.newOrg.city_id !== ''){
+      this.props.dispatch({ 
+        type: 'EDIT_ORG', 
+        payload: {
+          ...this.state.newOrg,
+          id: this.props.reduxState.individualOrgReducer.id,
+        }
+      });
+      this.props.history.push(`/organizations/${this.state.newOrg.name}/${this.props.reduxState.individualOrgReducer.id}`);
+      alert('your changes have been saved!');
+    } else {
+      alert('please leave a organization name and a city')
+    }
   };
 
+  // CHANGE TO ORG
+  // on click of 'delete city', confirm user would like to delete, then delete
+  // deleteCity = event => {
+  //   // confirm user would like to delete the city
+  //   Swal.fire({
+  //     title: 'Are you sure?',
+  //     text: "This will delete the city and all it's information from the database",
+  //     type: 'warning',
+  //     showCancelButton: true,
+  //     confirmButtonColor: '#3085d6',
+  //     cancelButtonColor: '#d33',
+  //     confirmButtonText: `I'm sure.`
+  //   }).then((result) => {
+  //     if (result.value) {
+  //       // send confirmation message
+  //       Swal.fire(
+  //         'Deleted!',
+  //         'City removed from database.',
+  //         'success'
+  //       )
+  //       // delete city
+  //       this.willDelete();
+  //       // navigate to cities page
+  //       this.props.history.push('/cities');
+  //     }
+  //   });
+  // }
+
   componentDidMount() {
+    // grab orgName and id params from url
     const { match: { params: { orgName } } } = this.props;
+    const { match: { params: { id } } } = this.props;
+    // check if the form should be new or load info from an existing org
     if (orgName === 'new') {
-      console.log('new form');
-      this.props.dispatch({ type: 'FETCH_CITIES' })
+      console.log(orgName);
+      // if new, create new org, set individualOrgReducer to new city
+      this.props.dispatch({ 
+        type: 'NEW_ORG',
+        payload: this.state.newOrg,
+      });
     } else {
-      console.log('filled form');
+      // fetch org by id
+      // axios get org by id, set state
+      console.log(orgName);
     }
+    this.props.dispatch({ type: 'FETCH_CITIES' })
   }
 
   render() {
@@ -81,7 +132,7 @@ class OrganizationFormPage extends Component {
             <h1>{this.state.newOrg.name}</h1> :
             <h1> </h1>}
         </div>
-        <form style={{ width: `100%` }} onSubmit={this.addNewOrg}>
+        <form style={{ width: `100%` }} onSubmit={this.saveOrg}>
           <h2>Organization Summary</h2>
           <Grid id="newOrgGrid" container>
             <Grid className="inputFields" item xs={12}>
@@ -116,7 +167,7 @@ class OrganizationFormPage extends Component {
                 {cities.map(city => {
                   return (
                     <MenuItem key={city.id} value={city.id}>
-                      {city.value}
+                      {city.name}
                     </MenuItem>
                   )
                 })}
@@ -170,7 +221,7 @@ class OrganizationFormPage extends Component {
                       onChange={this.handleNewCheckBoxChange('recommended')}
                     />
                   }
-                  label="Recommendation"
+                  label="Recommended"
                 />
               </Grid>
               <Grid item xs={6}>
@@ -384,8 +435,11 @@ class OrganizationFormPage extends Component {
             </Grid>
             <Grid container item xs={12} 
               style={{margin: `5%`, marginBottom: `20vh`}}>
-              <Grid item xs={4}>
-                <Button type='submit' value='Add New Organization' style={{ width: "24vw" }} variant="contained" color="inherent">Submit New Organization</Button>
+              <Grid item xs={6}>
+                <Button type='submit' value='Save' style={{ width: "24vw" }} variant="contained" color="inherent">Save</Button>
+              </Grid>
+              <Grid item xs={6}>
+                <Button onClick={this.deleteOrganization} value='Delete Organization' style={{ width: "24vw" }} color="secondary">Delete Organization</Button>
               </Grid>
             </Grid>
           </Grid>

@@ -81,7 +81,7 @@ function OrganizationsPage(props) {
         alignItems="center"
         >
           <Grid item>
-            <Link to="/organizations/:orgName/:id">
+            <Link to="/organizations/new/0">
               <Button fullWidth className={classes.addButton} variant="contained">
                 Add New Organization
             </Button>

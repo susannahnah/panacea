@@ -17,7 +17,7 @@ const router = express.Router();
 // })
 
 
-//GET selected orgs
+//GET selected org
 router.get('/:id', (req, res) => {
     const queryText = 'SELECT * FROM "organizations" WHERE "id"=$1';
     console.log('here is your org ', req.params.id);
@@ -33,9 +33,17 @@ router.get('/:id', (req, res) => {
 })
 
 
-//POST new org
+// POST new org
 router.post('/', rejectUnauthenticated, (req, res) => {
-    const newCity = req.body;
+    const newOrg = req.body;
+
+
+    if(newOrg.city_id === ''){
+        newOrg.city_id = null;
+    }
+    if(!newOrg.lat){newOrg.lat = null}
+    if(!newOrg.long){newOrg.long = null}
+
     const queryText = `INSERT INTO "organizations"(
     "city_id",
     "name",
@@ -84,11 +92,11 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     ];
     pool.query(queryText, queryValues)
         .then((result) => {
-            res.sendStatus(201);
-            console.log(result);
+            res.send(result.rows[0]);
+            console.log(result.rows);
         })
         .catch((error) => {
-            console.log('Error completing POST org query', error);
+            console.log('Error posting a new organization:', error);
             res.sendStatus(500);
         });
 });
