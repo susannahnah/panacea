@@ -4,9 +4,10 @@ import { put, takeEvery } from 'redux-saga/effects';
 //GET specific org
 function* selectOrgSaga(action) {
     const getOrg = yield axios.get(`/api/organizations/${action.payload}`)
-    yield put({ type: 'SET_INDIVIDUAL_CITY', payload: getOrg.data })
+    yield put({ type: 'SET_INDIVIDUAL_ORG', payload: getOrg.data })
     console.log('end of selectOrgSaga');
-  }
+}
+
 
 //POST new org function:
 function* postOrgSaga(action) {
@@ -38,7 +39,8 @@ function* postNewOrgSaga(action) {
 //UPDATE specific org
 function* editOrgSaga(action) {
     yield axios.put(`/api/organizations`, action.payload)
-    yield put({ type: 'SEARCH_ORGANIZATION'})
+    const updatedOrgResponse = yield axios.get(`/api/organizations/${action.payload.id}`);
+    yield put({ type: 'SET_INDIVIDUAL_ORG', payload: updatedOrgResponse.data });
     console.log('org updated')
 }
 
@@ -46,11 +48,11 @@ function* editOrgSaga(action) {
 function* deleteOrgSaga(action) {
     console.log('deleteOrgSaga hit')
     try {
-      yield axios.delete(`/api/organizations/${action.payload}`)
-      yield put({type: 'SEARCH_ORGANIZATION'})
+        yield axios.delete(`/api/organizations/${action.payload}`)
+        yield put({ type: 'SEARCH_ORGANIZATION' })
     } catch (error) {
-      console.log(error);
-      alert('Unable to delete item');
+        console.log(error);
+        alert('Unable to delete item');
     }
 }
 
