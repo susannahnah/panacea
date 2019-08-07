@@ -202,4 +202,4 @@ const mapStateToRedux = (reduxStore) => ({
           reduxStore
         });
         
-        export default connect(mapStateToRedux)(AdminLandingPage);
+export default connect(mapStateToRedux)(AdminLandingPage);
