@@ -12,6 +12,7 @@ class OrganizationFormPage extends Component {
   state = {
     newOrg: {
       name: '',
+      city_id: '',
       type: '',
       recommended: false,
       twentyfour: false,
@@ -64,10 +65,10 @@ class OrganizationFormPage extends Component {
     const { match: { params: { orgName } } } = this.props;
     if (orgName === 'new') {
       console.log('new form');
-      this.props.dispatch({ type: 'FETCH_CITIES' })
     } else {
       console.log('filled form');
     }
+    this.props.dispatch({ type: 'FETCH_CITIES' })
   }
 
   render() {
@@ -116,7 +117,7 @@ class OrganizationFormPage extends Component {
                 {cities.map(city => {
                   return (
                     <MenuItem key={city.id} value={city.id}>
-                      {city.value}
+                      {city.name}
                     </MenuItem>
                   )
                 })}
@@ -170,7 +171,7 @@ class OrganizationFormPage extends Component {
                       onChange={this.handleNewCheckBoxChange('recommended')}
                     />
                   }
-                  label="Recommendation"
+                  label="Recommended"
                 />
               </Grid>
               <Grid item xs={6}>
