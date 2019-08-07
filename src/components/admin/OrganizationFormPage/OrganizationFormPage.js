@@ -29,6 +29,7 @@ class OrganizationFormPage extends Component {
       lat: '',
       long: '',
       google_maps_link: '',
+      address: '',
     }
   }
 

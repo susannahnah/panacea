@@ -18,6 +18,7 @@ const orgDetails = {
     "lat": '',
     "long": '',
     "google_maps_link": '',
+    "address":'',
 
 }
 

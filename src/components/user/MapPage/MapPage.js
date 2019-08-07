@@ -4,12 +4,11 @@ import Marker from './Marker';
 import axios from 'axios';
 import './MapPage.css';
 import BackButton from '@material-ui/icons/ChevronLeftRounded';
+import UserLayout from '../../layouts/UserLayout/UserLayout';
 
 function MapPage(props) {
 
-  const [loadingStatus, setLoadingStatus] = useState(true);
   const [organizations, setOrganizations] = useState([]);
-  
 
   useEffect(() => {
 
@@ -20,63 +19,61 @@ function MapPage(props) {
       } catch (error) {
         console.log('Error with request: ', error);
       }
-
-      setLoadingStatus(false);
     }
 
     if (props.location.city_id) {
       fetchOrganizations();
     }
 
-    setLoadingStatus(true);
   }, []);
 
   const markerClicked = (key, org) => {
-    console.log('this is the org',org);
-
+    console.log('this is the org', org);
   }
 
-  if (!loadingStatus) {
+  if (props.location.city_id) {
     return (
       <>
+        <UserLayout>
 
-        <div className="container">
+          <div className="container">
 
-          <GoogleMapReact
-            bootstrapURLKeys={{
-              key: '',
-              language: 'en'
-            }}
-            center={props.location.coordinates}
-            defaultZoom={11}
-            onChildClick={markerClicked}
-          >
+            <GoogleMapReact
+              bootstrapURLKeys={{
+                key: '',
+                language: 'en'
+              }}
+              center={props.location.coordinates}
+              defaultZoom={11}
+              onChildClick={markerClicked}
+            >
 
-            {/* TODO: add functioning back button
+              {/* TODO: add functioning back button
             <div className="back-button">
               <BackButton></BackButton>
             </div> */}
 
-            {organizations.map((org, i) => {
-              return (
-                <Marker
-                  key={i}
-                  {...org}
-                />
-              )
-            })}
+              {organizations.map((org, i) => {
+                return (
+                  <Marker
+                    key={i}
+                    {...org}
+                  />
+                )
+              })}
 
-          </GoogleMapReact>
+            </GoogleMapReact>
 
-        </div>
+          </div>
+
+        </UserLayout>
 
       </>
     )
   } else {
     return (
-      <div className="container">
-        <div className="loading"></div>
-      </div>
+      <>
+      </>
     )
   }
 

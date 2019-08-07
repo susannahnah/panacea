@@ -14,8 +14,8 @@ CREATE TABLE countries (id VARCHAR(64) NOT NULL, value VARCHAR(64) NOT NULL, PRI
 CREATE TABLE "cities" (
     "id" SERIAL PRIMARY KEY,
     "created_at" TIMESTAMP NOT NULL DEFAULT NOW(),
-    "country_id" VARCHAR REFERENCES "countries" NOT NULL,
-    "name" VARCHAR NOT NULL,
+    "country_id" VARCHAR REFERENCES "countries",
+    "name" VARCHAR,
     "overview" VARCHAR,
     "health_risks" VARCHAR,
     "ambulance" VARCHAR,
@@ -36,9 +36,9 @@ CREATE TABLE "cities" (
 CREATE TABLE "organizations" (
   "id" SERIAL PRIMARY KEY,
   "created_at" TIMESTAMP NOT NULL DEFAULT NOW(),
-  "city_id" INT REFERENCES "cities" NOT NULL,
-  "name" VARCHAR NOT NULL,
-  "type" VARCHAR NOT NULL,
+  "city_id" INT REFERENCES "cities",
+  "name" VARCHAR,
+  "type" VARCHAR,
   "recommended" BOOLEAN DEFAULT FALSE,
   "twentyfour" BOOLEAN DEFAULT FALSE,
   "hours" VARCHAR,
