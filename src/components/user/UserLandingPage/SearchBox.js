@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import './SearchBox.css';
 import { Link } from 'react-router-dom';
-import { Input } from '@material-ui/core';
+import { InputBase } from '@material-ui/core';
 import axios from 'axios';
 
 class SearchBox extends Component {
@@ -84,7 +84,7 @@ class SearchBox extends Component {
 
         return (
             <>
-                <Input
+                <InputBase
                     type="text"
                     onChange={onChange}
                     placeholder="Where are you traveling?"
