@@ -62,11 +62,21 @@ class OrganizationFormPage extends Component {
   };
 
   componentDidMount() {
+    // grab orgName and id params from url
     const { match: { params: { orgName } } } = this.props;
+    const { match: { params: { id } } } = this.props;
+    // check if the form should be new or load info from an existing org
     if (orgName === 'new') {
-      console.log('new form');
+      console.log(orgName);
+      // if new, create new org, set individualOrgReducer to new org
+      this.props.dispatch({ 
+        type: 'NEW_ORG',
+        payload: this.state.newOrg,
+      });
     } else {
-      console.log('filled form');
+      // fetch org by id
+      // axios get org by id, set state
+      console.log(orgName);
     }
     this.props.dispatch({ type: 'FETCH_CITIES' })
   }
