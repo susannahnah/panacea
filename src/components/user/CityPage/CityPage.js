@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './CityPage.css';
-import { Grid, Paper, Typography } from '@material-ui/core/';
+import { Grid, Paper, Typography, Link as MuiLink } from '@material-ui/core/';
 import UserLayout from '../../layouts/UserLayout/UserLayout';
 
 class CityPage extends Component {
@@ -78,47 +78,62 @@ class CityPage extends Component {
 
             {/* TODO: Refactor this code */}
 
-            <Typography gutterBottom>
-              overview: {this.state.city.overview}
+            <Typography variant='h5' gutterBottom> 
+              Overview: <Typography variant='body1' gutterBottom display='inline'>{this.state.city.overview}</Typography>
             </Typography>
 
-            <Typography gutterBottom>
-              health risks: {this.state.city.health_risks}
+            <Typography variant='h5' gutterBottom>
+              Health Risks: <Typography variant='body1' gutterBottom display='inline'>{this.state.city.health_risks}</Typography>
             </Typography>
 
-            <Typography gutterBottom>
-              wellness resources: {this.state.city.wellness_resources}
+            <Typography variant='h5' gutterBottom>
+              Wellness Resources: <Typography variant='body1' gutterBottom display='inline'>{this.state.city.wellness_resources}</Typography>
             </Typography>
 
-            <Typography gutterBottom>
-              local health remedies: {this.state.city.local_health_remedies}
+            <Typography variant='h5' gutterBottom>
+              Local Health Remedies: <Typography variant='body1' gutterBottom display='inline'>{this.state.city.local_health_remedies}</Typography>
             </Typography>
 
-            <Typography gutterBottom>
-              healthcare tourism: {this.state.city.healthcare_tourism}
+            <Typography variant='h5' gutterBottom>
+              Healthcare Tourism: <Typography variant='body1' gutterBottom display='inline'>{this.state.city.healthcare_tourism}</Typography>
             </Typography>
+            
+            {this.state.city.WHO_link &&
+            <Typography gutterBottom>
+              <MuiLink href={this.state.city.WHO_link} target="_blank" underline='always'>
+                WHO Link
+              </MuiLink>
+            </Typography>}
 
+            {this.state.city.CDC_link &&
             <Typography gutterBottom>
-              WHO link: {this.state.city.WHO_link}
-            </Typography>
+              <MuiLink href={this.state.city.CDC_link} target="_blank" underline='always'>
+                CDC Link
+              </MuiLink>
+            </Typography>}
 
+            {this.state.city.google_translate_link &&
             <Typography gutterBottom>
-              CDC link: {this.state.city.CDC_link}
-            </Typography>
+              <MuiLink href={this.state.city.google_translate_link} target="_blank" underline='always'>
+              Google Translate Link
+              </MuiLink>
+            </Typography>}
 
+            {this.state.city.local_resources &&
             <Typography gutterBottom>
-              google translate link: {this.state.city.google_translate_link}
-            </Typography>
-
-            <Typography gutterBottom>
-              local resources: {this.state.city.local_resources}
-            </Typography>
+              <MuiLink href={this.state.city.local_resources} target="_blank" underline='always'>
+              Local Resources
+              </MuiLink>
+            </Typography>}
 
             <Link 
             to={{ pathname: `/city/${this.props.match.params.cityName}/medications` }}
             style={{ textDecoration: 'underline', color: 'blue'}}
             >
-              Medicine Translations
+              <Typography>
+                Medicine Translations
+              </Typography>
+              
             </Link>
 
           </Paper>
