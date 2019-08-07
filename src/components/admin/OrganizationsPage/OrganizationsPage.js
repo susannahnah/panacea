@@ -14,7 +14,6 @@ import {
   TableRow,
   TableCell
 } from "@material-ui/core";
-import { getThemeProps } from "@material-ui/styles";
 
 const useStyles = makeStyles({
   root: {
@@ -49,7 +48,7 @@ const useStyles = makeStyles({
 function OrganizationsPage(props) {
   
   useEffect(() => {props.dispatch({type: "SEARCH_ORGANIZATION", payload: ""})}, []);
-
+  useEffect(() => {props.dispatch({type: "CLEAR_INDIVIDUAL_ORGANIZATION"})}, []);
   // use classes names for styling
   const classes = useStyles();
 
@@ -61,16 +60,11 @@ function OrganizationsPage(props) {
   // Takes in a property name and the event to update local state.
   const handleChange = property => event => {
     setSearchValues({ ...searchValues, [property]: event.target.value });
-  };
-
-
-  // Fetch the organizations associated to the search
-  const handleClickSearch = searchBy => event => {
-    switch (searchBy) {
+    switch (property) {
       case "organization":
-        props.dispatch({
-          type: "SEARCH_ORGANIZATION",
-          payload: event.target.value,
+        props.dispatch({ 
+          type: "SEARCH_ORGANIZATION", 
+          payload: event.target.value 
         });
         break;
       default:
@@ -113,15 +107,6 @@ function OrganizationsPage(props) {
             variant="outlined"
             fullWidth
           />
-        </Grid>
-        <Grid item>
-          <Button
-            variant="contained"
-            fullWidth
-            className={classes.searchButton}
-            onClick={() => handleClickSearch("organization")}>
-            Search
-            </Button>
         </Grid>
       </Grid>
       <Grid container item spacing={1} direction="row" alignItems="center">

@@ -10,7 +10,6 @@ class UserLandingPage extends Component {
   state = {
     topCitySearch: '',
     bottomCitySearch: '',
-    cities: [],
   }
 
   handleChangeFor = (prop) => (e) => {
