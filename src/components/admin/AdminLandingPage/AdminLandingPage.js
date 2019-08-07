@@ -29,6 +29,10 @@ const useStyles = makeStyles({
   }
 });
 
+  componentDidMount() {
+    this.props.dispatch({type: "CLEAR_INDIVIDUAL_CITY"});
+    this.props.dispatch({type: "CLEAR_MEDICATIONS"});
+  }
 
 // class AdminLandingPage extends Component {
 
