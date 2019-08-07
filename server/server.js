@@ -14,6 +14,7 @@ const searchRouter = require('./routes/search.router');
 const cityRouter = require('./routes/city.router');
 const countryRouter = require('./routes/country.router');
 const orgRouter = require('./routes/org.router');
+const medicationRouter = require('./routes/medication.router');
 const publicRouter = require('./routes/public.router');
 
 // Body parser middleware
@@ -33,6 +34,7 @@ app.use('/api/search', searchRouter);
 app.use('/api/cities', cityRouter);
 app.use('/api/countries', countryRouter);
 app.use('/api/organizations', orgRouter);
+app.use('/api/medications', medicationRouter);
 app.use('/api/public', publicRouter);
 
 // Serve static files

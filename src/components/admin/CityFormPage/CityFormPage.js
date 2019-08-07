@@ -1,36 +1,61 @@
 // src/components/admin/CityFormPage/CityFormPage.js
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import axios from 'axios';
+import Swal from 'sweetalert2';
 
 // Material-UI components
-import { Grid, TextField, Button, Select, MenuItem, OutlinedInput, InputLabel, FormControl } from '@material-ui/core';
+import { 
+  Grid,
+  TextField, 
+  Button, 
+  Select, 
+  MenuItem,
+  OutlinedInput, 
+  InputLabel, 
+  Table, 
+  TableHead, 
+  TableBody, 
+  TableCell,
+  TableRow, 
+  IconButton, 
+  SvgIcon 
+} from '@material-ui/core';
 import './CityFormPage.css';
 import AdminLayout from '../../layouts/AdminLayout/AdminLayout';
 
 
 class CityFormPage extends Component {
+
+  individualCity = this.props.reduxState.individualCityReducer;
+
   state = {
     newCity: {
-      country_id: 'Select A Country',
-      name: '',
-      overview: '',
-      health_risks: '',
-      ambulance: '',
-      fire: '',
-      police: '',
-      roadside_assistance: '',
-      wellness_resources: '',
-      local_health_remedies: '',
-      healthcare_tourism: '',
-      WHO_link: '',
-      CDC_link: '',
-      google_translate_link: '',
-      local_resources: '',
+      country_id: this.individualCity.country_id || '',
+      name: this.individualCity.name || '',
+      overview: this.individualCity.overview || '',
+      health_risks: this.individualCity.health_risks || '',
+      ambulance: this.individualCity.ambulance || '',
+      fire: this.individualCity.fire || '',
+      police: this.individualCity.police || '',
+      roadside_assistance: this.individualCity.roadside_assistance || '',
+      wellness_resources: this.individualCity.wellness_resources || '',
+      local_health_remedies: this.individualCity.local_health_remedies || '',
+      healthcare_tourism: this.individualCity.healthcare_tourism || '',
+      WHO_link: this.individualCity.WHO_link || '',
+      CDC_link: this.individualCity.CDC_link || '',
+      google_translate_link: this.individualCity.google_translate_link || '',
+      local_resources: this.individualCity.local_resources || '',
+    },
+    newMedication: {
+      generic_name_us: '',
+      brand_name_us: '',
+      brand_name_translated: '',
     }
   }
 
-  handleNewChange = (propertyName) => (event) => {
-    console.log('somethings happening!');
+  // handles input changes for city information
+  handleCityChange = (propertyName) => (event) => {
     this.setState({      
       newCity: {
         ...this.state.newCity,
@@ -39,21 +64,140 @@ class CityFormPage extends Component {
     })
   }
 
-  addNewCity = event => {
+  // handles input changes for new medications
+  handleMedicationChange = (prop) => (event) => {
+    this.setState({
+      newMedication: {
+        ...this.state.newMedication,
+        [prop]: event.target.value,
+      }
+    })
+  }
+
+  // on add_circle click, will post a new medication to the database
+  // first checks if inputs are filled
+  // if not, alerts the user
+  addNewMedication = () => {
+
+    const generic = this.state.newMedication.generic_name_us;
+    const brand_us = this.state.newMedication.brand_name_us;
+    const brand_translated = this.state.newMedication.brand_name_translated;
+
+    if( generic && brand_us && brand_translated ){
+      this.props.dispatch({ 
+        type: 'ADD_NEW_MEDICATION', 
+        payload: {
+          ...this.state.newMedication,
+          city_id: this.props.reduxState.individualCityReducer.id,
+        } 
+      });
+      this.setState({
+        newMedication: {
+          generic_name_us: '',
+          brand_name_us: '',
+          brand_name_translated: '',
+        }
+      }); 
+    } else {
+      alert('please fill inputs!');
+    }
+  }
+
+  // when delete button is clicked, will delete a medication from the database
+  deleteMedication = (id) => (event) => {
+    this.props.dispatch({
+      type: 'DELETE_MEDICATION',
+      payload: id
+    });
+  }
+
+  // when save button is clicked, update city info in the database
+  // first checks that the user has at least given a city name
+  // if not, alerts user to leave a city name
+  // if successful, alerts user that changes have been saved
+  saveCity = event => {
     event.preventDefault();
-    this.props.dispatch({ type: 'POST_CITY', payload: this.state.newCity })
-    this.props.history.push('/cities')
+    if( this.state.newCity.name !== '' ){
+      this.props.dispatch({ 
+        type: 'EDIT_CITY', 
+        payload: {
+          ...this.state.newCity,
+          id: this.props.reduxState.individualCityReducer.id,
+        }
+      });
+      this.props.history.push('/cities/' + this.state.newCity.name)
+      alert('your changes have been saved!');
+    } else {
+      alert('please leave a city name')
+    }
+  }
+
+  // on click of 'delete city', confirm user would like to delete, then delete
+  deleteCity = event => {
+    // confirm user would like to delete the city
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "This will delete the city and all it's information from the database",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: `I'm sure.`
+    }).then((result) => {
+      if (result.value) {
+        // send confirmation message
+        Swal.fire(
+          'Deleted!',
+          'City removed from database.',
+          'success'
+        )
+        // delete city
+        this.willDelete();
+        // navigate to cities page
+        this.props.history.push('/cities');
+      }
+    });
+  }
+
+  // function to delete a city from the database
+  willDelete = () => {
+    this.props.dispatch({ 
+      type: 'DELETE_CITY',
+      payload: this.props.reduxState.individualCityReducer.id,
+    })
   }
 
   componentDidMount() {
-    // check url param "cityName"
+    // grab cityName param from url
     const { match: { params: { cityName } } } = this.props; // this is the same way as writing const params = this.props.match.params.cityName;
+    // check if the form should be new or load info from an existing city
     if (cityName === 'new') {
-      console.log('new form');
-      this.props.dispatch({ type: 'FETCH_COUNTRIES' });
+      // if new, create new city, set individualCityReducer to new city
+      this.props.dispatch({
+        type: 'NEW_CITY',
+        payload: {
+          city: this.state.newCity,
+        }
+      });
     } else {
-      console.log('filled form');
+      // else, select city by cityName, set individualCityReducer to existing city
+      this.props.dispatch({ 
+        type: 'SELECT_CITY_BY_NAME', 
+        payload: cityName 
+      });
+      // directly set state to this city
+      axios.get(`/api/cities/city/${cityName}`)
+      .then( ({ data }) => {
+        console.log(data);
+        this.setState({
+          newCity: {
+            ...data,
+          }
+        })
+      })
     }
+    // fetch countries in both circumstances
+    this.props.dispatch({ type: 'FETCH_COUNTRIES' });
   }
 
   render() {
@@ -62,12 +206,15 @@ class CityFormPage extends Component {
 
     return (
       <AdminLayout>
+        {/* <pre>
+          {JSON.stringify(this.state, null, 2)}
+        </pre> */}
         <div style={{height: `50px`, bottom: 0}}>
           { this.state.newCity.name ? 
           <h1>{this.state.newCity.name}</h1> :
           <h1> </h1> }
         </div>
-        <form style={{width: `100%`}} onSubmit={this.addNewCity}>
+        <form style={{width: `100%`}} onSubmit={this.saveCity}>
           <h2>City Summary</h2>
           <Grid id="newCityGrid" container>
             <Grid className="inputFields" item xs={12}>
@@ -77,19 +224,15 @@ class CityFormPage extends Component {
                 variant="outlined" 
                 fullWidth margin="normal"
                 value={this.state.newCity.name} 
-                onChange={this.handleNewChange('name')} />
+                onChange={this.handleCityChange('name')} />
             </Grid>
             <Grid className="inputFields" item xs={12}>
               <InputLabel htmlFor="countrySelect">Country</InputLabel>
               <Select
                 displayEmpty
-                inputProps={{
-                  name: 'country',
-                  id: 'countrySelect',
-                }}
                 style={{minWidth: 120}}
                 value={this.state.newCity.country_id}
-                onChange={this.handleNewChange('country_id')}
+                onChange={this.handleCityChange('country_id')}
                 input={<OutlinedInput name="Country" id="outlined-country" />}
               >
                 <MenuItem value="">
@@ -113,7 +256,7 @@ class CityFormPage extends Component {
                 variant="outlined" 
                 type='type' 
                 value={this.state.newCity.overview} 
-                onChange={this.handleNewChange('overview')} />
+                onChange={this.handleCityChange('overview')} />
             </Grid> 
             <Grid className="inputFields"  item xs={12}>
               <TextField 
@@ -124,7 +267,7 @@ class CityFormPage extends Component {
                 variant="outlined" 
                 type='type' 
                 value={this.state.newCity.health_risks} 
-                onChange={this.handleNewChange('health_risks')} />
+                onChange={this.handleCityChange('health_risks')} />
             </Grid>
             <Grid className="inputFields" container spacing={3}
               item xs={12}>
@@ -141,7 +284,7 @@ class CityFormPage extends Component {
                   fullWidth margin="normal"
                   variant="outlined" 
                   value={this.state.newCity.ambulance} 
-                  onChange={this.handleNewChange('ambulance')} />
+                  onChange={this.handleCityChange('ambulance')} />
               </Grid>
               <Grid item xs={6}>
                 <TextField 
@@ -150,7 +293,7 @@ class CityFormPage extends Component {
                   fullWidth margin="normal" 
                   variant="outlined" 
                   value={this.state.newCity.fire} 
-                  onChange={this.handleNewChange('fire')} />
+                  onChange={this.handleCityChange('fire')} />
               </Grid>
               <Grid item xs={6}>
                 <TextField 
@@ -159,7 +302,7 @@ class CityFormPage extends Component {
                   fullWidth margin="normal" 
                   variant="outlined" 
                   value={this.state.newCity.police} 
-                  onChange={this.handleNewChange('police')} />
+                  onChange={this.handleCityChange('police')} />
               </Grid>
               <Grid item xs={6}>
                 <TextField 
@@ -168,7 +311,75 @@ class CityFormPage extends Component {
                   fullWidth margin="normal" 
                   variant="outlined" 
                   value={this.state.newCity.roadside_assistance} 
-                  onChange={this.handleNewChange('roadside_assistance')} />
+                  onChange={this.handleCityChange('roadside_assistance')} />
+              </Grid>
+            </Grid>
+            <Grid className="inputFields" container spacing={3}
+              item xs={12}>
+              <h2 style={{
+                marginBottom: 0,
+                marginTop: `5vw`
+              }}>
+                Medicine Translations
+              </h2>
+              <Grid container item xs={12}>
+                <Table>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>US Generic Name</TableCell>
+                      <TableCell>US Brand Name</TableCell>
+                      <TableCell>Translated Brand Name</TableCell>
+                      <TableCell></TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    { this.props.reduxState.cityMedicationsReducer.map( med => {
+                        return (
+                          <TableRow key={med.generic_name_us}>
+                            <TableCell>{med.generic_name_us}</TableCell>
+                            <TableCell>{med.brand_name_us}</TableCell>
+                            <TableCell>{med.brand_name_translated}</TableCell>
+                            <TableCell>
+                              <IconButton onClick={this.deleteMedication(med.id)}>
+                                <SvgIcon>
+                                  <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"></path>
+                                </SvgIcon>
+                              </IconButton>
+                            </TableCell>
+                          </TableRow>
+                        );
+                      })
+                    }
+                  </TableBody>
+                </Table>
+                <Grid item xs={4}>
+                  <TextField label="US Generic Name"
+                    margin="normal"
+                    variant="outlined"
+                    value={this.state.newMedication.generic_name_us}
+                    onChange={this.handleMedicationChange('generic_name_us')}/>
+                </Grid>
+                <Grid item xs={4}>
+                  <TextField label="US Brand Name"
+                    margin="normal"
+                    variant="outlined"
+                    value={this.state.newMedication.brand_name_us}
+                    onChange={this.handleMedicationChange('brand_name_us')}/>
+                </Grid>
+                <Grid item xs={4}>
+                  <TextField label="Translated Brand Name"
+                    margin="normal"
+                    variant="outlined"
+                    value={this.state.newMedication.brand_name_translated}
+                    onChange={this.handleMedicationChange('brand_name_translated')}/>
+                </Grid>
+                <Grid item xs={12} style={{textAlign: `center`}}>
+                  <IconButton onClick={this.addNewMedication}>
+                    <SvgIcon>
+                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"></path>
+                    </SvgIcon>
+                  </IconButton>
+                </Grid>
               </Grid>
             </Grid> 
             <Grid className="inputFields"  item xs={12}>
@@ -186,7 +397,7 @@ class CityFormPage extends Component {
                 variant="outlined" 
                 type='type' 
                 value={this.state.newCity.wellness_resources} 
-                onChange={this.handleNewChange('wellness_resources')} />
+                onChange={this.handleCityChange('wellness_resources')} />
             </Grid>  
             <Grid className="inputFields"  item xs={12}>  
               <TextField 
@@ -197,7 +408,7 @@ class CityFormPage extends Component {
                 variant="outlined" 
                 type='type' 
                 value={this.state.newCity.local_health_remedies} 
-                onChange={this.handleNewChange('local_health_remedies')} />
+                onChange={this.handleCityChange('local_health_remedies')} />
             </Grid>  
             <Grid className="inputFields"  item xs={12}>  
               <TextField 
@@ -208,7 +419,7 @@ class CityFormPage extends Component {
                 variant="outlined" 
                 type='type' 
                 value={this.state.newCity.healthcare_tourism}
-                onChange={this.handleNewChange('healthcare_tourism')} />
+                onChange={this.handleCityChange('healthcare_tourism')} />
             </Grid>  
             <Grid className="inputFields"  item xs={12}>
               <h2 style={{
@@ -223,7 +434,7 @@ class CityFormPage extends Component {
                 fullWidth margin="normal" 
                 variant="outlined" 
                 value={this.state.newCity.WHO_link} 
-                onChange={this.handleNewChange('WHO_link')} />
+                onChange={this.handleCityChange('WHO_link')} />
             </Grid>  
             <Grid className="inputFields"  item xs={12}>  
               <TextField 
@@ -232,7 +443,7 @@ class CityFormPage extends Component {
                 fullWidth margin="normal" 
                 variant="outlined" 
                 value={this.state.newCity.CDC_link} 
-                onChange={this.handleNewChange('CDC_link')} />
+                onChange={this.handleCityChange('CDC_link')} />
             </Grid>  
             <Grid className="inputFields"  item xs={12}>  
               <TextField 
@@ -241,7 +452,7 @@ class CityFormPage extends Component {
                 fullWidth margin="normal" 
                 variant="outlined" 
                 value={this.state.newCity.google_translate_link} 
-                onChange={this.handleNewChange('google_translate_link')} />
+                onChange={this.handleCityChange('google_translate_link')} />
             </Grid>
             <Grid className="inputFields"  item xs={12}>  
               <TextField 
@@ -252,12 +463,15 @@ class CityFormPage extends Component {
                 variant="outlined" 
                 type='type' 
                 value={this.state.newCity.local_resources} 
-                onChange={this.handleNewChange('local_resources')} />
+                onChange={this.handleCityChange('local_resources')} />
             </Grid>
             <Grid container item xs={12} 
               style={{margin: `5%`, marginBottom: `20vh`}}>
-              <Grid item xs={4}>
-                <Button type='submit' value='Add New City' style={{ width: "24vw" }} variant="contained" color="inherent">Submit New City</Button>
+              <Grid item xs={6}>
+                <Button type='submit' value='Save' style={{ width: "24vw" }} variant="contained" color="inherit">Save</Button>
+              </Grid>
+              <Grid item xs={6}>
+                <Button onClick={this.deleteCity} value='Delete City' style={{ width: "24vw" }} color="secondary">Delete City</Button>
               </Grid>
             </Grid>
           </Grid>

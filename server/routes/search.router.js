@@ -29,26 +29,11 @@ router.get("/country", async (req, res, next) => {
     const { country_name } = req.query; // destructuring the query object only looking for the city name
     const searchQuery = `
         SELECT
-        "cities"."id",
-        "created_at",
-        "country_id",
-        "name",
-        "overview",
-        "health_risks",
-        "ambulance",
-        "fire",
-        "police",
-        "roadside_assistance",
-        "wellness_resources",
-        "local_health_remedies",
-        "healthcare_tourism",
-        "WHO_link",
-        "CDC_link",
-        "google_translate_link",
-        "local_resources",
-        "lat",
-        "long",
-        "value" as "country_name"
+        "cities"."id" AS "city_id",
+        "cities"."created_at" AS "city_created_at",
+        "cities"."country_id" AS "city_country_id",
+        "cities"."name" AS "city_name",
+        "countries"."value" AS "country_name"
         FROM "cities" 
         JOIN "countries" ON "cities"."country_id"="countries"."id"
         WHERE "countries"."value" ILIKE $1`;

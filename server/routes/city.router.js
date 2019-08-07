@@ -16,6 +16,18 @@ router.get('/', (req, res) => {
         })
 })
 
+router.get('/city/:cityName', (req, res) => {
+    const queryText = 'SELECT * FROM "cities" WHERE "name"=$1';
+    console.log('here is your city', req.params.cityName);
+    pool.query(queryText, [req.params.cityName])
+        .then((result) => {
+            res.send(result.rows[0]);
+        })
+        .catch((error) => {
+            console.log('Error completely SELECT city query', error)
+            res.sendStatus(500)
+        })
+})
 
 //GET selected cities
 router.get('/:id', (req, res) => {
@@ -35,7 +47,13 @@ router.get('/:id', (req, res) => {
 
 //POST new city
 router.post('/', rejectUnauthenticated, (req, res) => {
-    const newCity = req.body;
+    
+    let newCity = req.body;
+
+    if(newCity.country_id === ''){
+        newCity.country_id = null;
+    }
+
     const queryText = `INSERT INTO "cities"(
         "country_id",
         "name",
@@ -73,8 +91,8 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     ];
     pool.query(queryText, queryValues)
         .then((result) => {
-            res.sendStatus(201);
-            console.log(result);
+            res.send(result.rows[0]);
+            console.log('this is result.rows from city.router:', result.rows);
         })
         .catch((error) => {
             console.log('Error completing POST city query', error);
@@ -85,26 +103,34 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 
 //UPDATE city
 router.put('/', rejectUnauthenticated, (req, res) => {
-    console.log('testtest', req.body);
-    const updateCity = req.body;
+    console.log(req.body)
+
+    let updatedCity = req.body;
+
+    if (updatedCity.country_id === '') {
+        updatedCity.country_id = null;
+    }
+
     pool.query(`UPDATE "cities"
     SET 
-    "name"=$1, 
-    "overview"=$2, 
-    "health_risks"=$3,
-    "ambulance"=$4,
-    "fire"=$5, 
-    "police"=$6, 
-    "roadside_assistance"=$7, 
-    "wellness_resources"=$8, 
-    "local_health_remedies"=$9, 
-    "healthcare_tourism"=$10,
-    "WHO_link"=$11,
-    "CDC_link"=$12,
-    "google_translate_link"=$13,
-    "local_resources"=$14
-    WHERE "id"=$15;`,
+    "country_id"=$1,
+    "name"=$2, 
+    "overview"=$3, 
+    "health_risks"=$4,
+    "ambulance"=$5,
+    "fire"=$6, 
+    "police"=$7, 
+    "roadside_assistance"=$8, 
+    "wellness_resources"=$9, 
+    "local_health_remedies"=$10, 
+    "healthcare_tourism"=$11,
+    "WHO_link"=$12,
+    "CDC_link"=$13,
+    "google_translate_link"=$14,
+    "local_resources"=$15
+    WHERE "id"=$16;`,
         [
+            updatedCity.country_id,
             updatedCity.name,
             updatedCity.overview,
             updatedCity.health_risks,
@@ -132,7 +158,7 @@ router.put('/', rejectUnauthenticated, (req, res) => {
 });
 
 
-//DELETE city 
+// DELETE city 
 router.delete('/:id', rejectUnauthenticated, (req, res) => {
     const queryText = 'DELETE FROM "cities" WHERE id=$1';
     pool.query(queryText, [req.params.id])
