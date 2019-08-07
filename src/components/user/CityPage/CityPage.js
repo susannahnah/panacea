@@ -1,28 +1,62 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-
-// testing map
 import axios from 'axios';
-import MapPage from '../MapPage/MapPage';
+import './CityPage.css';
+import { Button, Grid } from '@material-ui/core/';
+import UserLayout from '../../layouts/UserLayout/UserLayout';
 
 class CityPage extends Component {
 
   state = {
-    city: {}
+    city: {},
+    orgTypes: ['Hospital', 'Clinic', 'Urgent Care', 'Laboratory', 'Home Visits', 'Pharmacy'],
   }
 
   render() {
     return (
-      <>
-        <Link to={{
-          pathname: '/map',
-          coordinates: {
-            lat: Number(this.state.city.lat),
-            lng: Number(this.state.city.long)
-          },
-        }}>
-          Sending props to Map Page
-        </Link>
+      <UserLayout>
+
+        <div className="stock-map">
+          <Grid 
+          container
+          spacing={1}
+          >
+
+            {this.state.orgTypes.map(
+              (type, i) => (
+
+                <Grid 
+                key={i}
+                item xs={6}
+                style={{textAlign:`center`, marginTop: `2vh`}}
+                >
+
+                  <Button
+                    className="organization-button"
+                    key={i}
+                    variant="outlined"
+                  >
+
+                    <Link to={{
+                      pathname: `/map/${this.props.match.params.cityName}`,
+                      city_id: this.state.city.city_id,
+                      orgType: type,
+                      coordinates: {
+                        lat: Number(this.state.city.lat),
+                        lng: Number(this.state.city.long)
+                      },
+                    }}>
+                      {type}
+                    </Link>
+
+                  </Button>
+
+                </Grid>
+
+              ))}
+
+          </Grid>
+        </div>
 
         <pre>
           {JSON.stringify(this.state, null, 2)}
@@ -31,20 +65,20 @@ class CityPage extends Component {
         <pre>
           {JSON.stringify(this.props, null, 2)}
         </pre>
-      </>
+      </UserLayout>
     )
   }
 
   componentDidMount() {
-    axios.get('/api/cities')
+    axios.get(`/api/search/city?city_name=%${this.props.match.params.cityName}%`)
       .then(({ data }) => {
         this.setState({
-          city: { ...data[0] }
+          city: { ...data[0] },
         })
       })
       .catch((error) => {
-        console.log('Error with cities call: ', error);
-      });
+        console.log('Error with search city:', error);
+      })
   }
 
 }

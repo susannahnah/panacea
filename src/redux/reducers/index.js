@@ -6,6 +6,7 @@ import searchReducer from './searchReducer';
 import individualCityReducer from './individualCityReducer';
 import individualOrgReducer from './individualOrgReducer';
 import countriesReducer from './countriesReducer';
+import cityMedicationsReducer from './cityMedicationsReducer';
 import allCitiesReducer from './allCitiesReducer';
 
 // rootReducer is the primary reducer for our entire project
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   individualCityReducer, //will get single city from database
   individualOrgReducer, //will store individual organizations from database
   countriesReducer, // will hold array of countries from database
+  cityMedicationsReducer, // will hold array of medications attached to one city
   allCitiesReducer, //will hold array of cities from database
 });
 

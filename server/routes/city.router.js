@@ -4,18 +4,30 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 const router = express.Router();
 
 //GET all cities
-// router.get('/', (req, res) => {
-//     const queryText = 'SELECT * FROM "cities" ORDER BY "id"';
-//     pool.query(queryText)
-//         .then((result) => {
-//             res.send(result.rows);
-//         })
-//         .catch((error) => {
-//             console.log('Error completely SELECT city query', error)
-//             res.sendStatus(500)
-//         })
-// })
+router.get('/', (req, res) => {
+    const queryText = 'SELECT * FROM "cities" ORDER BY "id"';
+    pool.query(queryText)
+        .then((result) => {
+            res.send(result.rows);
+        })
+        .catch((error) => {
+            console.log('Error completely SELECT city query', error)
+            res.sendStatus(500)
+        })
+})
 
+router.get('/city/:cityName', (req, res) => {
+    const queryText = 'SELECT * FROM "cities" WHERE "name"=$1';
+    console.log('here is your city', req.params.cityName);
+    pool.query(queryText, [req.params.cityName])
+        .then((result) => {
+            res.send(result.rows[0]);
+        })
+        .catch((error) => {
+            console.log('Error completely SELECT city query', error)
+            res.sendStatus(500)
+        })
+})
 
 //GET selected cities
 router.get('/:id', (req, res) => {
@@ -35,7 +47,13 @@ router.get('/:id', (req, res) => {
 
 //POST new city
 router.post('/', rejectUnauthenticated, (req, res) => {
-    const newCity = req.body;
+    
+    let newCity = req.body;
+
+    if(newCity.country_id === ''){
+        newCity.country_id = null;
+    }
+
     const queryText = `INSERT INTO "cities"(
         "country_id",
         "name",
@@ -77,8 +95,8 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     ];
     pool.query(queryText, queryValues)
         .then((result) => {
-            res.sendStatus(201);
-            console.log(result);
+            res.send(result.rows[0]);
+            console.log('this is result.rows from city.router:', result.rows);
         })
         .catch((error) => {
             console.log('Error completing POST city query', error);
@@ -89,12 +107,22 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 
 //UPDATE city
 router.put('/', rejectUnauthenticated, (req, res) => {
-    console.log('testtest', req.body);
-    const updateCity = req.body;
+    console.log(req.body)
+
+    let updatedCity = req.body;
+
+    if (updatedCity.country_id === '') {
+        updatedCity.country_id = null;
+    }
+
     pool.query(`UPDATE "cities"
     SET 
     "country_id"=$1,
+<<<<<<< HEAD
     "name"=$2,
+=======
+    "name"=$2, 
+>>>>>>> master
     "overview"=$3, 
     "health_risks"=$4,
     "ambulance"=$5,
@@ -142,7 +170,7 @@ router.put('/', rejectUnauthenticated, (req, res) => {
 });
 
 
-//DELETE city 
+// DELETE city 
 router.delete('/:id', rejectUnauthenticated, (req, res) => {
     const queryText = 'DELETE FROM "cities" WHERE id=$1';
     pool.query(queryText, [req.params.id])

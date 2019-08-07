@@ -14,6 +14,7 @@ import {
   TableRow,
   TableCell
 } from "@material-ui/core";
+import { getThemeProps } from "@material-ui/styles";
 
 const useStyles = makeStyles({
   root: {
@@ -35,6 +36,7 @@ const useStyles = makeStyles({
     background: "#76a3d5"
   },
   table: {
+    // minWidth: 800,
     // width: 1000,
   },
   paper: {
@@ -59,7 +61,12 @@ function OrganizationsPage(props) {
   // Takes in a property name and the event to update local state.
   const handleChange = property => event => {
     setSearchValues({ ...searchValues, [property]: event.target.value });
-    switch (property) {
+  };
+
+
+  // Fetch the organizations associated to the search
+  const handleClickSearch = searchBy => event => {
+    switch (searchBy) {
       case "organization":
         props.dispatch({
           type: "SEARCH_ORGANIZATION",
@@ -71,82 +78,58 @@ function OrganizationsPage(props) {
     }
   };
 
-  // // Fetch the organization associated to the search
-  // const handleClickSearch = searchBy => {
-  //   switch (searchBy) {
-  //     case "organization":
-  //       props.dispatch({
-  //         type: "SEARCH_ORGANIZATION",
-  //         payload: searchValues.organization
-  //       });
-  //       break;
-  //     default:
-  //       return;
-  //   }
-  // };
-
-  const handleClickAddNewOrganization = () => {
-    props.history.push("/organizations/new");
-  };
-
   return (
     <AdminLayout>
       <Grid container>
         <Grid container item spacing={1} direction="row" alignItems="center">
           <Grid item>
-            <Button
-              fullWidth
-              className={classes.addButton}
-              variant="contained"
-              onClick={handleClickAddNewOrganization}
-            >
-              Add New Organization
+            <Link to="/organizations/new">
+              <Button fullWidth className={classes.addButton} variant="contained">
+                Add New Organization
             </Button>
+            </Link>
           </Grid>
         </Grid>
-        <Grid
-          container
-          item
-          item
-          spacing={1}
-          direction="row"
-          alignItems="center"
-        >
-          <Grid item>
-            <TextField
-              id="organization-search-input"
-              label="Organization"
-              value={searchValues.city}
-              onChange={handleChange("organization")}
-              margin="normal"
-              variant="outlined"
-              fullWidth
-            />
-          </Grid>
-          {/* <Grid item>
-            <Button
-              variant="contained"
-              fullWidth
-              className={classes.searchButton}
-              onClick={() => handleClickSearch("organization")}
-            >
-              Search
+      </Grid>
+      <Grid
+        container
+        item
+        item
+        spacing={1}
+        direction="row"
+        alignItems="center"
+      >
+        <Grid item>
+          <TextField
+            id="organization-search-input"
+            label="Organization"
+            value={searchValues.organization}
+            onChange={handleChange("organization")}
+            margin="normal"
+            variant="outlined"
+            fullWidth
+          />
+        </Grid>
+        <Grid item>
+          <Button
+            variant="contained"
+            fullWidth
+            className={classes.searchButton}
+            onClick={() => handleClickSearch("organization")}>
+            Search
             </Button>
-          </Grid> */}
         </Grid>
       </Grid>
       <Grid container item spacing={1} direction="row" alignItems="center">
-        <Grid container item >
-          <Grid item>
+        <Grid container item>
           <Paper className={classes.paper}>
             <Table className={classes.table}>
               <TableHead>
                 <TableRow>
-                  <TableCell>Name</TableCell>
+                  <TableCell>Organizations</TableCell>
                   <TableCell align="right">Type</TableCell>
                   <TableCell align="right">City</TableCell>
                   <TableCell align="right">Country</TableCell>
-                  <TableCell align="right"></TableCell>
                   <TableCell />
                 </TableRow>
               </TableHead>
@@ -177,7 +160,6 @@ function OrganizationsPage(props) {
               </TableBody>
             </Table>
           </Paper>
-          </Grid>
         </Grid>
       </Grid>
       <pre>Local State {JSON.stringify(searchValues, null, 2)}</pre>

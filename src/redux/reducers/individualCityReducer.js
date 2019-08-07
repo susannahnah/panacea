@@ -20,6 +20,8 @@ const individualCityReducer = (state = cityDetails, action) => {
     switch (action.type) {
         case 'SET_INDIVIDUAL_CITY':
             return action.payload;
+        case 'CLEAR_INDIVIDUAL_CITY':
+            return cityDetails;
         default:
             return state;
     }
