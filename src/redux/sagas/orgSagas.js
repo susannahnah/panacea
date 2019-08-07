@@ -29,7 +29,7 @@ function* postNewOrgSaga(action) {
     try {
         const newOrgIdResponse = yield axios.post('/api/organizations', action.payload);
         const newOrgObjResponse = yield axios.get(`/api/organizations/${newOrgIdResponse.data.id}`);
-        yield put({ type: 'SET_INDIVIDUAL_ORGANIZATION', payload: newOrgObjResponse.data });
+        yield put({ type: 'SET_INDIVIDUAL_ORG', payload: newOrgObjResponse.data });
     } catch (error) {
         console.log(`Error with postNewOrgSaga:`, error);
     }
@@ -61,6 +61,7 @@ function* orgSagas() {
     yield takeEvery('POST_ORG', postOrgSaga)
     yield takeEvery('EDIT_ORG', editOrgSaga)
     yield takeEvery('DELETE_ORG', deleteOrgSaga)
+    yield takeEvery('NEW_ORG', postNewOrgSaga);
 }
 
 
