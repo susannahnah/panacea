@@ -142,7 +142,7 @@ class OrganizationFormPage extends Component {
         payload: id
       });
       // directly set state to this city
-      axios.get(`/api/organizations/organization/${id}`)
+      axios.get(`/api/organizations/${id}`)
         .then(({ data }) => {
           console.log(data);
           this.setState({
@@ -152,7 +152,7 @@ class OrganizationFormPage extends Component {
           })
         })
     }
-    this.props.dispatch({ type: 'FETCH_ORGS' })
+    this.props.dispatch({ type: 'FETCH_CITIES' })
   }
 
   render() {
@@ -251,7 +251,7 @@ class OrganizationFormPage extends Component {
                       id="recommended"
                       margin="normal"
                       color="primary"
-                      checked={this.state.recommended}
+                      checked={this.state.newOrg.recommended}
                       onChange={this.handleNewCheckBoxChange('recommended')}
                     />
                   }
@@ -265,7 +265,7 @@ class OrganizationFormPage extends Component {
                       id="twentyfour"
                       margin="normal"
                       color="primary"
-                      value={this.state.twentyfour}
+                      value={this.state.newOrg.twentyfour}
                       onChange={this.handleNewCheckBoxChange('twentyfour')}
                     />
                   }
@@ -279,7 +279,7 @@ class OrganizationFormPage extends Component {
                       id="labor_delivery"
                       margin="normal"
                       color="primary"
-                      value={this.state.labor_delivery}
+                      value={this.state.newOrg.labor_delivery}
                       onChange={this.handleNewCheckBoxChange('labor_delivery')}
                     />
                   }
@@ -293,7 +293,7 @@ class OrganizationFormPage extends Component {
                       id="childrens"
                       margin="normal"
                       color="primary"
-                      value={this.state.childrens}
+                      value={this.state.newOrg.childrens}
                       onChange={this.handleNewCheckBoxChange('childrens')}
                     />
                   }
@@ -307,7 +307,7 @@ class OrganizationFormPage extends Component {
                       id="childrens_surgical"
                       margin="normal"
                       color="primary"
-                      value={this.state.childrens_surgical}
+                      value={this.state.newOrg.childrens_surgical}
                       onChange={this.handleNewCheckBoxChange('childrens_surgical')}
                     />
                   }
@@ -321,7 +321,7 @@ class OrganizationFormPage extends Component {
                       id="adult"
                       margin="normal"
                       color="primary"
-                      value={this.state.adult}
+                      value={this.state.newOrg.adult}
                       onChange={this.handleNewCheckBoxChange('adult')}
                     />
                   }
@@ -335,7 +335,7 @@ class OrganizationFormPage extends Component {
                       id="adult_surgical"
                       margin="normal"
                       color="primary"
-                      value={this.state.adult_surgical}
+                      value={this.state.newOrg.adult_surgical}
                       onChange={this.handleNewCheckBoxChange('adult_surgical')}
                     />
                   }
@@ -349,7 +349,7 @@ class OrganizationFormPage extends Component {
                       id="medical_translators"
                       margin="normal"
                       color="primary"
-                      value={this.state.medical_translators}
+                      value={this.state.newOrg.medical_translators}
                       onChange={this.handleNewCheckBoxChange('medical_translators')}
                     />
                   }
