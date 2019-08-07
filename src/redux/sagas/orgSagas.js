@@ -21,6 +21,20 @@ function* postOrgSaga(action) {
     }
 }
 
+// POST new org function
+// will post a new org object to the database
+// get new org by id
+// set the individual org to the new org that was just created
+function* postNewOrgSaga(action) {
+    try {
+        const newOrgIdResponse = yield axios.post('/api/organizations', action.payload);
+        const newOrgObjResponse = yield axios.get(`/api/organizations/${newOrgIdResponse.data.id}`);
+        yield put({ type: 'SET_INDIVIDUAL_ORG', payload: newOrgObjResponse.data });
+    } catch (error) {
+        console.log(`Error with postNewOrgSaga:`, error);
+    }
+}
+
 //UPDATE specific org
 function* editOrgSaga(action) {
     yield axios.put(`/api/organizations`, action.payload)
@@ -47,6 +61,7 @@ function* orgSagas() {
     yield takeEvery('POST_ORG', postOrgSaga)
     yield takeEvery('EDIT_ORG', editOrgSaga)
     yield takeEvery('DELETE_ORG', deleteOrgSaga)
+    yield takeEvery('NEW_ORG', postNewOrgSaga);
 }
 
 
