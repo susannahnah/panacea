@@ -118,11 +118,7 @@ router.put('/', rejectUnauthenticated, (req, res) => {
     pool.query(`UPDATE "cities"
     SET 
     "country_id"=$1,
-<<<<<<< HEAD
-    "name"=$2,
-=======
     "name"=$2, 
->>>>>>> master
     "overview"=$3, 
     "health_risks"=$4,
     "ambulance"=$5,
