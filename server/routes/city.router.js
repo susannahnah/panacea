@@ -53,6 +53,8 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     if(newCity.country_id === ''){
         newCity.country_id = null;
     }
+    if(!newCity.lat){newCity.lat = null}
+    if(!newCity.long){newCity.long = null}
 
     const queryText = `INSERT INTO "cities"(
         "country_id",
@@ -114,15 +116,13 @@ router.put('/', rejectUnauthenticated, (req, res) => {
     if (updatedCity.country_id === '') {
         updatedCity.country_id = null;
     }
+    if(!updatedCity.lat){updatedCity.lat = null}
+    if(!updatedCity.long){updatedCity.long = null}
 
     pool.query(`UPDATE "cities"
     SET 
     "country_id"=$1,
-<<<<<<< HEAD
-    "name"=$2,
-=======
     "name"=$2, 
->>>>>>> master
     "overview"=$3, 
     "health_risks"=$4,
     "ambulance"=$5,

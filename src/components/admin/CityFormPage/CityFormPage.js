@@ -46,6 +46,8 @@ class CityFormPage extends Component {
       CDC_link: this.individualCity.CDC_link || '',
       google_translate_link: this.individualCity.google_translate_link || '',
       local_resources: this.individualCity.local_resources || '',
+      lat: this.individualCity.lat || '', 
+      long: this.individualCity.long || '',
     },
     newMedication: {
       generic_name_us: '',
@@ -464,6 +466,34 @@ class CityFormPage extends Component {
                 type='type' 
                 value={this.state.newCity.local_resources} 
                 onChange={this.handleCityChange('local_resources')} />
+            </Grid>
+            <Grid className="inputFields" container item xs={12}>
+              <Grid item xs={12}>
+                <h2 style={{
+                  marginBottom: 0,
+                  marginTop: `5vw`
+                }}>
+                  Geographical Information
+                </h2>
+              </Grid>
+              <Grid item xs={6} style={{padding: `0 15px`}}>
+                <TextField 
+                  id="lat" 
+                  label="Latitude" 
+                  fullWidth margin="normal" 
+                  variant="outlined" 
+                  value={this.state.newCity.lat} 
+                  onChange={this.handleCityChange('lat')} />
+              </Grid>
+              <Grid item xs={6} style={{padding: `0 15px`}}>
+                <TextField 
+                  id="long" 
+                  label="Longitude" 
+                  fullWidth margin="normal" 
+                  variant="outlined" 
+                  value={this.state.newCity.long} 
+                  onChange={this.handleCityChange('long')} />
+              </Grid>
             </Grid>
             <Grid container item xs={12} 
               style={{margin: `5%`, marginBottom: `20vh`}}>

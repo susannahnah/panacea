@@ -48,7 +48,8 @@ const useStyles = makeStyles({
 function CitiesPage(props) {
 
   useEffect(() => {props.dispatch({type: "SEARCH_CITY", payload: ""})}, []);
-  useEffect(() => {props.dispatch({type: "CLEAR_INDIVIDUAL_CITY"})})
+  useEffect(() => {props.dispatch({type: "CLEAR_INDIVIDUAL_CITY"})});
+  useEffect(() => {props.dispatch({type: "CLEAR_MEDICATIONS"})});
 
   // use classes names for styling
   const classes = useStyles();
