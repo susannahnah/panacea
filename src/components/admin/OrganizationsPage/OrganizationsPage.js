@@ -75,9 +75,13 @@ function OrganizationsPage(props) {
   return (
     <AdminLayout>
       <Grid container>
-        <Grid container item spacing={1} direction="row" alignItems="center">
+        <Grid container 
+        item spacing={1} 
+        direction="row" 
+        alignItems="center"
+        >
           <Grid item>
-            <Link to="/organizations/new">
+            <Link to="/organizations/:orgName/:id">
               <Button fullWidth className={classes.addButton} variant="contained">
                 Add New Organization
             </Button>

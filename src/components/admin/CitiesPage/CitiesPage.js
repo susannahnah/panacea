@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
@@ -48,8 +48,10 @@ const useStyles = makeStyles({
 function CitiesPage(props) {
 
   useEffect(() => {props.dispatch({type: "SEARCH_CITY", payload: ""})}, []);
-  useEffect(() => {props.dispatch({type: "CLEAR_INDIVIDUAL_CITY"})})
   useEffect(() => {props.dispatch({type: "CLEAR_INDIVIDUAL_ORGANIZATION"})}, []);
+  useEffect(() => {props.dispatch({type: "CLEAR_INDIVIDUAL_CITY"})});
+  useEffect(() => {props.dispatch({type: "CLEAR_MEDICATIONS"})});
+
 
   // use classes names for styling
   const classes = useStyles();
@@ -65,13 +67,13 @@ function CitiesPage(props) {
     setSearchValues({ ...searchValues, [property]: event.target.value });
     switch (property) {
       case "city":
-        props.dispatch({ 
-          type: "SEARCH_CITY", 
-          payload: event.target.value 
+        props.dispatch({
+          type: "SEARCH_CITY",
+          payload: event.target.value
         });
         break;
       case "country":
-        props.dispatch({ 
+        props.dispatch({
           type: "SEARCH_CITY_BY_COUNTRY",
           payload: event.target.value,
         });
@@ -84,20 +86,26 @@ function CitiesPage(props) {
   return (
     <AdminLayout>
       <Grid container>
-        <Grid container item spacing={1} direction="row" alignItems="center">
+        <Grid container
+          item spacing={1}
+          direction="row"
+          alignItems="center"
+        >
           <Grid item>
-          <Link to="/cities/new">
-            <Button fullWidth className={classes.addButton} variant="contained">
-              Add New City
+            <Link to="/cities/new">
+              <Button
+                fullWidth
+                className={classes.addButton}
+                variant="contained"
+              >
+                Add New City
             </Button>
-          </Link>
+            </Link>
           </Grid>
         </Grid>
         <Grid
           container
-          item
-          item
-          spacing={1}
+          item spacing={1}
           direction="row"
           alignItems="center"
         >
