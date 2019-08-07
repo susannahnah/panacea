@@ -29,7 +29,7 @@ class OrganizationFormPage extends Component {
       name: this.individualOrg.name || '',
       type: this.individualOrg.type || '',
       recommended: this.individualOrg.recommended || false,
-      twentyfour: this.individualOrg.twentyFourfalse,
+      twentyfour: this.individualOrg.twentyfour || false,
       hours: this.individualOrg.hours || '',
       homeopathic_remedies: this.individualOrg.homeopathic_remedies || '',
       labor_delivery: this.individualOrg.labor_deliver || false,
