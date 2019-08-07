@@ -146,7 +146,7 @@ class OrganizationFormPage extends Component {
         .then(({ data }) => {
           console.log(data);
           this.setState({
-            newCity: {
+            newOrg: {
               ...data,
             }
           })
@@ -265,7 +265,7 @@ class OrganizationFormPage extends Component {
                       id="twentyfour"
                       margin="normal"
                       color="primary"
-                      value={this.state.newOrg.twentyfour}
+                      checked={this.state.newOrg.twentyfour}
                       onChange={this.handleNewCheckBoxChange('twentyfour')}
                     />
                   }
@@ -279,7 +279,7 @@ class OrganizationFormPage extends Component {
                       id="labor_delivery"
                       margin="normal"
                       color="primary"
-                      value={this.state.newOrg.labor_delivery}
+                      checked={this.state.newOrg.labor_delivery}
                       onChange={this.handleNewCheckBoxChange('labor_delivery')}
                     />
                   }
@@ -293,7 +293,7 @@ class OrganizationFormPage extends Component {
                       id="childrens"
                       margin="normal"
                       color="primary"
-                      value={this.state.newOrg.childrens}
+                      checked={this.state.newOrg.childrens}
                       onChange={this.handleNewCheckBoxChange('childrens')}
                     />
                   }
@@ -307,7 +307,7 @@ class OrganizationFormPage extends Component {
                       id="childrens_surgical"
                       margin="normal"
                       color="primary"
-                      value={this.state.newOrg.childrens_surgical}
+                      checked={this.state.newOrg.childrens_surgical}
                       onChange={this.handleNewCheckBoxChange('childrens_surgical')}
                     />
                   }
@@ -321,7 +321,7 @@ class OrganizationFormPage extends Component {
                       id="adult"
                       margin="normal"
                       color="primary"
-                      value={this.state.newOrg.adult}
+                      checked={this.state.newOrg.adult}
                       onChange={this.handleNewCheckBoxChange('adult')}
                     />
                   }
@@ -335,7 +335,7 @@ class OrganizationFormPage extends Component {
                       id="adult_surgical"
                       margin="normal"
                       color="primary"
-                      value={this.state.newOrg.adult_surgical}
+                      checked={this.state.newOrg.adult_surgical}
                       onChange={this.handleNewCheckBoxChange('adult_surgical')}
                     />
                   }
@@ -349,7 +349,7 @@ class OrganizationFormPage extends Component {
                       id="medical_translators"
                       margin="normal"
                       color="primary"
-                      value={this.state.newOrg.medical_translators}
+                      checked={this.state.newOrg.medical_translators}
                       onChange={this.handleNewCheckBoxChange('medical_translators')}
                     />
                   }
