@@ -4,6 +4,7 @@ import Marker from './Marker';
 import axios from 'axios';
 import './MapPage.css';
 import BackButton from '@material-ui/icons/ChevronLeftRounded';
+import UserLayout from '../../layouts/UserLayout/UserLayout';
 
 function MapPage(props) {
 
@@ -39,6 +40,7 @@ function MapPage(props) {
   if (!loadingStatus) {
     return (
       <>
+      <UserLayout>
 
         <div className="container">
 
@@ -69,6 +71,8 @@ function MapPage(props) {
           </GoogleMapReact>
 
         </div>
+
+        </UserLayout>
 
       </>
     )
