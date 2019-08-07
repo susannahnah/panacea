@@ -28,9 +28,9 @@ class CityPage extends Component {
     return (
       <UserLayout>
 
-        <div style={{ marginTop: '2%', marginBottom: '2%' }}>
+        <Typography variant='h4' gutterBottom style={{ marginTop: '2%', marginBottom: '2%' }}>
           <b>{this.state.city.city_name} , {this.state.city.city_country_id}</b>
-        </div>
+        </Typography>
 
         <div className="stock-map">
           <Grid
@@ -67,10 +67,13 @@ class CityPage extends Component {
 
           </Grid>
         </div>
-
-        <div style={{ marginTop: '2%', marginBottom: '2%' }}>
+        
+        <Typography variant='h4' gutterBottom style={{ marginTop: '2%', marginBottom: '2%' }}>
           <b>Healthcare in the city</b>
-        </div>
+        </Typography>
+        {/* <div style={{ marginTop: '2%', marginBottom: '2%' }}>
+          <b>Healthcare in the city</b>
+        </div> */}
 
         <Grid item xs={12}>
 
@@ -140,9 +143,9 @@ class CityPage extends Component {
 
         </Grid>
 
-        <div style={{ marginTop: '2%', marginBottom: '2%' }}>
+        <Typography variant='h4' gutterBottom style={{ marginTop: '2%', marginBottom: '2%' }}>
           <b>Emergency Phone Numbers</b>
-        </div>
+        </Typography>
 
         <Grid item xs={12}>
 
