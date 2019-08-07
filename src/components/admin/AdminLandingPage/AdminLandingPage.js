@@ -29,15 +29,13 @@ const useStyles = makeStyles({
   }
 });
 
-  componentDidMount() {
-    this.props.dispatch({type: "CLEAR_INDIVIDUAL_CITY"});
-    this.props.dispatch({type: "CLEAR_MEDICATIONS"});
-  }
-
 function AdminLandingPage(props) {
 
   useEffect(() => { props.dispatch({ type: "SEARCH_CITY", payload: "" }) }, []);
   useEffect(() => { props.dispatch({ type: "SEARCH_ORGANIZATION", payload: "" }) }, []);
+  useEffect(() => { props.dispatch({ type: "CLEAR_INDIVIDUAL_CITY"})}, []);
+  useEffect(() => { props.dispatch({ type: "CLEAR_MEDICATIONS"})}, []);
+  useEffect(() => { props.dispatch({ type: "CLEAR_INDIVIDUAL_ORGANIZATION"})}, []);
 
 
   // use classes names for styling
