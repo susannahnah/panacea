@@ -42,14 +42,9 @@ class UserLandingPage extends Component {
             <IconButton style={{ width: `15%` }}>
               <SearchIcon />
             </IconButton>
-              <AutoComplete
-                suggestions={this.state.cities}
-              />
-            {/* <InputBase
-              style={{ width: `85%` }}
-              value={this.state.citySearch}
-              placeholder="Where are you traveling?"
-              onChange={this.handleChangeFor('topCitySearch')} /> */}
+            <AutoComplete
+              suggestions={this.state.cities}
+            />
           </Paper>
         </Grid>
         <Grid item xs={12}>
@@ -85,13 +80,8 @@ class UserLandingPage extends Component {
               <SearchIcon />
             </IconButton>
             <AutoComplete
-                suggestions={this.state.cities}
-              />
-            {/* <InputBase
-              style={{ width: `80%` }}
-              value={this.state.citySearch}
-              placeholder="Where are you traveling?"
-              onChange={this.handleChangeFor('bottomCitySearch')} /> */}
+              suggestions={this.state.cities}
+            />
           </Paper>
         </Grid>
       </UserLayout>

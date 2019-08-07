@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './CityPage.css';
-import { Button, Grid } from '@material-ui/core/';
+import { Grid } from '@material-ui/core/';
 import UserLayout from '../../layouts/UserLayout/UserLayout';
 
 class CityPage extends Component {
@@ -17,39 +17,33 @@ class CityPage extends Component {
       <UserLayout>
 
         <div className="stock-map">
-          <Grid 
-          container
-          spacing={1}
+          <Grid
+            container
+            spacing={1}
           >
 
             {this.state.orgTypes.map(
               (type, i) => (
 
-                <Grid 
-                key={i}
-                item xs={6}
-                style={{textAlign:`center`, marginTop: `2vh`}}
+                <Grid
+                  key={i}
+                  item xs={6}
+                  style={{ textAlign: `center`, marginTop: `2vh` }}
                 >
 
-                  <Button
-                    className="organization-button"
-                    key={i}
-                    variant="outlined"
-                  >
-
-                    <Link to={{
-                      pathname: `/map/${this.props.match.params.cityName}`,
-                      city_id: this.state.city.city_id,
-                      orgType: type,
-                      coordinates: {
-                        lat: Number(this.state.city.lat),
-                        lng: Number(this.state.city.long)
-                      },
-                    }}>
+                    <Link
+                      style={{ display: 'block', backgroundColor: 'white' }}
+                      to={{
+                        pathname: `/map/${this.props.match.params.cityName}`,
+                        city_id: this.state.city.city_id,
+                        orgType: type,
+                        coordinates: {
+                          lat: Number(this.state.city.lat),
+                          lng: Number(this.state.city.long)
+                        },
+                      }}>
                       {type}
                     </Link>
-
-                  </Button>
 
                 </Grid>
 
@@ -58,13 +52,13 @@ class CityPage extends Component {
           </Grid>
         </div>
 
-        <pre>
+        {/* <pre>
           {JSON.stringify(this.state, null, 2)}
         </pre>
 
         <pre>
           {JSON.stringify(this.props, null, 2)}
-        </pre>
+        </pre> */}
       </UserLayout>
     )
   }

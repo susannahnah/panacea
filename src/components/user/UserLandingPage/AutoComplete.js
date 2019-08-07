@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import './AutoComplete.css';
+import { Link, Redirect } from 'react-router-dom';
 import { Input } from '@material-ui/core';
 
 class Autocomplete extends Component {
@@ -28,31 +29,24 @@ class Autocomplete extends Component {
         });
     };
 
-    onClick = e => {
-        this.setState({
-            activeSuggestion: 0,
-            filteredSuggestions: [],
-            showSuggestions: false,
-            userInput: e.currentTarget.innerText
-        });
-    };
-
     onKeyDown = e => {
         const { activeSuggestion, filteredSuggestions } = this.state;
 
         if (e.keyCode === 13) {
-            this.setState({
-                activeSuggestion: 0,
-                showSuggestions: false,
-                userInput: filteredSuggestions[activeSuggestion].name
-            });
+            return (
+                <Redirect
+                    to={{
+                        pathname: `/city/${filteredSuggestions[activeSuggestion].name}`,
+                        id: filteredSuggestions[activeSuggestion].id,
+                    }}
+                />
+            )
         }
 
         else if (e.keyCode === 38) {
             if (activeSuggestion === 0) {
                 return;
             }
-
             this.setState({ activeSuggestion: activeSuggestion - 1 });
         }
 
@@ -60,7 +54,6 @@ class Autocomplete extends Component {
             if (activeSuggestion - 1 === filteredSuggestions.length) {
                 return;
             }
-
             this.setState({ activeSuggestion: activeSuggestion + 1 });
         }
     };
@@ -68,7 +61,6 @@ class Autocomplete extends Component {
     render() {
         const {
             onChange,
-            onClick,
             onKeyDown,
             state: {
                 activeSuggestion,
@@ -84,21 +76,24 @@ class Autocomplete extends Component {
             if (filteredSuggestions.length) {
                 suggestionsListComponent = (
                     <ul className="suggestions">
-                        {filteredSuggestions.map((suggestion, index) => {
+                        {filteredSuggestions.map((suggestion, i) => {
                             let className;
 
-                            if (index === activeSuggestion) {
+                            if (i === activeSuggestion) {
                                 className = "suggestion-active";
                             }
 
                             return (
-                                <li
-                                    className={className}
-                                    key={suggestion.id}
-                                    onClick={onClick}
-                                    value={suggestion.id}
-                                >
-                                    {suggestion.name}, {suggestion.country_id}
+                                <li key={i}>
+                                    <Link
+                                        style={{ display: 'block' }}
+                                        to={{
+                                            pathname: `/city/${suggestion.name}`,
+                                            id: suggestion.id,
+                                        }}
+                                    >
+                                        {suggestion.name}, {suggestion.country_id}
+                                    </Link>
                                 </li>
                             );
                         })}
@@ -106,9 +101,8 @@ class Autocomplete extends Component {
                 );
             } else {
                 suggestionsListComponent = (
-                    <div className="no-suggestions">
-                        <em>No suggestions, you're on your own!</em>
-                    </div>
+                    <>
+                    </>
                 );
             }
         }
@@ -116,10 +110,11 @@ class Autocomplete extends Component {
         return (
             <>
                 <Input
-                    fullWidth
                     type="text"
                     onChange={onChange}
                     onKeyDown={onKeyDown}
+                    placeholder="Where are you traveling?"
+                    style={{ width: `85%` }}
                     value={userInput}
                 />
                 {suggestionsListComponent}
