@@ -83,7 +83,7 @@ function AdminLandingPage(props) {
           <Grid item
             xs={6}
           >
-            <Link to="/cities/:cityName">
+            <Link to="/cities/new">
               <Button
                 fullWidth
                 className={classes.addButton}
@@ -93,7 +93,7 @@ function AdminLandingPage(props) {
             </Link>
           </Grid>
           <Grid item xs={6}>
-            <Link to="/organizations/:orgName/:id">
+            <Link to="/organizations/new">
               <Button
                 fullWidth
                 className={classes.addButton}
