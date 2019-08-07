@@ -71,7 +71,10 @@ class OrganizationFormPage extends Component {
 
   }
 
-  // NEEDS EDIT SAGA AND FIX PUT ROUTE
+  // when save button is clicked, update org info in the database
+  // first checks that the user has at least given a org name
+  // if not, alerts user to leave a org name
+  // if successful, alerts user that changes have been saved
   saveOrg = event => {
     event.preventDefault();
     if (this.state.newOrg.name !== '' && this.state.newOrg.city_id !== '') {
@@ -89,13 +92,13 @@ class OrganizationFormPage extends Component {
     }
   };
 
-  // CHANGE TO ORG
-  // on click of 'delete city', confirm user would like to delete, then delete
-  deleteCity = event => {
+
+  // on click of 'delete org', confirm user would like to delete, then delete
+  deleteOrg = event => {
     // confirm user would like to delete the city
     Swal.fire({
       title: 'Are you sure?',
-      text: "This will delete the city and all it's information from the database",
+      text: "This will delete the organization and all it's information from the database",
       type: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -106,13 +109,13 @@ class OrganizationFormPage extends Component {
         // send confirmation message
         Swal.fire(
           'Deleted!',
-          'City removed from database.',
+          'Organization removed from database.',
           'success'
         )
-        // delete city
+        // delete org
         this.willDelete();
-        // navigate to cities page
-        this.props.history.push('/cities');
+        // navigate to og page
+        this.props.history.push('/organizations');
       }
     });
   }

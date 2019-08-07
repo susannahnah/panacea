@@ -9,19 +9,6 @@ function* selectOrgSaga(action) {
 }
 
 
-//POST new org function:
-function* postOrgSaga(action) {
-    console.log('hit!');
-    try {
-        console.log(action.payload);
-        yield axios.post('/api/organizations', action.payload);
-        yield put({ type: 'SEARCH_ORGANIZATION' })
-    }
-    catch (error) {
-        console.log('Error with POST', error);
-    }
-}
-
 // POST new org function
 // will post a new org object to the database
 // get new org by id
@@ -44,7 +31,7 @@ function* editOrgSaga(action) {
     console.log('org updated')
 }
 
-//DELTE specific org
+//DELETE specific org
 function* deleteOrgSaga(action) {
     console.log('deleteOrgSaga hit')
     try {
@@ -60,7 +47,6 @@ function* deleteOrgSaga(action) {
 //ALL org Sagas
 function* orgSagas() {
     yield takeEvery('SELECT_ORG', selectOrgSaga)
-    yield takeEvery('POST_ORG', postOrgSaga)
     yield takeEvery('EDIT_ORG', editOrgSaga)
     yield takeEvery('DELETE_ORG', deleteOrgSaga)
     yield takeEvery('NEW_ORG', postNewOrgSaga);
