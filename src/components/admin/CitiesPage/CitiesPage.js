@@ -62,18 +62,15 @@ function CitiesPage(props) {
   // Takes in a property name and the event to update local state.
   const handleChange = property => event => {
     setSearchValues({ ...searchValues, [property]: event.target.value });
-  };
-
- 
-  // Fetch the cities associated to the search
-  const handleClickSearch = searchBy => event => {
-    switch (searchBy) {
+    switch (property) {
       case "city":
-        props.dispatch({ type: "SEARCH_CITY", payload: event.target.value });
+        props.dispatch({ 
+          type: "SEARCH_CITY", 
+          payload: event.target.value 
+        });
         break;
       case "country":
-        console.log(searchValues);
-        props.dispatch({
+        props.dispatch({ 
           type: "SEARCH_CITY_BY_COUNTRY",
           payload: event.target.value,
         });
@@ -206,12 +203,12 @@ function CitiesPage(props) {
           </Paper>
         </Grid>
       </Grid>
-      <pre>
+      {/* <pre>
         Local State {JSON.stringify(searchValues, null, 2)}
       </pre>
       <pre>
         Props + Redux State {JSON.stringify(props, null, 2)}
-      </pre>
+      </pre> */}
     </AdminLayout>
   );
 }

@@ -206,9 +206,9 @@ class CityFormPage extends Component {
 
     return (
       <AdminLayout>
-        <pre>
+        {/* <pre>
           {JSON.stringify(this.state, null, 2)}
-        </pre>
+        </pre> */}
         <div style={{height: `50px`, bottom: 0}}>
           { this.state.newCity.name ? 
           <h1>{this.state.newCity.name}</h1> :
