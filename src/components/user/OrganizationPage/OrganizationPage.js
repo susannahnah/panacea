@@ -6,17 +6,17 @@ class OrganizationPage extends Component {
     org: []
   }
 
-  componentDidMount() {
-    axios.get(`/api/search/organization?organization_name=%${this.props.match.params.orgName}%`)
-      .then(({ data }) => {
-        this.setState({
-          org: { ...data[0] },
-        })
-      })
-      .catch((error) => {
-        console.log('Error with search org:', error);
-      })
-  }
+  // componentDidMount() {
+  //   axios.get(`/api/search/organization?organization_name=%${this.props.match.params.orgName}%`)
+  //     .then(({ data }) => {
+  //       this.setState({
+  //         org: { ...data[0] },
+  //       })
+  //     })
+  //     .catch((error) => {
+  //       console.log('Error with search org:', error);
+  //     })
+  // }
   render() {
     return (
         <></>
