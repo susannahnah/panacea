@@ -22,6 +22,7 @@ function* searchCityByCountrySaga(action) {
 }
 
 function* searchOrganizationSaga(action) {
+    console.log('in search org')
     try {
         const { data } = yield axios.get(`/api/search/organization?organization_name=%${action.payload}%`);
         yield put({ type: 'SET_ORGANIZATION_SEARCH_RESULT', payload: data });

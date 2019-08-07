@@ -12,6 +12,13 @@ router.get("/city", async (req, res, next) => {
       "cities"."country_id" AS "city_country_id",
       "cities"."name" AS "city_name",
       "cities"."lat", "cities"."long",
+      "cities"."overview", "cities"."health_risks",
+      "cities"."ambulance", "cities"."fire",
+      "cities"."police", "cities"."roadside_assistance",
+      "cities"."wellness_resources", "cities"."local_health_remedies",
+      "cities"."healthcare_tourism", "cities"."WHO_link",
+      "cities"."CDC_link", "cities"."google_translate_link",
+      "cities"."local_resources",
       "countries"."value" AS "country_name"
       FROM "cities" 
       JOIN "countries" ON "cities"."country_id"="countries"."id"
@@ -55,7 +62,7 @@ router.get("/organization", async (req, res, next) => {
        "organizations"."name" AS "organization_name",
        "type",
        "recommended",
-       "24_hour",
+       "twentyfour",
        "hours",
        "homeopathic_remedies",
        "labor_delivery",
