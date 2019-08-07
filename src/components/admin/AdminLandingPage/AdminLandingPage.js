@@ -111,40 +111,39 @@ function AdminLandingPage(props) {
 
   return (
     <AdminLayout>
-      <div 
-      style={{ height: `50px`, bottom: 0 }}
-      >
-      </div>
       <Grid container>
-        <Grid container item spacing={1} direction="row" alignItems="center">
-          <Grid item xs={5}>
-            <Link to="/cities/new">
-              <Button 
-              fullWidth 
-              className={classes.addButton} 
-              variant="contained">
+        <Grid container
+          item spacing={1}
+          direction="row"
+          alignItems="center"
+        >
+          <Grid item
+            xs={6}
+          >
+            <Link to="/cities/:cityName">
+              <Button
+                fullWidth
+                className={classes.addButton}
+                variant="contained">
                 Add New City
             </Button>
             </Link>
           </Grid>
-          <Grid item xs={5}>
-          <Link to="/organizations/new">
-            <Button 
-            fullWidth 
-            className={classes.addButton} 
-            variant="contained">
-              Add New Organization
+          <Grid item xs={6}>
+            <Link to="/organizations/:orgName/:id">
+              <Button
+                fullWidth
+                className={classes.addButton}
+                variant="contained"
+              >
+                Add New Organization
             </Button>
-          </Link>
+            </Link>
+          </Grid>
         </Grid>
-        </Grid>
-        
       </Grid>
-      <Grid
-        container
-        item
-        item
-        spacing={1}
+      <Grid container
+        item spacing={1}
         direction="row"
         alignItems="center"
       >
@@ -159,47 +158,50 @@ function AdminLandingPage(props) {
             fullWidth
           />
         </Grid>
-        <Grid
-          container
-          item
-          item
-          spacing={1}
-          direction="row"
-          alignItems="center"
-        >
-          <Grid item>
-            <TextField
-              id="organization-search-input"
-              label="Organization"
-              value={searchValues.organization}
-              onChange={handleChange("organization")}
-              margin="normal"
-              variant="outlined"
-              fullWidth
-            />
-          </Grid>
-          <Grid
-          item
-          xs={6}
-        >
-
-          {/* <Button
-            size='large'
-            style={{ width: '250px', marginLeft: '75px' }}
-            variant="outlined"
-            onClick={this.clickAddOrganization}
-          >Add New Organization</Button> */}
-
+        <Grid item>
+          <Button
+            variant="contained"
+            fullWidth
+            className={classes.searchButton}
+            onClick={() => handleClickSearch("city")}>
+            Search
+            </Button>
         </Grid>
-      </Grid> 
-    </Grid>
+      </Grid>
+      <Grid container
+        item spacing={1}
+        direction="row"
+        alignItems="center"
+      >
+        <Grid item>
+          <TextField
+            id="organization-search-input"
+            label="Search Organization"
+            value={searchValues.organization}
+            onChange={handleChange("organization")}
+            margin="normal"
+            variant="outlined"
+            fullWidth
+          />
+        </Grid>
+        <Grid item>
+          <Button
+            variant="contained"
+            fullWidth
+            className={classes.searchButton}
+            onClick={() => handleClickSearch("organization")}>
+            Search
+            </Button>
+        </Grid>
+      </Grid>
+
     </AdminLayout>
   )
 }
-      
-      
+
+
 const mapStateToRedux = (reduxStore) => ({
-          reduxStore
-        });
-        
+  reduxStore
+});
+
 export default connect(mapStateToRedux)(AdminLandingPage);

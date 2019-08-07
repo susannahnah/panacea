@@ -47,8 +47,8 @@ const useStyles = makeStyles({
 
 function CitiesPage(props) {
 
-  useEffect(() => {props.dispatch({type: "SEARCH_CITY", payload: ""})}, []);
-  useEffect(() => {props.dispatch({type: "CLEAR_INDIVIDUAL_CITY"})})
+  useEffect(() => { props.dispatch({ type: "SEARCH_CITY", payload: "" }) }, []);
+  useEffect(() => { props.dispatch({ type: "CLEAR_INDIVIDUAL_CITY" }) })
 
   // use classes names for styling
   const classes = useStyles();
@@ -64,14 +64,32 @@ function CitiesPage(props) {
     setSearchValues({ ...searchValues, [property]: event.target.value });
     switch (property) {
       case "city":
-        props.dispatch({ 
-          type: "SEARCH_CITY", 
-          payload: event.target.value 
+        props.dispatch({
+          type: "SEARCH_CITY",
+          payload: event.target.value
         });
         break;
       case "country":
-        props.dispatch({ 
+        props.dispatch({
           type: "SEARCH_CITY_BY_COUNTRY",
+          payload: event.target.value,
+        });
+        break;
+      default:
+        return;
+    }
+  };
+
+  // Fetch the cities associated to the search
+  const handleClickSearch = searchBy => event => {
+    switch (searchBy) {
+      case "city":
+        props.dispatch({ type: "SEARCH_CITY", payload: event.target.value });
+        break;
+      case "country":
+        console.log(searchValues);
+        props.dispatch({
+          type: "SEARCH_COUNTRY",
           payload: event.target.value,
         });
         break;
@@ -83,10 +101,18 @@ function CitiesPage(props) {
   return (
     <AdminLayout>
       <Grid container>
-        <Grid container item spacing={1} direction="row" alignItems="center">
+        <Grid container
+          item spacing={1}
+          direction="row"
+          alignItems="center"
+        >
           <Grid item>
-            <Link to="/cities/new">
-              <Button fullWidth className={classes.addButton} variant="contained">
+            <Link to="/cities/:cityName">
+              <Button
+                fullWidth
+                className={classes.addButton}
+                variant="contained"
+              >
                 Add New City
             </Button>
             </Link>
@@ -94,9 +120,7 @@ function CitiesPage(props) {
         </Grid>
         <Grid
           container
-          item
-          item
-          spacing={1}
+          item spacing={1}
           direction="row"
           alignItems="center"
         >
@@ -110,6 +134,15 @@ function CitiesPage(props) {
               variant="outlined"
               fullWidth
             />
+          </Grid>
+          <Grid item>
+            <Button
+              variant="contained"
+              fullWidth
+              className={classes.searchButton}
+              onClick={() => handleClickSearch("city")}>
+              Search
+            </Button>
           </Grid>
         </Grid>
       </Grid>
@@ -125,7 +158,7 @@ function CitiesPage(props) {
             fullWidth
           />
         </Grid>
-        {/* <Grid item>
+        <Grid item>
           <Button
             variant="contained"
             fullWidth
@@ -134,7 +167,7 @@ function CitiesPage(props) {
           >
             Search
           </Button>
-        </Grid> */}
+        </Grid>
       </Grid>
       <Grid container item spacing={1} direction="row" alignItems="center">
         <Grid container item>
