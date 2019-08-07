@@ -14,7 +14,7 @@ import {
   TableRow,
   TableCell
 } from "@material-ui/core";
-import { getThemeProps } from "@material-ui/styles";
+
 
 const useStyles = makeStyles({
   root: {
@@ -49,6 +49,7 @@ function CitiesPage(props) {
 
   useEffect(() => {props.dispatch({type: "SEARCH_CITY", payload: ""})}, []);
   useEffect(() => {props.dispatch({type: "CLEAR_INDIVIDUAL_CITY"})})
+  useEffect(() => {props.dispatch({type: "CLEAR_INDIVIDUAL_ORGANIZATION"})}, []);
 
   // use classes names for styling
   const classes = useStyles();
@@ -78,25 +79,6 @@ function CitiesPage(props) {
       default:
         return;
     }
-  };
-
-  // Fetch the cities associated to the search
-  // const handleClickSearch = (searchBy) => {
-  //   switch (searchBy) {
-  //     case "city":
-  //       props.dispatch({ type: "SEARCH_CITY", payload: searchValues.city });
-  //       break;
-  //     case "country":
-  //       console.log(searchValues);
-  //       props.dispatch({type: "SEARCH_CITY_BY_COUNTRY", payload: searchValues.country });
-  //       break;
-  //     default:
-  //       return;
-  //   }
-  // };
-
-  const handleClickAddNewCity = () => {
-    props.history.push("/cities/new");
   };
 
   return (
@@ -130,16 +112,6 @@ function CitiesPage(props) {
               fullWidth
             />
           </Grid>
-          {/* <Grid item>
-            <Button
-              variant="contained"
-              fullWidth
-              className={classes.searchButton}
-              onClick={() => handleClickSearch("city")}
-            >
-              Search
-            </Button>
-          </Grid> */}
         </Grid>
       </Grid>
       <Grid container item spacing={1} direction="row" alignItems="center">
@@ -154,16 +126,6 @@ function CitiesPage(props) {
             fullWidth
           />
         </Grid>
-        {/* <Grid item>
-          <Button
-            variant="contained"
-            fullWidth
-            className={classes.searchButton}
-            onClick={() => handleClickSearch("country")}
-          >
-            Search
-          </Button>
-        </Grid> */}
       </Grid>
       <Grid container item spacing={1} direction="row" alignItems="center">
         <Grid container item>
