@@ -1,39 +1,54 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import axios from 'axios';
+import Swal from 'sweetalert2';
 
 //Material-UI components
-import { TextField, Grid, Button, Select, MenuItem, OutlinedInput, InputLabel } from '@material-ui/core';
+import {
+  TextField,
+  Grid,
+  Button,
+  Select,
+  MenuItem,
+  OutlinedInput,
+  InputLabel
+} from '@material-ui/core';
 import AdminLayout from '../../layouts/AdminLayout/AdminLayout';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 
 class OrganizationFormPage extends Component {
+
+  individualOrg = this.props.reduxState.individualOrgReducer;
+
+
   state = {
     newOrg: {
-      name: '',
-      city_id: '',
-      type: '',
-      recommended: false,
-      twentyfour: false,
-      hours: '',
-      homeopathic_remedies: '',
-      labor_delivery: false,
-      childrens: false,
-      childrens_surgical: false,
-      adult: false,
-      adult_surgical: false,
-      medical_translators: false,
-      comments: '',
-      phone_numbers: '',
-      website_url: '',
-      lat: '',
-      long: '',
-      google_maps_link: '',
-      address: '',
+      city_id: this.individualOrg.city_id || '',
+      name: this.individualOrg.name || '',
+      type: this.individualOrg.type || '',
+      recommended: this.individualOrg.recommended || false,
+      twentyfour: this.individualOrg.twentyFourfalse,
+      hours: this.individualOrg.hours || '',
+      homeopathic_remedies: this.individualOrg.homeopathic_remedies || '',
+      labor_delivery: this.individualOrg.labor_deliver || false,
+      childrens: this.individualOrg.childrens || false,
+      childrens_surgical: this.individualOrg.childrens_surgial || false,
+      adult: this.individualOrg.adult || false,
+      adult_surgical: this.individualOrg.adult_surgical || false,
+      medical_translators: this.individualOrg.medical_translators || false,
+      comments: this.individualOrg.comments || '',
+      phone_numbers: this.individualOrg.phone_numbers || '',
+      website_url: this.individualOrg.website_url || '',
+      lat: this.individualOrg.lat || '',
+      long: this.individualOrg.long || '',
+      google_maps_link: this.individualOrg.google_maps_link || '',
+      address: this.individualOrg.address || '',
     }
   }
 
+  //handles input changes for org info 
   handleNewChange = (propertyName) => (event) => {
     console.log('change occured', event);
     this.setState({
@@ -44,6 +59,7 @@ class OrganizationFormPage extends Component {
     });
   };
 
+  //handle input change for check boxes for orgs
   handleNewCheckBoxChange = (propertyName) => (event) => {
     console.log('checkbox checked', event);
     this.setState({
@@ -54,13 +70,16 @@ class OrganizationFormPage extends Component {
     })
 
   }
-  
-  // NEEDS EDIT SAGA AND FIX PUT ROUTE
+
+  // when save button is clicked, update org info in the database
+  // first checks that the user has at least given a org name
+  // if not, alerts user to leave a org name
+  // if successful, alerts user that changes have been saved
   saveOrg = event => {
     event.preventDefault();
-    if( this.state.newOrg.name !== '' && this.state.newOrg.city_id !== ''){
-      this.props.dispatch({ 
-        type: 'EDIT_ORG', 
+    if (this.state.newOrg.name !== '' && this.state.newOrg.city_id !== '') {
+      this.props.dispatch({
+        type: 'EDIT_ORG',
         payload: {
           ...this.state.newOrg,
           id: this.props.reduxState.individualOrgReducer.id,
@@ -73,33 +92,33 @@ class OrganizationFormPage extends Component {
     }
   };
 
-  // CHANGE TO ORG
-  // on click of 'delete city', confirm user would like to delete, then delete
-  // deleteCity = event => {
-  //   // confirm user would like to delete the city
-  //   Swal.fire({
-  //     title: 'Are you sure?',
-  //     text: "This will delete the city and all it's information from the database",
-  //     type: 'warning',
-  //     showCancelButton: true,
-  //     confirmButtonColor: '#3085d6',
-  //     cancelButtonColor: '#d33',
-  //     confirmButtonText: `I'm sure.`
-  //   }).then((result) => {
-  //     if (result.value) {
-  //       // send confirmation message
-  //       Swal.fire(
-  //         'Deleted!',
-  //         'City removed from database.',
-  //         'success'
-  //       )
-  //       // delete city
-  //       this.willDelete();
-  //       // navigate to cities page
-  //       this.props.history.push('/cities');
-  //     }
-  //   });
-  // }
+
+  // on click of 'delete org', confirm user would like to delete, then delete
+  deleteOrg = event => {
+    // confirm user would like to delete the city
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "This will delete the organization and all it's information from the database",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: `I'm sure.`
+    }).then((result) => {
+      if (result.value) {
+        // send confirmation message
+        Swal.fire(
+          'Deleted!',
+          'Organization removed from database.',
+          'success'
+        )
+        // delete org
+        this.willDelete();
+        // navigate to og page
+        this.props.history.push('/organizations');
+      }
+    });
+  }
 
   componentDidMount() {
     // grab orgName and id params from url
@@ -109,7 +128,7 @@ class OrganizationFormPage extends Component {
     if (orgName === 'new') {
       console.log(orgName);
       // if new, create new org, set individualOrgReducer to new city
-      this.props.dispatch({ 
+      this.props.dispatch({
         type: 'NEW_ORG',
         payload: this.state.newOrg,
       });
@@ -117,8 +136,23 @@ class OrganizationFormPage extends Component {
       // fetch org by id
       // axios get org by id, set state
       console.log(orgName);
+      // else, select org by id, set individualOrgReducer to existing org
+      this.props.dispatch({
+        type: 'SELECT_ORG',
+        payload: id
+      });
+      // directly set state to this city
+      axios.get(`/api/organizations/organization/${id}`)
+        .then(({ data }) => {
+          console.log(data);
+          this.setState({
+            newCity: {
+              ...data,
+            }
+          })
+        })
     }
-    this.props.dispatch({ type: 'FETCH_CITIES' })
+    this.props.dispatch({ type: 'FETCH_ORGS' })
   }
 
   render() {
@@ -323,7 +357,7 @@ class OrganizationFormPage extends Component {
                 />
               </Grid>
             </Grid>
-            
+
             <Grid item xs={12}>
               <TextField
                 id="phone_number"
@@ -334,7 +368,7 @@ class OrganizationFormPage extends Component {
                 value={this.state.newOrg.phone_number}
                 onChange={this.handleNewChange('phone_number')} />
             </Grid>
-            
+
             <Grid className="inputFields" item xs={12}>
               <TextField
                 rows="8"
@@ -364,36 +398,36 @@ class OrganizationFormPage extends Component {
               }}>
                 Location
             </h2>
-            <Grid className="inputFields" item xs={12}>
-              <TextField
-                rows="5"
-                multiline
-                label="Address"
-                fullWidth margin="normal"
-                variant="outlined"
-                type='type'
-                value={this.state.newOrg.address}
-                onChange={this.handleNewChange('address')} />
+              <Grid className="inputFields" item xs={12}>
+                <TextField
+                  rows="5"
+                  multiline
+                  label="Address"
+                  fullWidth margin="normal"
+                  variant="outlined"
+                  type='type'
+                  value={this.state.newOrg.address}
+                  onChange={this.handleNewChange('address')} />
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  id="lat"
+                  label="Latitude"
+                  fullWidth margin="normal"
+                  variant="outlined"
+                  value={this.state.newOrg.lat}
+                  onChange={this.handleNewChange('lat')} />
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  id="long"
+                  label="Longitude"
+                  fullWidth margin="normal"
+                  variant="outlined"
+                  value={this.state.newOrg.long}
+                  onChange={this.handleNewChange('long')} />
+              </Grid>
             </Grid>
-            <Grid item xs={6}>
-              <TextField
-                id="lat"
-                label="Latitude"
-                fullWidth margin="normal" 
-                variant="outlined"
-                value={this.state.newOrg.lat}
-                onChange={this.handleNewChange('lat')} />
-            </Grid>
-            <Grid item xs={6}>
-              <TextField
-                id="long"
-                label="Longitude"
-                fullWidth margin="normal" 
-                variant="outlined"
-                value={this.state.newOrg.long}
-                onChange={this.handleNewChange('long')} />
-            </Grid>
-          </Grid>
             <Grid item xs={12}>
               <TextField
                 id="google_maps_link"
@@ -403,38 +437,38 @@ class OrganizationFormPage extends Component {
                 value={this.state.newOrg.google_maps_link}
                 onChange={this.handleNewChange('google_maps_link')} />
             </Grid>
-            <Grid className="inputFields"  item xs={12}>
+            <Grid className="inputFields" item xs={12}>
               <h2 style={{
                 marginBottom: 0,
                 marginTop: `4vw`
               }}>
                 Additional Information
-              </h2> 
-            <Grid item xs={12}>
-              <TextField
-                rows="12"
-                id="homeopathic_remedies"
-                label="Homeopathic Remedies"
-                variant="outlined"
-                multiline
-                fullWidth margin="normal"
-                value={this.state.newOrg.homeopathic_remedies}
-                onChange={this.handleNewChange('homeopathic_remedies')} />
+              </h2>
+              <Grid item xs={12}>
+                <TextField
+                  rows="12"
+                  id="homeopathic_remedies"
+                  label="Homeopathic Remedies"
+                  variant="outlined"
+                  multiline
+                  fullWidth margin="normal"
+                  value={this.state.newOrg.homeopathic_remedies}
+                  onChange={this.handleNewChange('homeopathic_remedies')} />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  id="comments"
+                  rows="12"
+                  label="Additional Comments"
+                  multiline
+                  fullWidth margin="normal"
+                  variant="outlined"
+                  value={this.state.newOrg.comments}
+                  onChange={this.handleNewChange('comments')} />
+              </Grid>
             </Grid>
-            <Grid item xs={12}>
-            <TextField
-              id="comments"
-              rows="12"
-              label="Additional Comments"
-              multiline
-              fullWidth margin="normal"              
-              variant="outlined"
-              value={this.state.newOrg.comments}
-              onChange={this.handleNewChange('comments')} />
-            </Grid>
-            </Grid>
-            <Grid container item xs={12} 
-              style={{margin: `5%`, marginBottom: `20vh`}}>
+            <Grid container item xs={12}
+              style={{ margin: `5%`, marginBottom: `20vh` }}>
               <Grid item xs={6}>
                 <Button type='submit' value='Save' style={{ width: "24vw" }} variant="contained" color="inherent">Save</Button>
               </Grid>
