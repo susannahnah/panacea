@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import UserLayout from '../../layouts/UserLayout/UserLayout';
-import { Paper, InputBase, Typography, IconButton, Grid, Card, CardMedia } from '@material-ui/core';
+import { Paper, Typography, IconButton, Grid, Card, CardMedia } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import image from './panaceaFamilyImage.jpg';
-import axios from 'axios';
-import AutoComplete from './AutoComplete';
+import SearchBox from './SearchBox';
 
 class UserLandingPage extends Component {
 
@@ -12,18 +11,6 @@ class UserLandingPage extends Component {
     topCitySearch: '',
     bottomCitySearch: '',
     cities: [],
-  }
-
-  componentDidMount() {
-    axios.get('/api/cities')
-      .then(({ data }) => {
-        this.setState({
-          cities: data,
-        });
-      })
-      .catch((error) => {
-        console.log('Error with get cities: ', error);
-      })
   }
 
   handleChangeFor = (prop) => (e) => {
@@ -42,9 +29,7 @@ class UserLandingPage extends Component {
             <IconButton style={{ width: `15%` }}>
               <SearchIcon />
             </IconButton>
-            <AutoComplete
-              suggestions={this.state.cities}
-            />
+            <SearchBox />
           </Paper>
         </Grid>
         <Grid item xs={12}>
@@ -79,9 +64,7 @@ class UserLandingPage extends Component {
             <IconButton style={{ width: `15%` }}>
               <SearchIcon />
             </IconButton>
-            <AutoComplete
-              suggestions={this.state.cities}
-            />
+            <SearchBox />
           </Paper>
         </Grid>
       </UserLayout>

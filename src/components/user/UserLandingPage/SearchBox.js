@@ -1,69 +1,50 @@
 import React, { Component } from "react";
-import './AutoComplete.css';
-import { Link, Redirect } from 'react-router-dom';
+import './SearchBox.css';
+import { Link } from 'react-router-dom';
 import { Input } from '@material-ui/core';
+import axios from 'axios';
 
-class Autocomplete extends Component {
+class SearchBox extends Component {
 
     state = {
-        activeSuggestion: 0,
+        cities: [],
         filteredSuggestions: [],
         showSuggestions: false,
         userInput: ""
     }
 
+    componentDidMount() {
+        axios.get('/api/cities')
+          .then(({ data }) => {
+            this.setState({
+              cities: data,
+            });
+          })
+          .catch((error) => {
+            console.log('Error with get cities: ', error);
+          })
+      }
+
     onChange = e => {
-        const { suggestions } = this.props;
+        const { cities } = this.state;
         const userInput = e.currentTarget.value;
 
-        const filteredSuggestions = suggestions.filter(
+        const filteredSuggestions = cities.filter(
             suggestion =>
                 suggestion.name.toLowerCase().indexOf(userInput.toLowerCase()) > -1
         );
 
         this.setState({
-            activeSuggestion: 0,
             filteredSuggestions,
             showSuggestions: true,
             userInput: e.currentTarget.value
         });
     };
 
-    onKeyDown = e => {
-        const { activeSuggestion, filteredSuggestions } = this.state;
-
-        if (e.keyCode === 13) {
-            return (
-                <Redirect
-                    to={{
-                        pathname: `/city/${filteredSuggestions[activeSuggestion].name}`,
-                        id: filteredSuggestions[activeSuggestion].id,
-                    }}
-                />
-            )
-        }
-
-        else if (e.keyCode === 38) {
-            if (activeSuggestion === 0) {
-                return;
-            }
-            this.setState({ activeSuggestion: activeSuggestion - 1 });
-        }
-
-        else if (e.keyCode === 40) {
-            if (activeSuggestion - 1 === filteredSuggestions.length) {
-                return;
-            }
-            this.setState({ activeSuggestion: activeSuggestion + 1 });
-        }
-    };
-
     render() {
         const {
             onChange,
-            onKeyDown,
             state: {
-                activeSuggestion,
                 filteredSuggestions,
                 showSuggestions,
                 userInput
@@ -77,12 +58,6 @@ class Autocomplete extends Component {
                 suggestionsListComponent = (
                     <ul className="suggestions">
                         {filteredSuggestions.map((suggestion, i) => {
-                            let className;
-
-                            if (i === activeSuggestion) {
-                                className = "suggestion-active";
-                            }
-
                             return (
                                 <li key={i}>
                                     <Link
@@ -112,7 +87,6 @@ class Autocomplete extends Component {
                 <Input
                     type="text"
                     onChange={onChange}
-                    onKeyDown={onKeyDown}
                     placeholder="Where are you traveling?"
                     style={{ width: `85%` }}
                     value={userInput}
@@ -123,4 +97,4 @@ class Autocomplete extends Component {
     }
 }
 
-export default Autocomplete;
+export default SearchBox;
