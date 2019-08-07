@@ -108,7 +108,7 @@ function CitiesPage(props) {
           alignItems="center"
         >
           <Grid item>
-            <Link to="/cities/:cityName">
+            <Link to="/cities/new">
               <Button
                 fullWidth
                 className={classes.addButton}

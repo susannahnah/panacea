@@ -29,54 +29,13 @@ const useStyles = makeStyles({
   }
 });
 
-  componentDidMount() {
-    this.props.dispatch({type: "CLEAR_INDIVIDUAL_CITY"});
-    this.props.dispatch({type: "CLEAR_MEDICATIONS"});
-  }
-
-// class AdminLandingPage extends Component {
-
-//   state = {
-//     city: '',
-//     organization: '',
-//   }
-
-//   clickAddCity = (e) => {
-//     this.props.history.push('/cities/new');
-//   }
-
-//   clickAddOrganization = (e) => {
-//     this.props.history.push('/organizations/new');
-//   }
-
-//   clickSearchCity = (e) => {
-//     this.props.dispatch({ type: 'SEARCH_CITY', payload: this.state.city });
-//     this.props.history.push('/cities');
-//   }
-
-//   clickSearchOrganization = () => {
-//     this.props.dispatch({ type: 'SEARCH_ORGANIZATION', payload: this.state.organization });
-//     this.props.history.push('/organizations');
-//   }
-
-//   inputSearchCity = (e) => {
-//     this.setState({
-//       city: e.target.value,
-//     });
-//   }
-
-//   inputSearchOrganization = (e) => {
-//     this.setState({
-//       organization: e.target.value,
-//     });
-//   }
-
-// render() {}
-
 function AdminLandingPage(props) {
 
   useEffect(() => { props.dispatch({ type: "SEARCH_CITY", payload: "" }) }, []);
   useEffect(() => { props.dispatch({ type: "SEARCH_ORGANIZATION", payload: "" }) }, []);
+  useEffect(() => { props.dispatch({ type: "CLEAR_INDIVIDUAL_CITY"})}, []);
+  useEffect(() => { props.dispatch({ type: "CLEAR_MEDICATIONS"})}, []);
+  useEffect(() => { props.dispatch({ type: "CLEAR_INDIVIDUAL_ORGANIZATION"})}, []);
 
 
   // use classes names for styling
@@ -124,7 +83,7 @@ function AdminLandingPage(props) {
           <Grid item
             xs={6}
           >
-            <Link to="/cities/:cityName">
+            <Link to="/cities/new">
               <Button
                 fullWidth
                 className={classes.addButton}
@@ -134,7 +93,7 @@ function AdminLandingPage(props) {
             </Link>
           </Grid>
           <Grid item xs={6}>
-            <Link to="/organizations/:orgName/:id">
+            <Link to="/organizations/new">
               <Button
                 fullWidth
                 className={classes.addButton}
