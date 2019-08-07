@@ -69,8 +69,10 @@ router.post('/', rejectUnauthenticated, (req, res) => {
         "WHO_link",
         "CDC_link",
         "google_translate_link",
-        "local_resources"
-    ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) 
+        "local_resources",
+        "lat",
+        "long"
+    ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17) 
     RETURNING "id"`;
     const queryValues = [
         newCity.country_id,
@@ -87,7 +89,9 @@ router.post('/', rejectUnauthenticated, (req, res) => {
         newCity.WHO_link,
         newCity.CDC_link,
         newCity.google_translate_link,
-        newCity.local_resources
+        newCity.local_resources,
+        newCity.lat,
+        newCity.long
     ];
     pool.query(queryText, queryValues)
         .then((result) => {
@@ -114,7 +118,11 @@ router.put('/', rejectUnauthenticated, (req, res) => {
     pool.query(`UPDATE "cities"
     SET 
     "country_id"=$1,
+<<<<<<< HEAD
+    "name"=$2,
+=======
     "name"=$2, 
+>>>>>>> master
     "overview"=$3, 
     "health_risks"=$4,
     "ambulance"=$5,
@@ -127,8 +135,10 @@ router.put('/', rejectUnauthenticated, (req, res) => {
     "WHO_link"=$12,
     "CDC_link"=$13,
     "google_translate_link"=$14,
-    "local_resources"=$15
-    WHERE "id"=$16;`,
+    "local_resources"=$15,
+    "lat"=$16,
+    "long"=$17
+    WHERE "id"=$18;`,
         [
             updatedCity.country_id,
             updatedCity.name,
@@ -145,6 +155,8 @@ router.put('/', rejectUnauthenticated, (req, res) => {
             updatedCity.CDC_link,
             updatedCity.google_translate_link,
             updatedCity.local_resources,
+            updatedCity.lat,
+            updatedCity.long,
             updatedCity.id
         ]
     )
