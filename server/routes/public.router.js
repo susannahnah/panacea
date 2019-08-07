@@ -5,7 +5,7 @@ const pool = require('../modules/pool');
 router.get('/map', async (req, res, next) => {
     try {
         const selectQuery = `SELECT "id", "created_at", "city_id", "name", "type", "recommended", 
-        "24_hour", "hours", "homeopathic_remedies", "labor_delivery", "childrens", "childrens_surgical", 
+        "twentyfour", "hours", "homeopathic_remedies", "labor_delivery", "childrens", "childrens_surgical", 
         "adult", "adult_surgical", "medical_translators", "comments", "phone_number", "website_url", 
         "lat", "long" as "lng", "google_maps_link" 
         FROM "public"."organizations"
