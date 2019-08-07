@@ -82,15 +82,14 @@ function* editCitySaga(action) {
     // yield put({ type: 'SEARCH_CITY'})
 }
 
-//DELETE specific city
+// DELETE specific city
 function* deleteCitySaga(action) {
-    console.log('deleteCitySaga hit')
     try {
       yield axios.delete(`/api/cities/${action.payload}`)
-      yield put({type: 'SEARCH_CITY'})
+      yield put({type: 'SEARCH_CITY', payload: "" });
     } catch (error) {
-      console.log(error);
-      alert('Unable to delete item');
+      console.log(`Error with deleteCitySaga:`, error);
+      alert('There was a problem delete the city from the database.');
     }
 }
 

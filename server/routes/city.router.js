@@ -158,7 +158,7 @@ router.put('/', rejectUnauthenticated, (req, res) => {
 });
 
 
-//DELETE city 
+// DELETE city 
 router.delete('/:id', rejectUnauthenticated, (req, res) => {
     const queryText = 'DELETE FROM "cities" WHERE id=$1';
     pool.query(queryText, [req.params.id])

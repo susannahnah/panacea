@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 // Material-UI components
 import { 
@@ -73,8 +74,9 @@ class CityFormPage extends Component {
     })
   }
 
-  // if all medication inputs are fill out, 
-  // will add a new medication to redux state until ready to post to database
+  // on add_circle click, will post a new medication to the database
+  // first checks if inputs are filled
+  // if not, alerts the user
   addNewMedication = () => {
 
     const generic = this.state.newMedication.generic_name_us;
@@ -101,7 +103,7 @@ class CityFormPage extends Component {
     }
   }
 
-  // will grab array of medication from redux state, alter, then push new array to redux state
+  // when delete button is clicked, will delete a medication from the database
   deleteMedication = (id) => (event) => {
     this.props.dispatch({
       type: 'DELETE_MEDICATION',
@@ -109,8 +111,10 @@ class CityFormPage extends Component {
     });
   }
 
-  // saves updates to the database
-  // alert (will be sweetalert) user that changes have been saved
+  // when save button is clicked, update city info in the database
+  // first checks that the user has at least given a city name
+  // if not, alerts user to leave a city name
+  // if successful, alerts user that changes have been saved
   saveCity = event => {
     event.preventDefault();
     if( this.state.newCity.name !== '' ){
@@ -128,11 +132,47 @@ class CityFormPage extends Component {
     }
   }
 
+  // on click of 'delete city', confirm user would like to delete, then delete
+  deleteCity = event => {
+    // confirm user would like to delete the city
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "This will delete the city and all it's information from the database",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: `I'm sure.`
+    }).then((result) => {
+      if (result.value) {
+        // send confirmation message
+        Swal.fire(
+          'Deleted!',
+          'City removed from database.',
+          'success'
+        )
+        // delete city
+        this.willDelete();
+        // navigate to cities page
+        this.props.history.push('/cities');
+      }
+    });
+  }
+
+  // function to delete a city from the database
+  willDelete = () => {
+    this.props.dispatch({ 
+      type: 'DELETE_CITY',
+      payload: this.props.reduxState.individualCityReducer.id,
+    })
+  }
+
   componentDidMount() {
-    // check url param "cityName"
+    // grab cityName param from url
     const { match: { params: { cityName } } } = this.props; // this is the same way as writing const params = this.props.match.params.cityName;
+    // check if the form should be new or load info from an existing city
     if (cityName === 'new') {
-      // create a new city
+      // if new, create new city, set individualCityReducer to new city
       this.props.dispatch({
         type: 'NEW_CITY',
         payload: {
@@ -140,12 +180,12 @@ class CityFormPage extends Component {
         }
       });
     } else {
-      // select city by names
+      // else, select city by cityName, set individualCityReducer to existing city
       this.props.dispatch({ 
         type: 'SELECT_CITY_BY_NAME', 
         payload: cityName 
       });
-      // directly set state
+      // directly set state to this city
       axios.get(`/api/cities/city/${cityName}`)
       .then( ({ data }) => {
         console.log(data);
@@ -310,17 +350,6 @@ class CityFormPage extends Component {
                         );
                       })
                     }
-                    {/* { this.props.reduxState.newMedicationsReducer.map((med, i) => {
-                        return (
-                          <TableRow key={i}>
-                            <TableCell>{med.generic_name_us}</TableCell>
-                            <TableCell>{med.brand_name_us}</TableCell>
-                            <TableCell>{med.brand_name_translated}</TableCell>
-                            
-                          </TableRow>
-                        );
-                      })
-                    } */}
                   </TableBody>
                 </Table>
                 <Grid item xs={4}>
@@ -438,8 +467,11 @@ class CityFormPage extends Component {
             </Grid>
             <Grid container item xs={12} 
               style={{margin: `5%`, marginBottom: `20vh`}}>
-              <Grid item xs={4}>
-                <Button type='submit' value='Save' style={{ width: "24vw" }} variant="contained" color="inherent">Save</Button>
+              <Grid item xs={6}>
+                <Button type='submit' value='Save' style={{ width: "24vw" }} variant="contained" color="inherit">Save</Button>
+              </Grid>
+              <Grid item xs={6}>
+                <Button onClick={this.deleteCity} value='Delete City' style={{ width: "24vw" }} color="secondary">Delete City</Button>
               </Grid>
             </Grid>
           </Grid>
