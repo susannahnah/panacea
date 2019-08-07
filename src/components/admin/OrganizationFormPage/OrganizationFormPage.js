@@ -39,7 +39,7 @@ class OrganizationFormPage extends Component {
       adult_surgical: this.individualOrg.adult_surgical || false,
       medical_translators: this.individualOrg.medical_translators || false,
       comments: this.individualOrg.comments || '',
-      phone_numbers: this.individualOrg.phone_numbers || '',
+      phone_number: this.individualOrg.phone_number || '',
       website_url: this.individualOrg.website_url || '',
       lat: this.individualOrg.lat || '',
       long: this.individualOrg.long || '',
