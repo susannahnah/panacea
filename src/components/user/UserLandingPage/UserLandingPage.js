@@ -16,12 +16,12 @@ class UserLandingPage extends Component {
 
   componentDidMount() {
     axios.get('/api/cities')
-      .then(({data})=>{
+      .then(({ data }) => {
         this.setState({
           cities: data,
         });
       })
-      .catch((error)=>{
+      .catch((error) => {
         console.log('Error with get cities: ', error);
       })
   }
@@ -42,9 +42,9 @@ class UserLandingPage extends Component {
             <IconButton style={{ width: `15%` }}>
               <SearchIcon />
             </IconButton>
-            <AutoComplete 
-              suggestions={this.state.cities}
-            />
+              <AutoComplete
+                suggestions={this.state.cities}
+              />
             {/* <InputBase
               style={{ width: `85%` }}
               value={this.state.citySearch}
@@ -84,11 +84,14 @@ class UserLandingPage extends Component {
             <IconButton style={{ width: `15%` }}>
               <SearchIcon />
             </IconButton>
-            <InputBase
+            <AutoComplete
+                suggestions={this.state.cities}
+              />
+            {/* <InputBase
               style={{ width: `80%` }}
               value={this.state.citySearch}
               placeholder="Where are you traveling?"
-              onChange={this.handleChangeFor('bottomCitySearch')} />
+              onChange={this.handleChangeFor('bottomCitySearch')} /> */}
           </Paper>
         </Grid>
       </UserLayout>
