@@ -1,4 +1,8 @@
-.info-window {
+.hidden {
+    display: none;
+}
+
+.show {
     position: absolute;
     top: -162px;
     left: -18px;
@@ -9,9 +13,10 @@
     z-index: 999980;
     padding: 5px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin: 0;
 }
 
-.info-window:after {
+.show:after {
     content: '';
     position: absolute;
     bottom: 0;

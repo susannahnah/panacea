@@ -1,75 +1,118 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Marker.css';
 
-const InfoWindow = (props) => {
-    return (
-        <div className="info-window">
-            <h2 style={{ margin: '0' }}>{props.name}</h2>
-            <h4 style={{ margin: '0' }}>info</h4>
-        </div>
-    )
-}
+function Marker(props) {
 
-const Marker = (props) => {
+    const [infoWindow, setInfoWindow] = useState(false);
+
+    const showInfoWindow = () => {
+        setInfoWindow(!infoWindow);
+    }
+
     switch (props.type) {
         case 'Hospital':
             return (
                 <>
-                    <div className="pin bounce">
+                    <div onClick={showInfoWindow} className="pin bounce">
                         <span className="type">H</span>
                     </div>
-                    <InfoWindow {...props} />
+                    {
+                        infoWindow
+                            ?
+                            <InfoWindow visibility="show" {...props} />
+                            :
+                            <InfoWindow visibility="hidden" {...props} />
+                    }
                 </>
             )
         case 'Clinic':
             return (
                 <>
-                    <div className="pin bounce">
+                    <div onClick={showInfoWindow} className="pin bounce">
                         <span className="type">C</span>
                     </div>
-                    <InfoWindow {...props} />
+                    {
+                        infoWindow
+                            ?
+                            <InfoWindow visibility="show" {...props} />
+                            :
+                            <InfoWindow visibility="hidden" {...props} />
+                    }
                 </>
             )
         case 'Urgent Care':
             return (
                 <>
-                    <div className="pin bounce">
+                    <div onClick={showInfoWindow} className="pin bounce">
                         <span className="type">U</span>
                     </div>
-                    <InfoWindow {...props} />
+                    {
+                        infoWindow
+                            ?
+                            <InfoWindow visibility="show" {...props} />
+                            :
+                            <InfoWindow visibility="hidden" {...props} />
+                    }
                 </>
 
             )
         case 'Laboratory':
             return (
                 <>
-                    <div className="pin bounce">
+                    <div onClick={showInfoWindow} className="pin bounce">
                         <span className="type">L</span>
                     </div>
-                    <InfoWindow {...props} />
+                    {
+                        infoWindow
+                            ?
+                            <InfoWindow visibility="show" {...props} />
+                            :
+                            <InfoWindow visibility="hidden" {...props} />
+                    }
                 </>
 
             )
         case 'Home Visits':
             return (
                 <>
-                    <div className="pin bounce">
+                    <div onClick={showInfoWindow} className="pin bounce">
                         <span className="type">Hv</span>
                     </div>
-                    <InfoWindow {...props} />
+                    {
+                        infoWindow
+                            ?
+                            <InfoWindow visibility="show" {...props} />
+                            :
+                            <InfoWindow visibility="hidden" {...props} />
+                    }
                 </>
 
             )
         case 'Pharmacy':
             return (
                 <>
-                    <div className="pin bounce">
+                    <div onClick={showInfoWindow} className="pin bounce">
                         <span className="type">Ph</span>
                     </div>
-                    <InfoWindow {...props} />
+                    {
+                        infoWindow
+                            ?
+                            <InfoWindow visibility="show" {...props} />
+                            :
+                            <InfoWindow visibility="hidden" {...props} />
+                    }
                 </>
             )
     }
 };
+
+const InfoWindow = (props) => {
+    return (
+        <div className={props.visibility}>
+            <h2 >{props.name}</h2>
+            <h4 >info</h4>
+        </div>
+    )
+}
 
 export default Marker;
