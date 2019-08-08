@@ -1,5 +1,5 @@
 .suggestions {
-    border: 1px solid #999;
+    border: 1px solid #6AA4DA;
     border-top-width: 0;
     list-style: none;
     margin-top: 0;
@@ -22,5 +22,5 @@
 }
 
 .suggestions li:not(:last-of-type) {
-    border-bottom: 1px solid #999;
+    border-bottom: 1px solid #6AA4DA;
 }

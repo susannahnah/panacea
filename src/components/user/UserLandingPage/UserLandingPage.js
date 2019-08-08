@@ -33,13 +33,12 @@ class UserLandingPage extends Component {
         </Grid>
         <Grid item xs={12}>
           <Paper style={{ backgroundColor: `#F8F9FA`, padding: `10% 5%` }} square={true}>
-            <Typography style={{ marginBottom: `10%` }}
+            <Typography style={{ marginBottom: `4%` }}
               variant="h5" component="h5">
-              Health and Wellness Resources
-              for the Explorer.
+              Find healthcare you can trust wherever you are.
               </Typography>
             <Typography component="p">
-              As heath care needs and locations change, we will help you quickly identify resources to support you in your journey, no matter where you are.
+              As your needs or your location changes, we are here as a trusted resource to help lighten your load with quick and easy access to local information to support you in your journey, no matter where you are.
               </Typography>
           </Paper>
         </Grid>
@@ -56,14 +55,14 @@ class UserLandingPage extends Component {
         </Grid>
         <Grid item xs={12}>
           <Paper style={{ backgroundColor: `#BBE2FC`, padding: `10% 5%` }} square={true}>
-            <Typography style={{ marginBottom: `10%` }}
+            {/* <Typography style={{ marginBottom: `10%` }}
               variant="h5" component="h5">
               New to Town?
               </Typography>
             <IconButton style={{ width: `15%` }}>
               <SearchIcon />
             </IconButton>
-            <SearchBox />
+            <SearchBox /> */}
           </Paper>
         </Grid>
       </UserLayout>

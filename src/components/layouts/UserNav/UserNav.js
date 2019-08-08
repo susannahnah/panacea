@@ -51,7 +51,7 @@ class UserNav extends Component {
     return (
       <div className="Nav">
         <Link to="/" underline='none'>
-          <img src={logo} alt="Panacea Logo" style={{padding: `1px 3px 0 10px`}}/>
+          <img src={logo} alt="Panacea Logo" style={{padding: `5px 3px 0 10px`}}/>
           <h3 className="Title">Panacea</h3>
         </Link>
         <IconButton 
