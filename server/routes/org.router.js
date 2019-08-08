@@ -1,3 +1,4 @@
+// server/routes/org.router.js
 const express = require('express');
 const pool = require('../modules/pool');
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
@@ -37,12 +38,11 @@ router.get('/:id', (req, res) => {
 router.post('/', rejectUnauthenticated, (req, res) => {
     const newOrg = req.body;
 
-
-    if(newOrg.city_id === ''){
+    if (newOrg.city_id === '') {
         newOrg.city_id = null;
     }
-    if(!newOrg.lat){newOrg.lat = null}
-    if(!newOrg.long){newOrg.long = null}
+    if (!newOrg.lat) { newOrg.lat = null }
+    if (!newOrg.long) { newOrg.long = null }
 
     const queryText = `INSERT INTO "organizations"(
     "city_id",
@@ -69,7 +69,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
              $12, $13, $14, $15, $16, $17, $18, $19, $20) 
     RETURNING "id"`;
     const queryValues = [
-        newOrg.city_id, 
+        newOrg.city_id,
         newOrg.name,
         newOrg.type,
         newOrg.recommend,
@@ -105,12 +105,20 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 //UPDATE org
 router.put('/', rejectUnauthenticated, (req, res) => {
     console.log('testtest', req.body);
-    const updateCity = req.body;
+
+    let updatedOrg = req.body;
+
+    if (updatedOrg.city_id === '') {
+        updatedOrg.city_id = null;
+    }
+    if(!updatedOrg.lat){updatedOrg.lat = null}
+    if(!updatedOrg.long){updatedOrg.long = null}
+    
     pool.query(`UPDATE "organizations"
     SET 
     "city_id"=$1,
     "name"=$2,
-    "type"=#3,
+    "type"=$3,
     "recommended"=$4,
     "twentyfour"=$5,
     "hours"=$6,
@@ -130,27 +138,27 @@ router.put('/', rejectUnauthenticated, (req, res) => {
     "google_maps_link"=$20
     WHERE "id"=$21;`,
         [
-            newOrg.city_id, 
-            newOrg.name,
-            newOrg.type,
-            newOrg.recommend,
-            newOrg.twentyfour,
-            newOrg.hours,
-            newOrg.homeopathic_remedies,
-            newOrg.labor_delivery,
-            newOrg.childrens,
-            newOrg.childrens_surgery,
-            newOrg.adult,
-            newOrg.adult_surgery,
-            newOrg.medical_translators,
-            newOrg.comments,
-            newOrg.phone_number,
-            newOrg.org_address,
-            newOrg.website_url,
-            newOrg.lat,
-            newOrg.long,
-            newOrg.google_maps_link,
-            newOrg.id
+            updatedOrg.city_id,
+            updatedOrg.name,
+            updatedOrg.type,
+            updatedOrg.recommended,
+            updatedOrg.twentyfour,
+            updatedOrg.hours,
+            updatedOrg.homeopathic_remedies,
+            updatedOrg.labor_delivery,
+            updatedOrg.childrens,
+            updatedOrg.childrens_surgical,
+            updatedOrg.adult,
+            updatedOrg.adult_surgical,
+            updatedOrg.medical_translators,
+            updatedOrg.comments,
+            updatedOrg.phone_number,
+            updatedOrg.org_address,
+            updatedOrg.website_url,
+            updatedOrg.lat,
+            updatedOrg.long,
+            updatedOrg.google_maps_link,
+            updatedOrg.id
         ]
     )
         .then((response) => {

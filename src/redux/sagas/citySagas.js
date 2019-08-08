@@ -1,3 +1,4 @@
+// src/redux/sagas/citySagas.js
 import axios from 'axios';
 import { put, takeEvery, all } from 'redux-saga/effects';
 
@@ -35,28 +36,6 @@ function* selectCityByNameSaga(action) {
     }
 }
 
-// POST new city function
-// will post a new city object to the database 
-// then will post each medication to the database with the newCityId
-function* postCitySaga(action) {
-    try {
-        const cityResponse = yield axios.post('/api/cities', action.payload.city);
-        yield all( action.payload.medications.map( med => {
-            return (
-                axios.post('/api/medications', {
-                    city_id: cityResponse.data.id,
-                    generic_name_us: med.generic_name_us,
-                    brand_name_us: med.brand_name_us,
-                    brand_name_translated: med.brand_name_translated,
-                })
-            ); // end axios post for one medication
-        })); // end yield all
-        yield put({ type: 'CLEAR_MEDICATIONS' });
-        yield put({ type: 'SEARCH_CITY', payload: "" });
-    } catch (error) {
-        console.log('Error with postCitySaga:', error);
-    }
-}
 
 // POST new city function
 // will post a new city object to the database
@@ -71,6 +50,7 @@ function* postNewCitySaga(action) {
         console.log(`Error with postNewCitySaga:`, error);
     }
 }
+
 
 // UPDATE specific city
 // refresh individual city
@@ -89,7 +69,7 @@ function* deleteCitySaga(action) {
       yield put({type: 'SEARCH_CITY', payload: "" });
     } catch (error) {
       console.log(`Error with deleteCitySaga:`, error);
-      alert('There was a problem delete the city from the database.');
+      alert('There was a problem deleting the city from the database.');
     }
 }
 
@@ -99,7 +79,6 @@ function* citySagas() {
     yield takeEvery('SELECT_CITY', selectCityByIdSaga)
     yield takeEvery('SELECT_CITY_BY_NAME', selectCityByNameSaga)
     yield takeEvery('FETCH_CITIES', fetchCitiesSaga)
-    yield takeEvery('POST_CITY', postCitySaga)
     yield takeEvery('EDIT_CITY', editCitySaga)
     yield takeEvery('DELETE_CITY', deleteCitySaga)
     yield takeEvery('NEW_CITY', postNewCitySaga)

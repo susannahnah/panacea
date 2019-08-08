@@ -1,24 +1,12 @@
+// src/redux/sagas/orgSagas.js
 import axios from 'axios';
 import { put, takeEvery } from 'redux-saga/effects';
 
-//GET specific org
+// GET specific org by id
 function* selectOrgSaga(action) {
     const getOrg = yield axios.get(`/api/organizations/${action.payload}`)
-    yield put({ type: 'SET_INDIVIDUAL_CITY', payload: getOrg.data })
+    yield put({ type: 'SET_INDIVIDUAL_ORG', payload: getOrg.data })
     console.log('end of selectOrgSaga');
-  }
-
-//POST new org function:
-function* postOrgSaga(action) {
-    console.log('hit!');
-    try {
-        console.log(action.payload);
-        yield axios.post('/api/organizations', action.payload);
-        yield put({ type: 'SEARCH_ORGANIZATION' })
-    }
-    catch (error) {
-        console.log('Error with POST', error);
-    }
 }
 
 // POST new org function
@@ -35,35 +23,34 @@ function* postNewOrgSaga(action) {
     }
 }
 
-//UPDATE specific org
+// UPDATE specific org
 function* editOrgSaga(action) {
-    yield axios.put(`/api/organizations`, action.payload)
-    yield put({ type: 'SEARCH_ORGANIZATION'})
-    console.log('org updated')
+    try {
+        yield axios.put(`/api/organizations`, action.payload);
+        const updatedOrgResponse = yield axios.get(`/api/organizations/${action.payload.id}`);
+        yield put({ type: 'SET_INDIVIDUAL_ORG', payload: updatedOrgResponse.data }); 
+    } catch (error) {
+        console.log(`Error with editOrgSaga:`, error);
+    } 
 }
 
-//DELTE specific org
+// DELETE specific org
 function* deleteOrgSaga(action) {
-    console.log('deleteOrgSaga hit')
     try {
-      yield axios.delete(`/api/organizations/${action.payload}`)
-      yield put({type: 'SEARCH_ORGANIZATION'})
+        yield axios.delete(`/api/organizations/${action.payload}`);
+        yield put({ type: 'SEARCH_ORGANIZATION', payload: '' });
     } catch (error) {
-      console.log(error);
-      alert('Unable to delete item');
+        console.log(error);
+        alert('There was a problem deleting the organization from the database.');
     }
 }
 
-
-//ALL org Sagas
+// ALL org Sagas
 function* orgSagas() {
-    yield takeEvery('SELECT_ORG', selectOrgSaga)
-    yield takeEvery('POST_ORG', postOrgSaga)
-    yield takeEvery('EDIT_ORG', editOrgSaga)
-    yield takeEvery('DELETE_ORG', deleteOrgSaga)
+    yield takeEvery('SELECT_ORG', selectOrgSaga);
+    yield takeEvery('EDIT_ORG', editOrgSaga);
+    yield takeEvery('DELETE_ORG', deleteOrgSaga);
     yield takeEvery('NEW_ORG', postNewOrgSaga);
 }
-
-
 
 export default orgSagas;
