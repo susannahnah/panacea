@@ -129,7 +129,7 @@ const InfoWindow = (organization) => {
         <div className={organization.visibility}>
             <h3>{organization.name}</h3>
             <h4>Phone Number: {organization.phone_number}</h4>
-            <a href={organization.google_maps_link}>directions</a>
+            <a target="_blank" href={organization.google_maps_link}>directions</a>
             <br/>
             <Link to={{
                 pathname: `/map/${organization.cityName}/${organization.name}`,
