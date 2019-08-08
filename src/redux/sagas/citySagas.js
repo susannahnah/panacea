@@ -1,3 +1,4 @@
+// src/redux/sagas/citySagas.js
 import axios from 'axios';
 import { put, takeEvery, all } from 'redux-saga/effects';
 
@@ -68,7 +69,7 @@ function* deleteCitySaga(action) {
       yield put({type: 'SEARCH_CITY', payload: "" });
     } catch (error) {
       console.log(`Error with deleteCitySaga:`, error);
-      alert('There was a problem delete the city from the database.');
+      alert('There was a problem deleting the city from the database.');
     }
 }
 
