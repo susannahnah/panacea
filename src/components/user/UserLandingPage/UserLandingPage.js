@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import UserLayout from '../../layouts/UserLayout/UserLayout';
 import { Paper, Typography, IconButton, Grid, Card, CardMedia } from '@material-ui/core';
-import SearchIcon from '@material-ui/icons/Search';
 import image from './panaceaFamilyImage.jpg';
-import SearchBox from './SearchBox';
 
 class UserLandingPage extends Component {
 
@@ -22,15 +20,6 @@ class UserLandingPage extends Component {
   render() {
     return (
       <UserLayout>
-        <Grid item xs={12}
-          style={{ width: `100%`, display: `inline` }}>
-          <Paper style={{ border: `1px solid #6AA4DA` }} square={true}>
-            <IconButton style={{ width: `15%` }}>
-              <SearchIcon />
-            </IconButton>
-            <SearchBox />
-          </Paper>
-        </Grid>
         <Grid item xs={12}>
           <Paper style={{ backgroundColor: `#F8F9FA`, padding: `10% 5%` }} square={true}>
             <Typography style={{ marginBottom: `4%` }}

@@ -28,8 +28,8 @@ class CityPage extends Component {
     return (
       <UserLayout>
 
-        <Typography variant='h4' gutterBottom style={{ marginTop: '2%', marginBottom: '2%' }}>
-          <b>{this.state.city.city_name} , {this.state.city.city_country_id}</b>
+        <Typography variant='h5' gutterBottom style={{ marginTop: '2%', marginBottom: '2%' }}>
+          <b>{this.state.city.city_name}, {this.state.city.city_country_id}</b>
         </Typography>
 
         <div className="stock-map">
@@ -67,9 +67,8 @@ class CityPage extends Component {
 
           </Grid>
         </div>
-        
-        <Typography variant='h4' gutterBottom style={{ marginTop: '2%', marginBottom: '2%' }}>
-          <b>Healthcare in the city</b>
+        <Typography variant='h6' gutterBottom style={{ marginTop: '2%', marginBottom: '2%' }}>
+          Healthcare in the city
         </Typography>
         {/* <div style={{ marginTop: '2%', marginBottom: '2%' }}>
           <b>Healthcare in the city</b>
