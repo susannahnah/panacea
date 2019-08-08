@@ -29,7 +29,7 @@ router.get('/city/:cityName', (req, res) => {
         })
 })
 
-//GET selected cities
+// GET selected cities
 router.get('/:id', (req, res) => {
     const queryText = 'SELECT * FROM "cities" WHERE "id"=$1';
     console.log('here is your city ', req.params.id);

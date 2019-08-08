@@ -8,6 +8,7 @@ import UserLayout from '../../layouts/UserLayout/UserLayout';
 
 function MapPage(props) {
 
+  const { cityName } = props.match.params;
   const [organizations, setOrganizations] = useState([]);
 
   useEffect(() => {
@@ -50,11 +51,12 @@ function MapPage(props) {
               <BackButton></BackButton>
             </div> */}
 
-              {organizations.map((org, i) => {
+              {organizations.map((organization, i) => {
                 return (
                   <Marker
                     key={i}
-                    {...org}
+                    cityName={cityName}
+                    {...organization}
                   />
                 )
               })}

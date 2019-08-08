@@ -26,6 +26,8 @@ const individualOrgReducer = (state = orgDetails, action) => {
     switch (action.type) {
         case 'SET_INDIVIDUAL_ORG':
             return action.payload;
+        case 'CLEAR_INDIVIDUAL_ORGANIZATION':
+            return orgDetails;
         default:
             return state;
     }
