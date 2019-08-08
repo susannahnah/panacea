@@ -27,6 +27,11 @@ function MapPage(props) {
 
   }, []);
 
+  // const handleApiLoaded = (map, maps) => {
+  //   console.log('this is map ', map);
+  //   console.log('this is maps ', maps)
+  // };
+
   const markerClicked = (key, org) => {
     console.log('this is the org', org);
   }
@@ -34,7 +39,7 @@ function MapPage(props) {
   if (props.location.city_id) {
     return (
       <>
-        <UserLayout>
+        {/* <UserLayout> */}
 
           <div className="container">
 
@@ -46,9 +51,10 @@ function MapPage(props) {
               center={props.location.coordinates}
               defaultZoom={11}
               onChildClick={markerClicked}
+              options={{ clickableIcons: false }}
             >
-
-              {/* TODO: add functioning back button
+{/* 
+              TODO: add functioning back button
             <div className="back-button">
               <BackButton></BackButton>
             </div> */}
@@ -66,7 +72,7 @@ function MapPage(props) {
 
           </div>
 
-        </UserLayout>
+        {/* </UserLayout> */}
 
       </>
     )
