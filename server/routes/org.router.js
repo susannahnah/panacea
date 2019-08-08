@@ -1,3 +1,4 @@
+// server/routes/org.router.js
 const express = require('express');
 const pool = require('../modules/pool');
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
@@ -140,7 +141,7 @@ router.put('/', rejectUnauthenticated, (req, res) => {
             updatedOrg.city_id,
             updatedOrg.name,
             updatedOrg.type,
-            updatedOrg.recommend,
+            updatedOrg.recommended,
             updatedOrg.twentyfour,
             updatedOrg.hours,
             updatedOrg.homeopathic_remedies,

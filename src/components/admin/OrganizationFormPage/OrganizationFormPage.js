@@ -1,3 +1,4 @@
+// src/components/admin/OrganizationFormPage/OrganizationFormPage.js
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
@@ -44,7 +45,7 @@ class OrganizationFormPage extends Component {
       lat: this.individualOrg.lat || '',
       long: this.individualOrg.long || '',
       google_maps_link: this.individualOrg.google_maps_link || '',
-      address: this.individualOrg.address || '',
+      org_address: this.individualOrg.org_address || '',
     }
   }
 
@@ -118,6 +119,14 @@ class OrganizationFormPage extends Component {
         this.props.history.push('/organizations');
       }
     });
+  }
+
+  // function to delete an organization from the database
+  willDelete = () => {
+    this.props.dispatch({
+      type: 'DELETE_ORG',
+      payload: this.props.reduxState.individualOrgReducer.id,
+    })
   }
 
   componentDidMount() {
@@ -406,8 +415,8 @@ class OrganizationFormPage extends Component {
                   fullWidth margin="normal"
                   variant="outlined"
                   type='type'
-                  value={this.state.newOrg.address}
-                  onChange={this.handleNewChange('address')} />
+                  value={this.state.newOrg.org_address}
+                  onChange={this.handleNewChange('org_address')} />
               </Grid>
               <Grid item xs={6}>
                 <TextField
@@ -473,7 +482,7 @@ class OrganizationFormPage extends Component {
                 <Button type='submit' value='Save' style={{ width: "24vw" }} variant="contained" color="inherent">Save</Button>
               </Grid>
               <Grid item xs={6}>
-                <Button onClick={this.deleteOrganization} value='Delete Organization' style={{ width: "24vw" }} color="secondary">Delete Organization</Button>
+                <Button onClick={this.deleteOrg} value='Delete Organization' style={{ width: "24vw" }} color="secondary">Delete Organization</Button>
               </Grid>
             </Grid>
           </Grid>
