@@ -19,7 +19,11 @@ class OrganizationPage extends Component {
   // }
   render() {
     return (
-        <></>
+        <>
+        <pre>
+          {JSON.stringify(this.props, null, 2)}
+        </pre>
+        </>
   )}
 }
 

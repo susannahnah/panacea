@@ -8,6 +8,7 @@ import UserLayout from '../../layouts/UserLayout/UserLayout';
 
 function MapPage(props) {
 
+  const { cityName } = props.match.params;
   const [organizations, setOrganizations] = useState([]);
 
   useEffect(() => {
@@ -27,10 +28,6 @@ function MapPage(props) {
 
   }, []);
 
-  const markerClicked = (key, org) => {
-    console.log('this is the org', org);
-  }
-
   if (props.location.city_id) {
     return (
       <>
@@ -40,24 +37,26 @@ function MapPage(props) {
 
             <GoogleMapReact
               bootstrapURLKeys={{
+                // TODO: restrict key later
                 key: '',
                 language: 'en'
               }}
               center={props.location.coordinates}
               defaultZoom={11}
-              onChildClick={markerClicked}
+              options={{ clickableIcons: false }}
             >
-
-              {/* TODO: add functioning back button
+              {/* 
+              TODO: add functioning back button
             <div className="back-button">
               <BackButton></BackButton>
             </div> */}
 
-              {organizations.map((org, i) => {
+              {organizations.map((organization, i) => {
                 return (
                   <Marker
                     key={i}
-                    {...org}
+                    cityName={cityName}
+                    {...organization}
                   />
                 )
               })}

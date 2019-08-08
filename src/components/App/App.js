@@ -38,7 +38,7 @@ class App extends Component {
             <Route exact path="/city/:cityName" component={CityPage}/>
             <Route exact path="/city/:cityName/medications" component={MedicationsPage}/>
             <Route exact path="/map/:cityName" component={MapPage}/>
-            <Route exact path="/city/:cityName/:orgName" component={OrganizationPage}/>
+            <Route exact path="/map/:cityName/:orgName" component={OrganizationPage}/>
             {/* "Not Found" Page if user attempts to search for a city not in the database */}
             {/* Admin Pages */}
             <ProtectedRoute exact path="/admin" component={AdminLandingPage}/>
