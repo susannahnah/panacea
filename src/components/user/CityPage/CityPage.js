@@ -27,7 +27,7 @@ class CityPage extends Component {
   render() {
     return (
       <UserLayout>
-        <Paper style={{width: `100%`}} square={true}>
+        <Paper style={{width: `100%`, paddingLeft: `5%`}} square={true}>
           <Typography variant='h5' gutterBottom style={{ marginTop: '2%', marginBottom: '2%' }}>
             <b>{this.state.city.city_name}, {this.state.city.city_country_id}</b>
           </Typography>
