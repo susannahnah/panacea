@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './CityPage.css';
-import { Grid, Paper, Typography, Link as MuiLink } from '@material-ui/core/';
+import { Grid, Paper, Typography, Link as MuiLink, Card } from '@material-ui/core/';
 import UserLayout from '../../layouts/UserLayout/UserLayout';
 
 class CityPage extends Component {
@@ -44,11 +44,11 @@ class CityPage extends Component {
                 <Grid
                   key={i}
                   item xs={6}
-                  style={{ textAlign: `center`, marginTop: `2vh` }}
+                  style={{ textAlign: `center`, marginTop: `4vh` }}
                 >
 
                   <Link
-                    style={{ display: 'block', backgroundColor: 'white', textDecoration: 'underline', color: 'blue' }}
+                    style={{ display: 'block' }}
                     to={{
                       pathname: `/map/${this.props.match.params.cityName}`,
                       city_id: this.state.city.city_id,
@@ -58,7 +58,12 @@ class CityPage extends Component {
                         lng: Number(this.state.city.long)
                       },
                     }}>
-                    {type}
+                    <Card style={{width: `40vw`, margin: `auto`}}>
+                      <Typography>
+                        {type}
+                      </Typography>
+                    </Card>
+                    
                   </Link>
 
                 </Grid>
