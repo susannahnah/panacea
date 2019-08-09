@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './UserNav.css';
+import logo from './Panacea-logo.png';
 
 // Material-UI components
 import Grid from '@material-ui/core/Grid';
@@ -50,6 +51,7 @@ class UserNav extends Component {
     return (
       <div className="Nav">
         <Link to="/" underline='none'>
+          <img src={logo} alt="Panacea Logo" style={{ margin: `3px 5px 0px 12px`,height: `48%`}}/>
           <h3 className="Title">Panacea</h3>
         </Link>
         <IconButton 

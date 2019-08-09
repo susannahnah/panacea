@@ -3,7 +3,7 @@ import './Footer.css'
 
 const Footer = () => (
   <footer>
-    &copy; Panacea 2019
+      &copy; Panacea 2019
   </footer>
 );
 
