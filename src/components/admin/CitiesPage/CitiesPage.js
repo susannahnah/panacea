@@ -48,12 +48,12 @@ const useStyles = makeStyles({
 
 function CitiesPage(props) {
 
-  useEffect(() => {props.dispatch({type: "SEARCH_CITY", payload: ""})}, []);
-  useEffect(() => {props.dispatch({type: "CLEAR_INDIVIDUAL_ORGANIZATION"})}, []);
-  useEffect(() => {props.dispatch({type: "CLEAR_INDIVIDUAL_CITY"})}, []);
-  useEffect(() => {props.dispatch({type: "CLEAR_MEDICATIONS"})}, []);
-
   const searchedValues = queryString.parse(props.location.search);
+
+  useEffect(() => {props.dispatch({type: "SEARCH_CITY", payload: searchedValues.citySearched || ''})}, []);
+  useEffect(() => {props.dispatch({type: "CLEAR_INDIVIDUAL_ORGANIZATION"})}, []);
+  useEffect(() => {props.dispatch({type: "CLEAR_INDIVIDUAL_CITY"})}, []); 
+  useEffect(() => {props.dispatch({type: "CLEAR_MEDICATIONS"})}, []);
 
   // use classes names for styling
   const classes = useStyles();
@@ -73,12 +73,14 @@ function CitiesPage(props) {
           type: "SEARCH_CITY",
           payload: event.target.value
         });
+        setSearchValues({ city: event.target.value, country: '' });
         break;
       case "country":
         props.dispatch({
           type: "SEARCH_CITY_BY_COUNTRY",
           payload: event.target.value,
         });
+        setSearchValues({ city: '', country: event.target.value });
         break;
       default:
         return;

@@ -48,15 +48,14 @@ const useStyles = makeStyles({
 
 function OrganizationsPage(props) {
   const searchedValues = queryString.parse(props.location.search);
+
+  useEffect(() => {props.dispatch({type: "SEARCH_ORGANIZATION", payload: searchedValues.organizationSearched || ""})}, []);
+  useEffect(() => {props.dispatch({type: "CLEAR_INDIVIDUAL_ORGANIZATION"})}, []);
   
   // Local state to store inputs for organization to search.
   const [searchValues, setSearchValues] = useState({
     organization: searchedValues.organizationSearched || ""
   });
-
-
-  useEffect(() => {props.dispatch({type: "SEARCH_ORGANIZATION", payload: ""})}, []);
-  useEffect(() => {props.dispatch({type: "CLEAR_INDIVIDUAL_ORGANIZATION"})}, []);
 
   // use classes names for styling
   const classes = useStyles();

@@ -52,14 +52,6 @@ function AdminLandingPage(props) {
     props.dispatch({ type: "CLEAR_INDIVIDUAL_ORGANIZATION" });
   }, []);
 
-  useEffect(() => {
-    setSearchValues({ ...searchValues, organization: "" });
-  }, [searchValues.city]);
-
-  useEffect(() => {
-    setSearchValues({ ...searchValues, city: "" });
-  }, [searchValues.organization]);
-
   // use classes names for styling
   const classes = useStyles();
 
@@ -67,10 +59,10 @@ function AdminLandingPage(props) {
   const handleChange = property => event => {
     switch (property) {
       case "city":
-        setSearchValues({ ...searchValues, [property]: event.target.value });
+        setSearchValues({ organization: '', city: event.target.value });
         break;
       case "organization":
-        setSearchValues({ ...searchValues, [property]: event.target.value });
+        setSearchValues({ city: '', organization: event.target.value });
         break;
       default:
         return;
