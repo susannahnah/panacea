@@ -104,7 +104,7 @@ function AdminLandingPage(props) {
             </Link>
           </Grid>
           <Grid item xs={6}>
-            <Link to="/organizations/new">
+            <Link to="/organizations/new/0">
               <Button
                 fullWidth
                 className={classes.addButton}
