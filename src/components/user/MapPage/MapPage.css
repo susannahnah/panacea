@@ -4,3 +4,11 @@
   margin: 0;
   display: flex;
 }
+
+.organization-list {
+  background-color: #ffffff;
+  position: fixed;
+  bottom:0;
+  height: 90vh;
+  width:100%;
+}

@@ -108,6 +108,7 @@ function Marker(organization) {
 };
 
 const InfoWindow = (organization) => {
+
     // If you are styling, this is all the organization information
     // comments: "Important to be an advocate and have a birth plan and have talked to locals who recommend paying in cash staff to take better care of you otherwise you get minimal attention and lack of supplies.  bring your own supplies for pads, and foods etc for yourself and diapers outfits etc for baby"
     // created_at: "2019-08-07T17:22:13.674Z"
@@ -125,16 +126,16 @@ const InfoWindow = (organization) => {
     // twentyfour: true
     // type: "Hospital"
     // visibility: "hidden"
+
+    const { showOrganizationClick } = organization;
+
     return (
         <div className={organization.visibility}>
             <h3>{organization.name}</h3>
             <h4>Phone Number: {organization.phone_number}</h4>
             <a target="_blank" href={organization.google_maps_link}>directions</a>
-            <br/>
-            <Link to={{
-                pathname: `/map/${organization.cityName}/${organization.name}`,
-                orgId: organization.id
-            }}>...more info</Link>
+            <br />
+            <span onClick={showOrganizationClick} id={organization.id}>...more info</span>
         </div>
     )
 }
