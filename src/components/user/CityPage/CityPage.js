@@ -58,7 +58,7 @@ class CityPage extends Component {
                   <Grid
                     key={i}
                     item xs={6}
-                    style={{ textAlign: `center`, marginTop: `3vh` }}
+                    style={{ textAlign: `center`, marginTop: `2.5vh` }}
                   >
 
                     <Link
@@ -72,8 +72,15 @@ class CityPage extends Component {
                           lng: Number(this.state.city.long)
                         },
                       }}>
-                      <Card style={{width: `35vw`, margin: `auto`, opacity: `.8`, elevation: `12`}}>
-                        <Typography style={{ color: `#2ECBB0` }}>
+                      <Card style={{
+                          width: `35vw`, 
+                          margin: `auto`, 
+                          opacity: `.9`, 
+                          elevation: `12`, 
+                          backgroundColor: `#4A8CCD`,
+                          padding: `2.5%`
+                      }}>
+                        <Typography variant='p' style={{ color: `white` }}>
                           {type}
                         </Typography>
                       </Card>
@@ -93,97 +100,82 @@ class CityPage extends Component {
         </Paper>
         <Grid item xs={12}>
           <Paper style={{ backgroundColor: `#F8F9FA`}} square={true}>
-          {/* <ExpansionPanel style={{width: `100%`}}>
-            <ExpansionPanelSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1a-content"
-              id="panel1a-header"
-            >
-              <Typography>Expansion Panel 1</Typography>
-            </ExpansionPanelSummary>
-            <ExpansionPanelDetails>
-              <Typography>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                sit amet blandit leo lobortis eget.
-              </Typography>
-            </ExpansionPanelDetails>
-          </ExpansionPanel> */}
-
-            {/* TODO: Refactor this code */}
-
-            <Typography variant='body2' gutterBottom style={{ paddingLeft: `8%`, paddingRight: `8%` }}>
-              <b>Overview:</b>
-            </Typography>
-              <Typography variant='body2' gutterBottom style={{ paddingLeft: `9%`, paddingRight: `8%` }}>
-                {this.state.city.overview}
-              </Typography>
-            <Typography variant='body2' gutterBottom style={{ paddingLeft: `8%`, paddingRight: `8%` }}>
-              <b>Health Risks:</b>
-            </Typography>
-              <Typography variant='body2' gutterBottom style={{ paddingLeft: `9%`, paddingRight: `8%` }}>
-                {this.state.city.health_risks}
-              </Typography>
-            <Typography variant='body2' gutterBottom style={{ paddingLeft: `8%`, paddingRight: `8%` }}>
-              <b>Wellness Resources:</b>
-            </Typography>
-              <Typography variant='body2' gutterBottom style={{ paddingLeft: `9%`, paddingRight: `8%` }}>
-                {this.state.city.wellness_resources}
-              </Typography>
-            <Typography variant='body2' gutterBottom style={{ paddingLeft: `8%`, paddingRight: `8%` }}>
-              <b>Local Health Remedies</b>
-            </Typography>
-              <Typography variant='body2' gutterBottom style={{ paddingLeft: `9%`, paddingRight: `8%` }}>
-                {this.state.city.local_health_remedies}
-              </Typography>
-            <Typography variant='body2' gutterBottom style={{ paddingLeft: `8%`, paddingRight: `8%` }}>
-              <b>Healthcare Tourism:</b>
-            </Typography>
-              <Typography variant='body2' gutterBottom style={{ paddingLeft: `9%`, paddingRight: `8%` }}>
-                {this.state.city.healthcare_tourism}
-              </Typography>
-            <Typography variant='body2' gutterBottom style={{ paddingLeft: `8%`, paddingRight: `8%` }}>
-              <b>Important Resources:</b>
-            { this.state.city.WHO_link &&
-              <Typography gutterBottom>
-                <MuiLink href={this.state.city.WHO_link} target="_blank" underline='always'>
-                  WHO Link
-                </MuiLink>
-              </Typography>
-            }
-            { this.state.city.CDC_link &&
-              <Typography gutterBottom>
-                <MuiLink href={this.state.city.CDC_link} target="_blank" underline='always'>
-                  CDC Link
-                </MuiLink>
-              </Typography>
-            }
-            { this.state.city.google_translate_link &&
-              <Typography gutterBottom>
-                <MuiLink href={this.state.city.google_translate_link} target="_blank" underline='always'>
-                Google Translate Link
-                </MuiLink>
-              </Typography>
-            }
-            { this.state.city.local_resources &&
-              <Typography gutterBottom>
-                <MuiLink href={this.state.city.local_resources} target="_blank" underline='always'>
-                Local Resources
-                </MuiLink>
-              </Typography>
-            }
-            </Typography>
-            <Link 
-            to={{ pathname: `/city/${this.props.match.params.cityName}/medications` }}
-            style={{ textDecoration: 'underline', color: 'blue'}}
-            >
-              <Typography>
-                Medicine Translations
-              </Typography>
-              
-            </Link>
-
-          </Paper>
-
+            <ExpansionPanel display='block' style={{width: `100%`, backgroundColor: `#F8F9FA`}}>
+              <ExpansionPanelSummary
+                expandIcon={<ExpandMoreIcon style={{color: `2ECBB0`}}/>}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+              >
+                <div>
+                  <Typography variant='body2' gutterBottom style={{ paddingLeft: `8%`, paddingRight: `8%` }}>
+                    <b>Overview:</b> 
+                  </Typography>
+                    <Typography variant='body2' gutterBottom style={{ paddingLeft: `9%`, paddingRight: `8%` }}>
+                      {this.state.city.overview}
+                    </Typography>
+                </div>
+              </ExpansionPanelSummary>
+              <ExpansionPanelDetails>
+                <div style={{marginTop: 0}}>
+                  <Typography variant='body2' gutterBottom style={{ paddingLeft: `5%`, paddingRight: `5%` }}>
+                    <b>Health Risks:</b>
+                  </Typography>
+                    <Typography variant='body2' gutterBottom style={{ paddingLeft: `6%`, paddingRight: `5%` }}>
+                      {this.state.city.health_risks}
+                    </Typography>
+                  <Typography variant='body2' gutterBottom style={{ paddingLeft: `5%`, paddingRight: `5%` }}>
+                    <b>Wellness Resources:</b>
+                  </Typography>
+                    <Typography variant='body2' gutterBottom style={{ paddingLeft: `6%`, paddingRight: `5%` }}>
+                      {this.state.city.wellness_resources}
+                    </Typography>
+                  <Typography variant='body2' gutterBottom style={{ paddingLeft: `5%`, paddingRight: `5%` }}>
+                    <b>Local Health Remedies</b>
+                  </Typography>
+                    <Typography variant='body2' gutterBottom style={{ paddingLeft: `6%`, paddingRight: `5%` }}>
+                      {this.state.city.local_health_remedies}
+                    </Typography>
+                  <Typography variant='body2' gutterBottom style={{ paddingLeft: `5%`, paddingRight: `5%` }}>
+                    <b>Healthcare Tourism:</b>
+                  </Typography>
+                    <Typography variant='body2' gutterBottom style={{ paddingLeft: `6%`, paddingRight: `5%` }}>
+                      {this.state.city.healthcare_tourism}
+                    </Typography>
+                  <Typography variant='body2' gutterBottom style={{ paddingLeft: `5%`, paddingRight: `5%` }}>
+                    <b>Important Resources:</b>
+                  { this.state.city.WHO_link &&
+                    <Typography gutterBottom>
+                      <MuiLink href={this.state.city.WHO_link} target="_blank" underline='always'>
+                        WHO Link
+                      </MuiLink>
+                    </Typography>
+                  }
+                  { this.state.city.CDC_link &&
+                    <Typography gutterBottom>
+                      <MuiLink href={this.state.city.CDC_link} target="_blank" underline='always'>
+                        CDC Link
+                      </MuiLink>
+                    </Typography>
+                  }
+                  { this.state.city.google_translate_link &&
+                    <Typography gutterBottom>
+                      <MuiLink href={this.state.city.google_translate_link} target="_blank" underline='always'>
+                      Google Translate Link
+                      </MuiLink>
+                    </Typography>
+                  }
+                  { this.state.city.local_resources &&
+                    <Typography gutterBottom>
+                      <MuiLink href={this.state.city.local_resources} target="_blank" underline='always'>
+                      Local Resources
+                      </MuiLink>
+                    </Typography>
+                  }
+                  </Typography>
+                </div>
+              </ExpansionPanelDetails>
+            </ExpansionPanel>
+          </Paper>  
         </Grid>
 
         <Typography variant='h4' gutterBottom style={{ marginTop: '2%', marginBottom: '2%' }}>
@@ -215,7 +207,15 @@ class CityPage extends Component {
           </Paper>
 
         </Grid>
-
+        {/* <Link 
+        to={{ pathname: `/city/${this.props.match.params.cityName}/medications` }}
+        style={{ textDecoration: 'underline', color: 'blue'}}
+        >
+          <Typography>
+            Medicine Translations
+          </Typography>
+          
+        </Link> */}
         {/* <pre>
           {JSON.stringify(this.state, null, 2)}
         </pre>
