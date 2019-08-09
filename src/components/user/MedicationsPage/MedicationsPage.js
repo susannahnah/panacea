@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import UserLayout from '../../layouts/UserLayout/UserLayout';
+import { Link } from 'react-router-dom';
 import { Grid, Typography } from '@material-ui/core';
 import CompareArrow from '@material-ui/icons/CompareArrows';
+import BackButton from '@material-ui/icons/ChevronLeftRounded';
 
 class MedicationsPage extends Component {
 
@@ -12,6 +14,15 @@ class MedicationsPage extends Component {
         {/* TODO: REPLACE DUMMY DATA WITH REAL DATA */}
 
         <UserLayout>
+
+          <Link
+            style={{ display: 'block' }}
+            to={{
+              pathname: `/city/${this.props.match.params.cityName}`,
+            }}
+          >
+            <BackButton />
+          </Link>
 
           <Grid
             style={{ textAlign: 'center', width: '100%' }}
