@@ -3,6 +3,7 @@ import GoogleMapReact from 'google-map-react';
 import Marker from './Marker';
 import axios from 'axios';
 import './MapPage.css';
+import { Grid, Typography, Checkbox, FormControlLabel } from '@material-ui/core/';
 import BackButton from '@material-ui/icons/ChevronLeftRounded';
 import UserLayout from '../../layouts/UserLayout/UserLayout';
 
@@ -14,12 +15,9 @@ function MapPage(props) {
 
   const markerOpen = (e) => {
     const { id } = e.currentTarget;
-    // console.log('You clicked me!', e.currentTarget.id);
-    // console.log('this is state array', organizations);
     setOrganizationToShow(organizations.filter((org) => {
       return org.id == id;
     }))
-    console.log(showOrganization[0]);
   }
 
   const markerClose = (e) => {
@@ -107,10 +105,159 @@ website_url: "https://www.su.krakow.pl/" */}
           showOrganization.length > 0
             ?
             <>
+
               <div className="organization-list">
-                {showOrganization[0].name}
-                <br />
-                <span onClick={markerClose}>X</span>
+
+              {/* TODO: FIX THE CLOSE, IT TAKES UP A 100% OF THE WIDTH, MEANING DON'T HAVE TO CLICK X TO CLOSE */}
+                <div
+                  style={{ color: '#a00404', fontSize: '18pt', left: '5px' }}
+                  onClick={markerClose}
+                >
+                  X
+                </div>
+
+                <Grid
+                  container
+                  item
+                  spacing={1}
+                  xs={12}>
+
+                  <Grid item xs={12} style={{ textAlign: 'center', marginBottom: '5px' }}>
+                    <a target="_blank" href={showOrganization[0].website_url}>
+                      {showOrganization[0].name}
+                    </a>
+                  </Grid>
+
+                  <Grid item xs={12} spacing={1}>
+                    Phone Number: {showOrganization[0].phone_number}
+                  </Grid>
+
+                  <Grid item xs={12} spacing={1}>
+                    Hours: {showOrganization[0].hours}
+                  </Grid>
+
+                  <Grid item xs={12} spacing={1}>
+                    Comments: {showOrganization[0].comments}
+                  </Grid>
+
+                  <Grid item xs={6}>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          id="recommended"
+                          color="primary"
+                          checked={showOrganization[0].recommended}
+                        />
+                      }
+                      label="Recommended"
+                      style={{ width: '180px', marginLeft: '0px' }}
+                    />
+                  </Grid>
+
+                  <Grid item xs={6}>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          id="twentyfour"
+                          color="primary"
+                          checked={showOrganization[0].twentyfour}
+                        />
+                      }
+                      label="Open 24 Hours"
+                      style={{ width: '180px', marginLeft: '0px' }}
+                    />
+                  </Grid>
+
+                  <Grid item xs={6}>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          id="labor_delivery"
+                          color="primary"
+                          checked={showOrganization[0].labor_delivery}
+                        />
+                      }
+                      label="Labor and Delivery Available"
+                      style={{ width: '180px', marginLeft: '0px' }}
+                    />
+                  </Grid>
+
+                  <Grid item xs={6}>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          id="childrens"
+                          color="primary"
+                          checked={showOrganization[0].childrens}
+                        />
+                      }
+                      label="Pediatric Services"
+                      style={{ width: '180px', marginLeft: '0px' }}
+                    />
+                  </Grid>
+
+                  <Grid item xs={6}>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          id="childrens_surgical"
+                          color="primary"
+                          checked={showOrganization[0].childrens_surgical}
+                        />
+                      }
+                      label="Surgical Pediatric Services"
+                      style={{ width: '180px', marginLeft: '0px' }}
+                    />
+                  </Grid>
+
+                  <Grid item xs={6}>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          id="adult"
+                          color="primary"
+                          checked={showOrganization[0].adult}
+                        />
+                      }
+                      label="Adult Medicine"
+                      style={{ width: '180px', marginLeft: '0px' }}
+                    />
+                  </Grid>
+
+                  <Grid item xs={6}>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          id="adult_surgical"
+                          color="primary"
+                          checked={showOrganization[0].adult_surgical}
+                        />
+                      }
+                      label="Adult Surgical Services"
+                      style={{ width: '180px', marginLeft: '0px' }}
+                    />
+                  </Grid>
+
+                  <Grid item xs={6}>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          id="medical_translators"
+                          color="primary"
+                          checked={showOrganization[0].medical_translators}
+                        />
+                      }
+                      label="Medical Translators Available"
+                      style={{ width: '180px', marginLeft: '0px' }}
+                    />
+                  </Grid>
+
+                  <Grid item xs={12} spacing={1}>
+                    <a target="_blank" href={showOrganization[0].google_maps_link}>Directions</a>
+                  </Grid>
+
+                </Grid>
+
               </div>
             </>
             :
