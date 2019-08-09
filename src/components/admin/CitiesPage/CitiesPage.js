@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import queryString from 'query-string';
 
 import AdminLayout from "../../layouts/AdminLayout/AdminLayout";
 
@@ -47,19 +48,20 @@ const useStyles = makeStyles({
 
 function CitiesPage(props) {
 
-  useEffect(() => {props.dispatch({type: "SEARCH_CITY", payload: ""})}, []);
-  useEffect(() => {props.dispatch({type: "CLEAR_INDIVIDUAL_ORGANIZATION"})}, []);
-  useEffect(() => {props.dispatch({type: "CLEAR_INDIVIDUAL_CITY"})}, []);
-  useEffect(() => {props.dispatch({type: "CLEAR_MEDICATIONS"})}, []);
+  const searchedValues = queryString.parse(props.location.search);
 
+  useEffect(() => {props.dispatch({type: "SEARCH_CITY", payload: searchedValues.citySearched || ''})}, []);
+  useEffect(() => {props.dispatch({type: "CLEAR_INDIVIDUAL_ORGANIZATION"})}, []);
+  useEffect(() => {props.dispatch({type: "CLEAR_INDIVIDUAL_CITY"})}, []); 
+  useEffect(() => {props.dispatch({type: "CLEAR_MEDICATIONS"})}, []);
 
   // use classes names for styling
   const classes = useStyles();
 
   // Local state to store inputs for city and country to search.
   const [searchValues, setSearchValues] = useState({
-    city: "",
-    country: ""
+    city: searchedValues.citySearched || '',
+    country:''
   });
 
   // Takes in a property name and the event to update local state.
@@ -71,12 +73,14 @@ function CitiesPage(props) {
           type: "SEARCH_CITY",
           payload: event.target.value
         });
+        setSearchValues({ city: event.target.value, country: '' });
         break;
       case "country":
         props.dispatch({
           type: "SEARCH_CITY_BY_COUNTRY",
           payload: event.target.value,
         });
+        setSearchValues({ city: '', country: event.target.value });
         break;
       default:
         return;
