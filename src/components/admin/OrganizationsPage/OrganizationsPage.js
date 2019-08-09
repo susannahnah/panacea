@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import queryString from 'query-string';
 
 import AdminLayout from "../../layouts/AdminLayout/AdminLayout";
 
@@ -46,17 +47,21 @@ const useStyles = makeStyles({
 });
 
 function OrganizationsPage(props) {
+  const searchedValues = queryString.parse(props.location.search);
   
+  // Local state to store inputs for organization to search.
+  const [searchValues, setSearchValues] = useState({
+    organization: searchedValues.organizationSearched || ""
+  });
+
+
   useEffect(() => {props.dispatch({type: "SEARCH_ORGANIZATION", payload: ""})}, []);
   useEffect(() => {props.dispatch({type: "CLEAR_INDIVIDUAL_ORGANIZATION"})}, []);
+
   // use classes names for styling
   const classes = useStyles();
 
-  // Local state to store inputs for organization to search.
-  const [searchValues, setSearchValues] = useState({
-    organization: ""
-  });
-
+  
   // Takes in a property name and the event to update local state.
   const handleChange = property => event => {
     setSearchValues({ ...searchValues, [property]: event.target.value });
@@ -151,8 +156,8 @@ function OrganizationsPage(props) {
           </Paper>
         </Grid>
       </Grid>
-      <pre>Local State {JSON.stringify(searchValues, null, 2)}</pre>
-      <pre>Props + Redux State {JSON.stringify(props, null, 2)}</pre>
+      {/* <pre>Local State {JSON.stringify(searchValues, null, 2)}</pre>
+      <pre>Props + Redux State {JSON.stringify(props, null, 2)}</pre> */}
     </AdminLayout>
   );
 }
