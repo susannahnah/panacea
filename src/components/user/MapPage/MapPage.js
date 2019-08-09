@@ -51,7 +51,7 @@ function MapPage(props) {
           <GoogleMapReact
             bootstrapURLKeys={{
               // TODO: restrict key later
-              key: '',
+              key: 'AIzaSyD1LKqeIf7_dF7UhVc9JGzNbo_vUM3gOjE',
               language: 'en'
             }}
             center={props.location.coordinates}
