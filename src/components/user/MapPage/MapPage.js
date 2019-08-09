@@ -128,15 +128,15 @@ website_url: "https://www.su.krakow.pl/" */}
                     </a>
                   </Grid>
 
-                  <Grid item xs={12} spacing={1}>
+                  <Grid item xs={12}>
                     Phone Number: {showOrganization[0].phone_number}
                   </Grid>
 
-                  <Grid item xs={12} spacing={1}>
+                  <Grid item xs={12}>
                     Hours: {showOrganization[0].hours}
                   </Grid>
 
-                  <Grid item xs={12} spacing={1}>
+                  <Grid item xs={12}>
                     Comments: {showOrganization[0].comments}
                   </Grid>
 
@@ -252,7 +252,7 @@ website_url: "https://www.su.krakow.pl/" */}
                     />
                   </Grid>
 
-                  <Grid item xs={12} spacing={1}>
+                  <Grid item xs={12}>
                     <a target="_blank" href={showOrganization[0].google_maps_link}>Directions</a>
                   </Grid>
 
