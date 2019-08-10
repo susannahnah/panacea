@@ -173,7 +173,7 @@ class CityPage extends Component {
             }
             </Typography>
             <Link 
-            to={{ pathname: `/city/${this.props.match.params.cityName}/medications` }}
+            to={{ pathname: `/city/${this.props.match.params.cityName}/medications`, id: this.state.city.city_id }}
             style={{ textDecoration: 'underline', color: 'blue'}}
             >
               <Typography>
