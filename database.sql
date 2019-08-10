@@ -63,7 +63,7 @@ CREATE TABLE "medications" (
 	"city_id" INT REFERENCES "cities" NOT NULL,
 	"generic_name_us" VARCHAR,
 	"brand_name_us" VARCHAR,
-	"brand_name_translated" VARCHAR
+	"generic_name_translated" VARCHAR
 );
 
 INSERT INTO "countries" ("id", "value") VALUES (E'AF', E'Afghanistan');
