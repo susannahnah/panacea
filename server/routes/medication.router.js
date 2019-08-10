@@ -23,13 +23,13 @@ router.post('/', rejectUnauthenticated, (req, res) => {
         "city_id",
         "generic_name_us",
         "brand_name_us",
-        "brand_name_translated"
+        "generic_name_translated"
     ) VALUES ($1, $2, $3, $4);`;
     const queryValues = [
         newMed.city_id,
         newMed.generic_name_us,
         newMed.brand_name_us,
-        newMed.brand_name_translated
+        newMed.generic_name_translated
     ];
     pool.query(queryText, queryValues)
     .then((result) => {
