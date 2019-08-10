@@ -328,8 +328,8 @@ class CityFormPage extends Component {
                 <Table>
                   <TableHead>
                     <TableRow>
-                      <TableCell>US Generic Name</TableCell>
                       <TableCell>US Brand Name</TableCell>
+                      <TableCell>US Generic Name</TableCell>
                       <TableCell>Translated Generic Name</TableCell>
                       <TableCell></TableCell>
                     </TableRow>
@@ -338,8 +338,8 @@ class CityFormPage extends Component {
                     { this.props.reduxState.cityMedicationsReducer.map( med => {
                         return (
                           <TableRow key={med.generic_name_us}>
-                            <TableCell>{med.generic_name_us}</TableCell>
                             <TableCell>{med.brand_name_us}</TableCell>
+                            <TableCell>{med.generic_name_us}</TableCell>
                             <TableCell>{med.generic_name_translated}</TableCell>
                             <TableCell>
                               <IconButton onClick={this.deleteMedication(med.id)}>
