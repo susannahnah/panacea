@@ -9,8 +9,21 @@
 }
 
 .nav-right {
-    display: flex;
-    float: right;
+    margin-left: auto;
+}
+
+.account-name {
+    display: block;
+}
+
+.account-logout {
+    display: block;
+    text-align: right;
+}
+
+.account-icon {
+    margin-left: 10px;
+    font-size: 3.0rem!important;
 }
 
 .logout {
