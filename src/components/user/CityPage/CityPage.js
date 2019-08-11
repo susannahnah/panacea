@@ -4,6 +4,7 @@ import axios from 'axios';
 import './CityPage.css';
 import hospitalIcon from '../../../images/hospital-teal.png';
 import phoneIcon from '../../../images/Ringing-phone-teal.png';
+import medicineIcon from '../../../images/medicine-white.png';
 import UserLayout from '../../layouts/UserLayout/UserLayout';
 
 // Material-UI components
@@ -14,6 +15,7 @@ import {
   Link as MuiLink, 
   Card, 
   SvgIcon,
+  IconButton,
   ExpansionPanel,
   ExpansionPanelSummary,
   ExpansionPanelDetails
@@ -76,9 +78,9 @@ class CityPage extends Component {
                       <Card style={{
                           width: `35vw`, 
                           margin: `auto`, 
-                          opacity: `.8`, 
                           elevation: `12`, 
-                          backgroundColor: `#4A8CCD`,
+                          backgroundColor: `#6AA4DA`,
+                          boxShadow: `.5px 0px 1px 0px black`,
                           padding: `2.5%`
                       }}>
                         <Typography variant='p' style={{ color: `white` }}>
@@ -198,15 +200,21 @@ class CityPage extends Component {
             </Typography>
           </Paper>
         </Grid>
-        <Link 
-        to={{ pathname: `/city/${this.props.match.params.cityName}/medications`, id: this.state.city.city_id }}
-        style={{ textDecoration: 'underline', color: 'blue', padding: `11%`}}
-        >
-          <Typography>
+        <Grid item xs={12} style={{ textAlign: `center`, margin: `5%`, marginBottom: `15%` }}>
+          <Link 
+          to={{ pathname: `/city/${this.props.match.params.cityName}/medications`, id: this.state.city.city_id }}
+          >
+            <IconButton style={{ backgroundColor: `#6AA4DA`, boxShadow: `.5px 0px 1px 0px black`  }}>
+              <img src={medicineIcon} alt="Medicine Icon" style={{ width: `65%`, padding: `15%` }}/>
+            </IconButton>
+          </Link>
+          <Typography variant="body2" style={{ 
+            // color: `#868E96`, 
+            marginTop: `2.5%` 
+          }}>
             Medicine Translations
           </Typography>
-          
-        </Link>
+        </Grid>
         {/* <pre>
           {JSON.stringify(this.state, null, 2)}
         </pre>
