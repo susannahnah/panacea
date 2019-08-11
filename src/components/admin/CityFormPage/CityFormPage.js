@@ -52,7 +52,7 @@ class CityFormPage extends Component {
     newMedication: {
       generic_name_us: '',
       brand_name_us: '',
-      brand_name_translated: '',
+      generic_name_translated: '',
     }
   }
 
@@ -83,7 +83,7 @@ class CityFormPage extends Component {
 
     const generic = this.state.newMedication.generic_name_us;
     const brand_us = this.state.newMedication.brand_name_us;
-    const brand_translated = this.state.newMedication.brand_name_translated;
+    const brand_translated = this.state.newMedication.generic_name_translated;
 
     if( generic && brand_us && brand_translated ){
       this.props.dispatch({ 
@@ -97,7 +97,7 @@ class CityFormPage extends Component {
         newMedication: {
           generic_name_us: '',
           brand_name_us: '',
-          brand_name_translated: '',
+          generic_name_translated: '',
         }
       }); 
     } else {
@@ -330,7 +330,7 @@ class CityFormPage extends Component {
                     <TableRow>
                       <TableCell>US Generic Name</TableCell>
                       <TableCell>US Brand Name</TableCell>
-                      <TableCell>Translated Brand Name</TableCell>
+                      <TableCell>Translated Generic Name</TableCell>
                       <TableCell></TableCell>
                     </TableRow>
                   </TableHead>
@@ -340,7 +340,7 @@ class CityFormPage extends Component {
                           <TableRow key={med.generic_name_us}>
                             <TableCell>{med.generic_name_us}</TableCell>
                             <TableCell>{med.brand_name_us}</TableCell>
-                            <TableCell>{med.brand_name_translated}</TableCell>
+                            <TableCell>{med.generic_name_translated}</TableCell>
                             <TableCell>
                               <IconButton onClick={this.deleteMedication(med.id)}>
                                 <SvgIcon>
@@ -369,11 +369,11 @@ class CityFormPage extends Component {
                     onChange={this.handleMedicationChange('brand_name_us')}/>
                 </Grid>
                 <Grid item xs={4}>
-                  <TextField label="Translated Brand Name"
+                  <TextField label="Translated Generic Name"
                     margin="normal"
                     variant="outlined"
-                    value={this.state.newMedication.brand_name_translated}
-                    onChange={this.handleMedicationChange('brand_name_translated')}/>
+                    value={this.state.newMedication.generic_name_translated}
+                    onChange={this.handleMedicationChange('generic_name_translated')}/>
                 </Grid>
                 <Grid item xs={12} style={{textAlign: `center`}}>
                   <IconButton onClick={this.addNewMedication}>

@@ -199,7 +199,7 @@ class CityPage extends Component {
           </Paper>
         </Grid>
         <Link 
-        to={{ pathname: `/city/${this.props.match.params.cityName}/medications` }}
+        to={{ pathname: `/city/${this.props.match.params.cityName}/medications`, id: this.state.city.city_id }}
         style={{ textDecoration: 'underline', color: 'blue', padding: `11%`}}
         >
           <Typography>
