@@ -138,7 +138,6 @@ website_url: "https://www.su.krakow.pl/" */}
 
               {/* TODO: FIX THE CLOSE, IT TAKES UP A 100% OF THE WIDTH, MEANING DON'T HAVE TO CLICK X TO CLOSE */}
                 <IconButton
-                  // style={{ color: '#a00404', fontSize: '18pt', left: '5px' }}
                   onClick={markerClose}
                 >
                   <SvgIcon style={{ color: `#F96F9D`}}>
@@ -170,116 +169,159 @@ website_url: "https://www.su.krakow.pl/" */}
                     Comments: {showOrganization[0].comments}
                   </Grid>
 
-                  <Grid item xs={6}>
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          id="recommended"
-                          color="primary"
-                          checked={showOrganization[0].recommended}
-                        />
+                  <Grid item xs={6} className="org-boolean">
+                    {/* <Grid item xs={12} className="boolean-icon"> */}
+                      { showOrganization[0].recommended ?
+                        <SvgIcon style={{ color: `#2ECBB0` }}>
+                          <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"></path>
+                        </SvgIcon>
+                      :
+                        <SvgIcon style={{ color: `#F96F9D` }}>
+                          <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
+                        </SvgIcon>
                       }
-                      label="Recommended"
-                      style={{ width: '180px', marginLeft: '0px' }}
-                    />
+                    {/* </Grid> */}
+                    {/* <Grid item xs={12} 
+                      className="boolean-title"
+                    > */}
+                      <Typography variant="body2" display="inline">
+                        Recommended
+                      </Typography>
+                    {/* </Grid> */}
                   </Grid>
 
-                  <Grid item xs={6}>
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          id="twentyfour"
-                          color="primary"
-                          checked={showOrganization[0].twentyfour}
-                        />
+                  <Grid item xs={6} className="org-boolean">
+                    {/* <Grid item xs={12} className="boolean-icon"> */}
+                      { showOrganization[0].twentyfour ?
+                        <SvgIcon style={{ color: `#2ECBB0` }}>
+                          <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"></path>
+                        </SvgIcon>
+                      :
+                        <SvgIcon style={{ color: `#F96F9D` }}>
+                          <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
+                        </SvgIcon>
                       }
-                      label="Open 24 Hours"
-                      style={{ width: '180px', marginLeft: '0px' }}
-                    />
+                    {/* </Grid> */}
+                    {/* <Grid item xs={12} 
+                      className="boolean-title"
+                    > */}
+                      <Typography variant="body2" display="inline">
+                        Open 24 Hours
+                      </Typography>
+                    {/* </Grid> */}
                   </Grid>
 
-                  <Grid item xs={6}>
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          id="labor_delivery"
-                          color="primary"
-                          checked={showOrganization[0].labor_delivery}
-                        />
+                  <Grid item xs={6} className="org-boolean">
+                    {/* <Grid item xs={12} className="boolean-icon"> */}
+                      { showOrganization[0].labor_delivery ?
+                        <SvgIcon style={{ color: `#2ECBB0` }}>
+                          <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"></path>
+                        </SvgIcon>
+                      :
+                        <SvgIcon style={{ color: `#F96F9D` }}>
+                          <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
+                        </SvgIcon>
                       }
-                      label="Labor and Delivery Available"
-                      style={{ width: '180px', marginLeft: '0px' }}
-                    />
+                    {/* </Grid> */}
+                    {/* <Grid item xs={12} className="boolean-title"> */}
+                      <Typography variant="body2" display="inline">
+                        Labor and Delivery
+                      </Typography>
+                    {/* </Grid> */}
                   </Grid>
 
-                  <Grid item xs={6}>
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          id="childrens"
-                          color="primary"
-                          checked={showOrganization[0].childrens}
-                        />
+                  <Grid item xs={6} className="org-boolean">
+                    {/* <Grid item xs={12} className="boolean-icon"> */}
+                      { showOrganization[0].childrens ?
+                        <SvgIcon style={{ color: `#2ECBB0` }}>
+                          <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"></path>
+                        </SvgIcon>
+                      :
+                        <SvgIcon style={{ color: `#F96F9D` }}>
+                          <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
+                        </SvgIcon>
                       }
-                      label="Pediatric Services"
-                      style={{ width: '180px', marginLeft: '0px' }}
-                    />
+                    {/* </Grid> */}
+                    {/* <Grid item xs={12} className="boolean-title"> */}
+                      <Typography variant="body2" display="inline">
+                        Pediatric Services
+                      </Typography>
+                    {/* </Grid> */}
                   </Grid>
 
-                  <Grid item xs={6}>
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          id="childrens_surgical"
-                          color="primary"
-                          checked={showOrganization[0].childrens_surgical}
-                        />
+                  <Grid item xs={6} className="org-boolean">
+                    {/* <Grid item xs={12} className="boolean-icon"> */}
+                      { showOrganization[0].childrens_surgical ?
+                        <SvgIcon style={{ color: `#2ECBB0` }}>
+                          <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"></path>
+                        </SvgIcon>
+                      :
+                        <SvgIcon style={{ color: `#F96F9D` }}>
+                          <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
+                        </SvgIcon>
                       }
-                      label="Surgical Pediatric Services"
-                      style={{ width: '180px', marginLeft: '0px' }}
-                    />
+                    {/* </Grid> */}
+                    {/* <Grid item xs={12} className="boolean-title"> */}
+                      <Typography variant="body2" display="inline">
+                        Surgical Pediatric Services
+                      </Typography>
+                    {/* </Grid> */}
                   </Grid>
 
-                  <Grid item xs={6}>
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          id="adult"
-                          color="primary"
-                          checked={showOrganization[0].adult}
-                        />
+                  <Grid item xs={6} className="org-boolean">
+                    {/* <Grid item xs={12} className="boolean-icon"> */}
+                      { showOrganization[0].adult ?
+                        <SvgIcon style={{ color: `#2ECBB0` }}>
+                          <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"></path>
+                        </SvgIcon>
+                      :
+                        <SvgIcon style={{ color: `#F96F9D` }}>
+                          <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
+                        </SvgIcon>
                       }
-                      label="Adult Medicine"
-                      style={{ width: '180px', marginLeft: '0px' }}
-                    />
+                    {/* </Grid> */}
+                    {/* <Grid item xs={12} className="boolean-title"> */}
+                      <Typography variant="body2" display="inline">
+                        Adult Medicine
+                      </Typography>
+                    {/* </Grid> */}
                   </Grid>
 
-                  <Grid item xs={6}>
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          id="adult_surgical"
-                          color="primary"
-                          checked={showOrganization[0].adult_surgical}
-                        />
+                  <Grid item xs={6} className="org-boolean">
+                    {/* <Grid item xs={12} className="boolean-icon"> */}
+                      { showOrganization[0].adult_surgical ?
+                        <SvgIcon style={{ color: `#2ECBB0` }}>
+                          <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"></path>
+                        </SvgIcon>
+                      :
+                        <SvgIcon style={{ color: `#F96F9D` }}>
+                          <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
+                        </SvgIcon>
                       }
-                      label="Adult Surgical Services"
-                      style={{ width: '180px', marginLeft: '0px' }}
-                    />
+                    {/* </Grid> */}
+                    {/* <Grid item xs={12} className="boolean-title"> */}
+                      <Typography variant="body2" display="inline">
+                        Adult Surgical Services
+                      </Typography>
+                    {/* </Grid> */}
                   </Grid>
-
-                  <Grid item xs={6}>
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          id="medical_translators"
-                          color="primary"
-                          checked={showOrganization[0].medical_translators}
-                        />
+                  <Grid item xs={6} className="org-boolean">
+                    {/* <Grid item xs={12} className="boolean-icon"> */}
+                      { showOrganization[0].medical_translators ?
+                        <SvgIcon style={{ color: `#2ECBB0` }}>
+                          <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"></path>
+                        </SvgIcon>
+                      :
+                        <SvgIcon style={{ color: `#F96F9D` }}>
+                          <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
+                        </SvgIcon>
                       }
-                      label="Medical Translators Available"
-                      style={{ width: '180px', marginLeft: '0px' }}
-                    />
+                    {/* </Grid> */}
+                    {/* <Grid item xs={12} className="boolean-title"> */}
+                      <Typography variant="body2" display="inline">
+                        Medical Translators Available
+                      </Typography>
+                    {/* </Grid> */}
                   </Grid>
 
                   <Grid item xs={12}>
