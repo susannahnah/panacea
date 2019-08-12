@@ -76,13 +76,13 @@ function MapPage(props) {
             }}
             center={{ lat: lat, lng: lng }}
             zoom={zoom}
+            layerTypes={['TrafficLayer', 'TransitLayer']}
             options={{ clickableIcons: false }}
             onChildClick={markerClicked}
           >
-            {/* 
-              TODO: add functioning back button
-            <div className="back-button">
-              <BackButton></BackButton>
+{/*          TODO: STILL CANT GET FUNCTIONING BACK BUTTON   
+            <div>
+              <BackButton className="back-button" />
             </div> */}
 
             {organizations.map((organization, i) => {
