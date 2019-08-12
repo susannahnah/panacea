@@ -138,7 +138,6 @@ website_url: "https://www.su.krakow.pl/" */}
 
               {/* TODO: FIX THE CLOSE, IT TAKES UP A 100% OF THE WIDTH, MEANING DON'T HAVE TO CLICK X TO CLOSE */}
                 <IconButton
-                  // style={{ color: '#a00404', fontSize: '18pt', left: '5px' }}
                   onClick={markerClose}
                 >
                   <SvgIcon style={{ color: `#F96F9D`}}>

@@ -1,6 +1,8 @@
 import React from 'react';
 import './Marker.css';
 
+import { IconButton, SvgIcon } from '@material-ui/core';
+
 function Marker(organization) {
 
     const { infoWindow } = organization;
@@ -128,14 +130,32 @@ const InfoWindow = (organization) => {
 
     return (
         <div className={organization.visibility}>
-            <span onClick={resetZoom} style={{color: 'red', float: 'right'}}>
+            <IconButton
+                onClick={resetZoom}
+                style={{ padding: 0, float: `right` }}
+            >
+                <SvgIcon style={{ color: `#F96F9D`}}>
+                <path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"></path>
+                </SvgIcon>
+            </IconButton>
+            {/* <span onClick={resetZoom} style={{color: 'red', float: 'right'}}>
                 X
-            </span>
+            </span> */}
             <h3>{organization.name}</h3>
             <h4>Phone Number: {organization.phone_number}</h4>
-            <a target="_blank" href={organization.google_maps_link}>directions</a>
+            <a target="_blank" 
+                href={organization.google_maps_link} 
+                style={{ color: `#868E96`, textDecoration: `underline` }}
+            >
+                Directions
+            </a>
             <br />
-            <span onClick={showOrganizationClick} id={organization.id}>...more info</span>
+            <br />
+            <span onClick={showOrganizationClick} id={organization.id} 
+                style={{ color: `#868E96`, textDecoration: `underline` }}
+            >
+                Details
+            </span>
         </div>
     )
 }
