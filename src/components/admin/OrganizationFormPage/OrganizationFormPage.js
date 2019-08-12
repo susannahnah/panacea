@@ -263,18 +263,13 @@ class OrganizationFormPage extends Component {
             </Grid>
             <Grid
               className="checkBoxes"
-              style={{ padding: "12px" }}
+              style={{ padding: "12px", marginTop:'2vh' }}
               container
               spacing={3}
               item
               xs={12}
             >
-              <h2
-                style={{
-                  marginBottom: 0,
-                  marginTop: `5vw`
-                }}
-              />
+
               <Grid item xs={6}>
                 <FormControlLabel
                   control={
@@ -300,7 +295,7 @@ class OrganizationFormPage extends Component {
                       onChange={this.handleNewCheckBoxChange("twentyfour")}
                     />
                   }
-                  label="Open 24 Hours?"
+                  label="Open 24 Hours"
                 />
               </Grid>
               <Grid item xs={6}>
@@ -314,7 +309,7 @@ class OrganizationFormPage extends Component {
                       onChange={this.handleNewCheckBoxChange("labor_delivery")}
                     />
                   }
-                  label="Labor and Delivery Available?"
+                  label="Labor and Delivery Available"
                 />
               </Grid>
               <Grid item xs={6}>
@@ -328,7 +323,7 @@ class OrganizationFormPage extends Component {
                       onChange={this.handleNewCheckBoxChange("childrens")}
                     />
                   }
-                  label="Pediatric Services?"
+                  label="Pediatric Services"
                 />
               </Grid>
               <Grid item xs={6}>
@@ -344,7 +339,7 @@ class OrganizationFormPage extends Component {
                       )}
                     />
                   }
-                  label="Surgical Pediatric Services?"
+                  label="Surgical Pediatric Services"
                 />
               </Grid>
               <Grid item xs={6}>
@@ -388,7 +383,7 @@ class OrganizationFormPage extends Component {
                       )}
                     />
                   }
-                  label="Medical Translators Available? "
+                  label="Medical Translators Available"
                 />
               </Grid>
             </Grid>
