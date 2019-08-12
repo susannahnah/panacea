@@ -5,7 +5,6 @@ import axios from 'axios';
 import './MapPage.css';
 import { Grid, Typography, Checkbox, FormControlLabel, IconButton, SvgIcon } from '@material-ui/core/';
 import BackButton from '@material-ui/icons/ChevronLeftRounded';
-import UserLayout from '../../layouts/UserLayout/UserLayout';
 
 function MapPage(props) {
 
@@ -64,7 +63,6 @@ function MapPage(props) {
   if (props.location.city_id) {
     return (
       <>
-        <UserLayout>
 
         <div className="container">
           <div className="back-button">
@@ -301,10 +299,6 @@ website_url: "https://www.su.krakow.pl/" */}
             <>
             </>
         }
-
-
-
-        </UserLayout>
 
       </>
     )
