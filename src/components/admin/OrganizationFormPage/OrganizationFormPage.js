@@ -87,9 +87,17 @@ class OrganizationFormPage extends Component {
         }
       });
       this.props.history.push(`/organizations/${this.state.newOrg.name}/${this.props.reduxState.individualOrgReducer.id}`);
-      alert('your changes have been saved!');
+      Swal.fire({
+        title: "Success!",
+        text: "Your changes have been saved.",
+        type: "success"
+      });
     } else {
-      alert('please leave a organization name and a city')
+      Swal.fire({
+        title: "Error:",
+        text: "Please leave a organization name.",
+        type: "error"
+      })
     }
   };
 
