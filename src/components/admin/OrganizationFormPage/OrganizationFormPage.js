@@ -1,8 +1,8 @@
 // src/components/admin/OrganizationFormPage/OrganizationFormPage.js
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import axios from 'axios';
-import Swal from 'sweetalert2';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 //Material-UI components
 import {
@@ -13,64 +13,60 @@ import {
   MenuItem,
   OutlinedInput,
   InputLabel
-} from '@material-ui/core';
-import AdminLayout from '../../layouts/AdminLayout/AdminLayout';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-
+} from "@material-ui/core";
+import AdminLayout from "../../layouts/AdminLayout/AdminLayout";
+import Checkbox from "@material-ui/core/Checkbox";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
 
 class OrganizationFormPage extends Component {
-
   individualOrg = this.props.reduxState.individualOrgReducer;
-
 
   state = {
     newOrg: {
-      city_id: this.individualOrg.city_id || '',
-      name: this.individualOrg.name || '',
-      type: this.individualOrg.type || '',
+      city_id: this.individualOrg.city_id || "",
+      name: this.individualOrg.name || "",
+      type: this.individualOrg.type || "",
       recommended: this.individualOrg.recommended || false,
       twentyfour: this.individualOrg.twentyfour || false,
-      hours: this.individualOrg.hours || '',
-      homeopathic_remedies: this.individualOrg.homeopathic_remedies || '',
+      hours: this.individualOrg.hours || "",
+      homeopathic_remedies: this.individualOrg.homeopathic_remedies || "",
       labor_delivery: this.individualOrg.labor_deliver || false,
       childrens: this.individualOrg.childrens || false,
       childrens_surgical: this.individualOrg.childrens_surgial || false,
       adult: this.individualOrg.adult || false,
       adult_surgical: this.individualOrg.adult_surgical || false,
       medical_translators: this.individualOrg.medical_translators || false,
-      comments: this.individualOrg.comments || '',
-      phone_number: this.individualOrg.phone_number || '',
-      website_url: this.individualOrg.website_url || '',
-      lat: this.individualOrg.lat || '',
-      long: this.individualOrg.long || '',
-      google_maps_link: this.individualOrg.google_maps_link || '',
-      org_address: this.individualOrg.org_address || '',
+      comments: this.individualOrg.comments || "",
+      phone_number: this.individualOrg.phone_number || "",
+      website_url: this.individualOrg.website_url || "",
+      lat: this.individualOrg.lat || "",
+      long: this.individualOrg.long || "",
+      google_maps_link: this.individualOrg.google_maps_link || "",
+      org_address: this.individualOrg.org_address || ""
     }
-  }
+  };
 
-  //handles input changes for org info 
-  handleNewChange = (propertyName) => (event) => {
-    console.log('change occured', event);
+  //handles input changes for org info
+  handleNewChange = propertyName => event => {
+    console.log("change occured", event);
     this.setState({
       newOrg: {
         ...this.state.newOrg,
-        [propertyName]: event.target.value,
+        [propertyName]: event.target.value
       }
     });
   };
 
   //handle input change for check boxes for orgs
-  handleNewCheckBoxChange = (propertyName) => (event) => {
-    console.log('checkbox checked', event);
+  handleNewCheckBoxChange = propertyName => event => {
+    console.log("checkbox checked", event);
     this.setState({
       newOrg: {
         ...this.state.newOrg,
-        [propertyName]: !this.state.newOrg[propertyName],
+        [propertyName]: !this.state.newOrg[propertyName]
       }
-    })
-
-  }
+    });
+  };
 
   // when save button is clicked, update org info in the database
   // first checks that the user has at least given a org name
@@ -78,68 +74,76 @@ class OrganizationFormPage extends Component {
   // if successful, alerts user that changes have been saved
   saveOrg = event => {
     event.preventDefault();
-    if (this.state.newOrg.name !== '' && this.state.newOrg.city_id !== '') {
+    if (this.state.newOrg.name !== "" && this.state.newOrg.city_id !== "") {
       this.props.dispatch({
-        type: 'EDIT_ORG',
+        type: "EDIT_ORG",
         payload: {
           ...this.state.newOrg,
-          id: this.props.reduxState.individualOrgReducer.id,
+          id: this.props.reduxState.individualOrgReducer.id
         }
       });
-      this.props.history.push(`/organizations/${this.state.newOrg.name}/${this.props.reduxState.individualOrgReducer.id}`);
-      alert('your changes have been saved!');
+      this.props.history.push(
+        `/organizations/${this.state.newOrg.name}/${
+          this.props.reduxState.individualOrgReducer.id
+        }`
+      );
+      alert("your changes have been saved!");
     } else {
-      alert('please leave a organization name and a city')
+      alert("please leave a organization name and a city");
     }
   };
-
 
   // on click of 'delete org', confirm user would like to delete, then delete
   deleteOrg = event => {
     // confirm user would like to delete the city
     Swal.fire({
-      title: 'Are you sure?',
-      text: "This will delete the organization and all it's information from the database",
-      type: 'warning',
+      title: "Are you sure?",
+      text:
+        "This will delete the organization and all it's information from the database",
+      type: "warning",
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
       confirmButtonText: `I'm sure.`
-    }).then((result) => {
+    }).then(result => {
       if (result.value) {
         // send confirmation message
-        Swal.fire(
-          'Deleted!',
-          'Organization removed from database.',
-          'success'
-        )
+        Swal.fire("Deleted!", "Organization removed from database.", "success");
         // delete org
         this.willDelete();
         // navigate to og page
-        this.props.history.push('/organizations');
+        this.props.history.push("/organizations");
       }
     });
-  }
+  };
 
   // function to delete an organization from the database
   willDelete = () => {
     this.props.dispatch({
-      type: 'DELETE_ORG',
-      payload: this.props.reduxState.individualOrgReducer.id,
-    })
-  }
+      type: "DELETE_ORG",
+      payload: this.props.reduxState.individualOrgReducer.id
+    });
+  };
 
   componentDidMount() {
     // grab orgName and id params from url
-    const { match: { params: { orgName } } } = this.props;
-    const { match: { params: { id } } } = this.props;
+    const {
+      match: {
+        params: { orgName }
+      }
+    } = this.props;
+    const {
+      match: {
+        params: { id }
+      }
+    } = this.props;
     // check if the form should be new or load info from an existing org
-    if (orgName === 'new') {
+    if (orgName === "new") {
       console.log(orgName);
       // if new, create new org, set individualOrgReducer to new city
       this.props.dispatch({
-        type: 'NEW_ORG',
-        payload: this.state.newOrg,
+        type: "NEW_ORG",
+        payload: this.state.newOrg
       });
     } else {
       // fetch org by id
@@ -147,33 +151,33 @@ class OrganizationFormPage extends Component {
       console.log(orgName);
       // else, select org by id, set individualOrgReducer to existing org
       this.props.dispatch({
-        type: 'SELECT_ORG',
+        type: "SELECT_ORG",
         payload: id
       });
       // directly set state to this city
-      axios.get(`/api/organizations/${id}`)
-        .then(({ data }) => {
-          console.log(data);
-          this.setState({
-            newOrg: {
-              ...data,
-            }
-          })
-        })
+      axios.get(`/api/organizations/${id}`).then(({ data }) => {
+        console.log(data);
+        this.setState({
+          newOrg: {
+            ...data
+          }
+        });
+      });
     }
-    this.props.dispatch({ type: 'FETCH_CITIES' })
+    this.props.dispatch({ type: "FETCH_CITIES" });
   }
 
   render() {
-
     const cities = this.props.reduxState.allCitiesReducer;
 
     return (
       <AdminLayout>
         <div style={{ height: `50px`, bottom: 0 }}>
-          {this.state.newOrg.name ?
-            <h1>{this.state.newOrg.name}</h1> :
-            <h1> </h1>}
+          {this.state.newOrg.name ? (
+            <h1>{this.state.newOrg.name}</h1>
+          ) : (
+            <h1> </h1>
+          )}
         </div>
         <form style={{ width: `100%` }} onSubmit={this.saveOrg}>
           <h2>Organization Summary</h2>
@@ -184,24 +188,27 @@ class OrganizationFormPage extends Component {
                 label="Organization Name"
                 margin="normal"
                 variant="outlined"
-                fullWidth margin="normal"
+                fullWidth
+                margin="normal"
                 value={this.state.newOrg.name}
-                onChange={this.handleNewChange('name')} />
+                onChange={this.handleNewChange("name")}
+              />
             </Grid>
             <Grid className="dropDownCity" item xs={12}>
-              <InputLabel style={{ padding: "12px" }}
-                htmlFor="citySelect">City</InputLabel>
+              <InputLabel style={{ padding: "12px" }} htmlFor="citySelect">
+                City
+              </InputLabel>
               <Select
                 displayEmpty
                 inputProps={{
-                  name: 'city',
-                  id: 'citySelect',
+                  name: "city",
+                  id: "citySelect"
                 }}
                 style={{ minWidth: 120 }}
                 margin="normal"
                 variant="outlined"
                 value={this.state.newOrg.city_id}
-                onChange={this.handleNewChange('city_id')}
+                onChange={this.handleNewChange("city_id")}
                 input={<OutlinedInput name="City" id="outlined-city" />}
               >
                 <MenuItem value="">
@@ -212,47 +219,58 @@ class OrganizationFormPage extends Component {
                     <MenuItem key={city.id} value={city.id}>
                       {city.name}
                     </MenuItem>
-                  )
+                  );
                 })}
               </Select>
             </Grid>
             <Grid className="dropDownType" item xs={12}>
-              <InputLabel style={{ padding: "12px" }}
-                htmlFor="typeSelect"></InputLabel>
+              <InputLabel style={{ padding: "12px" }} htmlFor="typeSelect" />
               <Select
                 displayEmpty
                 inputProps={{
-                  name: 'type',
-                  id: 'typeSelect',
+                  name: "type",
+                  id: "typeSelect"
                 }}
                 style={{ minWidth: 120 }}
                 margin="normal"
                 variant="outlined"
                 value={this.state.newOrg.type}
-                onChange={this.handleNewChange('type')}
+                onChange={this.handleNewChange("type")}
                 input={<OutlinedInput name="Type" id="outlined-type" />}
               >
                 <MenuItem value="">
                   <em>Select Type of Organization</em>
                 </MenuItem>
-                {["Hospital", "Clinic", "Urgent Care", "Pharmacy",
-                  "Laboratory", "Home Visits"].map(type => {
-                    return (
-                      <MenuItem key={type} value={type}>
-                        {type}
-                      </MenuItem>
-                    )
-                  })
-                }
+                {[
+                  "Hospital",
+                  "Clinic",
+                  "Urgent Care",
+                  "Pharmacy",
+                  "Laboratory",
+                  "Home Visits"
+                ].map(type => {
+                  return (
+                    <MenuItem key={type} value={type}>
+                      {type}
+                    </MenuItem>
+                  );
+                })}
               </Select>
             </Grid>
-            <Grid className="checkBoxes" style={{ padding: "12px" }} container spacing={3}
-              item xs={12}>
-              <h2 style={{
-                marginBottom: 0,
-                marginTop: `5vw`
-              }}>
-              </h2>
+            <Grid
+              className="checkBoxes"
+              style={{ padding: "12px" }}
+              container
+              spacing={3}
+              item
+              xs={12}
+            >
+              <h2
+                style={{
+                  marginBottom: 0,
+                  marginTop: `5vw`
+                }}
+              />
               <Grid item xs={6}>
                 <FormControlLabel
                   control={
@@ -261,7 +279,7 @@ class OrganizationFormPage extends Component {
                       margin="normal"
                       color="primary"
                       checked={this.state.newOrg.recommended}
-                      onChange={this.handleNewCheckBoxChange('recommended')}
+                      onChange={this.handleNewCheckBoxChange("recommended")}
                     />
                   }
                   label="Recommended"
@@ -275,7 +293,7 @@ class OrganizationFormPage extends Component {
                       margin="normal"
                       color="primary"
                       checked={this.state.newOrg.twentyfour}
-                      onChange={this.handleNewCheckBoxChange('twentyfour')}
+                      onChange={this.handleNewCheckBoxChange("twentyfour")}
                     />
                   }
                   label="Open 24 Hours?"
@@ -289,7 +307,7 @@ class OrganizationFormPage extends Component {
                       margin="normal"
                       color="primary"
                       checked={this.state.newOrg.labor_delivery}
-                      onChange={this.handleNewCheckBoxChange('labor_delivery')}
+                      onChange={this.handleNewCheckBoxChange("labor_delivery")}
                     />
                   }
                   label="Labor and Delivery Available?"
@@ -303,7 +321,7 @@ class OrganizationFormPage extends Component {
                       margin="normal"
                       color="primary"
                       checked={this.state.newOrg.childrens}
-                      onChange={this.handleNewCheckBoxChange('childrens')}
+                      onChange={this.handleNewCheckBoxChange("childrens")}
                     />
                   }
                   label="Pediatric Services?"
@@ -317,7 +335,9 @@ class OrganizationFormPage extends Component {
                       margin="normal"
                       color="primary"
                       checked={this.state.newOrg.childrens_surgical}
-                      onChange={this.handleNewCheckBoxChange('childrens_surgical')}
+                      onChange={this.handleNewCheckBoxChange(
+                        "childrens_surgical"
+                      )}
                     />
                   }
                   label="Surgical Pediatric Services?"
@@ -331,7 +351,7 @@ class OrganizationFormPage extends Component {
                       margin="normal"
                       color="primary"
                       checked={this.state.newOrg.adult}
-                      onChange={this.handleNewCheckBoxChange('adult')}
+                      onChange={this.handleNewCheckBoxChange("adult")}
                     />
                   }
                   label="Adult Medicine"
@@ -345,7 +365,7 @@ class OrganizationFormPage extends Component {
                       margin="normal"
                       color="primary"
                       checked={this.state.newOrg.adult_surgical}
-                      onChange={this.handleNewCheckBoxChange('adult_surgical')}
+                      onChange={this.handleNewCheckBoxChange("adult_surgical")}
                     />
                   }
                   label="Adult Surgical Services"
@@ -359,7 +379,9 @@ class OrganizationFormPage extends Component {
                       margin="normal"
                       color="primary"
                       checked={this.state.newOrg.medical_translators}
-                      onChange={this.handleNewCheckBoxChange('medical_translators')}
+                      onChange={this.handleNewCheckBoxChange(
+                        "medical_translators"
+                      )}
                     />
                   }
                   label="Medical Translators Available? "
@@ -373,9 +395,11 @@ class OrganizationFormPage extends Component {
                 label="Phone Number"
                 margin="normal"
                 variant="outlined"
-                fullWidth margin="normal"
+                fullWidth
+                margin="normal"
                 value={this.state.newOrg.phone_number}
-                onChange={this.handleNewChange('phone_number')} />
+                onChange={this.handleNewChange("phone_number")}
+              />
             </Grid>
 
             <Grid className="inputFields" item xs={12}>
@@ -383,11 +407,13 @@ class OrganizationFormPage extends Component {
                 rows="8"
                 multiline
                 label="Open Hours"
-                fullWidth margin="normal"
+                fullWidth
+                margin="normal"
                 variant="outlined"
-                type='type'
+                type="type"
                 value={this.state.newOrg.hours}
-                onChange={this.handleNewChange('hours')} />
+                onChange={this.handleNewChange("hours")}
+              />
             </Grid>
             <Grid item xs={12}>
               <TextField
@@ -395,62 +421,78 @@ class OrganizationFormPage extends Component {
                 label="Website URL"
                 margin="normal"
                 variant="outlined"
-                fullWidth margin="normal"
+                fullWidth
+                margin="normal"
                 value={this.state.newOrg.website_url}
-                onChange={this.handleNewChange('website_url')} />
+                onChange={this.handleNewChange("website_url")}
+              />
             </Grid>
-            <Grid className="inputFields" container spacing={3}
-              item xs={12}>
-              <h2 style={{
-                marginBottom: 0,
-                marginTop: `5vw`
-              }}>
-                Location
-            </h2>
+            <Grid className="inputFields" container spacing={3} item xs={12}>
+              <Grid item xs={12}>
+                <h2
+                  style={{
+                    marginBottom: 0,
+                    marginTop: `5vw`
+                  }}
+                >
+                  Location
+                </h2>
+              </Grid>
+
               <Grid className="inputFields" item xs={12}>
                 <TextField
                   rows="5"
                   multiline
                   label="Address"
-                  fullWidth margin="normal"
+                  fullWidth
+                  margin="normal"
                   variant="outlined"
-                  type='type'
+                  type="type"
                   value={this.state.newOrg.org_address}
-                  onChange={this.handleNewChange('org_address')} />
+                  onChange={this.handleNewChange("org_address")}
+                />
               </Grid>
               <Grid item xs={6}>
                 <TextField
                   id="lat"
                   label="Latitude"
-                  fullWidth margin="normal"
+                  fullWidth
+                  margin="normal"
                   variant="outlined"
                   value={this.state.newOrg.lat}
-                  onChange={this.handleNewChange('lat')} />
+                  onChange={this.handleNewChange("lat")}
+                />
               </Grid>
               <Grid item xs={6}>
                 <TextField
                   id="long"
                   label="Longitude"
-                  fullWidth margin="normal"
+                  fullWidth
+                  margin="normal"
                   variant="outlined"
                   value={this.state.newOrg.long}
-                  onChange={this.handleNewChange('long')} />
+                  onChange={this.handleNewChange("long")}
+                />
               </Grid>
             </Grid>
             <Grid item xs={12}>
               <TextField
                 id="google_maps_link"
                 label="Google Maps Link"
-                fullWidth margin="normal"
+                fullWidth
+                margin="normal"
                 variant="outlined"
                 value={this.state.newOrg.google_maps_link}
-                onChange={this.handleNewChange('google_maps_link')} />
+                onChange={this.handleNewChange("google_maps_link")}
+              />
             </Grid>
             <Grid className="inputFields" item xs={12}>
-              <h2 style={{
-                marginBottom: 0,
-                marginTop: `4vw`
-              }}>
+              <h2
+                style={{
+                  marginBottom: 0,
+                  marginTop: `4vw`
+                }}
+              >
                 Additional Information
               </h2>
               <Grid item xs={12}>
@@ -460,9 +502,11 @@ class OrganizationFormPage extends Component {
                   label="Homeopathic Remedies"
                   variant="outlined"
                   multiline
-                  fullWidth margin="normal"
+                  fullWidth
+                  margin="normal"
                   value={this.state.newOrg.homeopathic_remedies}
-                  onChange={this.handleNewChange('homeopathic_remedies')} />
+                  onChange={this.handleNewChange("homeopathic_remedies")}
+                />
               </Grid>
               <Grid item xs={12}>
                 <TextField
@@ -470,30 +514,51 @@ class OrganizationFormPage extends Component {
                   rows="12"
                   label="Additional Comments"
                   multiline
-                  fullWidth margin="normal"
+                  fullWidth
+                  margin="normal"
                   variant="outlined"
                   value={this.state.newOrg.comments}
-                  onChange={this.handleNewChange('comments')} />
+                  onChange={this.handleNewChange("comments")}
+                />
               </Grid>
             </Grid>
-            <Grid container item xs={12}
-              style={{ margin: `5%`, marginBottom: `20vh` }}>
-              <Grid item xs={6}>
-                <Button type='submit' value='Save' style={{ width: "24vw" }} variant="contained" color="inherent">Save</Button>
+            <Grid
+              container
+              fullWidth
+              spacing={2}
+              justify="flex-start"
+              style={{ marginTop: `5%`, marginBottom: `20vh` }}
+            >
+              <Grid item xs="auto" sm={4} md={4} lg={4} xl={4}>
+                <Button
+                  fullWidth
+                  type="submit"
+                  value="Save"
+                  variant="contained"
+                  color="inherent"
+                >
+                  Save
+                </Button>
               </Grid>
-              <Grid item xs={6}>
-                <Button onClick={this.deleteOrg} value='Delete Organization' style={{ width: "24vw" }} color="secondary">Delete Organization</Button>
+              <Grid item xs="auto" sm={4} md={4} lg={4} xl={4}>
+                <Button
+                  fullWidth
+                  onClick={this.deleteOrg}
+                  value="Delete Organization"
+                  variant="outlined"
+                  color="secondary"
+                >
+                  Delete Organization
+                </Button>
               </Grid>
             </Grid>
           </Grid>
         </form>
-      </AdminLayout >
-    )
+      </AdminLayout>
+    );
   }
 }
 
-
-
-const mapReduxStateToProps = (reduxState) => ({ reduxState });
+const mapReduxStateToProps = reduxState => ({ reduxState });
 
 export default connect(mapReduxStateToProps)(OrganizationFormPage);

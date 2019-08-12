@@ -338,7 +338,7 @@ class CityFormPage extends Component {
                     <TableRow>
                       <TableCell>US Brand Name</TableCell>
                       <TableCell>US Generic Name</TableCell>
-                      <TableCell>Translated Generic Name</TableCell>
+                      <TableCell>Translated Name</TableCell>
                       <TableCell></TableCell>
                     </TableRow>
                   </TableHead>
@@ -377,7 +377,7 @@ class CityFormPage extends Component {
                     onChange={this.handleMedicationChange('brand_name_us')} />
                 </Grid>
                 <Grid item xs={4}>
-                  <TextField label="Translated Generic Name"
+                  <TextField label="Translated Name"
                     margin="normal"
                     variant="outlined"
                     value={this.state.newMedication.generic_name_translated}
@@ -475,7 +475,7 @@ class CityFormPage extends Component {
                 value={this.state.newCity.local_resources}
                 onChange={this.handleCityChange('local_resources')} />
             </Grid>
-            <Grid className="inputFields" container item xs={12}>
+            <Grid container fullWidth spacing={2} justify="flex-start">
               <Grid item xs={12}>
                 <h2 style={{
                   marginBottom: 0,
@@ -484,7 +484,7 @@ class CityFormPage extends Component {
                   Geographical Information
                 </h2>
               </Grid>
-              <Grid item xs={6} style={{ padding: `0 15px` }}>
+              <Grid item xs={6}>
                 <TextField
                   id="lat"
                   label="Latitude"
@@ -493,7 +493,7 @@ class CityFormPage extends Component {
                   value={this.state.newCity.lat}
                   onChange={this.handleCityChange('lat')} />
               </Grid>
-              <Grid item xs={6} style={{ padding: `0 15px` }}>
+              <Grid item xs={6}>
                 <TextField
                   id="long"
                   label="Longitude"
@@ -503,14 +503,15 @@ class CityFormPage extends Component {
                   onChange={this.handleCityChange('long')} />
               </Grid>
             </Grid>
-            <Grid container item xs={12}
-              style={{ margin: `5%`, marginBottom: `20vh` }}>
-              <Grid item xs={6}>
-                <Button type='submit' value='Save' style={{ width: "24vw" }} variant="contained" color="inherit">Save</Button>
+            <Grid container fullWidth spacing={2} justify="flex-start"
+              style={{ marginTop  : `5%`, marginBottom: `20vh` }}>
+              <Grid item xs="auto" sm={4} md={4} lg={4} xl={4}>
+                <Button fullWidth type='submit' value='Save' variant="contained" color="inherit">Save</Button>
               </Grid>
-              <Grid item xs={6}>
-                <Button onClick={this.deleteCity} value='Delete City' style={{ width: "24vw" }} color="secondary">Delete City</Button>
+              <Grid item xs="auto" sm={4} md={4} lg={4} xl={4}>
+                <Button fullWidth onClick={this.deleteCity} variant="outlined" value='Delete City' color="secondary">Delete City</Button>
               </Grid>
+              {/* style={{ width: "15vmax" }} */}
             </Grid>
           </Grid>
         </form>
