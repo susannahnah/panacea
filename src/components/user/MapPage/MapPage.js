@@ -3,7 +3,7 @@ import GoogleMapReact from 'google-map-react';
 import Marker from './Marker';
 import axios from 'axios';
 import './MapPage.css';
-import { Grid, Typography, Checkbox, FormControlLabel } from '@material-ui/core/';
+import { Grid, Typography, Checkbox, FormControlLabel, IconButton } from '@material-ui/core/';
 import BackButton from '@material-ui/icons/ChevronLeftRounded';
 import UserLayout from '../../layouts/UserLayout/UserLayout';
 
@@ -12,6 +12,17 @@ function MapPage(props) {
   const { cityName } = props.match.params;
   const [organizations, setOrganizations] = useState([]);
   const [showOrganization, setOrganizationToShow] = useState([]);
+  const [lat, setLat] = useState(props.location.coordinates.lat);
+  const [lng, setLng] = useState(props.location.coordinates.lng);
+  const [infoWindow, setInfoWindow] = useState(null);
+  const [zoom, setZoom] = useState(11);
+
+  const markerClicked = (key, props) => {
+    const { lat, lng } = props;
+    setLat(Number(lat));
+    setLng(Number(lng));
+    return setZoom(13);
+  }
 
   const markerOpen = (e) => {
     const { id } = e.currentTarget;
@@ -21,7 +32,16 @@ function MapPage(props) {
   }
 
   const markerClose = (e) => {
-    setOrganizationToShow([]);
+    return setOrganizationToShow([]);
+  }
+
+  const showInfoWindow = (e) => {
+    return setInfoWindow(e.currentTarget.id);
+  }
+
+  const resetZoom = (e) => {
+    setInfoWindow(null);
+    return setZoom(11);
   }
 
   useEffect(() => {
@@ -44,30 +64,40 @@ function MapPage(props) {
   if (props.location.city_id) {
     return (
       <>
-        {/* <UserLayout> */}
+        <UserLayout>
 
         <div className="container">
-
+          <div className="back-button">
+            <IconButton onClick={
+              props.history.goBack
+            } style={{
+              backgroundColor: `#6AA4DA`, 
+              boxShadow: `.5px 0px 1px 0px black`
+            }}>
+              <BackButton style={{ color: `white` }}/>
+            </IconButton>
+          </div>
+          
           <GoogleMapReact
             bootstrapURLKeys={{
               // TODO: restrict key later
               key: 'AIzaSyD1LKqeIf7_dF7UhVc9JGzNbo_vUM3gOjE',
               language: 'en'
             }}
-            center={props.location.coordinates}
-            defaultZoom={11}
+            center={{ lat: lat, lng: lng }}
+            zoom={zoom}
+            layerTypes={['TrafficLayer', 'TransitLayer']}
             options={{ clickableIcons: false }}
+            onChildClick={markerClicked}
           >
-            {/* 
-              TODO: add functioning back button
-            <div className="back-button">
-              <BackButton></BackButton>
-            </div> */}
 
             {organizations.map((organization, i) => {
               return (
                 <Marker
                   key={i}
+                  infoWindow={infoWindow}
+                  showInfoWindow={showInfoWindow}
+                  resetZoom={resetZoom}
                   showOrganizationClick={markerOpen}
                   cityName={cityName}
                   {...organization}
@@ -108,9 +138,9 @@ website_url: "https://www.su.krakow.pl/" */}
 
               <div className="organization-list">
 
-              {/* TODO: FIX THE CLOSE, IT TAKES UP A 100% OF THE WIDTH, MEANING DON'T HAVE TO CLICK X TO CLOSE */}
+                {/* TODO: FIX THE CLOSE, IT TAKES UP A 100% OF THE WIDTH, MEANING DON'T HAVE TO CLICK X TO CLOSE */}
                 <div
-                  style={{ color: '#a00404', fontSize: '18pt', left: '5px' }}
+                  style={{ color: '#a00404', fontSize: '18pt', left: '5px', float: 'right' }}
                   onClick={markerClose}
                 >
                   X
@@ -267,7 +297,7 @@ website_url: "https://www.su.krakow.pl/" */}
 
 
 
-        {/* </UserLayout> */}
+        </UserLayout>
 
       </>
     )

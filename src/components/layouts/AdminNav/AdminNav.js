@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -17,6 +17,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import SvgIcon from '@material-ui/core/SvgIcon';
+import AccountCircle from '@material-ui/icons/AccountCircle';
 
 import './AdminNav.css'
 import LogOutButton from '../../admin/LogOutButton/LogOutButton';
@@ -86,7 +87,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const AdminNav = (props) =>  {
+const AdminNav = (props) => {
 
   const classes = useStyles();
   const theme = useTheme();
@@ -122,12 +123,18 @@ const AdminNav = (props) =>  {
           </IconButton>
           <Link to="/admin">
             <Typography variant="h6" noWrap>
-                Panacea
+              Panacea
             </Typography>
           </Link>
-          {/* <div className="nav-right">
-              <h6>Sommer Collins</h6>
-          </div> */}
+          <div className="nav-right">
+            <span className="account-name">Sommer Collins</span>
+
+            <span className="account-logout">
+              <LogOutButton />
+            </span>
+
+          </div>
+          <AccountCircle className="account-icon" />
         </Toolbar>
       </AppBar>
       <Drawer
@@ -151,36 +158,36 @@ const AdminNav = (props) =>  {
         </div>
         <Divider />
         <List className="drawer-list">
-            <Link to="/admin">
-                <ListItem button key="home">
-                    <ListItemIcon>
-                        <SvgIcon>
-                            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path>
-                        </SvgIcon>
-                    </ListItemIcon>
-                    <ListItemText primary="Home"/>
-                </ListItem>
-            </Link>
-            <Link to="/cities">
-                <ListItem button key="cities">
-                    <ListItemIcon>
-                        <SvgIcon>
-                            <path d="M15 11V5l-3-3-3 3v2H3v14h18V11h-6zm-8 8H5v-2h2v2zm0-4H5v-2h2v2zm0-4H5V9h2v2zm6 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V9h2v2zm0-4h-2V5h2v2zm6 12h-2v-2h2v2zm0-4h-2v-2h2v2z"></path>
-                        </SvgIcon>
-                    </ListItemIcon>
-                    <ListItemText primary="Cities"/>
-                </ListItem>
-            </Link>
-            <Link to="/organizations">
-                <ListItem button key="organizations">
-                    <ListItemIcon>
-                        <SvgIcon>
-                            <path d="M4 10v7h3v-7H4zm6 0v7h3v-7h-3zM2 22h19v-3H2v3zm14-12v7h3v-7h-3zm-4.5-9L2 6v2h19V6l-9.5-5z"></path>
-                        </SvgIcon>
-                    </ListItemIcon>
-                    <ListItemText primary="Organizations"/>
-                </ListItem>
-            </Link>
+          <Link to="/admin">
+            <ListItem button key="home">
+              <ListItemIcon>
+                <SvgIcon>
+                  <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path>
+                </SvgIcon>
+              </ListItemIcon>
+              <ListItemText primary="Home" />
+            </ListItem>
+          </Link>
+          <Link to="/cities">
+            <ListItem button key="cities">
+              <ListItemIcon>
+                <SvgIcon>
+                  <path d="M15 11V5l-3-3-3 3v2H3v14h18V11h-6zm-8 8H5v-2h2v2zm0-4H5v-2h2v2zm0-4H5V9h2v2zm6 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V9h2v2zm0-4h-2V5h2v2zm6 12h-2v-2h2v2zm0-4h-2v-2h2v2z"></path>
+                </SvgIcon>
+              </ListItemIcon>
+              <ListItemText primary="Cities" />
+            </ListItem>
+          </Link>
+          <Link to="/organizations">
+            <ListItem button key="organizations">
+              <ListItemIcon>
+                <SvgIcon>
+                  <path d="M4 10v7h3v-7H4zm6 0v7h3v-7h-3zM2 22h19v-3H2v3zm14-12v7h3v-7h-3zm-4.5-9L2 6v2h19V6l-9.5-5z"></path>
+                </SvgIcon>
+              </ListItemIcon>
+              <ListItemText primary="Organizations" />
+            </ListItem>
+          </Link>
         </List>
       </Drawer>
     </div>
