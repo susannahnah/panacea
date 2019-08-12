@@ -19,3 +19,15 @@
   top: 10px;
   z-index: +1;
 }
+
+.org-boolean {
+  /* padding: 4%; */
+  /* border: 1px solid #868E96; */
+  display: flex;
+  align-items: center;
+  height: 10vh;
+}
+
+.org-boolean > svg {
+  margin-right: 10px;
+}

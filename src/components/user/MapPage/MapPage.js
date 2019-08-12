@@ -169,107 +169,159 @@ website_url: "https://www.su.krakow.pl/" */}
                     Comments: {showOrganization[0].comments}
                   </Grid>
 
-                  <Grid item xs={6} style={{ padding: `4%` }}>
-                    { showOrganization[0].recommended ?
-                      <SvgIcon style={{ color: `#2ECBB0` }}>
-                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"></path>
-                      </SvgIcon>
-                    :
-                      <></>
-                    }
-                    <span style={{ display: `inline-block`, marginLeft: `4%` }}>
-                      Recommended
-                    </span>
+                  <Grid item xs={6} className="org-boolean">
+                    {/* <Grid item xs={12} className="boolean-icon"> */}
+                      { showOrganization[0].recommended ?
+                        <SvgIcon style={{ color: `#2ECBB0` }}>
+                          <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"></path>
+                        </SvgIcon>
+                      :
+                        <SvgIcon style={{ color: `#F96F9D` }}>
+                          <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
+                        </SvgIcon>
+                      }
+                    {/* </Grid> */}
+                    {/* <Grid item xs={12} 
+                      className="boolean-title"
+                    > */}
+                      <Typography variant="body2" display="inline">
+                        Recommended
+                      </Typography>
+                    {/* </Grid> */}
                   </Grid>
 
-                  <Grid item xs={6} style={{ padding: `4%` }}>
-                    { showOrganization[0].twentyfour ?
-                      <SvgIcon style={{ color: `#2ECBB0` }}>
-                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"></path>
-                      </SvgIcon>
-                    :
-                      <></>
-                    }
-                    <span style={{ display: `inline-block`, marginLeft: `4%` }}>
-                      Open 24 Hours
-                    </span>
+                  <Grid item xs={6} className="org-boolean">
+                    {/* <Grid item xs={12} className="boolean-icon"> */}
+                      { showOrganization[0].twentyfour ?
+                        <SvgIcon style={{ color: `#2ECBB0` }}>
+                          <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"></path>
+                        </SvgIcon>
+                      :
+                        <SvgIcon style={{ color: `#F96F9D` }}>
+                          <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
+                        </SvgIcon>
+                      }
+                    {/* </Grid> */}
+                    {/* <Grid item xs={12} 
+                      className="boolean-title"
+                    > */}
+                      <Typography variant="body2" display="inline">
+                        Open 24 Hours
+                      </Typography>
+                    {/* </Grid> */}
                   </Grid>
 
-                  <Grid item xs={6} style={{ padding: `4%` }}>
-                    { showOrganization[0].labor_delivery ?
-                      <SvgIcon style={{ color: `#2ECBB0` }}>
-                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"></path>
-                      </SvgIcon>
-                    :
-                      <></>
-                    }
-                    <span style={{ display: `inline-block`, marginLeft: `4%` }}>
-                      Labor and Delivery Available
-                    </span>
+                  <Grid item xs={6} className="org-boolean">
+                    {/* <Grid item xs={12} className="boolean-icon"> */}
+                      { showOrganization[0].labor_delivery ?
+                        <SvgIcon style={{ color: `#2ECBB0` }}>
+                          <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"></path>
+                        </SvgIcon>
+                      :
+                        <SvgIcon style={{ color: `#F96F9D` }}>
+                          <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
+                        </SvgIcon>
+                      }
+                    {/* </Grid> */}
+                    {/* <Grid item xs={12} className="boolean-title"> */}
+                      <Typography variant="body2" display="inline">
+                        Labor and Delivery
+                      </Typography>
+                    {/* </Grid> */}
                   </Grid>
 
-                  <Grid item xs={6} style={{ padding: `4%` }}>
-                    { showOrganization[0].childrens ?
-                      <SvgIcon style={{ color: `#2ECBB0` }}>
-                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"></path>
-                      </SvgIcon>
-                    :
-                      <></>
-                    }
-                    <span style={{ display: `inline-block`, marginLeft: `4%` }}>
-                      Pediatric Services
-                    </span>
+                  <Grid item xs={6} className="org-boolean">
+                    {/* <Grid item xs={12} className="boolean-icon"> */}
+                      { showOrganization[0].childrens ?
+                        <SvgIcon style={{ color: `#2ECBB0` }}>
+                          <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"></path>
+                        </SvgIcon>
+                      :
+                        <SvgIcon style={{ color: `#F96F9D` }}>
+                          <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
+                        </SvgIcon>
+                      }
+                    {/* </Grid> */}
+                    {/* <Grid item xs={12} className="boolean-title"> */}
+                      <Typography variant="body2" display="inline">
+                        Pediatric Services
+                      </Typography>
+                    {/* </Grid> */}
                   </Grid>
 
-                  <Grid item xs={6} style={{ padding: `4%` }}>
-                    { showOrganization[0].childrens_surgical ?
-                      <SvgIcon style={{ color: `#2ECBB0` }}>
-                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"></path>
-                      </SvgIcon>
-                    :
-                      <></>
-                    }
-                    <span style={{ display: `inline-block`, marginLeft: `4%` }}>
-                      Surgical Pediatric Services
-                    </span>
+                  <Grid item xs={6} className="org-boolean">
+                    {/* <Grid item xs={12} className="boolean-icon"> */}
+                      { showOrganization[0].childrens_surgical ?
+                        <SvgIcon style={{ color: `#2ECBB0` }}>
+                          <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"></path>
+                        </SvgIcon>
+                      :
+                        <SvgIcon style={{ color: `#F96F9D` }}>
+                          <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
+                        </SvgIcon>
+                      }
+                    {/* </Grid> */}
+                    {/* <Grid item xs={12} className="boolean-title"> */}
+                      <Typography variant="body2" display="inline">
+                        Surgical Pediatric Services
+                      </Typography>
+                    {/* </Grid> */}
                   </Grid>
 
-                  <Grid item xs={6} style={{ padding: `4%` }}>
-                    { showOrganization[0].adult ?
-                      <SvgIcon style={{ color: `#2ECBB0` }}>
-                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"></path>
-                      </SvgIcon>
-                    :
-                      <></>
-                    }
-                    <span style={{ display: `inline-block`, marginLeft: `4%` }}>
-                      Adult Medicine
-                    </span>
+                  <Grid item xs={6} className="org-boolean">
+                    {/* <Grid item xs={12} className="boolean-icon"> */}
+                      { showOrganization[0].adult ?
+                        <SvgIcon style={{ color: `#2ECBB0` }}>
+                          <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"></path>
+                        </SvgIcon>
+                      :
+                        <SvgIcon style={{ color: `#F96F9D` }}>
+                          <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
+                        </SvgIcon>
+                      }
+                    {/* </Grid> */}
+                    {/* <Grid item xs={12} className="boolean-title"> */}
+                      <Typography variant="body2" display="inline">
+                        Adult Medicine
+                      </Typography>
+                    {/* </Grid> */}
                   </Grid>
 
-                  <Grid item xs={6} style={{ padding: `4%` }}>
-                    { showOrganization[0].adult_surgical ?
-                      <SvgIcon style={{ color: `#2ECBB0` }}>
-                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"></path>
-                      </SvgIcon>
-                    :
-                      <></>
-                    }
-                    <span style={{ display: `inline-block`, marginLeft: `4%` }}>
-                      Adult Surgical Services
-                    </span>
+                  <Grid item xs={6} className="org-boolean">
+                    {/* <Grid item xs={12} className="boolean-icon"> */}
+                      { showOrganization[0].adult_surgical ?
+                        <SvgIcon style={{ color: `#2ECBB0` }}>
+                          <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"></path>
+                        </SvgIcon>
+                      :
+                        <SvgIcon style={{ color: `#F96F9D` }}>
+                          <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
+                        </SvgIcon>
+                      }
+                    {/* </Grid> */}
+                    {/* <Grid item xs={12} className="boolean-title"> */}
+                      <Typography variant="body2" display="inline">
+                        Adult Surgical Services
+                      </Typography>
+                    {/* </Grid> */}
                   </Grid>
-                  <Grid item xs={6} style={{ padding: `4%` }}>
-                    { showOrganization[0].medical_translators ?
-                      <SvgIcon style={{ color: `#2ECBB0` }}>
-                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"></path>
-                      </SvgIcon>
-                    :
-                      <></>
-                    }
-                    <span style={{ display: `inline-block`, marginLeft: `4%` }}>
-                      Medical Translators Available
-                    </span>
+                  <Grid item xs={6} className="org-boolean">
+                    {/* <Grid item xs={12} className="boolean-icon"> */}
+                      { showOrganization[0].medical_translators ?
+                        <SvgIcon style={{ color: `#2ECBB0` }}>
+                          <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"></path>
+                        </SvgIcon>
+                      :
+                        <SvgIcon style={{ color: `#F96F9D` }}>
+                          <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
+                        </SvgIcon>
+                      }
+                    {/* </Grid> */}
+                    {/* <Grid item xs={12} className="boolean-title"> */}
+                      <Typography variant="body2" display="inline">
+                        Medical Translators Available
+                      </Typography>
+                    {/* </Grid> */}
                   </Grid>
 
                   <Grid item xs={12}>
