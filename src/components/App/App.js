@@ -15,13 +15,11 @@ import UserLandingPage from '../user/UserLandingPage/UserLandingPage';
 import CityPage from '../user/CityPage/CityPage';
 import MedicationsPage from '../user/MedicationsPage/MedicationsPage';
 import MapPage from '../user/MapPage/MapPage';
-import OrganizationPage from '../user/OrganizationPage/OrganizationPage';
 import AdminLandingPage from '../admin/AdminLandingPage/AdminLandingPage';
 import CitiesPage from '../admin/CitiesPage/CitiesPage';
 import CityFormPage from '../admin/CityFormPage/CityFormPage';
 import OrganizationsPage from '../admin/OrganizationsPage/OrganizationsPage';
 import OrganizationFormPage from '../admin/OrganizationFormPage/OrganizationFormPage';
-import AdminLayout from '../layouts/AdminLayout/AdminLayout';
 
 class App extends Component {
   componentDidMount () {
