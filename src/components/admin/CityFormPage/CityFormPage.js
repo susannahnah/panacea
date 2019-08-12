@@ -549,7 +549,6 @@ class CityFormPage extends Component {
               <Grid item xs="auto" sm={4} md={4} lg={4} xl={4}>
                 <Button fullWidth onClick={this.deleteCity} variant="outlined" value='Delete City' color="secondary">Delete City</Button>
               </Grid>
-              {/* style={{ width: "15vmax" }} */}
             </Grid>
           </Grid>
         </form>
