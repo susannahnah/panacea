@@ -169,116 +169,107 @@ website_url: "https://www.su.krakow.pl/" */}
                     Comments: {showOrganization[0].comments}
                   </Grid>
 
-                  <Grid item xs={6}>
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          id="recommended"
-                          color="primary"
-                          checked={showOrganization[0].recommended}
-                        />
-                      }
-                      label="Recommended"
-                      style={{ width: '180px', marginLeft: '0px' }}
-                    />
+                  <Grid item xs={6} style={{ padding: `4%` }}>
+                    { showOrganization[0].recommended ?
+                      <SvgIcon style={{ color: `#2ECBB0` }}>
+                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"></path>
+                      </SvgIcon>
+                    :
+                      <></>
+                    }
+                    <span style={{ display: `inline-block`, marginLeft: `4%` }}>
+                      Recommended
+                    </span>
                   </Grid>
 
-                  <Grid item xs={6}>
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          id="twentyfour"
-                          color="primary"
-                          checked={showOrganization[0].twentyfour}
-                        />
-                      }
-                      label="Open 24 Hours"
-                      style={{ width: '180px', marginLeft: '0px' }}
-                    />
+                  <Grid item xs={6} style={{ padding: `4%` }}>
+                    { showOrganization[0].twentyfour ?
+                      <SvgIcon style={{ color: `#2ECBB0` }}>
+                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"></path>
+                      </SvgIcon>
+                    :
+                      <></>
+                    }
+                    <span style={{ display: `inline-block`, marginLeft: `4%` }}>
+                      Open 24 Hours
+                    </span>
                   </Grid>
 
-                  <Grid item xs={6}>
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          id="labor_delivery"
-                          color="primary"
-                          checked={showOrganization[0].labor_delivery}
-                        />
-                      }
-                      label="Labor and Delivery Available"
-                      style={{ width: '180px', marginLeft: '0px' }}
-                    />
+                  <Grid item xs={6} style={{ padding: `4%` }}>
+                    { showOrganization[0].labor_delivery ?
+                      <SvgIcon style={{ color: `#2ECBB0` }}>
+                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"></path>
+                      </SvgIcon>
+                    :
+                      <></>
+                    }
+                    <span style={{ display: `inline-block`, marginLeft: `4%` }}>
+                      Labor and Delivery Available
+                    </span>
                   </Grid>
 
-                  <Grid item xs={6}>
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          id="childrens"
-                          color="primary"
-                          checked={showOrganization[0].childrens}
-                        />
-                      }
-                      label="Pediatric Services"
-                      style={{ width: '180px', marginLeft: '0px' }}
-                    />
+                  <Grid item xs={6} style={{ padding: `4%` }}>
+                    { showOrganization[0].childrens ?
+                      <SvgIcon style={{ color: `#2ECBB0` }}>
+                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"></path>
+                      </SvgIcon>
+                    :
+                      <></>
+                    }
+                    <span style={{ display: `inline-block`, marginLeft: `4%` }}>
+                      Pediatric Services
+                    </span>
                   </Grid>
 
-                  <Grid item xs={6}>
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          id="childrens_surgical"
-                          color="primary"
-                          checked={showOrganization[0].childrens_surgical}
-                        />
-                      }
-                      label="Surgical Pediatric Services"
-                      style={{ width: '180px', marginLeft: '0px' }}
-                    />
+                  <Grid item xs={6} style={{ padding: `4%` }}>
+                    { showOrganization[0].childrens_surgical ?
+                      <SvgIcon style={{ color: `#2ECBB0` }}>
+                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"></path>
+                      </SvgIcon>
+                    :
+                      <></>
+                    }
+                    <span style={{ display: `inline-block`, marginLeft: `4%` }}>
+                      Surgical Pediatric Services
+                    </span>
                   </Grid>
 
-                  <Grid item xs={6}>
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          id="adult"
-                          color="primary"
-                          checked={showOrganization[0].adult}
-                        />
-                      }
-                      label="Adult Medicine"
-                      style={{ width: '180px', marginLeft: '0px' }}
-                    />
+                  <Grid item xs={6} style={{ padding: `4%` }}>
+                    { showOrganization[0].adult ?
+                      <SvgIcon style={{ color: `#2ECBB0` }}>
+                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"></path>
+                      </SvgIcon>
+                    :
+                      <></>
+                    }
+                    <span style={{ display: `inline-block`, marginLeft: `4%` }}>
+                      Adult Medicine
+                    </span>
                   </Grid>
 
-                  <Grid item xs={6}>
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          id="adult_surgical"
-                          color="primary"
-                          checked={showOrganization[0].adult_surgical}
-                        />
-                      }
-                      label="Adult Surgical Services"
-                      style={{ width: '180px', marginLeft: '0px' }}
-                    />
+                  <Grid item xs={6} style={{ padding: `4%` }}>
+                    { showOrganization[0].adult_surgical ?
+                      <SvgIcon style={{ color: `#2ECBB0` }}>
+                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"></path>
+                      </SvgIcon>
+                    :
+                      <></>
+                    }
+                    <span style={{ display: `inline-block`, marginLeft: `4%` }}>
+                      Adult Surgical Services
+                    </span>
                   </Grid>
-
-                  <Grid item xs={6}>
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          id="medical_translators"
-                          color="primary"
-                          checked={showOrganization[0].medical_translators}
-                        />
-                      }
-                      label="Medical Translators Available"
-                      style={{ width: '180px', marginLeft: '0px' }}
-                    />
+                  <Grid item xs={6} style={{ padding: `4%` }}>
+                    { showOrganization[0].medical_translators ?
+                      <SvgIcon style={{ color: `#2ECBB0` }}>
+                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"></path>
+                      </SvgIcon>
+                    :
+                      <></>
+                    }
+                    <span style={{ display: `inline-block`, marginLeft: `4%` }}>
+                      Medical Translators Available
+                    </span>
                   </Grid>
 
                   <Grid item xs={12}>
