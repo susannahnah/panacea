@@ -79,12 +79,14 @@ class CityPage extends Component {
                           width: `35vw`, 
                           margin: `auto`, 
                           elevation: `12`, 
-                          backgroundColor: `#6AA4DA`,
+                          backgroundColor: `#568CC8`,
                           boxShadow: `.5px 0px 1px 0px black`,
                           padding: `2.5%`
                       }}>
-                        <Typography variant='p' style={{ color: `white` }}>
-                          {type}
+                        <Typography variant='body1' style={{ color: `white`, textShadow: `1px 1px 1.5px #000000`, letterSpacing: `2px` }}>
+                          <b>
+                            {type}
+                          </b>
                         </Typography>
                       </Card>
                       
@@ -204,7 +206,7 @@ class CityPage extends Component {
           <Link 
           to={{ pathname: `/city/${this.props.match.params.cityName}/medications`, id: this.state.city.city_id }}
           >
-            <IconButton style={{ backgroundColor: `#6AA4DA`, boxShadow: `.5px 0px 1px 0px black`  }}>
+            <IconButton style={{ backgroundColor: `#568CC8`, boxShadow: `.5px 0px 1px 0px black`  }}>
               <img src={medicineIcon} alt="Medicine Icon" style={{ width: `65%`, padding: `15%` }}/>
             </IconButton>
           </Link>
