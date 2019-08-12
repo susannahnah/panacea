@@ -336,29 +336,29 @@ class CityFormPage extends Component {
                 <Table>
                   <TableHead>
                     <TableRow>
-                      <TableCell>US Generic Name</TableCell>
                       <TableCell>US Brand Name</TableCell>
+                      <TableCell>US Generic Name</TableCell>
                       <TableCell>Translated Generic Name</TableCell>
                       <TableCell></TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {this.props.reduxState.cityMedicationsReducer.map(med => {
-                      return (
-                        <TableRow key={med.generic_name_us}>
-                          <TableCell>{med.generic_name_us}</TableCell>
-                          <TableCell>{med.brand_name_us}</TableCell>
-                          <TableCell>{med.generic_name_translated}</TableCell>
-                          <TableCell>
-                            <IconButton onClick={this.deleteMedication(med.id)}>
-                              <SvgIcon>
-                                <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"></path>
-                              </SvgIcon>
-                            </IconButton>
-                          </TableCell>
-                        </TableRow>
-                      );
-                    })
+                    { this.props.reduxState.cityMedicationsReducer.map( med => {
+                        return (
+                          <TableRow key={med.generic_name_us}>
+                            <TableCell>{med.brand_name_us}</TableCell>
+                            <TableCell>{med.generic_name_us}</TableCell>
+                            <TableCell>{med.generic_name_translated}</TableCell>
+                            <TableCell>
+                              <IconButton onClick={this.deleteMedication(med.id)}>
+                                <SvgIcon>
+                                  <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"></path>
+                                </SvgIcon>
+                              </IconButton>
+                            </TableCell>
+                          </TableRow>
+                        );
+                      })
                     }
                   </TableBody>
                 </Table>
