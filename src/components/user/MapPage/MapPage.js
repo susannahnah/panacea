@@ -12,6 +12,17 @@ function MapPage(props) {
   const { cityName } = props.match.params;
   const [organizations, setOrganizations] = useState([]);
   const [showOrganization, setOrganizationToShow] = useState([]);
+  const [lat, setLat] = useState(props.location.coordinates.lat);
+  const [lng, setLng] = useState(props.location.coordinates.lng);
+  const [infoWindow, setInfoWindow] = useState(null);
+  const [zoom, setZoom] = useState(11);
+
+  const markerClicked = (key, props) => {
+    const { lat, lng } = props;
+    setLat(Number(lat));
+    setLng(Number(lng));
+    return setZoom(13);
+  }
 
   const markerOpen = (e) => {
     const { id } = e.currentTarget;
@@ -21,7 +32,16 @@ function MapPage(props) {
   }
 
   const markerClose = (e) => {
-    setOrganizationToShow([]);
+    return setOrganizationToShow([]);
+  }
+
+  const showInfoWindow = (e) => {
+    return setInfoWindow(e.currentTarget.id);
+  }
+
+  const resetZoom = (e) => {
+    setInfoWindow(null);
+    return setZoom(11);
   }
 
   useEffect(() => {
@@ -44,6 +64,7 @@ function MapPage(props) {
   if (props.location.city_id) {
     return (
       <>
+        <UserLayout>
 
         <div className="container">
           <div className="back-button">
@@ -63,15 +84,20 @@ function MapPage(props) {
               key: 'AIzaSyD1LKqeIf7_dF7UhVc9JGzNbo_vUM3gOjE',
               language: 'en'
             }}
-            center={props.location.coordinates}
-            defaultZoom={11}
+            center={{ lat: lat, lng: lng }}
+            zoom={zoom}
+            layerTypes={['TrafficLayer', 'TransitLayer']}
             options={{ clickableIcons: false }}
-          >            
+            onChildClick={markerClicked}
+          >
 
             {organizations.map((organization, i) => {
               return (
                 <Marker
                   key={i}
+                  infoWindow={infoWindow}
+                  showInfoWindow={showInfoWindow}
+                  resetZoom={resetZoom}
                   showOrganizationClick={markerOpen}
                   cityName={cityName}
                   {...organization}
@@ -278,7 +304,7 @@ website_url: "https://www.su.krakow.pl/" */}
 
 
 
-        {/* </UserLayout> */}
+        </UserLayout>
 
       </>
     )

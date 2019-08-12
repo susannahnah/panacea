@@ -117,7 +117,7 @@ function AdminLandingPage(props) {
         </Grid>
       </Grid>
       <Grid container item spacing={1} direction="row" alignItems="center">
-        <Grid item>
+        <Grid item xs={8}>
           <TextField
             id="city-search-input"
             label="Search City"
@@ -128,7 +128,7 @@ function AdminLandingPage(props) {
             fullWidth
           />
         </Grid>
-        <Grid item>
+        <Grid item xs={4}>
           {/* <Link to={"/cities?citySearched=" + searchValues.city + "&" + "countrySearched=" + searchValues.city}> */}
           <Link to={"/cities?citySearched=" + searchValues.city}>
             <Button
@@ -143,7 +143,7 @@ function AdminLandingPage(props) {
         </Grid>
       </Grid>
       <Grid container item spacing={1} direction="row" alignItems="center">
-        <Grid item>
+        <Grid item xs={8}>
           <TextField
             id="organization-search-input"
             label="Search Organization"
@@ -155,7 +155,7 @@ function AdminLandingPage(props) {
           />
         </Grid>
 
-        <Grid item>
+        <Grid item xs={4}>
           <Link to={"/organizations?organizationSearched=" + searchValues.organization}>
             <Button
               variant="contained"
