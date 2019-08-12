@@ -476,13 +476,13 @@ class OrganizationFormPage extends Component {
                   onChange={this.handleNewChange('comments')} />
               </Grid>
             </Grid>
-            <Grid container item xs={12}
-              style={{ margin: `5%`, marginBottom: `20vh` }}>
-              <Grid item xs={6}>
-                <Button type='submit' value='Save' style={{ width: "24vw" }} variant="contained" color="inherent">Save</Button>
+            <Grid container fullWidth spacing={2} justify="flex-start"
+              style={{ marginTop  : `5%`, marginBottom: `20vh` }}>
+              <Grid item xs="auto" sm={4} md={4} lg={4} xl={4}>
+                <Button fullWidth type='submit' value='Save' variant="contained" color="inherent">Save</Button>
               </Grid>
-              <Grid item xs={6}>
-                <Button onClick={this.deleteOrg} value='Delete Organization' style={{ width: "24vw" }} color="secondary">Delete Organization</Button>
+              <Grid item xs="auto" sm={4} md={4} lg={4} xl={4}>
+                <Button fullWidth onClick={this.deleteOrg} value='Delete Organization' variant="outlined" color="secondary">Delete Organization</Button>
               </Grid>
             </Grid>
           </Grid>
