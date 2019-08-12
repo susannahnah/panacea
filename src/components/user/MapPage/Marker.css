@@ -6,7 +6,7 @@
     position: absolute;
     top: -162px;
     left: -18px;
-    background: #a8d3f3;
+    background: #ECF8FF;
     border-radius: .4em;
     width: 210px;
     height: 124px;
@@ -24,7 +24,7 @@
     width: 0;
     height: 0;
     border: 30px solid transparent;
-    border-top-color: #a8d3f3;
+    border-top-color: #ECF8FF;
     border-bottom: 0;
     border-left: 0;
     margin-left: -29px;
@@ -35,7 +35,7 @@
     width: 40px;
     height: 40px;
     border-radius: 50% 50% 50% 0;
-    background: #009fe9;
+    background: #6AA4DA;
     position: absolute;
     transform: rotate(-45deg);
     left: 50%;

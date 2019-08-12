@@ -14,5 +14,8 @@
 }
 
 .back-button {
-  font-size: 2.5rem!important;
+  position: fixed;
+  left: 30px;
+  top: 30px;
+  z-index: +1;
 }

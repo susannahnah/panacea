@@ -3,7 +3,7 @@ import GoogleMapReact from 'google-map-react';
 import Marker from './Marker';
 import axios from 'axios';
 import './MapPage.css';
-import { Grid, Typography, Checkbox, FormControlLabel } from '@material-ui/core/';
+import { Grid, Typography, Checkbox, FormControlLabel, IconButton } from '@material-ui/core/';
 import BackButton from '@material-ui/icons/ChevronLeftRounded';
 import UserLayout from '../../layouts/UserLayout/UserLayout';
 
@@ -67,7 +67,17 @@ function MapPage(props) {
         <UserLayout>
 
         <div className="container">
-
+          <div className="back-button">
+            <IconButton onClick={
+              props.history.goBack
+            } style={{
+              backgroundColor: `#6AA4DA`, 
+              boxShadow: `.5px 0px 1px 0px black`
+            }}>
+              <BackButton style={{ color: `white` }}/>
+            </IconButton>
+          </div>
+          
           <GoogleMapReact
             bootstrapURLKeys={{
               // TODO: restrict key later
@@ -80,10 +90,6 @@ function MapPage(props) {
             options={{ clickableIcons: false }}
             onChildClick={markerClicked}
           >
-{/*          TODO: STILL CANT GET FUNCTIONING BACK BUTTON   
-            <div>
-              <BackButton className="back-button" />
-            </div> */}
 
             {organizations.map((organization, i) => {
               return (
