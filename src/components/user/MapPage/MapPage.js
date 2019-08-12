@@ -12,6 +12,14 @@ function MapPage(props) {
   const { cityName } = props.match.params;
   const [organizations, setOrganizations] = useState([]);
   const [showOrganization, setOrganizationToShow] = useState([]);
+  const [lat, setLat] = useState(props.location.coordinates.lat);
+  const [lng, setLng] = useState(props.location.coordinates.lng);
+
+  const markerClicked = (key, props) => {
+    const { lat, lng } = props;
+    setLat(Number(lat));
+    setLng(Number(lng));
+  }
 
   const markerOpen = (e) => {
     const { id } = e.currentTarget;
@@ -54,9 +62,10 @@ function MapPage(props) {
               key: 'AIzaSyD1LKqeIf7_dF7UhVc9JGzNbo_vUM3gOjE',
               language: 'en'
             }}
-            center={props.location.coordinates}
+            center={{ lat: lat, lng: lng }}
             defaultZoom={11}
             options={{ clickableIcons: false }}
+            onChildClick={markerClicked}
           >
             {/* 
               TODO: add functioning back button
@@ -108,7 +117,7 @@ website_url: "https://www.su.krakow.pl/" */}
 
               <div className="organization-list">
 
-              {/* TODO: FIX THE CLOSE, IT TAKES UP A 100% OF THE WIDTH, MEANING DON'T HAVE TO CLICK X TO CLOSE */}
+                {/* TODO: FIX THE CLOSE, IT TAKES UP A 100% OF THE WIDTH, MEANING DON'T HAVE TO CLICK X TO CLOSE */}
                 <div
                   style={{ color: '#a00404', fontSize: '18pt', left: '5px' }}
                   onClick={markerClose}
