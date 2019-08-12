@@ -36,6 +36,7 @@ class MedicationsPage extends Component {
               <TableRow>
                 <TableCell>English Brand Name</TableCell>
                 <TableCell>English Generic Name</TableCell>
+                {/* <TableCell></TableCell> */}
                 <TableCell>Translated Generic Name</TableCell>
                 <TableCell />
               </TableRow>
@@ -46,6 +47,7 @@ class MedicationsPage extends Component {
                   <TableRow key={med.generic_name_us}>
                     <TableCell>{med.brand_name_us}</TableCell>
                     <TableCell>{med.generic_name_us}</TableCell>
+                    {/* <TableCell><CompareArrow /></TableCell> */}
                     <TableCell>{med.generic_name_translated}</TableCell>
                   </TableRow>
                 );
