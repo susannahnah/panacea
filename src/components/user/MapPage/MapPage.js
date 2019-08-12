@@ -14,11 +14,14 @@ function MapPage(props) {
   const [showOrganization, setOrganizationToShow] = useState([]);
   const [lat, setLat] = useState(props.location.coordinates.lat);
   const [lng, setLng] = useState(props.location.coordinates.lng);
+  const [infoWindow, setInfoWindow] = useState(null);
+  const [zoom, setZoom] = useState(11);
 
   const markerClicked = (key, props) => {
     const { lat, lng } = props;
     setLat(Number(lat));
     setLng(Number(lng));
+    return setZoom(13);
   }
 
   const markerOpen = (e) => {
@@ -29,7 +32,16 @@ function MapPage(props) {
   }
 
   const markerClose = (e) => {
-    setOrganizationToShow([]);
+    return setOrganizationToShow([]);
+  }
+
+  const showInfoWindow = (e) => {
+    return setInfoWindow(e.currentTarget.id);
+  }
+
+  const resetZoom = (e) => {
+    setInfoWindow(null);
+    return setZoom(11);
   }
 
   useEffect(() => {
@@ -52,7 +64,7 @@ function MapPage(props) {
   if (props.location.city_id) {
     return (
       <>
-        {/* <UserLayout> */}
+        <UserLayout>
 
         <div className="container">
 
@@ -63,7 +75,7 @@ function MapPage(props) {
               language: 'en'
             }}
             center={{ lat: lat, lng: lng }}
-            defaultZoom={11}
+            zoom={zoom}
             options={{ clickableIcons: false }}
             onChildClick={markerClicked}
           >
@@ -77,6 +89,9 @@ function MapPage(props) {
               return (
                 <Marker
                   key={i}
+                  infoWindow={infoWindow}
+                  showInfoWindow={showInfoWindow}
+                  resetZoom={resetZoom}
                   showOrganizationClick={markerOpen}
                   cityName={cityName}
                   {...organization}
@@ -119,7 +134,7 @@ website_url: "https://www.su.krakow.pl/" */}
 
                 {/* TODO: FIX THE CLOSE, IT TAKES UP A 100% OF THE WIDTH, MEANING DON'T HAVE TO CLICK X TO CLOSE */}
                 <div
-                  style={{ color: '#a00404', fontSize: '18pt', left: '5px' }}
+                  style={{ color: '#a00404', fontSize: '18pt', left: '5px', float: 'right' }}
                   onClick={markerClose}
                 >
                   X
@@ -276,7 +291,7 @@ website_url: "https://www.su.krakow.pl/" */}
 
 
 
-        {/* </UserLayout> */}
+        </UserLayout>
 
       </>
     )

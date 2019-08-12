@@ -32,7 +32,6 @@ class MedicationsPage extends Component {
   render() {
     return (
       <>
-        {/* TODO: REPLACE DUMMY DATA WITH REAL DATA */}
 
         <UserLayout>
           <Link
