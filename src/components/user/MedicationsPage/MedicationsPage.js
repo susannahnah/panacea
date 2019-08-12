@@ -37,7 +37,7 @@ class MedicationsPage extends Component {
                 <TableCell>English Brand Name</TableCell>
                 <TableCell>English Generic Name</TableCell>
                 {/* <TableCell></TableCell> */}
-                <TableCell>Translated Generic Name</TableCell>
+                <TableCell>Translated Name</TableCell>
                 <TableCell />
               </TableRow>
             </TableHead>

@@ -41,8 +41,15 @@ class SearchBox extends Component {
         });
     };
 
+    clearInput = e => {
+        this.setState({
+            userInput: "",
+        });
+    }
+
     render() {
         const {
+            clearInput,
             onChange,
             state: {
                 filteredSuggestions,
@@ -59,7 +66,7 @@ class SearchBox extends Component {
                     <ul className="suggestions">
                         {filteredSuggestions.map((suggestion, i) => {
                             return (
-                                <li key={i}>
+                                <li onClick={clearInput} key={i}>
                                     <Link
                                         style={{ display: 'block' }}
                                         to={{
