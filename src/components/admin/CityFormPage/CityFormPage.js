@@ -202,6 +202,28 @@ class CityFormPage extends Component {
     this.props.dispatch({ type: 'FETCH_COUNTRIES' });
   }
 
+  autoPopulateMedicine = () => {
+    this.setState({
+      newMedication: {
+        generic_name_us: 'Acetaminophen',
+        brand_name_us: 'Tylenol',
+        generic_name_translated: 'Acetaminofeno',
+      }
+    })
+  }
+
+  autoPopulateLinks = () => {
+    this.setState({
+      newCity: {
+        ...this.state.newCity,
+        WHO_link: 'http://www.euro.who.int/__data/assets/pdf_file/0004/373216/spain-report-eng.pdf',
+        CDC_link: 'https://wwwnc.cdc.gov/travel/destinations/traveler/none/spain',
+        google_translate_link: 'https://translate.google.com/#view=home&op=translate&sl=en&tl=es',
+        local_resources: 'https://www.expatica.com/es/healthcare/healthcare-basics/health-insurance-439814/'
+      }
+    })
+  }
+
   render() {
 
     const countries = this.props.reduxState.countriesReducer;
@@ -323,11 +345,15 @@ class CityFormPage extends Component {
             <Grid className="inputFields" container spacing={3}
               item xs={12}>
 
+              {/* REMOVE: AFTER PRESENTATION REMOVE THE ONCLICK FUNCTION */}
+
               <Grid item xs={12}>
                 <h2 style={{
                   marginBottom: 0,
                   marginTop: `5vw`
-                }}>
+                }}
+                  onClick={this.autoPopulateMedicine}
+                >
                   Medicine Translations
               </h2>
               </Grid>
@@ -343,22 +369,22 @@ class CityFormPage extends Component {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    { this.props.reduxState.cityMedicationsReducer.map( med => {
-                        return (
-                          <TableRow key={med.generic_name_us}>
-                            <TableCell>{med.brand_name_us}</TableCell>
-                            <TableCell>{med.generic_name_us}</TableCell>
-                            <TableCell>{med.generic_name_translated}</TableCell>
-                            <TableCell>
-                              <IconButton onClick={this.deleteMedication(med.id)}>
-                                <SvgIcon>
-                                  <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"></path>
-                                </SvgIcon>
-                              </IconButton>
-                            </TableCell>
-                          </TableRow>
-                        );
-                      })
+                    {this.props.reduxState.cityMedicationsReducer.map(med => {
+                      return (
+                        <TableRow key={med.generic_name_us}>
+                          <TableCell>{med.brand_name_us}</TableCell>
+                          <TableCell>{med.generic_name_us}</TableCell>
+                          <TableCell>{med.generic_name_translated}</TableCell>
+                          <TableCell>
+                            <IconButton onClick={this.deleteMedication(med.id)}>
+                              <SvgIcon>
+                                <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"></path>
+                              </SvgIcon>
+                            </IconButton>
+                          </TableCell>
+                        </TableRow>
+                      );
+                    })
                     }
                   </TableBody>
                 </Table>
@@ -432,10 +458,14 @@ class CityFormPage extends Component {
                 onChange={this.handleCityChange('healthcare_tourism')} />
             </Grid>
             <Grid className="inputFields" item xs={12}>
+
+              {/* REMOVE: AFTER PRESENTATION REMOVE THE ONCLICK FUNCTION */}
               <h2 style={{
                 marginBottom: 0,
                 marginTop: `4vw`
-              }}>
+              }}
+                onClick={this.autoPopulateLinks}
+              >
                 Important Resources
               </h2>
               <TextField
@@ -504,7 +534,7 @@ class CityFormPage extends Component {
               </Grid>
             </Grid>
             <Grid container fullWidth spacing={2} justify="flex-start"
-              style={{ marginTop  : `5%`, marginBottom: `20vh` }}>
+              style={{ marginTop: `5%`, marginBottom: `20vh` }}>
               <Grid item xs="auto" sm={4} md={4} lg={4} xl={4}>
                 <Button fullWidth type='submit' value='Save' variant="contained" color="inherit">Save</Button>
               </Grid>
