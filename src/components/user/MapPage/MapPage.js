@@ -3,7 +3,7 @@ import GoogleMapReact from 'google-map-react';
 import Marker from './Marker';
 import axios from 'axios';
 import './MapPage.css';
-import { Grid, Checkbox, FormControlLabel, IconButton } from '@material-ui/core/';
+import { Grid, Typography, Checkbox, FormControlLabel, IconButton, SvgIcon } from '@material-ui/core/';
 import BackButton from '@material-ui/icons/ChevronLeftRounded';
 
 function MapPage(props) {
@@ -136,22 +136,24 @@ website_url: "https://www.su.krakow.pl/" */}
 
               <div className="organization-list">
 
-                {/* TODO: FIX THE CLOSE, IT TAKES UP A 100% OF THE WIDTH, MEANING DON'T HAVE TO CLICK X TO CLOSE */}
-                <div
-                  style={{ color: '#a00404', fontSize: '18pt', left: '5px', float: 'right' }}
+              {/* TODO: FIX THE CLOSE, IT TAKES UP A 100% OF THE WIDTH, MEANING DON'T HAVE TO CLICK X TO CLOSE */}
+                <IconButton
+                  // style={{ color: '#a00404', fontSize: '18pt', left: '5px' }}
                   onClick={markerClose}
                 >
-                  X
-                </div>
+                  <SvgIcon style={{ color: `#F96F9D`}}>
+                    <path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"></path>
+                  </SvgIcon>
+                </IconButton>
 
-                <Grid
-                  container
-                  item
-                  spacing={1}
-                  xs={12}>
+                <Grid container spacing={1} item xs={12}
+                  style={{ margin: `0px 20px`, width: `90vw` }} >
 
                   <Grid item xs={12} style={{ textAlign: 'center', marginBottom: '5px' }}>
-                    <a target="_blank" href={showOrganization[0].website_url}>
+                    <a target="_blank" 
+                      href={showOrganization[0].website_url}
+                      style={{ textDecoration: `underline` }}
+                    >
                       {showOrganization[0].name}
                     </a>
                   </Grid>
@@ -281,7 +283,12 @@ website_url: "https://www.su.krakow.pl/" */}
                   </Grid>
 
                   <Grid item xs={12}>
-                    <a target="_blank" href={showOrganization[0].google_maps_link}>Directions</a>
+                    <a target="_blank" 
+                      href={showOrganization[0].google_maps_link}
+                      style={{ textDecoration: `underline` }}
+                    >
+                      Directions
+                      </a>
                   </Grid>
 
                 </Grid>
