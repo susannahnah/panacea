@@ -12,3 +12,7 @@
   height: 90vh;
   width:100%;
 }
+
+.back-button {
+  font-size: 2.5rem!important;
+}

@@ -1,24 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './Marker.css';
-import { Link } from 'react-router-dom';
 
 function Marker(organization) {
 
-    const [infoWindow, setInfoWindow] = useState(false);
-
-    const showInfoWindow = () => {
-        setInfoWindow(!infoWindow);
-    }
+    const { infoWindow } = organization;
+    const { showInfoWindow } = organization;
 
     switch (organization.type) {
         case 'Hospital':
             return (
                 <>
-                    <div onClick={showInfoWindow} className="pin bounce">
+                    <div onClick={showInfoWindow} id={organization.id} className="pin bounce">
                         <span className="type">H</span>
                     </div>
                     {
-                        infoWindow
+                        infoWindow == organization.id
                             ?
                             <InfoWindow visibility="show" {...organization} />
                             :
@@ -29,11 +25,11 @@ function Marker(organization) {
         case 'Clinic':
             return (
                 <>
-                    <div onClick={showInfoWindow} className="pin bounce">
+                    <div onClick={showInfoWindow} id={organization.id} className="pin bounce">
                         <span className="type">C</span>
                     </div>
                     {
-                        infoWindow
+                        infoWindow == organization.id
                             ?
                             <InfoWindow visibility="show" {...organization} />
                             :
@@ -44,11 +40,11 @@ function Marker(organization) {
         case 'Urgent Care':
             return (
                 <>
-                    <div onClick={showInfoWindow} className="pin bounce">
+                    <div onClick={showInfoWindow} id={organization.id} className="pin bounce">
                         <span className="type">U</span>
                     </div>
                     {
-                        infoWindow
+                        infoWindow == organization.id
                             ?
                             <InfoWindow visibility="show" {...organization} />
                             :
@@ -60,11 +56,11 @@ function Marker(organization) {
         case 'Laboratory':
             return (
                 <>
-                    <div onClick={showInfoWindow} className="pin bounce">
+                    <div onClick={showInfoWindow} id={organization.id} className="pin bounce">
                         <span className="type">L</span>
                     </div>
                     {
-                        infoWindow
+                        infoWindow == organization.id
                             ?
                             <InfoWindow visibility="show" {...organization} />
                             :
@@ -76,11 +72,11 @@ function Marker(organization) {
         case 'Home Visits':
             return (
                 <>
-                    <div onClick={showInfoWindow} className="pin bounce">
+                    <div onClick={showInfoWindow} id={organization.id} className="pin bounce">
                         <span className="type">Hv</span>
                     </div>
                     {
-                        infoWindow
+                        infoWindow == organization.id
                             ?
                             <InfoWindow visibility="show" {...organization} />
                             :
@@ -92,11 +88,11 @@ function Marker(organization) {
         case 'Pharmacy':
             return (
                 <>
-                    <div onClick={showInfoWindow} className="pin bounce">
+                    <div onClick={showInfoWindow} id={organization.id} className="pin bounce">
                         <span className="type">Ph</span>
                     </div>
                     {
-                        infoWindow
+                        infoWindow == organization.id
                             ?
                             <InfoWindow visibility="show" {...organization} />
                             :
@@ -128,9 +124,13 @@ const InfoWindow = (organization) => {
     // visibility: "hidden"
 
     const { showOrganizationClick } = organization;
+    const { resetZoom } = organization;
 
     return (
         <div className={organization.visibility}>
+            <span onClick={resetZoom} style={{color: 'red', float: 'right'}}>
+                X
+            </span>
             <h3>{organization.name}</h3>
             <h4>Phone Number: {organization.phone_number}</h4>
             <a target="_blank" href={organization.google_maps_link}>directions</a>
