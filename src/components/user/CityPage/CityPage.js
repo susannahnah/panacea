@@ -31,15 +31,25 @@ class CityPage extends Component {
   }
 
   componentDidMount() {
+    this.axiosRequest();
+  }
+
+  axiosRequest = () => {
     axios.get(`/api/search/city?city_name=%${this.props.match.params.cityName}%`)
-      .then(({ data }) => {
-        this.setState({
-          city: { ...data[0] },
-        })
+    .then(({ data }) => {
+      this.setState({
+        city: { ...data[0] },
       })
-      .catch((error) => {
-        console.log('Error with search city:', error);
-      })
+    })
+    .catch((error) => {
+      console.log('Error with search city:', error);
+    });
+  }
+
+  componentDidUpdate(prevProps){
+    if (prevProps.match.params.cityName !== this.props.match.params) {
+      return this.axiosRequest();
+    }
   }
 
   render() {
