@@ -11,8 +11,8 @@ function MapPage(props) {
   const { cityName } = props.match.params;
   const [organizations, setOrganizations] = useState([]);
   const [showOrganization, setOrganizationToShow] = useState([]);
-  const [lat, setLat] = useState(props.location.coordinates.lat);
-  const [lng, setLng] = useState(props.location.coordinates.lng);
+  const [lat, setLat] = useState(props.location.coordinates?props.location.coordinates.lat:0);
+  const [lng, setLng] = useState(props.location.coordinates?props.location.coordinates.lng:0);
   const [infoWindow, setInfoWindow] = useState(null);
   const [zoom, setZoom] = useState(11);
 
@@ -303,8 +303,9 @@ website_url: "https://www.su.krakow.pl/" */}
     )
   } else {
     return (
-      <>
-      </>
+      <h1>
+      404
+      </h1>
     )
   }
 
