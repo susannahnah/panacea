@@ -50,9 +50,9 @@ class UserNav extends Component {
   render() {
     return (
       <div className="Nav">
-        <Link to="/" underline='none'>
-          <img src={logo} alt="Panacea Logo" style={{ margin: `3px 5px 0px 12px`,height: `48%`}}/>
-          <h3 className="Title">Panacea</h3>
+        <Link to="/" style={{ marginTop: `-10px` }}>
+          <img src={logo} alt="Panacea Logo" style={{ margin: `-2px 5px -3px 10px`,height: `55%`}}/>
+          <h3 className="Title" style={{ margin: `auto` }}>Panacea</h3>
         </Link>
         <IconButton 
           style={{float: "right"}}
