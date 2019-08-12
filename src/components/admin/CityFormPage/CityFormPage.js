@@ -127,10 +127,18 @@ class CityFormPage extends Component {
           id: this.props.reduxState.individualCityReducer.id,
         }
       });
-      this.props.history.push('/cities/' + this.state.newCity.name)
-      alert('your changes have been saved!');
+      this.props.history.push('/cities/' + this.state.newCity.name);
+      Swal.fire({
+        title: "Success!",
+        text: "Your changes have been saved.",
+        type: "success"
+      });
     } else {
-      alert('please leave a city name')
+      Swal.fire({
+        title: "Error:",
+        text: "Please leave a city name.",
+        type: "error"
+      })
     }
   }
 
