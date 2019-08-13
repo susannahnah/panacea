@@ -15,14 +15,23 @@
 
 .back-button {
   position: fixed;
-  left: 10px;
-  top: 10px;
+  left: 20px;
+  top: 20px;
   z-index: +1;
 }
 
+.back-button > button {
+  background-color: rgba(47, 107, 181, .95);
+  box-shadow: 0.5px 1px 2px 0px black;
+}
+
+.back-icon {
+  color: white;
+  font-size: 1.75em!important;
+  margin: -.175em;
+}
+
 .org-boolean {
-  /* padding: 4%; */
-  /* border: 1px solid #868E96; */
   display: flex;
   align-items: center;
   height: 10vh;
