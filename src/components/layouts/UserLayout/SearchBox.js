@@ -94,7 +94,7 @@ class SearchBox extends Component {
                 <InputBase
                     type="text"
                     onChange={onChange}
-                    placeholder="Where are you traveling?"
+                    placeholder="Find my city?"
                     style={{ width: `85%` }}
                     value={userInput}
                 />
