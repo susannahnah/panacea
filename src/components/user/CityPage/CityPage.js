@@ -62,7 +62,6 @@ class CityPage extends Component {
           <div className="stock-map">
             <Grid
               container
-              spacing={1}
             >
 
               {this.state.orgTypes.map(
@@ -85,20 +84,17 @@ class CityPage extends Component {
                           lng: Number(this.state.city.long)
                         },
                       }}>
-                      <Card style={{
-                          width: `35vw`, 
-                          margin: `auto`, 
-                          elevation: `12`, 
-                          backgroundColor: `#568CC8`,
-                          boxShadow: `.5px 0px 1px 0px black`,
-                          padding: `2.5%`
-                      }}>
-                        <Typography variant='body1' style={{ color: `white`, textShadow: `1px 1px 1.5px #000000`, letterSpacing: `2px` }}>
-                          <b>
+                      <button className="organization-button">
+                        <Typography variant='h6' 
+                        style={{ color: `white`, 
+                        textShadow: `1px 1px 1.5px #000000`, 
+                        letterSpacing: `2px`}}
+                        >
+                          {/* <b> */}
                             {type}
-                          </b>
+                          {/* </b> */}
                         </Typography>
-                      </Card>
+                      </button>
                       
                     </Link>
 
@@ -156,8 +152,10 @@ class CityPage extends Component {
                     <Typography variant='body2' gutterBottom style={{ paddingLeft: `6%`, paddingRight: `5%` }}>
                       {this.state.city.healthcare_tourism}
                     </Typography>
-                  <Typography variant='body2' gutterBottom style={{ paddingLeft: `5%`, paddingRight: `5%` }}>
-                    <b>Important Resources:</b>
+                  <div style={{ paddingLeft: `5%`, paddingRight: `5%` }}>
+                    <Typography variant='body2' gutterBottom>
+                      <b>Important Resources:</b>
+                    </Typography>
                   { this.state.city.WHO_link &&
                     <Typography gutterBottom>
                       <MuiLink href={this.state.city.WHO_link} target="_blank" underline='always'>
@@ -186,7 +184,7 @@ class CityPage extends Component {
                       </MuiLink>
                     </Typography>
                   }
-                  </Typography>
+                  </div>
                 </div>
               </ExpansionPanelDetails>
             </ExpansionPanel>
@@ -212,28 +210,20 @@ class CityPage extends Component {
             </Typography>
           </Paper>
         </Grid>
-        <Grid item xs={12} style={{ textAlign: `center`, margin: `5%`, marginBottom: `15%` }}>
+        <Grid item xs={12} className="medicine-translations">
           <Link 
           to={{ pathname: `/city/${this.props.match.params.cityName}/medications`, id: this.state.city.city_id }}
           >
-            <IconButton style={{ backgroundColor: `#568CC8`, boxShadow: `.5px 0px 1px 0px black`  }}>
+            <IconButton className="medicine-button">
               <img src={medicineIcon} alt="Medicine Icon" style={{ width: `65%`, padding: `15%` }}/>
             </IconButton>
           </Link>
           <Typography variant="body2" style={{ 
-            // color: `#868E96`, 
             marginTop: `2.5%` 
           }}>
             Medicine Translations
           </Typography>
         </Grid>
-        {/* <pre>
-          {JSON.stringify(this.state, null, 2)}
-        </pre>
-
-        <pre>
-          {JSON.stringify(this.props, null, 2)}
-        </pre> */}
       </UserLayout >
     )
   }

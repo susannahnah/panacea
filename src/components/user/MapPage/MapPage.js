@@ -66,13 +66,8 @@ function MapPage(props) {
 
         <div className="container">
           <div className="back-button">
-            <IconButton onClick={
-              props.history.goBack
-            } style={{
-              backgroundColor: `#6AA4DA`, 
-              boxShadow: `.5px 0px 1px 0px black`
-            }}>
-              <BackButton style={{ color: `white` }}/>
+            <IconButton onClick={props.history.goBack}>          
+              <BackButton className="back-icon"/>
             </IconButton>
           </div>
           
