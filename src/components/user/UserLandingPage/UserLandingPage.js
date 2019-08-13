@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import UserLayout from '../../layouts/UserLayout/UserLayout';
-import { Paper, Typography, IconButton, Grid, Card, CardMedia } from '@material-ui/core';
+import { Paper, Typography, Grid, Card, CardMedia } from '@material-ui/core';
 import image from './panaceaFamilyImage.jpg';
 
 class UserLandingPage extends Component {

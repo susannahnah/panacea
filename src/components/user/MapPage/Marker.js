@@ -1,8 +1,7 @@
 import React from 'react';
 import './Marker.css';
 
-import { IconButton, SvgIcon, Typography } from '@material-ui/core';
-import directionsIcon from '../../../images/baseline-directions-24px.svg'
+import { IconButton, SvgIcon } from '@material-ui/core';
 
 function Marker(organization) {
 
