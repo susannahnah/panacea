@@ -22,18 +22,19 @@ const useStyles = makeStyles({
   },
   addButton: {
     marginTop: 30,
+    height: `56px`,
     color: "white",
-    background: "#76a3d5"
+    background: "#1b3757"
   },
   searchButton: {
-    height: 50,
+    height: 56,
     color: "white",
-    background: "#76a3d5"
+    background: "#1b3757"
   },
   detailsButton: {
-    height: 30,
+    height: `38pxa`,
     color: "white",
-    background: "#76a3d5"
+    background: "#1b3757"
   },
   table: {
     // minWidth: 800,

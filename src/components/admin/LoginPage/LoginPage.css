@@ -1,6 +1,11 @@
 .login-page {
     margin-top: 10%;
     text-align: center;
+    border: 1px solid black;
+    border-radius: .5em;
+    width: 40vw;
+    margin: auto;
+    margin-top: 20vh;
 }
 
 .login-welcome {
@@ -9,7 +14,7 @@
 }
 
 .login-username {
-    padding-bottom: 10px
+    padding-bottom: 10px;
 }
 
 .login-password {

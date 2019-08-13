@@ -15,12 +15,13 @@ const useStyles = makeStyles({
   addButton: {
     marginTop: 30,
     color: "white",
-    background: "#76a3d5"
+    background: "#1b3757"
   },
   searchButton: {
-    height: 50,
+    height: 56,
     color: "white",
-    background: "#76a3d5"
+    background: "#1b3757",
+    marginBottom: `-7px`
   },
   paper: {
     width: "100%",
