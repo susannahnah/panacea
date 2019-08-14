@@ -166,8 +166,8 @@ export default SearchBox;
 
 
 ## Authors ##
-* Dayton Brock
-* Koua Xiong
-* John Gellert
-* Susannah Fujimoto Harris
+* [Dayton Brock](https://github.com/daytonbrock)
+* [Koua Xiong](https://github.com/amfgkzz)
+* [John Gellert](https://github.com/johngellert)
+* [Susannah Fujimoto Harris](https://github.com/susannahnah)
 
