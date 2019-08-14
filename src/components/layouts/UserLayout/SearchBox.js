@@ -21,7 +21,6 @@ class SearchBox extends Component {
             });
           })
           .catch((error) => {
-            console.log('Error with get cities: ', error);
           })
       }
 
