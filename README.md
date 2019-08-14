@@ -1,6 +1,6 @@
 # Panacea  
 
-
+![Panacea Logo](src/images/panacealogo.png))
 
 Panacea is a mobile-first web application that allows users traveling abroad to quickly gain access to local health information, such as urgent care centers, medication translations, and emergency contact numbers.  
 
