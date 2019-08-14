@@ -21,7 +21,6 @@ import {
   IconButton,
   SvgIcon
 } from '@material-ui/core';
-import './CityFormPage.css';
 import AdminLayout from '../../layouts/AdminLayout/AdminLayout';
 
 
