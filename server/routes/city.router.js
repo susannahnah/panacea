@@ -3,7 +3,7 @@ const pool = require('../modules/pool');
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 const router = express.Router();
 
-//GET all cities
+
 router.get('/', (req, res) => {
     const queryText = 'SELECT * FROM "cities" ORDER BY "id"';
     pool.query(queryText)
@@ -11,43 +11,36 @@ router.get('/', (req, res) => {
             res.send(result.rows);
         })
         .catch((error) => {
-            console.log('Error completely SELECT city query', error)
             res.sendStatus(500)
         })
 })
 
+
 router.get('/city/:cityName', (req, res) => {
     const queryText = 'SELECT * FROM "cities" WHERE "name"=$1';
-    console.log('here is your city', req.params.cityName);
     pool.query(queryText, [req.params.cityName])
         .then((result) => {
             res.send(result.rows[0]);
         })
         .catch((error) => {
-            console.log('Error completely SELECT city query', error)
             res.sendStatus(500)
         })
 })
 
-// GET selected cities
+
 router.get('/:id', (req, res) => {
     const queryText = 'SELECT * FROM "cities" WHERE "id"=$1';
-    console.log('here is your city ', req.params.id);
-
     pool.query(queryText, [req.params.id])
         .then((result) => {
             res.send(result.rows[0]);
         })
         .catch((error) => {
-            console.log('Error completely SELECT city query', error)
             res.sendStatus(500)
         })
 })
 
 
-//POST new city
 router.post('/', rejectUnauthenticated, (req, res) => {
-    
     let newCity = req.body;
 
     if(newCity.country_id === ''){
@@ -98,19 +91,14 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     pool.query(queryText, queryValues)
         .then((result) => {
             res.send(result.rows[0]);
-            console.log('this is result.rows from city.router:', result.rows);
         })
         .catch((error) => {
-            console.log('Error completing POST city query', error);
             res.sendStatus(500);
         });
 });
 
 
-//UPDATE city
 router.put('/', rejectUnauthenticated, (req, res) => {
-    console.log(req.body)
-
     let updatedCity = req.body;
 
     if (updatedCity.country_id === '') {
@@ -164,21 +152,19 @@ router.put('/', rejectUnauthenticated, (req, res) => {
             res.sendStatus(200)
         })
         .catch((error) => {
-            console.log('ERROR completing UPDATE of city', error);
             res.sendStatus(500)
         });
 });
 
 
-// DELETE city 
 router.delete('/:id', rejectUnauthenticated, (req, res) => {
     const queryText = 'DELETE FROM "cities" WHERE id=$1';
     pool.query(queryText, [req.params.id])
       .then(() => { res.sendStatus(200); })
       .catch((err) => {
-        console.log('Error completing DELETE city query', err);
         res.sendStatus(500);
       });
   });
 
+  
 module.exports = router;

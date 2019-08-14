@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const pool = require('../modules/pool');
 
-// USER ORGANIZATION GET ROUTE
+
 router.get('/map', async (req, res, next) => {
     try {
         const selectQuery = `SELECT "id", "created_at", "city_id", "name", "type", "recommended", 
