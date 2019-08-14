@@ -1,5 +1,4 @@
 # Panacea # 
-
 ![Panacea Logo](src/images/panacealogo.png))
 
 Panacea is a mobile-first web application that allows users traveling abroad to quickly gain access to local health information, such as urgent care centers, medication translations, and emergency contact numbers.
@@ -8,7 +7,7 @@ Panacea offers a carefully compiled perspective into each city’s unique health
 
 An admin will be able to log into a desktop-first view and easily access the Panacea database to add new cities, organizations, and medication translations as well as search and edit existing content.
 
-##### This version uses: ####
+#### This version uses: ###
 * React
 * Redux
 * Google Maps API
@@ -18,6 +17,7 @@ An admin will be able to log into a desktop-first view and easily access the Pan
 * Passport
 * PostgreSQL 
 * A full list of dependencies can be found in `package.json`
+
 
 
 ## Motivation ##
@@ -45,7 +45,7 @@ Before you get started, make sure you have the following software installed on y
 - [Nodemon](https://nodemon.io/)
 
 
-#### In Terminal: ####
+### In Terminal: ###
 1. Clone repository
 2. Go into repository
 3. Install dependencies
@@ -54,7 +54,10 @@ Before you get started, make sure you have the following software installed on y
 5. npm run client
 
 
+
 ![Panacea User](src/images/panaceauser.gif))
+
+
 
 
 ```javascript
@@ -162,16 +165,9 @@ export default SearchBox;
 
 
 
-## Deployment
+## Authors ##
+* Dayton Brock
+* Koua Xiong
+* John Gellert
+* Susannah Fujimoto Harris
 
-1. Create a new Heroku project
-1. Link the Heroku project to the project GitHub Repo
-1. Create an Heroku Postgres database
-1. Connect to the Heroku Postgres database from Postico
-1. Create the necessary tables
-1. Add an environment variable for `SERVER_SESSION_SECRET` with a nice random string for security
-1. In the deploy section, select manual deploy
-
-## Update Documentation
-
-Customize this ReadMe and the code comments in this project to read less like a starter repo and more like a project. Here is an example: https://gist.github.com/PurpleBooth/109311bb0361f32d87a2
