@@ -1,7 +1,15 @@
-# Prime Project
-This version uses React, Redux, Express, Passport, and PostgreSQL (a full list of dependencies can be found in `package.json`).
+# Panacea  
 
-We **STRONGLY** recommend following these instructions carefully. It's a lot, and will take some time to set up, but your life will be much easier this way in the long run.
+
+
+Panacea is a mobile-first web application that allows users traveling abroad to quickly gain access to local health information, such as urgent care centers, medication translations, and emergency contact numbers.  
+
+Panacea offers a carefully compiled perspective into each city’s unique health system, thus aiding users in their search for and understanding of specific types of healthcare organizations and cultural health norms.  
+
+An admin will be able to log into a desktop-first view and easily access the Panacea database to add new cities, organizations, and medication translations as well as search and edit existing content.
+
+This version uses React, Redux, Google Maps API, REST Countries, Material-UI, Express, Passport, and PostgreSQL (a full list of dependencies can be found in `package.json`).
+
 
 ## Download (Don't Clone) This Repository
 
