@@ -7,7 +7,7 @@ Panacea offers a carefully compiled perspective into each city’s unique health
 
 An admin will be able to log into a desktop-first view and easily access the Panacea database to add new cities, organizations, and medication translations as well as search and edit existing content.
 
-##### This version uses: ####
+#### This version uses: ###
 * React
 * Redux
 * Google Maps API
@@ -45,7 +45,7 @@ Before you get started, make sure you have the following software installed on y
 - [Nodemon](https://nodemon.io/)
 
 
-#### In Terminal: ####
+### In Terminal: ###
 1. Clone repository
 2. Go into repository
 3. Install dependencies
