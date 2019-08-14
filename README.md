@@ -55,7 +55,7 @@ Before you get started, make sure you have the following software installed on y
 
 
 
-![Panacea User](src/images/panaceauser.gif)
+![Panacea User](src/images/panaceauser1.gif)
 
 
 
