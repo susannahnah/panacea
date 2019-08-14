@@ -1,5 +1,4 @@
 const cookieSession = require('cookie-session');
-const warnings = require('../constants/warnings');
 
 
 const serverSessionSecret = () => {
