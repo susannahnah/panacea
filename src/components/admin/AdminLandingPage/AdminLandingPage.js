@@ -30,7 +30,6 @@ const useStyles = makeStyles({
 });
 
 function AdminLandingPage(props) {
-  // Local state to store inputs for city and country to search.
   const [searchValues, setSearchValues] = useState({
     city: "",
     organization: ""
@@ -129,7 +128,6 @@ function AdminLandingPage(props) {
           />
         </Grid>
         <Grid item xs={4}>
-          {/* <Link to={"/cities?citySearched=" + searchValues.city + "&" + "countrySearched=" + searchValues.city}> */}
           <Link to={"/cities?citySearched=" + searchValues.city}>
             <Button
               variant="contained"
@@ -168,7 +166,6 @@ function AdminLandingPage(props) {
           </Link>
         </Grid>
       </Grid>
-      {/* <pre>{JSON.stringify(searchValues, null, 2)}</pre> */}
     </AdminLayout>
   );
 }
