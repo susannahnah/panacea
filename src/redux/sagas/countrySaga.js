@@ -9,7 +9,6 @@ function* fetchCountriesSaga() {
         const { data } = yield axios.get('/api/countries');
         yield put({ type: 'SET_COUNTRIES', payload: data });
     } catch (err) {
-        console.log('Error with fetch countries saga:', err);
     }
 }
 

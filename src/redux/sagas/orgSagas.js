@@ -6,7 +6,6 @@ import { put, takeEvery } from 'redux-saga/effects';
 function* selectOrgSaga(action) {
     const getOrg = yield axios.get(`/api/organizations/${action.payload}`)
     yield put({ type: 'SET_INDIVIDUAL_ORG', payload: getOrg.data })
-    console.log('end of selectOrgSaga');
 }
 
 // POST new org function
@@ -19,7 +18,6 @@ function* postNewOrgSaga(action) {
         const newOrgObjResponse = yield axios.get(`/api/organizations/${newOrgIdResponse.data.id}`);
         yield put({ type: 'SET_INDIVIDUAL_ORG', payload: newOrgObjResponse.data });
     } catch (error) {
-        console.log(`Error with postNewOrgSaga:`, error);
     }
 }
 
@@ -30,7 +28,6 @@ function* editOrgSaga(action) {
         const updatedOrgResponse = yield axios.get(`/api/organizations/${action.payload.id}`);
         yield put({ type: 'SET_INDIVIDUAL_ORG', payload: updatedOrgResponse.data }); 
     } catch (error) {
-        console.log(`Error with editOrgSaga:`, error);
     } 
 }
 

@@ -5,13 +5,9 @@ import { put, takeEvery, all } from 'redux-saga/effects';
  // // Get all cities:
  function* fetchCitiesSaga(action) {
     try {
-      const cityResponse = yield axios.get('/api/cities')
-      console.log('hey cities!', cityResponse);
-      
+      const cityResponse = yield axios.get('/api/cities')      
       yield put({ type: 'SET_CITIES', payload: cityResponse.data });
-      console.log('end of fetchCitiesSaga')
     } catch (error) {
-      console.log(error);
     }
   };
 
@@ -21,7 +17,6 @@ function* selectCityByIdSaga(action) {
         const getCity = yield axios.get(`/api/cities/${action.payload}`)
         yield put({ type: 'SET_INDIVIDUAL_CITY', payload: getCity.data })
     } catch (error) {
-        console.log(`Error with selectCityByIdSaga:`, error);
     }
 }
 
@@ -32,7 +27,6 @@ function* selectCityByNameSaga(action) {
         yield put({ type: 'SET_CITY_MEDICATIONS', payload: getMedications.data });
         yield put({ type: 'SET_INDIVIDUAL_CITY', payload: getCity.data });
     } catch (error) {
-        console.log(`Error with selectCityByNameSaga:`, error);
     }
 }
 
@@ -47,7 +41,6 @@ function* postNewCitySaga(action) {
         const newCityObjResponse = yield axios.get(`/api/cities/${newCityIdResponse.data.id}`);
         yield put({ type: 'SET_INDIVIDUAL_CITY', payload: newCityObjResponse.data });
     } catch (error) {
-        console.log(`Error with postNewCitySaga:`, error);
     }
 }
 
@@ -55,11 +48,9 @@ function* postNewCitySaga(action) {
 // UPDATE specific city
 // refresh individual city
 function* editCitySaga(action) {
-    console.log(action.payload)
     yield axios.put(`/api/cities`, action.payload);
     const updatedCityResponse = yield axios.get(`/api/cities/${action.payload.id}`);
     yield put({ type: 'SET_INDIVIDUAL_CITY', payload: updatedCityResponse.data });
-    // yield put({ type: 'SEARCH_CITY'})
 }
 
 // DELETE specific city
@@ -68,7 +59,6 @@ function* deleteCitySaga(action) {
       yield axios.delete(`/api/cities/${action.payload}`)
       yield put({type: 'SEARCH_CITY', payload: "" });
     } catch (error) {
-      console.log(`Error with deleteCitySaga:`, error);
       alert('There was a problem deleting the city from the database.');
     }
 }

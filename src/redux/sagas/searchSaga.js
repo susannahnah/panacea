@@ -6,28 +6,23 @@ function* searchCitySaga(action) {
         const { data } = yield axios.get(`/api/search/city?city_name=%${action.payload}%`);
         yield put({ type: 'SET_CITY_SEARCH_RESULT', payload: data });
     } catch (error) {
-        console.log('Error with search city saga:', error);
     }
 }
 
 // Action.payload is the country name from cities page
 function* searchCityByCountrySaga(action) {
     try {
-        // data from response.data
         const { data } = yield axios.get(`/api/search/country?country_name=%${action.payload}%`);
         yield put({ type: 'SET_CITY_SEARCH_RESULT', payload: data }); // data from response.data
     } catch (error) {
-        console.log('Error with search cities by country saga:', error);
     }
 }
 
 function* searchOrganizationSaga(action) {
-    console.log('in search org')
     try {
         const { data } = yield axios.get(`/api/search/organization?organization_name=%${action.payload}%`);
         yield put({ type: 'SET_ORGANIZATION_SEARCH_RESULT', payload: data });
     } catch (error) {
-        console.log('Error with search org saga:', error);
     }
 }
 
