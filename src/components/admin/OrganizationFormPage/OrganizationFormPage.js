@@ -48,7 +48,6 @@ class OrganizationFormPage extends Component {
 
   //handles input changes for org info
   handleNewChange = propertyName => event => {
-    console.log("change occured", event);
     this.setState({
       newOrg: {
         ...this.state.newOrg,
@@ -99,7 +98,6 @@ class OrganizationFormPage extends Component {
 
   // on click of 'delete org', confirm user would like to delete, then delete
   deleteOrg = event => {
-    // confirm user would like to delete the city
     Swal.fire({
       title: "Are you sure?",
       text:

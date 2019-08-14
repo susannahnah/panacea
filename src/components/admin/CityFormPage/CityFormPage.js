@@ -144,7 +144,6 @@ class CityFormPage extends Component {
 
   // on click of 'delete city', confirm user would like to delete, then delete
   deleteCity = event => {
-    // confirm user would like to delete the city
     Swal.fire({
       title: 'Are you sure?',
       text: "This will delete the city and all it's information from the database",
@@ -155,15 +154,12 @@ class CityFormPage extends Component {
       confirmButtonText: `I'm sure.`
     }).then((result) => {
       if (result.value) {
-        // send confirmation message
         Swal.fire(
           'Deleted!',
           'City removed from database.',
           'success'
         )
-        // delete city
         this.willDelete();
-        // navigate to cities page
         this.props.history.push('/cities');
       }
     });
@@ -195,10 +191,8 @@ class CityFormPage extends Component {
         type: 'SELECT_CITY_BY_NAME',
         payload: cityName
       });
-      // directly set state to this city
       axios.get(`/api/cities/city/${cityName}`)
         .then(({ data }) => {
-          console.log(data);
           this.setState({
             newCity: {
               ...data,
@@ -210,27 +204,6 @@ class CityFormPage extends Component {
     this.props.dispatch({ type: 'FETCH_COUNTRIES' });
   }
 
-  autoPopulateMedicine = () => {
-    this.setState({
-      newMedication: {
-        generic_name_us: 'Acetaminophen',
-        brand_name_us: 'Tylenol',
-        generic_name_translated: 'Acetaminofeno',
-      }
-    })
-  }
-
-  autoPopulateLinks = () => {
-    this.setState({
-      newCity: {
-        ...this.state.newCity,
-        WHO_link: 'http://www.euro.who.int/__data/assets/pdf_file/0004/373216/spain-report-eng.pdf',
-        CDC_link: 'https://wwwnc.cdc.gov/travel/destinations/traveler/none/spain',
-        google_translate_link: 'https://translate.google.com/#view=home&op=translate&sl=en&tl=es',
-        local_resources: 'https://www.expatica.com/es/healthcare/healthcare-basics/health-insurance-439814/'
-      }
-    })
-  }
 
   render() {
 
@@ -238,9 +211,6 @@ class CityFormPage extends Component {
 
     return (
       <AdminLayout>
-        {/* <pre>
-          {JSON.stringify(this.state, null, 2)}
-        </pre> */}
         <div style={{ height: `50px`, bottom: 0 }}>
           {this.state.newCity.name ?
             <h1>{this.state.newCity.name}</h1> :
@@ -352,20 +322,15 @@ class CityFormPage extends Component {
             </Grid>
             <Grid className="inputFields" container spacing={3}
               item xs={12}>
-
-              {/* REMOVE: AFTER PRESENTATION REMOVE THE ONCLICK FUNCTION */}
-
               <Grid item xs={12}>
                 <h2 style={{
                   marginBottom: 0,
                   marginTop: `5vw`
                 }}
-                  onClick={this.autoPopulateMedicine}
                 >
                   Medicine Translations
               </h2>
               </Grid>
-
               <Grid container item xs={12}>
                 <Table>
                   <TableHead>
@@ -466,13 +431,10 @@ class CityFormPage extends Component {
                 onChange={this.handleCityChange('healthcare_tourism')} />
             </Grid>
             <Grid className="inputFields" item xs={12}>
-
-              {/* REMOVE: AFTER PRESENTATION REMOVE THE ONCLICK FUNCTION */}
               <h2 style={{
                 marginBottom: 0,
                 marginTop: `4vw`
               }}
-                onClick={this.autoPopulateLinks}
               >
                 Important Resources
               </h2>

@@ -4,21 +4,7 @@ const pool = require('../modules/pool');
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 const router = express.Router();
 
-//GET all orgs
-// router.get('/', (req, res) => {
-//     const queryText = 'SELECT * FROM "organizations" ORDER BY "id"';
-//     pool.query(queryText)
-//         .then((result) => {
-//             res.send(result.rows);
-//         })
-//         .catch((error) => {
-//             console.log('Error completely SELECT org query', error)
-//             res.sendStatus(500)
-//         })
-// })
 
-
-//GET selected org
 router.get('/:id', (req, res) => {
     const queryText = 'SELECT * FROM "organizations" WHERE "id"=$1';
     console.log('here is your org ', req.params.id);
@@ -34,7 +20,6 @@ router.get('/:id', (req, res) => {
 })
 
 
-// POST new org
 router.post('/', rejectUnauthenticated, (req, res) => {
     const newOrg = req.body;
 
@@ -93,19 +78,14 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     pool.query(queryText, queryValues)
         .then((result) => {
             res.send(result.rows[0]);
-            console.log(result.rows);
         })
         .catch((error) => {
-            console.log('Error posting a new organization:', error);
             res.sendStatus(500);
         });
 });
 
 
-//UPDATE org
 router.put('/', rejectUnauthenticated, (req, res) => {
-    console.log('testtest', req.body);
-
     let updatedOrg = req.body;
 
     if (updatedOrg.city_id === '') {
@@ -165,19 +145,16 @@ router.put('/', rejectUnauthenticated, (req, res) => {
             res.sendStatus(200)
         })
         .catch((error) => {
-            console.log('ERROR completing UPDATE of org', error);
             res.sendStatus(500)
         });
 });
 
 
-//DELETE org 
 router.delete('/:id', rejectUnauthenticated, (req, res) => {
     const queryText = 'DELETE FROM "organizations" WHERE id=$1';
     pool.query(queryText, [req.params.id])
         .then(() => { res.sendStatus(200); })
         .catch((err) => {
-            console.log('Error completing DELETE org query', err);
             res.sendStatus(500);
         });
 });

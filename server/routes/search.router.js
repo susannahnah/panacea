@@ -2,9 +2,8 @@ const router = require("express").Router();
 const pool = require("../modules/pool");
 
 router.get("/city", async (req, res, next) => {
-  // async is just another way of writing promises like .then
   try {
-    const { city_name } = req.query; // destructuring the query object only looking for the city name
+    const { city_name } = req.query; 
     const searchQuery =
       `SELECT 
       "cities"."id" AS "city_id",
@@ -31,9 +30,8 @@ router.get("/city", async (req, res, next) => {
 });
 
 router.get("/country", async (req, res, next) => {
-  // async is just another way of writing promises like .then
   try {
-    const { country_name } = req.query; // destructuring the query object only looking for the city name
+    const { country_name } = req.query; 
     const searchQuery = `
         SELECT
         "cities"."id" AS "city_id",
@@ -44,7 +42,7 @@ router.get("/country", async (req, res, next) => {
         FROM "cities" 
         JOIN "countries" ON "cities"."country_id"="countries"."id"
         WHERE "countries"."value" ILIKE $1`;
-    const { rows } = await pool.query(searchQuery, [country_name]); // destructuring the result.rows only looking for the rows
+    const { rows } = await pool.query(searchQuery, [country_name]); 
     res.send(rows);
   } catch (error) {
     next(error);

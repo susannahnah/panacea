@@ -106,25 +106,6 @@ function Marker(organization) {
 };
 
 const InfoWindow = (organization) => {
-
-    // If you are styling, this is all the organization information
-    // comments: "Important to be an advocate and have a birth plan and have talked to locals who recommend paying in cash staff to take better care of you otherwise you get minimal attention and lack of supplies.  bring your own supplies for pads, and foods etc for yourself and diapers outfits etc for baby"
-    // created_at: "2019-08-07T17:22:13.674Z"
-    // google_maps_link: "https://www.google.com/maps/place/Szpital+Ginekologiczno-Po%C5%82o%C5%BCniczy+im.+Rafa%C5%82a+Czerwiakowskiego/@50.0692737,19.930189,17z/data=!3m1!4b1!4m5!3m4!1s0x47165b0649eb0a4f:0x90f06b0b4a997bb9!8m2!3d50.0692737!4d19.9323777"
-    // homeopathic_remedies: "none"
-    // hours: "Open 24 hours"
-    // id: 3
-    // labor_delivery: true
-    // lat: "50.069313"
-    // lng: "19.932438"
-    // medical_translators: false
-    // name: "Szpital Ginekologiczno-Położniczy im. Rafała Czerwiakowskiego"
-    // phone_number: "+48 12 634 22 22"
-    // recommended: true
-    // twentyfour: true
-    // type: "Hospital"
-    // visibility: "hidden"
-
     const { showOrganizationClick } = organization;
     const { resetZoom } = organization;
 
@@ -138,9 +119,6 @@ const InfoWindow = (organization) => {
                     <path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"></path>
                 </SvgIcon>
             </IconButton>
-            {/* <span onClick={resetZoom} style={{color: 'red', float: 'right'}}>
-                X
-            </span> */}
             <h3>{organization.name}</h3>
             <h4>Phone Number: {organization.phone_number}</h4>
             <div className="org-window">

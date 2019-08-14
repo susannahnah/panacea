@@ -44,18 +44,6 @@ class UserLandingPage extends Component {
             />
           </Card>
         </Grid>
-        {/* <Grid item xs={12}>
-          <Paper style={{ backgroundColor: `#BBE2FC`, padding: `10% 5%` }} square={true}>
-            <Typography style={{ marginBottom: `10%` }}
-              variant="h5" component="h5">
-              New to Town?
-              </Typography>
-            <IconButton style={{ width: `15%` }}>
-              <SearchIcon />
-            </IconButton>
-            <SearchBox />
-          </Paper>
-        </Grid> */}
       </UserLayout>
     )
   }

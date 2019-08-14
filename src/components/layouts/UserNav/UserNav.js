@@ -42,7 +42,6 @@ class UserNav extends Component {
     >
       <List>
         <ListLink to="/">Home</ListLink>
-        <ListLink to="/about">About</ListLink>
       </List>
     </div>
   );

@@ -38,7 +38,6 @@ const useStyles = makeStyles({
     background: "#1b3757"
   },
   table: {
-    // minWidth: 800,
   },
   paper: {
     width: "100%",
@@ -178,12 +177,6 @@ function CitiesPage(props) {
           </Paper>
         </Grid>
       </Grid>
-      {/* <pre>
-        Local State {JSON.stringify(searchValues, null, 2)}
-      </pre>
-      <pre>
-        Props + Redux State {JSON.stringify(props, null, 2)}
-      </pre> */}
     </AdminLayout>
   );
 }
